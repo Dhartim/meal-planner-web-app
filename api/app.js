@@ -1,25 +1,19 @@
 const express = require('express');
-const logger = require('morgan');
+const path = require('path');
+const uuid = require('uuid/v4')
+const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-
-const config = require('./server/config/config');
-
-// the express app
 const app = express();
 
-// log requests to console
-app.use(logger('dev'));
-// parse incoming request data
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+// app.use(uuid);
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false}));
-
-app.set('superSecret', config.secret);
 
 // appending app to the require allows the express app to have access to the routes
-require('./server/routes')(app);
-// catch-all route where other paths get routed to that are not specified
-app.get('*', (req, res) => res.status(200).send({
-	message: '{ message: "HELLO THERE" }',
-}));
+require('./routes')(app);
 
 module.exports = app;
