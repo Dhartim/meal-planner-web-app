@@ -1,15 +1,15 @@
 'use strict';
-module.exports = (sequelize, Sequelize) => {
+module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     firstName: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false
     },
     lastName: {
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     email: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       required: true,
       unique: true,
@@ -22,18 +22,12 @@ module.exports = (sequelize, Sequelize) => {
       }
     },
     password: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
       minLength: 7
     },
-    tokens: [{
-      token: {
-          type: String,
-          required: true
-      }
-  }]
   }, {});
-  User.associate = function(models) {
+  User.associate = models => {
     // associations can be defined here
   };
   return User;
