@@ -1,5 +1,5 @@
-const User = require("../models").user
-const config = require("../config")
+const User = require("../models").User
+const config = require("../config/config.json")
 
 //tools
 const jwt = require("jsonwebtoken")
@@ -7,15 +7,12 @@ const bcrypt = require("bcryptjs")
 
 function login (req, res) {
   const body = req.body;
-  console.log("body---> ", body)
   return User.findOne({ 
     where: { 
       email: body.email 
     } 
   })
   .then(user => {
-    // const uLen = user.length-1;
-    
     const validPassword = bcrypt.compareSync(
       body.password, 
       user.password
@@ -25,7 +22,7 @@ function login (req, res) {
 
     const token = jwt.sign(
       {
-        user: user
+        user
       },
       config.jwt.jwtSecret,
       {
@@ -37,11 +34,9 @@ function login (req, res) {
       token: token,
       userId: user.id
     })
-    .catch(err => {
-      res.status(400).send("Email or Password was not validgit")
-    })
+  }).catch(err => {
+        res.status(400).send("Email or Password was not valid")
   })
-
 }
 
 

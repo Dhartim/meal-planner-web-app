@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "lint": "eslint",
-    "start": "nodemon --exec babel-node ./server.js",
+    "start": "nodemon --exec babel-node ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -18,9 +18,7 @@
     "express": "~4.16.1",
     "jsonwebtoken": "^8.5.1",
     "morgan": "~1.9.1",
-    "passport": "^0.4.0",
-    "passport-jwt": "^4.0.0",
-    "pg": "^7.11.0",
+    "pg": "^7.12.1",
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.18.4",
     "sequelize-cli": "^5.5.1",
