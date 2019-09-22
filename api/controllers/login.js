@@ -7,19 +7,18 @@ const bcrypt = require("bcryptjs")
 
 function login (req, res) {
   const body = req.body;
-
-
+  console.log("body---> ", body)
   return User.findOne({ 
     where: { 
       email: body.email 
     } 
   })
   .then(user => {
-    const uLen = user.length-1;
+    // const uLen = user.length-1;
     
     const validPassword = bcrypt.compareSync(
       body.password, 
-      user[uLen].password
+      user.password
     );
 
     !validPassword && res.status(400).send({ auth: false, token: null })

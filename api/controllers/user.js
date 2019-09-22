@@ -23,7 +23,7 @@ function update(req, res) {
   return findUserById(req)
   .then(user => {
     if (!user) {
-      return res.status(200).send(notFound)
+      return res.status(404).send(notFound)
     }
     return UserModel.update({
       firstName: req.body.firstName,
@@ -40,7 +40,7 @@ function update(req, res) {
 function getById(req, res) {
   return findUserById(req)
   .then(user => {
-    return user ? res.status(200).send(user) : res.status(200).send(notFound)
+    return user ? res.status(200).send(user) : res.status(404).send(notFound)
   })
   .catch(error => res.status(400).send(error))
 }
