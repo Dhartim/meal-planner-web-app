@@ -49,38 +49,21 @@ function Copyright() {
     </Typography>
   );
 }
-
-function FirstName(){
+function userName(nam, lab) {
     return(
         <Grid item xs={12} sm={6}>
             <TextField
             autoComplete="fname"
-            name="firstName"
+            name={nam}
             variant="outlined"
             required
             fullWidth
-            id="firstName"
-            label="First Name"
-            autoFocus
+            id={nam}
+            label={lab}
             />
         </Grid>
     );
-}
-
-function LastName(){
-    return(
-        <Grid item xs={12} sm={6}>
-            <TextField
-            variant="outlined"
-            required
-            fullWidth
-            id="lastName"
-            label="Last Name"
-            name="lastName"
-            autoComplete="lname"
-            />
-        </Grid>
-    );
+    
 }
 
 function Email(){
@@ -130,8 +113,8 @@ export default function SignUp() {
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
-            <FirstName/>
-            <LastName/>
+            {userName("firstName", "First Name")}
+            {userName("lastName", "Last Name")}
             <Email />
             <Password/>
           </Grid>
