@@ -1,9 +1,8 @@
-var express = require('express');
-var router = express.Router();
-
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
-module.exports = router;
+const userController = require('../controllers').user;
+const loginController = require('../controllers').login
+const checkAuth = require('../middleware/checkAuth')
+module.exports = (app) => {
+  app.get('/api/user/:userId', checkAuth, userController.getById);
+  app.post("/api/register", userController.create);
+  app.post("/api/login", loginController.login)
+};
