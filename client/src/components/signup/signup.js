@@ -1,57 +1,98 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import FastfoodSharpIcon from '@material-ui/icons/FastfoodSharp';
 import Typography from '@material-ui/core/Typography';
-// import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
-// Styles
+// Styles and layouts
 import useStyles from './signupstyle';
+import TextField from "@material-ui/core/TextField";
 
 export class SignUp extends Component {
   constructor(props) {
      super(props);
 
      this.state = {
+       firstName: '',
+       lastName: '',
+       email: '',
+       password: '',
      }
   }
 
-  copyright() {
-    return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
-          Meal Planner
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  }
+  signup = async () => {
+    console.log("SIGNUP");
+    const { firstName, lastName, email, password } = this.state;
+    const response = await axios({
+      method: 'POST',
+      url: `/register`,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json;charset=UTF-8',
+      },
+      data: {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password
+      }
+    });
+    console.log("response.status: " + response.status);
 
-  userName(nam, lab) {
+    const body = await response.json();
+
+
+    if (response.status !== 200 && response.status !== 201) {
+      throw Error(body.message)
+    }
+    return body;
+  };
+
+  firstName = (nam, lab) => {
     return(
       <Grid item xs={12} sm={6}>
         <TextField
-          autoComplete="fname"
-          name={nam}
           variant="outlined"
           required
           fullWidth
           id={nam}
           label={lab}
+          name={nam}
+          autoComplete="fname"
+          onChange={e => {
+            this.setState({ firstName: e.target.value })
+          }}
         />
       </Grid>
     );
-  }
+  };
 
-  email(){
+  lastName = (nam, lab) => {
+    return(
+      <Grid item xs={12} sm={6}>
+        <TextField
+          variant="outlined"
+          required
+          fullWidth
+          id={nam}
+          label={lab}
+          name={nam}
+          autoComplete="fname"
+          onChange={e => {
+            this.setState({ lastName: e.target.value })
+          }}
+        />
+      </Grid>
+    );
+  };
+
+  email = () => {
     return(
       <Grid item xs={12}>
         <TextField
@@ -62,26 +103,45 @@ export class SignUp extends Component {
           label="Email Address"
           name="email"
           autoComplete="email"
+          onChange={e => {
+            this.setState({ email: e.target.value })
+          }}
         />
       </Grid>
     );
-  }
+  };
 
-  password() {
-     return(
-         <Grid item xs={12}>
-           <TextField
-               variant="outlined"
-               required
-               fullWidth
-               name="password"
-               label="Password"
-               type="password"
-               id="password"
-               autoComplete="current-password"
-           />
-         </Grid>
-     );
+  password = () => {
+    return(
+      <Grid item xs={12}>
+        <TextField
+          variant="outlined"
+          required
+          fullWidth
+          name="password"
+          label="Password"
+          type="password"
+          id="password"
+          autoComplete="current-password"
+          onChange={e => {
+            this.setState({ password: e.target.value })
+          }}
+        />
+      </Grid>
+    );
+  };
+
+  copyright = () => {
+    return (
+      <Typography variant="body2" color="textSecondary" align="center">
+        {'Copyright © '}
+        <Link color="inherit" href="https://material-ui.com/">
+          Meal Planner
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+    );
   };
 
   render() {
@@ -91,18 +151,21 @@ export class SignUp extends Component {
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
+          <center>
           <Avatar className={classes.avatar} >
             <FastfoodSharpIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
+          </center>
+
           <form className={classes.form} noValidate>
             <Grid container spacing={2}>
-              {this.userName("firstName", "First Name")}
-              {this.userName("lastName", "Last Name")}
-              {this.email}
-              {this.password}
+              {this.firstName("firstName", "First Name")}
+              {this.lastName("lastName", "Last Name")}
+              {this.email()}
+              {this.password()}
             </Grid>
             <Button
               type="submit"
@@ -110,6 +173,13 @@ export class SignUp extends Component {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={() =>
+                this.signup()
+                    .then(res => {
+                      console.log("res: " + res)
+                    })
+                    .catch(err => console.log("error: " + err))
+              }
             >
               Sign Up
             </Button>
@@ -123,7 +193,7 @@ export class SignUp extends Component {
           </form>
         </div>
         <Box mt={5}>
-          {this.copyright}
+          {this.copyright()}
         </Box>
       </Container>
     );
