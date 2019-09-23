@@ -23,35 +23,64 @@ export class SignUp extends Component {
        lastName: '',
        email: '',
        password: '',
+       errorText: '',
      }
   }
 
   signup = async () => {
     console.log("SIGNUP");
     const { firstName, lastName, email, password } = this.state;
-    const response = await axios({
-      method: 'POST',
-      url: `/register`,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json;charset=UTF-8',
-      },
-      data: {
+
+    try {
+      return axios.post('/register', {
         firstName: firstName,
         lastName: lastName,
         email: email,
         password: password
-      }
-    });
-    console.log("response.status: " + response.status);
-
-    const body = await response.json();
-
-
-    if (response.status !== 200 && response.status !== 201) {
-      throw Error(body.message)
+      })
+      .then(res => {
+        console.log("response: %s", res);
+        console.log("response data: %s", res.data);
+        this.setState({errorText: 'SUCCESS!!!'});
+      })
+      .catch(error => {
+        console.log("error status code: %s", error.response.status);
+        let statusCode = error.response.status;
+        if(statusCode === 409) {
+          this.setState({errorText: 'Email is already taken. Please try again.'});
+        }
+      });
+    } catch (err) {
+      console.log("some error is being caught: %s", err)
     }
-    return body;
+    // console.log("response: %s", res);
+    // console.log("response data: %s", res.data);
+    // return res;
+
+    // const response = await axios({
+    //   method: 'POST',
+    //   url: `/register`,
+    //   headers: {
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json;charset=UTF-8',
+    //   },
+    //   data: {
+    //     firstName: firstName,
+    //     lastName: lastName,
+    //     email: email,
+    //     password: password
+    //   }
+    // });
+    // console.log("response.status: " + response.status);
+    //
+    // let responseOK = response && response.status === 200 && response.statusText === 'OK';
+    //
+    // if (responseOK) {
+    //   const body = await response;
+    //   console.log("body.token: " + body.token);
+    //   return body;
+    // } else {
+    // }
   };
 
   firstName = (nam, lab) => {
@@ -147,6 +176,8 @@ export class SignUp extends Component {
   render() {
     const classes = useStyles;
 
+    let { errorText } = this.state;
+
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -175,10 +206,13 @@ export class SignUp extends Component {
               className={classes.submit}
               onClick={() =>
                 this.signup()
-                    .then(res => {
-                      console.log("res: " + res)
-                    })
-                    .catch(err => console.log("error: " + err))
+                    // .then(res => {
+                    //   console.log("res: " + res);
+                    //   console.log("response data: %s", res.data);
+                    //   this.setState({ test: 'created'});
+                    //   window.location.reload();
+                    // })
+                    // .catch(err => console.log("error: " + err))
               }
             >
               Sign Up
@@ -195,6 +229,8 @@ export class SignUp extends Component {
         <Box mt={5}>
           {this.copyright()}
         </Box>
+        <br/>
+        {errorText}
       </Container>
     );
   }
