@@ -16,8 +16,8 @@ import TextField from "@material-ui/core/TextField";
 
 export class SignUp extends Component {
   constructor(props) {
-     super(props);
-
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this); 
      this.state = {
        firstName: '',
        lastName: '',
@@ -54,36 +54,38 @@ export class SignUp extends Component {
     return body;
   };
 
-  firstName = (nam, lab) => {
+  firstName = () => {
     return(
       <Grid item xs={12} sm={6}>
         <TextField
           variant="outlined"
           required
           fullWidth
-          id={nam}
-          label={lab}
-          name={nam}
+          id="firstName"
+          label="First Name"
+          name="firstName"
+          value= {this.state.firstName}
           autoComplete="fname"
           onChange={e => {
-            this.setState({ firstName: e.target.value })
+            this.setState({firstName: e.target.value})
           }}
         />
       </Grid>
     );
   };
 
-  lastName = (nam, lab) => {
+  lastName = () => {
     return(
       <Grid item xs={12} sm={6}>
         <TextField
           variant="outlined"
           required
           fullWidth
-          id={nam}
-          label={lab}
-          name={nam}
-          autoComplete="fname"
+          id="lastName"
+          label="Last Name"
+          name="lastName"
+          value= {this.state.lastName}
+          autoComplete="lname"
           onChange={e => {
             this.setState({ lastName: e.target.value })
           }}
@@ -102,6 +104,7 @@ export class SignUp extends Component {
           id="email"
           label="Email Address"
           name="email"
+          value={this.state.email}
           autoComplete="email"
           onChange={e => {
             this.setState({ email: e.target.value })
@@ -119,6 +122,7 @@ export class SignUp extends Component {
           required
           fullWidth
           name="password"
+          value={this.state.password}
           label="Password"
           type="password"
           id="password"
@@ -143,6 +147,17 @@ export class SignUp extends Component {
       </Typography>
     );
   };
+  //onsubmit function
+  onSubmit(e) {
+    e.preventDefault();
+    console.log(`The values are ${this.state.firstName}, ${this.state.lastName}, ${this.state.email} , ${this.state.password}`)
+    this.setState({
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+    })
+  }
 
   render() {
     const classes = useStyles;
@@ -152,15 +167,15 @@ export class SignUp extends Component {
         <CssBaseline />
         <div className={classes.paper}>
           <center>
-          <Avatar className={classes.avatar} >
-            <FastfoodSharpIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign up
-          </Typography>
+            <Avatar className={classes.avatar} >
+              <FastfoodSharpIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign up
+            </Typography>
           </center>
 
-          <form className={classes.form} noValidate>
+          <form className={classes.form} onSubmit={this.onSubmit}>
             <Grid container spacing={2}>
               {this.firstName("firstName", "First Name")}
               {this.lastName("lastName", "Last Name")}
