@@ -4,7 +4,7 @@ const User = require("../models").User;
 //libraries
 const bcrypt = require("bcryptjs");
 
-const notFound = {message: 'User Not Found'};
+const notFound = { message: 'User Not Found' };
 
 function create(req, res) {
   return User
@@ -58,8 +58,9 @@ function update(req, res) {
 }
 
 function getById(req, res) {
+  console.log(req.params);
   return User
-    .findByPk(req.params.userid)
+    .findByPk(req.params.userId)
     .then(user => {
       return user ? res.status(200).send(user) : res.status(404).send(notFound)
     })
