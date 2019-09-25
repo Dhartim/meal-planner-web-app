@@ -53,34 +53,6 @@ export class SignUp extends Component {
     } catch (err) {
       console.log("some error is being caught: %s", err)
     }
-    // console.log("response: %s", res);
-    // console.log("response data: %s", res.data);
-    // return res;
-
-    // const response = await axios({
-    //   method: 'POST',
-    //   url: `/register`,
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json;charset=UTF-8',
-    //   },
-    //   data: {
-    //     firstName: firstName,
-    //     lastName: lastName,
-    //     email: email,
-    //     password: password
-    //   }
-    // });
-    // console.log("response.status: " + response.status);
-    //
-    // let responseOK = response && response.status === 200 && response.statusText === 'OK';
-    //
-    // if (responseOK) {
-    //   const body = await response;
-    //   console.log("body.token: " + body.token);
-    //   return body;
-    // } else {
-    // }
   };
 
   firstName = () => {
@@ -221,13 +193,6 @@ export class SignUp extends Component {
               className={classes.submit}
               onClick={() =>
                 this.signup()
-                    // .then(res => {
-                    //   console.log("res: " + res);
-                    //   console.log("response data: %s", res.data);
-                    //   this.setState({ test: 'created'});
-                    //   window.location.reload();
-                    // })
-                    // .catch(err => console.log("error: " + err))
               }
             >
               Sign Up
