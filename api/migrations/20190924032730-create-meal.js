@@ -24,7 +24,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       recipe: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       cuisineTypeId: {
         type: Sequelize.INTEGER,

@@ -1,7 +1,28 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Meal = sequelize.define('Meal', {
-    dishName: DataTypes.STRING
+    dishName: {
+      type: DataTypes.STRING
+    },
+    nutritionInfo: {
+      type: DataTypes.STRING
+    },
+    imgUrl: {
+      type: DataTypes.STRING
+    },
+    prepTime: {
+      type: DataTypes.STRING
+    },
+    cookTime: {
+      type: DataTypes.STRING
+    },
+    recipe: {
+      type: DataTypes.STRING
+    },
+    cuisineTypeId: {
+      type: DataTypes.INTEGER,
+      foreignKey: true
+    },
   }, {});
   Meal.associate = function(models) {
     // associations can be defined here
