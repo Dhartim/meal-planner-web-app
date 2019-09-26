@@ -4,21 +4,6 @@ let faker = require('faker');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    /*
-      Add altering commands here.
-      Return a promise to correctly handle asynchronicity.
- 
-    
-    recipe: {
-      type: Sequelize.STRING
-    },
-    cuisineTypeIdId: {
-      type: Sequelize.INTEGER,
-      foreignKey: true
-    },
-      Example:
-      */
-     
       return queryInterface.bulkInsert('Meals', [
         {
           dishName: faker.commerce.product(),
