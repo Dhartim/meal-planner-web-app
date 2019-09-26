@@ -5,6 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import Signup from '../components/signup';
 import Home from '../components/home';
 import BadRequest from '../components/badrequest';
+import Login from "../components/login";
 
 
 // <Route exact path={'/profiles'} components={Profiles} /* Profile list route *//>
@@ -18,6 +19,7 @@ class AppRouter extends Component {
           <Switch>
             <Route exact path={'/home'} components={Home} /* Home route *//>
             <Route exact path={'/register'} component={Signup} /* Signup route *//>
+            <Route exact path={'/login'} component={Login}/>
             <Route path="*" component={BadRequest} />
           </Switch>
         </div>
