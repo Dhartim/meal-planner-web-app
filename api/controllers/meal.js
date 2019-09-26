@@ -10,7 +10,7 @@ function list (req, res) {
 
 function getById(req, res) {
   return Meal.findByPk(req.params.id)
-    then( meal => {
+    .then( meal => {
       if (!meal) {
         return res.status(404).send({
           message: "Meal not found"

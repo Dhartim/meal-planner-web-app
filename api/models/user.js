@@ -28,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {});
   User.associate = models => {
+    User.hasMany(models.Favorite)
     // associations can be defined here
   };
   return User;
