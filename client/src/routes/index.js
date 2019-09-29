@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 // Routes
 import Signup from '../components/signup';
 import Home from '../components/home';
 import BadRequest from '../components/badrequest';
+import Navbar from "../components/navbar/navbar";
 
 
 // <Route exact path={'/profiles'} components={Profiles} /* Profile list route *//>
@@ -16,7 +17,9 @@ class AppRouter extends Component {
     return (
         <div>
           <Switch>
-            <Route exact path={'/home'} components={Home} /* Home route *//>
+            <Navbar/>
+            <Redirect from='/home' to='/' />
+            <Route exact path={'/'} components={Home} /* Home route *//>
             <Route exact path={'/register'} component={Signup} /* Signup route *//>
             <Route path="*" component={BadRequest} />
           </Switch>
