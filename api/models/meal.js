@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {});
   Meal.associate = function(models) {
-    Meal.hasMany(models.Favorite)
+    Meal.hasMany(models.Favorite, {foreignKey: 'mealId'})
     // associations can be defined here
   };
   return Meal;

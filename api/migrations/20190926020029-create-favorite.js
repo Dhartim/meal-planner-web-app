@@ -9,10 +9,22 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       userId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        foreignKey: true,
+        references: {
+          model: 'Users',
+          key: 'id',
+          as: 'userId'
+        }
       },
       mealId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        foreignKey: true,
+        references: {
+          model: 'Meals',
+          key: 'id',
+          as: 'mealId'
+        }
       },
       createdAt: {
         allowNull: false,

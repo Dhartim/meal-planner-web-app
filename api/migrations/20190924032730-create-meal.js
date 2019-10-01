@@ -28,7 +28,7 @@ module.exports = {
       },
       cuisineTypeId: {
         type: Sequelize.INTEGER,
-        foreignKey: true
+        foreignKey: true,
       },
 
       createdAt: {

@@ -12,7 +12,7 @@ module.exports = {
           prepTime:  `${Math.floor(Math.random() * 30)} min`,
           cookTime: `${Math.floor(Math.random() * 60)} min`,
           recipe: faker.lorem.sentences(),
-          cuisineTypeId: Math.floor(Math.random() * 10),
+          cuisineTypeId: Math.floor(Math.random() * 3),
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -23,7 +23,7 @@ module.exports = {
           prepTime:  `${Math.floor(Math.random() * 30)} min`,
           cookTime: `${Math.floor(Math.random() * 60)} min`,
           recipe: faker.lorem.sentences(),
-          cuisineTypeId: Math.floor(Math.random() * 10),
+          cuisineTypeId: Math.floor(Math.random() * 3),
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -34,7 +34,7 @@ module.exports = {
           prepTime:  `${Math.floor(Math.random() * 30)} min`,
           cookTime: `${Math.floor(Math.random() * 60)} min`,
           recipe: faker.lorem.sentences(),
-          cuisineTypeId: Math.floor(Math.random() * 10),
+          cuisineTypeId: Math.floor(Math.random() * 3),
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -45,7 +45,7 @@ module.exports = {
           prepTime:  `${Math.floor(Math.random() * 30)} min`,
           cookTime: `${Math.floor(Math.random() * 60)} min`,
           recipe: faker.lorem.sentences(),
-          cuisineTypeId: Math.floor(Math.random() * 10),
+          cuisineTypeId: Math.floor(Math.random() * 3),
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -56,7 +56,7 @@ module.exports = {
           prepTime:  `${Math.floor(Math.random() * 30)} min`,
           cookTime: `${Math.floor(Math.random() * 60)} min`,
           recipe: faker.lorem.sentences(),
-          cuisineTypeId: Math.floor(Math.random() * 10),
+          cuisineTypeId: Math.floor(Math.random() * 3),
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -69,7 +69,7 @@ module.exports = {
       Return a promise to correctly handle asynchronicity.
 
       Example:
-      return queryInterface.bulkDelete('People', null, {});
-    */
+      */
+      return queryInterface.bulkDelete('Meals', null, {});
   }
 };

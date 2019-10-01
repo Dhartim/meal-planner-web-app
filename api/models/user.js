@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {});
   User.associate = models => {
-    User.hasMany(models.Favorite)
+    User.hasMany(models.Favorite, { foreignKey: 'userId'})
     // associations can be defined here
   };
   return User;
