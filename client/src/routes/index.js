@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 // Routes
 import Signup from '../components/signup';
 import Home from '../components/home';
+import MealCard from '../components/mealCard'
 import BadRequest from '../components/badrequest';
 
 
@@ -18,6 +19,7 @@ class AppRouter extends Component {
           <Switch>
             <Route exact path={'/home'} components={Home} /* Home route *//>
             <Route exact path={'/register'} component={Signup} /* Signup route *//>
+            <Route exact path={'/mealCard'} component={MealCard} /*showing meal card *//>
             <Route path="*" component={BadRequest} />
           </Switch>
         </div>
