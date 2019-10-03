@@ -26,7 +26,7 @@ module.exports = {
       recipe: {
         type: Sequelize.TEXT
       },
-      cuisineTypeId: {
+      cuisineId: {
         type: Sequelize.INTEGER,
         foreignKey: true,
       },

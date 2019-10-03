@@ -1,6 +1,7 @@
 const Meal = require("../models").Meal;
 
 function list (req, res) {
+  console.log('--------',req)
   return Meal.findAll({order: [
     ['dishName', 'Desc'],
   ]})

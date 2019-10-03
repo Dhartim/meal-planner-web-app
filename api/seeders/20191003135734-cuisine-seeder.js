@@ -8,32 +8,47 @@ module.exports = {
 
       Example:
       */
-      return queryInterface.bulkInsert('Cuisine', [
+      return queryInterface.bulkInsert('Cuisines', [
       {
-        cuisineType: 'Mexican'
+        cuisineType: 'Mexican',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
-        cuisineType: 'Italian'
+        cuisineType: 'Italian',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
-        cuisineType: 'American'
+        cuisineType: 'American',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
-        cuisineType: 'French'
+        cuisineType: 'French',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
-        cuisineType: 'Chinese'
+        cuisineType: 'Chinese',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
-        cuisineType: 'Japanese'
+        cuisineType: 'Japanese',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
-        cuisineType: 'Mediterranean'
+        cuisineType: 'Mediterranean',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
       {
-        cuisineType: 'Indian'
+        cuisineType: 'Indian',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }
-      
       ], {});
   },
 
