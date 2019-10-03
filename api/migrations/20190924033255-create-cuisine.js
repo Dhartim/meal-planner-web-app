@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      type: {
+      cuisineType: {
         type: Sequelize.STRING
       },
       createdAt: {
