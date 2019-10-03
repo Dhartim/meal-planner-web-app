@@ -1,10 +1,17 @@
 const Meal = require("../models").Meal;
+const Cuisine = require('../models').Cuisine; 
 
 function list (req, res) {
-  console.log('--------',req)
-  return Meal.findAll({order: [
-    ['dishName', 'Desc'],
-  ]})
+  return Meal.findAll({
+    // raw:true,
+    order: [
+      ['dishName', 'Desc'],
+    ],
+    include: [{
+      model: Cuisine,
+      attributes: ['cuisineType']
+    }]
+  })
   .then( Meals => res.status(200).send(Meals) )
   .catch( error => res.status(400).send(error)) 
 }
