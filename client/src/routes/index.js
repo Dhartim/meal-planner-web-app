@@ -15,15 +15,15 @@ import Navbar from "../components/navbar/navbar";
 class AppRouter extends Component {
   render() {
     return (
-        <div>
-          <Switch>
-            <Navbar/>
-            <Redirect from='/home' to='/' />
-            <Route exact path={'/'} components={Home} /* Home route *//>
-            <Route exact path={'/register'} component={Signup} /* Signup route *//>
-            <Route path="*" component={BadRequest} />
-          </Switch>
-        </div>
+      <div>
+        <Route component={Navbar} />
+        <Switch>
+          <Redirect from='/home' to='/' />
+          <Route exact path={'/'} components={Home} /* Home route *//>
+          <Route exact path={'/register'} component={Signup} /* Signup route *//>
+          <Route path="*" component={BadRequest} />
+        </Switch>
+      </div>
     )
   }
 }
