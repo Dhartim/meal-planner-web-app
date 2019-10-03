@@ -1,36 +1,31 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Meals', {
+    return queryInterface.createTable('Favorites', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      dishName: {
-        type: Sequelize.STRING
-      },
-      nutritionInfo: {
-        type: Sequelize.STRING
-      },
-      imgUrl: {
-        type: Sequelize.STRING
-      },
-      prepTime: {
-        type: Sequelize.STRING
-      },
-      cookTime: {
-        type: Sequelize.STRING
-      },
-      recipe: {
-        type: Sequelize.TEXT
-      },
-      cuisineTypeId: {
+      userId: {
         type: Sequelize.INTEGER,
         foreignKey: true,
+        references: {
+          model: 'Users',
+          key: 'id',
+          as: 'userId'
+        }
       },
-
+      mealId: {
+        type: Sequelize.INTEGER,
+        foreignKey: true,
+        references: {
+          model: 'Meals',
+          key: 'id',
+          as: 'mealId'
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -42,6 +37,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Meals');
+    return queryInterface.dropTable('Favorites');
   }
 };
