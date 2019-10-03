@@ -5,12 +5,12 @@ import BackCard from './BackCard';
 
 function Card() {
   return (
-    <div class="card-container">
-        <div class="card">
-            <div class="front">
+    <div className="card-container">
+        <div className="card">
+            <div className="front">
                 <FrontCard/>
             </div>
-            <div class="back">
+            <div className="back">
                 <BackCard/>
             </div>
         </div>

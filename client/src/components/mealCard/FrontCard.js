@@ -7,7 +7,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import IconButton from '@material-ui/core/IconButton';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
-
+import './mealCard.css'
 export class FrontCard extends Component{
     render(){
         return (
@@ -16,12 +16,13 @@ export class FrontCard extends Component{
                     title="Pizza"
                 />
                 <CardMedia
+                    className = {"cardMedia"}
                     image="https://www.foodiesfeed.com/wp-content/uploads/2019/02/pizza-salami-close-up.jpg"
                     title="Pizza"
                 />
                 <CardContent>
                     <Typography variant="body2" color="textSecondary" component="p">
-                    Pizza will be in Keto Diet 
+                    Pizza will be in Keto Diet  
                     </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
