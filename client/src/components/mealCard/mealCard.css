@@ -1,0 +1,38 @@
+h1 {
+  margin: 0;
+}
+
+.card-container {
+  perspective: 800;
+}
+
+.card {
+  position: relative;
+  color: #fff;
+  text-align: center;
+  line-height: 200px;
+  margin: 20px;
+  width: 400px;
+  height: 400px;
+  transition: all 0.6s ease;
+  transform-style: preserve-3d;
+}
+
+.front,
+.back {
+  background: #5677fc;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 400px;
+  width: 400px;
+  backface-visibility: hidden;
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+.card:hover {
+  transform: rotateY(180deg);
+}
