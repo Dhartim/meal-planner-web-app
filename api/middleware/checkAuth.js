@@ -9,7 +9,6 @@ module.exports = (req, res, next) => {
     req.userData = decode;
     next()
   } catch (error) {
-    return res.status(401).send(error)
+    return res.status(401).send(error);
   }
-
 };

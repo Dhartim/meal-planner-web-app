@@ -43,7 +43,7 @@ function update(req, res) {
     .findByPk(req.params.userid)
     .then(user => {
       if (!user) {
-        return res.status(404).send(notFound)
+        return res.status(404).send(notFound);
       }
       return User.update({
         firstName: req.body.firstName.trim(),
@@ -52,19 +52,18 @@ function update(req, res) {
         password: bcrypt.hashSync(req.body.password.trim())
       })
       .then(() => res.status(200).send(user))
-      .catch(error => res.status(400).send(error))
+      .catch(error => res.status(400).send(error));
     })
-    .catch(error => res.status(400).send(error))
+    .catch(error => res.status(400).send(error));
 }
 
 function getById(req, res) {
-    console.log(req.params)
   return User
     .findByPk(req.params.userId)
     .then(user => {
-      return user ? res.status(200).send(user) : res.status(404).send(notFound)
+      return user ? res.status(200).send(user) : res.status(404).send(notFound);
     })
-    .catch(error => res.status(400).send(error))
+    .catch(error => res.status(400).send(error));
 }
 
 module.exports = {

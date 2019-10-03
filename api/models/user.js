@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
 
       validate: value => {
           if (!validator.isEmail(value)) {
-              throw new Error({error: 'Invalid Email address'})
+              throw new Error({ error: 'Invalid Email address' });
           }
       }
     },
@@ -28,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
     },
   }, {});
   User.associate = models => {
-    User.hasMany(models.Favorite, { foreignKey: 'userId'})
+    User.hasMany(models.Favorite, { foreignKey: 'userId' });
     // associations can be defined here
   };
   return User;

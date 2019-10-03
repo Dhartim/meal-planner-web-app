@@ -35,7 +35,7 @@ function login (req, res) {
       userId: user.id
     })
   }).catch(err => {
-        res.status(400).send("Email or Password was not valid")
+        res.status(400).send("Email or Password was not valid");
   })
 }
 
