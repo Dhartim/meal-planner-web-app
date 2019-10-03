@@ -1,14 +1,13 @@
-'use strict';
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: (queryInterface, Sequelize) =>
     /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
 
       Example:
       */
-      return queryInterface.bulkInsert('Cuisines', [
+    queryInterface.bulkInsert('Cuisines', [
       {
         cuisineType: 'Mexican',
         createdAt: new Date(),
@@ -48,9 +47,8 @@ module.exports = {
         cuisineType: 'Indian',
         createdAt: new Date(),
         updatedAt: new Date(),
-      }
-      ], {});
-  },
+      },
+    ], {}),
 
   down: (queryInterface, Sequelize) => {
     /*
@@ -59,6 +57,6 @@ module.exports = {
 
       Example:
       */
-      // return queryInterface.bulkDelete('Cuisine', null, {});
-  }
+    return queryInterface.bulkDelete('Cuisines', null, {});
+  },
 };

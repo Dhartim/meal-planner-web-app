@@ -1,75 +1,72 @@
-'use strict';
 
-let faker = require('faker');
+const faker = require('faker');
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-      return queryInterface.bulkInsert('Meals', [
-        {
-          dishName: faker.commerce.product(),
-          nutritionInfo: faker.lorem.sentence(),
-          imgUrl: faker.image.food(),
-          prepTime:  `${Math.floor(Math.random() * 30)} min`,
-          cookTime: `${Math.floor(Math.random() * 60)} min`,
-          recipe: faker.lorem.sentences(),
-          cuisineId: Math.floor(Math.random() * 8),
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          dishName: faker.commerce.product(),
-          nutritionInfo: faker.lorem.sentence(),
-          imgUrl: faker.image.food(),
-          prepTime:  `${Math.floor(Math.random() * 30)} min`,
-          cookTime: `${Math.floor(Math.random() * 60)} min`,
-          recipe: faker.lorem.sentences(),
-          cuisineId: Math.floor(Math.random() * 8),
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          dishName: faker.commerce.product(),
-          nutritionInfo: faker.lorem.sentence(),
-          imgUrl: faker.image.food(),
-          prepTime:  `${Math.floor(Math.random() * 30)} min`,
-          cookTime: `${Math.floor(Math.random() * 60)} min`,
-          recipe: faker.lorem.sentences(),
-          cuisineId: Math.floor(Math.random() * 8),
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          dishName: faker.commerce.product(),
-          nutritionInfo: faker.lorem.sentence(),
-          imgUrl: faker.image.food(),
-          prepTime:  `${Math.floor(Math.random() * 30)} min`,
-          cookTime: `${Math.floor(Math.random() * 60)} min`,
-          recipe: faker.lorem.sentences(),
-          cuisineId: Math.floor(Math.random() * 8),
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          dishName: faker.commerce.product(),
-          nutritionInfo: faker.lorem.sentence(),
-          imgUrl: faker.image.food(),
-          prepTime:  `${Math.floor(Math.random() * 30)} min`,
-          cookTime: `${Math.floor(Math.random() * 60)} min`,
-          recipe: faker.lorem.sentences(),
-          cuisineId: Math.floor(Math.random() * 8),
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-    ], {});
-  },
+  up: (queryInterface, Sequelize) => queryInterface.bulkInsert('Meals', [
+    {
+      dishName: faker.commerce.product(),
+      nutritionInfo: faker.lorem.sentence(),
+      imgUrl: faker.image.food(),
+      prepTime: `${Math.floor(Math.random() * 30)} min`,
+      cookTime: `${Math.floor(Math.random() * 60)} min`,
+      recipe: faker.lorem.sentences(),
+      cuisineId: Math.floor(Math.random() * 8),
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      dishName: faker.commerce.product(),
+      nutritionInfo: faker.lorem.sentence(),
+      imgUrl: faker.image.food(),
+      prepTime: `${Math.floor(Math.random() * 30)} min`,
+      cookTime: `${Math.floor(Math.random() * 60)} min`,
+      recipe: faker.lorem.sentences(),
+      cuisineId: Math.floor(Math.random() * 8),
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      dishName: faker.commerce.product(),
+      nutritionInfo: faker.lorem.sentence(),
+      imgUrl: faker.image.food(),
+      prepTime: `${Math.floor(Math.random() * 30)} min`,
+      cookTime: `${Math.floor(Math.random() * 60)} min`,
+      recipe: faker.lorem.sentences(),
+      cuisineId: Math.floor(Math.random() * 8),
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      dishName: faker.commerce.product(),
+      nutritionInfo: faker.lorem.sentence(),
+      imgUrl: faker.image.food(),
+      prepTime: `${Math.floor(Math.random() * 30)} min`,
+      cookTime: `${Math.floor(Math.random() * 60)} min`,
+      recipe: faker.lorem.sentences(),
+      cuisineId: Math.floor(Math.random() * 8),
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      dishName: faker.commerce.product(),
+      nutritionInfo: faker.lorem.sentence(),
+      imgUrl: faker.image.food(),
+      prepTime: `${Math.floor(Math.random() * 30)} min`,
+      cookTime: `${Math.floor(Math.random() * 60)} min`,
+      recipe: faker.lorem.sentences(),
+      cuisineId: Math.floor(Math.random() * 8),
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+  ], {}),
 
-  down: (queryInterface, Sequelize) => {
+  down: (queryInterface, Sequelize) =>
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.
 
       Example:
       */
-      return queryInterface.bulkDelete('Meals', null, {});
-  }
+    queryInterface.bulkDelete('Meals', null, {}),
+
 };
