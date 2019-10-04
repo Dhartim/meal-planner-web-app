@@ -18,6 +18,7 @@ export function Navbar() {
             </IconButton>
             <Typography className={classes.title}>
               <Button
+                href={'/home'}
                 color="inherit"
               >
                 <Typography variant="h6" className={classes.title}>
@@ -26,6 +27,7 @@ export function Navbar() {
               </Button>
             </Typography>
             <Button
+              href={'/register'}
               className={classes.auth}
               color="inherit"
             >
