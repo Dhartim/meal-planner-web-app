@@ -16,8 +16,14 @@ export function Navbar() {
             <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" className={classes.title}>
-              Meal Planner
+            <Typography className={classes.title}>
+              <Button
+                color="inherit"
+              >
+                <Typography variant="h6" className={classes.title}>
+                  Meal Planner
+                </Typography>
+              </Button>
             </Typography>
             <Button
               className={classes.auth}
