@@ -20,7 +20,7 @@ export function Navbar(props) {
               </IconButton>
               <Typography className={classes.title}>
                 <Button
-                  href={'/home'}
+                  href={'/'}
                   color="inherit"
                 >
                   <Typography component={'span'} variant="h6" className={classes.title}>
@@ -52,7 +52,7 @@ export function Navbar(props) {
               </IconButton>
               <Typography className={classes.title}>
                 <Button
-                  href={'/home'}
+                  href={'/'}
                   color="inherit"
                 >
                   <Typography component={'span'} variant="h6" className={classes.title}>
@@ -66,6 +66,13 @@ export function Navbar(props) {
                 color="inherit"
               >
                 Sign up
+              </Button>
+              <Button
+                href={'/login'}
+                className={classes.auth}
+                color="inherit"
+              >
+                Login
               </Button>
             </Toolbar>
           </AppBar>
