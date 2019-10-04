@@ -6,6 +6,7 @@ import Signup from '../components/signup';
 import Home from '../components/home';
 import BadRequest from '../components/badrequest';
 import Navbar from "../components/navbar/navbar";
+import NavbarAuthCheck from "../components/auth";
 
 
 // <Route exact path={'/profiles'} components={Profiles} /* Profile list route *//>
@@ -15,7 +16,7 @@ class AppRouter extends Component {
   render() {
     return (
       <div>
-        <Route component={Navbar} />
+        <Route component={NavbarAuthCheck(Navbar)} />
         <div>
           <Switch>
             <Redirect from={'/home'} to={'/'}/>

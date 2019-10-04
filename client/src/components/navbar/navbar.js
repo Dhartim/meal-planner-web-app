@@ -5,12 +5,12 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 import useStyles from "./navbarstyle";
 
-export function Navbar() {
+export function Navbar(props) {
     const classes = useStyles();
-    const token = localStorage.getItem('token');
-    console.log(`token=${token}`);
+    const authorized = props.auth;
+    console.log(`logged in=${authorized}`);
 
-    if(token !== null) {
+    if(authorized) {
       return (
         <div className={classes.root}>
           <AppBar position="static">

@@ -9,4 +9,5 @@ module.exports = (app) => {
   require('./meals')(app);
   require('./favorites')(app);
   require('./cuisines')(app);
+  require('./authorization')(app);
 };

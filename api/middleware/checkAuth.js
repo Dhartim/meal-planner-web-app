@@ -4,7 +4,7 @@ const config = require('../config/config.json');
 
 module.exports = (req, res, next) => {
   try {
-    const token = req.headers.authorization.split(' ')[1];
+    const token = req.headers['x-access-token'];
     const decode = jwt.verify(token, config.jwt.jwtSecret);
     req.userData = decode;
     next();
