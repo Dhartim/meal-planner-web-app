@@ -1,13 +1,14 @@
 import React from 'react';
 
-import { AppBar, Button, IconButton, Link, Toolbar, Typography } from "@material-ui/core";
+import { AppBar, Button, IconButton, Toolbar, Typography } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
 
 import useStyles from "./navbarstyle";
 
 export function Navbar() {
     const classes = useStyles();
-    const Home = () => <Link to="/" />;
+    const token = localStorage.getItem('token');
+    console.log(`token ${token}`);
 
     return(
       <div className={classes.root}>
@@ -21,7 +22,7 @@ export function Navbar() {
                 href={'/home'}
                 color="inherit"
               >
-                <Typography variant="h6" className={classes.title}>
+                <Typography component={'span'} variant="h6" className={classes.title}>
                   Meal Planner
                 </Typography>
               </Button>

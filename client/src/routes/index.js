@@ -11,7 +11,6 @@ import Navbar from "../components/navbar/navbar";
 // <Route exact path={'/profiles'} components={Profiles} /* Profile list route *//>
 // ErrorBoundaries catch any non-event handler queries. Use try/catch for event-handlers (ex. button or onclick events)
 // Can use regex to check query params. Allows app to throw a 400 Bad Request as the url would be invalid
-//     <Route path="*" component={BadRequest} />
 class AppRouter extends Component {
   render() {
     return (
