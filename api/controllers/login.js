@@ -5,11 +5,12 @@ const config = require('../config/config.json');
 
 function login(req, res) {
   const { body } = req;
-  return User.findOne({
-    where: {
-      email: body.email,
-    },
-  })
+  return User
+    .findOne({
+      where: {
+        email: body.email,
+      },
+    })
     .then((user) => {
       const validPassword = bcrypt.compareSync(
         body.password,
@@ -27,9 +28,10 @@ function login(req, res) {
           expiresIn: config.jwt.jwtDuration,
         },
       );
+      res.set('token', token);
+
       res.status(200).send({
         auth: true,
-        token,
         userId: user.id,
       });
     }).catch((err) => {

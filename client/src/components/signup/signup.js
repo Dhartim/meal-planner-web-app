@@ -23,6 +23,7 @@ export class SignUp extends Component {
        lastName: '',
        email: '',
        password: '',
+       validEmail: false,
        errorText: '',
      }
   }
@@ -106,9 +107,11 @@ export class SignUp extends Component {
           label="Email Address"
           name="email"
           value={this.state.email}
+          type={'email'}
           autoComplete="email"
           onChange={e => {
-            this.setState({ email: e.target.value })
+            this.setState({ email: e.target.value });
+            this.setState({ validEmail: e.target.validity.valid });
           }}
         />
       </Grid>
@@ -163,7 +166,7 @@ export class SignUp extends Component {
   render() {
     const classes = useStyles;
 
-    let { errorText } = this.state;
+    let { errorText, validEmail } = this.state;
 
     return (
       <Container component="main" maxWidth="xs">
@@ -191,8 +194,11 @@ export class SignUp extends Component {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={() =>
-                this.signup()
+              onClick={() => {
+                  if (validEmail) {
+                    this.signup()
+                  }
+                }
               }
             >
               Sign Up

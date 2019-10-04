@@ -42,7 +42,6 @@ export default function NavbarAuthCheck(ComponentToAuthorize) {
         return null;
       }
       if (redirect) {
-        // return <Redirect to="/login" />;
         console.log("Not logged in")
       }
       return (
