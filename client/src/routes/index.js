@@ -7,11 +7,13 @@ import Home from '../components/home';
 import BadRequest from '../components/badrequest';
 import Navbar from "../components/navbar/navbar";
 import NavbarAuthCheck from "../components/auth";
+import Login from "../components/login";
 
 
 // <Route exact path={'/profiles'} components={Profiles} /* Profile list route *//>
 // ErrorBoundaries catch any non-event handler queries. Use try/catch for event-handlers (ex. button or onclick events)
 // Can use regex to check query params. Allows app to throw a 400 Bad Request as the url would be invalid
+//     <Route path="*" component={BadRequest} />
 class AppRouter extends Component {
   render() {
     return (
@@ -22,6 +24,9 @@ class AppRouter extends Component {
             <Redirect from={'/home'} to={'/'}/>
             <Route exact path={'/'} component={Home} />
             <Route path={'/register'} component={Signup} /* Signup route *//>
+            <Route exact path={'/home'} components={Home} /* Home route *//>
+            <Route exact path={'/register'} component={Signup} /* Signup route *//>
+            <Route exact path={'/login'} component={Login}/>
             <Route path="*" component={BadRequest} />
           </Switch>
         </div>
