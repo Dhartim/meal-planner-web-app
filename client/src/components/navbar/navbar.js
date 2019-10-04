@@ -33,7 +33,7 @@ export function Navbar(props) {
                 className={classes.auth}
                 color="inherit"
                 onClick={() => {
-                  localStorage.removeItem('token');
+                  localStorage.removeItem('jwtToken');
                 }}
               >
                 Logout

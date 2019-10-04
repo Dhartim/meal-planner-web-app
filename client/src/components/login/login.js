@@ -4,24 +4,49 @@ import { Form, Button } from 'react-bootstrap'
 import Axios from "axios";
 
 import "./login.css";
+import {Redirect} from "react-router-dom";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
 
 export default class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
+
+    this.state = {
+      email: '',
+      password: '',
+    };
+  }
 
   onSubmit = (e) => {
     e.preventDefault();
+  };
 
+  tryLogin = () => {
     const { email, password } = this.state;
 
-    Axios.post('/login', { email, password })
-      .then((response) => {
-        console.log(response.token);
+    Axios.post('/login', {
+      email: email,
+      password: password
+    })
+    .then((response) => {
+      console.log(`token=${response.headers.token}`);
+      console.log(`status=${response.status}`);
 
-        if (response.payload.status === 200) {
-          sessionStorage.setItem('jwtToken', response.payload.data.token);
-        } else {
-          // TODO: Redirect and display message
-        }
-      })
+      if (response.status === 200) {
+        console.log(`Got token`);
+        localStorage.setItem('jwtToken', response.headers.token);
+        this.props.history.push('/');
+        window.location.reload();
+      } else {
+        console.log(`Must redirect`);
+        // TODO: Redirect and display message
+      }
+    })
+    .catch(error => {
+      console.log("LOGIN - error status code: %s", error);
+    });
   };
   // constructor(props) {
   //     console.log("super props")
@@ -52,16 +77,43 @@ export default class Login extends Component {
   render() {
     return (
 
-      <Form>
+      <Form onSubmit={this.onSubmit}>
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
+          <TextField
+            variant="outlined"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            value={this.state.email}
+            type={'email'}
+            autoComplete="email"
+            onChange={e => {
+              this.setState({ email: e.target.value });
+              this.setState({ validEmail: e.target.validity.valid });
+            }}
+          />
         </Form.Group>
         <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" />
+          <TextField
+            variant="outlined"
+            required
+            fullWidth
+            name="password"
+            value={this.state.password}
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            onChange={e => {
+              this.setState({ password: e.target.value })
+            }}
+          />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" onClick={() => {
+          this.tryLogin();
+        }}>
           Submit
         </Button>
       </Form>

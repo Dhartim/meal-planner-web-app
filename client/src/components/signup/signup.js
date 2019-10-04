@@ -41,7 +41,7 @@ export class SignUp extends Component {
       })
       .then(res => {
         console.log("response token: %s", res.headers.token);
-        localStorage.setItem('token', res.headers.token);
+        localStorage.setItem('jwtToken', res.headers.token);
         this.setState({errorText: 'SUCCESS!!!'});
       })
       .catch(error => {
