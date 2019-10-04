@@ -1,8 +1,6 @@
 import React, {Component} from "react";
 import axios from 'axios';
 
-import { Redirect } from "react-router-dom";
-
 export default function NavbarAuthCheck(ComponentToAuthorize) {
 
   return class extends Component {
@@ -37,7 +35,6 @@ export default function NavbarAuthCheck(ComponentToAuthorize) {
           this.setState({ loading: false, redirect: true });
         });
     }
-
 
     render() {
       const { loading, redirect } = this.state;
