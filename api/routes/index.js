@@ -6,4 +6,7 @@ module.exports = (app) => {
 
   // require user routes for the app
   require('./users')(app);
+  require('./meals')(app);
+  require('./favorites')(app);
+  require('./cuisines')(app);
 };
