@@ -39,8 +39,8 @@ export class SignUp extends Component {
         password: password
       })
       .then(res => {
-        console.log("response: %s", res);
-        console.log("response data: %s", res.data);
+        console.log("response token: %s", res.headers.token);
+        localStorage.setItem('token', res.headers.token);
         this.setState({errorText: 'SUCCESS!!!'});
       })
       .catch(error => {
