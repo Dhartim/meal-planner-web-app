@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "lint": "eslint",
+    "lint": "eslint .",
     "start": "nodemon --exec babel-node ./bin/www",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,6 +17,7 @@
     "cookie-parser": "~1.4.4",
     "env-cmd": "^10.0.1",
     "express": "~4.16.1",
+    "faker": "^4.1.0",
     "jsonwebtoken": "^8.5.1",
     "morgan": "~1.9.1",
     "pg": "^7.12.1",
@@ -43,9 +44,16 @@
     "@babel/node": "^7.4.5",
     "@babel/plugin-transform-runtime": "^7.4.4",
     "@babel/preset-env": "^7.4.5",
-    "eslint": "^6.0.1",
+    "eslint": "^6.4.0",
+    "eslint-config-airbnb": "^18.0.1",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.18.0",
-    "nodemon": "^1.19.1"
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "nodemon": "^1.18.7",
+    "chai": "^4.1.2",
+    "chai-http": "^4.0.0",
+    "mocha": "^5.1.1"
   }
 }

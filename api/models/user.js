@@ -1,12 +1,13 @@
-'use strict';
+const validator = require('validator');
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     firstName: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     lastName: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     email: {
       type: DataTypes.STRING,
@@ -15,19 +16,20 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       lowercase: true,
 
-      validate: value => {
-          if (!validator.isEmail(value)) {
-              throw new Error({error: 'Invalid Email address'})
-          }
-      }
+      validate: (value) => {
+        if (!validator.isEmail(value)) {
+          throw new Error({ error: 'Invalid Email address' });
+        }
+      },
     },
     password: {
       type: DataTypes.STRING,
       allowNull: false,
-      minLength: 7
+      minLength: 7,
     },
   }, {});
-  User.associate = models => {
+  User.associate = (models) => {
+    User.hasMany(models.Favorite, { foreignKey: 'userId' });
     // associations can be defined here
   };
   return User;

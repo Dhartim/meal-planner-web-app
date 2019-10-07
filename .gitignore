@@ -13,3 +13,5 @@ api/server.js
 
 # db
 api/config
+
+.eslintrc.js
