@@ -28,9 +28,11 @@ h1 {
   width: 400px;
   backface-visibility: hidden;
 }
+
 .cardMedia{
-  height: 400px;
+  height: 200px;
 }
+
 .back {
   transform: rotateY(180deg);
 }

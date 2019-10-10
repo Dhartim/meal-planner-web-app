@@ -4,9 +4,7 @@ import { Form, Button } from 'react-bootstrap'
 import Axios from "axios";
 
 import "./login.css";
-import {Redirect} from "react-router-dom";
 import TextField from "@material-ui/core/TextField";
-import Grid from "@material-ui/core/Grid";
 
 export default class Login extends Component {
   constructor(props) {
