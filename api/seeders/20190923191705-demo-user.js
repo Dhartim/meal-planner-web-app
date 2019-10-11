@@ -19,6 +19,16 @@ module.exports = {
       email: 'test2@test.com',
       createdAt: new Date(),
       updatedAt: new Date()
+    },
+    {
+      id: '3',
+
+      firstName: 'Three',
+      lastName: 'Test',
+      email: 'a@a.com',
+      password: bcrypt.hashSync('12345'),
+      createdAt: new Date(),
+      updatedAt: new Date(),
     }]);
   },
 
