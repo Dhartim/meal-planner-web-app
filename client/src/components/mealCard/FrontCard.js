@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CardMedia from '@material-ui/core/CardMedia';
-import { Card, Checkbox } from "@material-ui/core";
+import { Card, Checkbox, CardHeader } from "@material-ui/core";
 import Typography from '@material-ui/core/Typography';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import IconButton from '@material-ui/core/IconButton';
@@ -14,12 +14,17 @@ export class FrontCard extends Component{
       this.setState({ checked: event.target.checked })
     
     render(){
+        const meal = this.props.meal;
+
         return (
-            <Card>
+            <Card >
+                <CardHeader
+                    title={meal.dishName}
+                />
                 <CardMedia
                     className = {"cardMedia"}
-                    image="https://www.foodiesfeed.com/wp-content/uploads/2019/02/pizza-salami-close-up.jpg"
-                    title="Pizza"
+                    image={meal.imgUrl}
+                    title={meal.dishName}
                 />
                 <CardContent>
                     <Typography variant="h5" component="h2">

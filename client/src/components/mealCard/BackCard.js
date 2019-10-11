@@ -8,6 +8,7 @@ import { Card, Table, TableCell,TableBody } from "@material-ui/core";
 
 export class BackCard extends Component{
     render(){
+        const meal = this.props.meal;
         return(
             <Card>
                 <CardContent>
