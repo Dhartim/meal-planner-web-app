@@ -1,0 +1,4 @@
+.cuisine_list {
+  display:flex;
+  overflow: scroll;
+}

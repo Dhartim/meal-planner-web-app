@@ -18,6 +18,7 @@ export class Home extends Component {
   }
 
   render() {
+    console.log('cuisini ---', this.state.cuisines)
     const cuisineList = this.state.cuisines.map(cuisine => 
       cuisine.Meals.length > 0 && 
       <
@@ -25,6 +26,7 @@ export class Home extends Component {
         key={cuisine.id}
         meals={cuisine.Meals}
       />
+      
     )
 
     return(

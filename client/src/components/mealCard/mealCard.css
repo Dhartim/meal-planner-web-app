@@ -3,7 +3,8 @@ h1 {
 }
 
 .card-container {
-  perspective: 800;
+  perspective: 800px;
+  width: fit-content;
 }
 
 .card {
@@ -11,10 +12,11 @@ h1 {
   color: #fff;
   text-align: center;
   line-height: 200px;
-  margin: 20px;
+  /* margin: 20px; */
+  margin:1rem;
   width: 400px;
   height: 400px;
-  transition: all 0.6s ease;
+  transition: all 0.6s cubic-bezier(0.4, 0, 1, 1);
   transform-style: preserve-3d;
 }
 

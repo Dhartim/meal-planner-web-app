@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import MealCard from "../mealCard";
 import Axios from 'axios'
+import './cuisineCards.css';
 
 function CuisineCards(props) {
 
@@ -11,9 +12,10 @@ function CuisineCards(props) {
       {...meal }
     />
   )
-  console.log(cards)
+  // console.log(cards)
   return(
-    <div>
+    <div className='cuisine_list'>
+      <h3></h3>
       {cards}
     </div>
   )
