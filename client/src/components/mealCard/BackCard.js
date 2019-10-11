@@ -13,10 +13,10 @@ export class BackCard extends Component{
             <Card>
                 <CardContent>
                     <Typography variant="subtitle1" color="textPrimary" component="p">
-                        Title {/*comes from database*/}
+                        {meal.dishName}
                     </Typography>
                     <Typography variant="subtitle1" color="textPrimary" component="p">
-                        Prep time {/*comes from database*/}
+                        Prep time: {meal.prepTime}
                     </Typography>
                     <Table>
                         <TableBody>

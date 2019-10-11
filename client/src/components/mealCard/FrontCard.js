@@ -28,13 +28,13 @@ export class FrontCard extends Component{
                 />
                 <CardContent>
                     <Typography variant="h5" component="h2">
-                        Pizza {/*get title from database*/}
+                        {meal.dishName}
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        Cuisine Type 
+                        Cuisine Type: { meal.cuisineType } 
                     </Typography>
                     <Typography variant="body2" color="textSecondary" component="p">
-                        Servings : 2
+                        Servings: 2
                     </Typography>
                 </CardContent>
                 <CardActions disableSpacing>

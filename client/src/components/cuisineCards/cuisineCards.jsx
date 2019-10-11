@@ -4,12 +4,12 @@ import Axios from 'axios'
 import './cuisineCards.css';
 
 function CuisineCards(props) {
-
   const cards = props.meals.map(meal => 
     <
       MealCard 
       key={meal.id}
       {...meal }
+      cuisineType = {props.cuisineType}
     />
   )
   // console.log(cards)

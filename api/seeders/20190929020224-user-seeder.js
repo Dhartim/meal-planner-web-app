@@ -1,5 +1,4 @@
 
-const faker = require('faker');
 const bcrypt = require('bcryptjs');
 
 module.exports = {
@@ -12,6 +11,8 @@ module.exports = {
       */
     queryInterface.bulkInsert('Users', [
       {
+        id: '3',
+
         firstName: 'j',
         lastName: 'j',
         email: 'j@j.com',
@@ -20,6 +21,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        id: '4',
         firstName: 'k',
         lastName: 'k',
         email: 'k@k.com',
@@ -28,6 +30,7 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        id: '5',
         firstName: 'l',
         lastName: 'l',
         email: 'l@l.com',

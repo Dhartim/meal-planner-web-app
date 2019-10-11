@@ -18,15 +18,14 @@ export class Home extends Component {
   }
 
   render() {
-    console.log('cuisini ---', this.state.cuisines)
     const cuisineList = this.state.cuisines.map(cuisine => 
       cuisine.Meals.length > 0 && 
       <
         CuisineCards 
         key={cuisine.id}
         meals={cuisine.Meals}
+        cuisineType= { cuisine.cuisineType }
       />
-      
     )
 
     return(
