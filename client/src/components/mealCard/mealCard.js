@@ -3,15 +3,16 @@ import './mealCard.css';
 import FrontCard from './FrontCard';
 import BackCard from './BackCard';
 
-function Card() {
+function Card(props) {
+  
   return (
     <div className="card-container">
         <div className="card">
             <div className="front">
-                <FrontCard/>
+                <FrontCard meal= {props}/>
             </div>
             <div className="back">
-                <BackCard/>
+                <BackCard meal= {props}/>
             </div>
         </div>
     </div>

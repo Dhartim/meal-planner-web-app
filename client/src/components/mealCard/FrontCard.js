@@ -8,17 +8,27 @@ import IconButton from '@material-ui/core/IconButton';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import './mealCard.css'
-export class FrontCard extends Component{
+
+class FrontCard extends Component{
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+          
+        };
+      }
     render(){
+        const meal = this.props.meal;
+
         return (
             <Card >
                 <CardHeader
-                    title="Pizza"
+                    title={meal.dishName}
                 />
                 <CardMedia
                     className = {"cardMedia"}
-                    image="https://www.foodiesfeed.com/wp-content/uploads/2019/02/pizza-salami-close-up.jpg"
-                    title="Pizza"
+                    image={meal.imgUrl}
+                    title={meal.dishName}
                 />
                 <CardContent>
                     <Typography variant="body2" color="textSecondary" component="p">

@@ -6,6 +6,7 @@ import { Card } from "@material-ui/core";
 
 export class BackCard extends Component{
     render(){
+        const meal = this.props.meal;
         return(
             <Card>
                 <CardContent>
