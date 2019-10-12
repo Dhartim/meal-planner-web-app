@@ -22,7 +22,6 @@ module.exports = {
     },
     {
       id: '3',
-
       firstName: 'Three',
       lastName: 'Test',
       email: 'a@a.com',
