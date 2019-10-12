@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { Favorite } = require('../models');
+const { UserMeal } = require('../models');
 const config = require('../config/config.json');
 
 function getUserId(req) {
@@ -10,36 +10,36 @@ function getUserId(req) {
 
 function list(req, res) {
   const userid = getUserId(req);
-  return Favorite.findAll({
+  return UserMeal.findAll({
     where: {
       userId: userid,
     },
   })
-    .then((favorites) => res.status(200).send(favorites))
+    .then((userMeals) => res.status(200).send(userMeals))
     .catch((error) => res.status(400).send(error));
 }
 
 function add(req, res) {
   const userid = getUserId(req);
-  return Favorite
+  return UserMeal
     .create({
       userId: userid,
       mealId: req.body.mealId,
     })
-    .then((favorite) => res.status(201).send(favorite))
+    .then((userMeal) => res.status(201).send(userMeal))
     .catch((error) => res.status(400).send(error));
 }
 
 function destroy(req, res) {
-  return Favorite
+  return UserMeal
     .findByPk(req.params.id)
-    .then((favorite) => {
-      if (!favorite) {
+    .then((userMeal) => {
+      if (!userMeal) {
         return res.status(400).send({
-          message: 'Could not find favorite to delete',
+          message: 'Could not find userMeal to delete',
         });
       }
-      return favorite.destroy()
+      return userMeal.destroy()
         .then(() => res.status(204).send())
         .catch((error) => res.status(400).send(error));
     });
