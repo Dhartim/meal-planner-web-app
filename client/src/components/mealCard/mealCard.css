@@ -7,27 +7,24 @@ h1 {
   width: fit-content;
 }
 
-.card {
+/* .card {
   position: relative;
   color: #fff;
   text-align: center;
-  line-height: 200px;
-  /* margin: 20px; */
   margin:1rem;
-  width: 400px;
-  height: 400px;
+  width: 300px;
+  height: 300px;
   transition: all 0.6s cubic-bezier(0.4, 0, 1, 1);
   transform-style: preserve-3d;
-}
+} */
 
-.front,
+/* .front,
 .back {
-  background: #5677fc;
   position: absolute;
   top: 0;
   left: 0;
-  height: 400px;
-  width: 400px;
+  height: 300px;
+  width: 300px;
   backface-visibility: hidden;
 }
 
@@ -35,10 +32,10 @@ h1 {
   height: 200px;
 }
 
-.back {
+.back{
   transform: rotateY(180deg);
 }
 
-.card:hover {
+.card:active {
   transform: rotateY(180deg);
-}
+} */

@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import MealCard from "../mealCard";
-import Axios from 'axios'
 import './cuisineCards.css';
 
 function CuisineCards(props) {
+  console.log(props);
   const cards = props.meals.map(meal => 
     <
       MealCard 
@@ -15,7 +15,7 @@ function CuisineCards(props) {
   // console.log(cards)
   return(
     <div className='cuisine_list'>
-      <h3></h3>
+      {/* <h3></h3> */}
       {cards}
     </div>
   )

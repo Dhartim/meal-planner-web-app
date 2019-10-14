@@ -1,4 +1,7 @@
 .cuisine_list {
   display:flex;
+  /* need to have good css to arrange cards properly */
+  justify-content: space-evenly;
+  align-items: center;
   overflow: scroll;
 }
