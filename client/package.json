@@ -1,7 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
-  "proxy": "http://localhost:4000/api",
+  "proxy": "http://127.0.0.1:4000/api",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.4.3",
@@ -14,10 +14,13 @@
     "react-card-flip": "^0.8.1",
     "react-dom": "^16.9.0",
     "react-flipcard": "^0.2.1",
+    "react-icons": "^3.7.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.1.1",
+    "react-slick": "^0.25.2",
     "react-transition-group": "^1.2.1",
-    "react-ui-cards": "^2.0.0"
+    "react-ui-cards": "^2.0.0",
+    "slick-carousel": "^1.8.1"
   },
   "scripts": {
     "start": "react-scripts start",

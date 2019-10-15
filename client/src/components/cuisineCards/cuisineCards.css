@@ -1,7 +1,20 @@
 .cuisine_list {
-  display:flex;
-  /* need to have good css to arrange cards properly */
-  justify-content: space-evenly;
-  align-items: center;
-  overflow: scroll;
+	display:flex;
+	justify-content: space-evenly;
+	align-items: center;
+	overflow: scroll;
+}
+
+.cuisine-list {
+    padding: 20px 30px;
+    text-align: left;
+}
+.cuisine-list h2{
+    padding: 20px 0px;
+}
+.slick-track {
+	margin: 0;
+}
+.slick-prev:before, .slick-next:before {
+	color: #3f52b5;
 }
