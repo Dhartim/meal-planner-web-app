@@ -11,4 +11,5 @@ module.exports = (app) => {
   require('./cuisines')(app);
   require('./authorization')(app);
   require('./userMeals')(app);
+  require('./customers')(app)
 };

@@ -4,6 +4,7 @@ const meal = require('./meal');
 const favorite = require('./favorite');
 const cuisine = require('./cuisine');
 const userMeal = require('./userMeal');
+const customer = require('./customer');
 
 module.exports = {
   user,
@@ -12,4 +13,5 @@ module.exports = {
   favorite,
   cuisine,
   userMeal,
+  customer,
 };
