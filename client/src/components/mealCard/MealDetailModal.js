@@ -25,7 +25,7 @@ function MealDetailModal(props) {
                 <Modal.Body>
                     <div className="top-block">
                         <div className="image-block">
-                            <img src={meal.imgUrl} className="img-responsive" alt=""/>
+                            <img src={meal.imgUrl} className="img-responsive" />
                         </div>
                         <div className="content-block">
                             <h6>{meal.prepTime} to prep</h6>
