@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaRegHeart } from "react-icons/fa/";
+import { FaRegHeart, FaHeart } from "react-icons/fa/";
 class FavouriteButton extends React.Component {
 
   constructor(props){
@@ -30,13 +30,13 @@ class FavouriteButton extends React.Component {
   }
 
   render(){
-    return(
-      <div>
-        <p>
-            <FaRegHeart size ={20} onClick={this.updateLikes}/>
-            {/* //when click on this button then meal id should go to favourite table or column of user  */}
-        </p>
-      </div>
+    return (
+        <div>
+            {/* //both of these should change or toggle for favourtie and non favourite button */}
+            {/* //need to update value of hidden on click and hide and show it  */}
+            <FaHeart size ={20} hidden = {true}/> 
+            <FaRegHeart size ={20} hidden = {false}/>
+        </div>
     );
 
   }
