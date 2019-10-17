@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Card from 'react-bootstrap/Card';
 import { OverlayTrigger, Form } from "react-bootstrap";
+import Tooltip from 'react-bootstrap/Tooltip'                                    
 import MealDetailModal from './MealDetailModal';
-import axios from "axios";
 import FavouriteButton from "./FavouriteButton";
 
 export class FrontCard extends Component{
@@ -10,106 +10,33 @@ export class FrontCard extends Component{
     
     handleCheckboxChange = event =>
       this.setState({ checked: event.target.checked })
-
-    handleFavouriteBoxClick(event){
-        //console.log('no', no);
-        //console.log('event.target.value', event);
-        event.currentTarget.style.backgroundColor = '#ccc';
-        console.log("clicked");
-
-        /*var bodyFormData = new FormData();
-        bodyFormData.set('mealId', 1);
-
-        axios.post('/favorites')
-          .then(res => this.setState({cuisines: res.data}))
-          .catch(error => error)*/
-        const jwtToken = localStorage.getItem('jwtToken');
-
-        var headers = {
-            "Authorization": 'Bearer ' + jwtToken
-        }
-
-        axios('/favorites',{
-            method: 'POST',
-            data : {
-              mealId: 1
-            },
-            headers: headers
-        })
-        .then((response) => {
-          if (response.status === 200) {
-            console.log(response);
-          } else {
-            console.log(`Error`);
-          }
-        })
-        .catch(error => {
-          console.log("some error is being caught: %s", error)
-        });
-
-        /*axios.post('/favorites', {
-          mealId: 1
-        })
-        .then((response) => {
-          if (response.status === 200) {
-            console.log(response);
-          } else {
-            console.log(`Error`);
-          }
-        })
-        .catch(error => {
-          console.log("some error is being caught: %s", err)
-        });*/
-
-        /*var checkBoxClick = this.state.checkBoxClick;
-        checkBoxClick[no] = !this.state.checkBoxClick[no];
-        this.setState({
-            checkBoxClick
-        });
-
-        var alltrue =Object.keys(checkBoxClick).every((k) =>{ return checkBoxClick[k] });
-        //console.log('alltrue', alltrue);
-        if(alltrue){
-            // console.log('alltrue in if : ', alltrue);
-            this.props.handleMultiSelect();
-        }
-
-        if(this.props.checkBoxDefaultStatus){
-            this.props.handleMultiSelect();
-        }*/
-    }
     
     render(){
         const meal = this.props.meal;
-        const renderTooltip = props => (
-            <div
-              {...props}
-              style={{
-                backgroundColor: 'rgba(0, 0, 0, 0.85)',
-                padding: '2px 10px',
-                color: 'white',
-                borderRadius: 3,
-                ...props.style,
-              }}
-            >
-            {/* //following things will come from db */}
-            Prep-Time:{meal.prepTime} <br/>
-            Calories: 90 <br/>
-            Fat: 30<br/>
-            Protein: 30<br/>
-            Carbs: 30<br/>
-            </div>
+
+        const renderTooltipTemp = (
+            <Tooltip id="tooltip-right-start">
+            {/* //below mentioned data comes from db */}
+              <div>
+                    Prep-Time:{meal.prepTime} <br/>
+                    Calories: 90 <br/>
+                    Fat: 30<br/>
+                    Protein: 30<br/>
+                    Carbs: 30<br/>
+                </div>
+            </Tooltip>
         );
+
        // const longTitle = meal.prepTime;
-        console.log(meal);
+        //console.log(meal);
         return ( 
             <Card style={{ width: '18rem' }}>
                 <OverlayTrigger
-                    placement="right-start"
-                    delay={{ show: 250, hide: 400 }}
-                    overlay={renderTooltip}
+                  key="right-start"
+                  placement="right-start"
+                  overlay={renderTooltipTemp}
                 >
-                    <Card.Img variant="top" src={meal.imgUrl} />
+                  <Card.Img variant="top" src={meal.imgUrl} />
                 </OverlayTrigger>
                 <Card.Body>
                     <Card.Title>{meal.dishName}</Card.Title>
@@ -128,11 +55,9 @@ export class FrontCard extends Component{
                             </div>
                         ))}
                     </Form>
-                    <FavouriteButton />
-                    {/* <p className="icon" onClick={this.handleFavouriteBoxClick}>
-                        <FaRegStar />
-                    </p> */}
-                    {/*<Button variant="primary">More Details</Button>*/}
+                    <div className="favourite-block">
+                        <FavouriteButton meal_id={meal.id} favorites={meal.favorites}/>
+                    </div>
                     <MealDetailModal meal= {meal}/>
                 </Card.Body>
             </Card>
