@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button';
 import './mealCard.css';
-import { FaRegStar, FaRegTrashAlt } from "react-icons/fa";
+import { FaRegHeart, FaRegTrashAlt } from "react-icons/fa";
 
 
 function MealDetailModal(props) {
@@ -34,7 +34,7 @@ function MealDetailModal(props) {
                     <div className="action-block">
                         <ul>
                             <li>
-                                <FaRegStar />
+                                <FaRegHeart />
                             </li>
                             <li>
                                 <FaRegTrashAlt />

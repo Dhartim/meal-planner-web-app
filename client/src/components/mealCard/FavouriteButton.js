@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaRegStar } from "react-icons/fa/";
+import { FaRegHeart } from "react-icons/fa/";
 class FavouriteButton extends React.Component {
 
   constructor(props){
@@ -11,10 +11,9 @@ class FavouriteButton extends React.Component {
     this.updateLikes = this.updateLikes.bind(this);
   }
 
-  updateLikes(event) {
+  updateLikes() {
 
     if(!this.state.updated) {
-        event.currentTarget.style.backgroundColor = '#ccc';
         this.setState((prevState, props) => {
         return {
           updated: true
@@ -28,16 +27,14 @@ class FavouriteButton extends React.Component {
         };
       });
     }
-
-
   }
 
   render(){
-
     return(
       <div>
-        <p onClick={this.updateLikes}>
-            <FaRegStar />
+        <p>
+            <FaRegHeart size ={20} onClick={this.updateLikes}/>
+            {/* //when click on this button then meal id should go to favourite table or column of user  */}
         </p>
       </div>
     );
