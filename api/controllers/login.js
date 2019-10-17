@@ -17,7 +17,7 @@ function login(req, res) {
         user.password,
       );
 
-      console.log('validpass: ', validPassword)
+      console.log('validpass: ', validPassword);
 
       !validPassword && res.status(400).send({ auth: false, token: null });
 

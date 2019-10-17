@@ -3,7 +3,7 @@ const { UserMeal } = require('../models');
 const config = require('../config/config.json');
 
 function getUserId(req) {
-  console.log(req.headers['x-access-token'])
+  console.log(req.headers['x-access-token']);
   const token = req.headers['x-access-token'];
   const decode = jwt.verify(token, config.jwt.jwtSecret);
   return decode.user.id;

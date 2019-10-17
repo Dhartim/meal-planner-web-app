@@ -5,9 +5,8 @@ import axios from 'axios';
 export default class Stripe extends React.Component {
   //4242424242424242	Visa	Any 3 digits	Any future date
   onToken = (token) => {
-    console.log(token)
-    axios.post('/api/charge', {
-      body: JSON.stringify(token)
+    axios.post('/charge', {
+      stripeToken: token.id, userId: "3" // hard coded userid need to change after redux
     }).then(res => {
       console.log('result: ', res)
     }).catch(err => {

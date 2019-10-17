@@ -3,8 +3,8 @@ const faker = require('faker');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    const recipes = require('../public/Recipes.json')
-    let recipesArray = []
+    const recipes = require('../public/Recipes.json');
+    const recipesArray = [];
     recipes.forEach((recipe) => {
       recipesArray.push({
         dishName: recipe.name,
@@ -16,9 +16,9 @@ module.exports = {
         cuisineId: Math.floor(Math.random() * 8),
         createdAt: new Date(),
         updatedAt: new Date(),
-      })
-    })
-    return queryInterface.bulkInsert('Meals', recipesArray)
+      });
+    });
+    return queryInterface.bulkInsert('Meals', recipesArray);
   },
 
   down: (queryInterface, Sequelize) =>
