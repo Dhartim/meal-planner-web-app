@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button';
 import './mealCard.css';
-import { FaRegStar, FaStar, FaRegTrashAlt } from "react-icons/fa";
+import { FaRegStar, FaRegTrashAlt } from "react-icons/fa";
 
 
 function MealDetailModal(props) {
@@ -25,7 +25,7 @@ function MealDetailModal(props) {
                 <Modal.Body>
                     <div className="top-block">
                         <div className="image-block">
-                            <img src={meal.imgUrl} className="img-responsive" />
+                            <img src={meal.imgUrl} className="img-responsive" alt=""/>
                         </div>
                         <div className="content-block">
                             <h6>{meal.prepTime} to prep</h6>
@@ -35,9 +35,6 @@ function MealDetailModal(props) {
                         <ul>
                             <li>
                                 <FaRegStar />
-                            </li>
-                            <li>
-                                <FaStar />
                             </li>
                             <li>
                                 <FaRegTrashAlt />

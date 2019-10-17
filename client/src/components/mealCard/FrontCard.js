@@ -1,20 +1,9 @@
 import React, { Component } from "react";
-//import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-// import CardMedia from '@material-ui/core/CardMedia';
-// import { Card, Checkbox, CardHeader } from "@material-ui/core";
-// import Typography from '@material-ui/core/Typography';
-// import FavoriteIcon from '@material-ui/icons/Favorite';
-// import IconButton from '@material-ui/core/IconButton';
-// import CardContent from '@material-ui/core/CardContent';
-// import CardActions from '@material-ui/core/CardActions';
-// import Button from '@material-ui/core/Button';
-// import Tooltip from '@material-ui/core/Tooltip';
-// import Grid from '@material-ui/core/Grid';
 import { OverlayTrigger, Form } from "react-bootstrap";
 import MealDetailModal from './MealDetailModal';
-import { FaRegStar } from "react-icons/fa";
 import axios from "axios";
+import FavouriteButton from "./FavouriteButton";
 
 export class FrontCard extends Component{
     state = { checked: false }
@@ -139,15 +128,14 @@ export class FrontCard extends Component{
                             </div>
                         ))}
                     </Form>
-                    <p className="icon" onClick={this.handleFavouriteBoxClick}>
+                    <FavouriteButton />
+                    {/* <p className="icon" onClick={this.handleFavouriteBoxClick}>
                         <FaRegStar />
-                    </p>
+                    </p> */}
                     {/*<Button variant="primary">More Details</Button>*/}
                     <MealDetailModal meal= {meal}/>
                 </Card.Body>
             </Card>
-            // favourite icon and component on click of button remaining
-            //size of card container
         );
     }
 }
