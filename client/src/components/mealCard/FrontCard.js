@@ -16,7 +16,6 @@ export class FrontCard extends Component{
 
         const renderTooltipTemp = (
             <Tooltip id="tooltip-right-start">
-            {/* //below mentioned data comes from db */}
               <div>
                     Prep-Time:{meal.prepTime} <br/>
                     Calories: 90 <br/>
@@ -31,6 +30,13 @@ export class FrontCard extends Component{
         //console.log(meal);
         return ( 
             <Card style={{ width: '18rem' }}>
+                {/*<OverlayTrigger
+                    placement="right-start"
+                    delay={{ show: 250, hide: 400 }}
+                    overlay={renderTooltip}
+                >
+                    <Card.Img variant="top" src={meal.imgUrl} />
+                </OverlayTrigger> */}
                 <OverlayTrigger
                   key="right-start"
                   placement="right-start"
@@ -58,6 +64,10 @@ export class FrontCard extends Component{
                     <div className="favourite-block">
                         <FavouriteButton meal_id={meal.id} favorites={meal.favorites}/>
                     </div>
+                    {/* <p className="icon" onClick={this.handleFavouriteBoxClick}>
+                        <FaRegStar />
+                    </p> */}
+                    {/*<Button variant="primary">More Details</Button>*/}
                     <MealDetailModal meal= {meal}/>
                 </Card.Body>
             </Card>

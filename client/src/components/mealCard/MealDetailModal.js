@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button';
 import './mealCard.css';
-import { FaRegHeart, FaRegTrashAlt } from "react-icons/fa";
+import { FaRegTrashAlt } from "react-icons/fa";
+import FavouriteButton from "./FavouriteButton";
 
 
 function MealDetailModal(props) {
@@ -34,7 +35,7 @@ function MealDetailModal(props) {
                     <div className="action-block">
                         <ul>
                             <li>
-                                <FaRegHeart />
+                                <FavouriteButton meal_id={meal.id} favorites={meal.favorites}/>
                             </li>
                             <li>
                                 <FaRegTrashAlt />

@@ -74,3 +74,6 @@ h1 {
   .favourite-block {
 	  padding-bottom: 15px;
   }
+  span.icon.toggled.heart {
+	  color: red;
+  }

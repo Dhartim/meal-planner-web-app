@@ -1,13 +1,13 @@
 import React from 'react';
-import { FaRegHeart, FaHeart, FaCode } from "react-icons/fa/";
+import { FaRegHeart, FaHeart } from "react-icons/fa/";
 import axios from "axios";
 
 function IsFav(props) {
-    return <p className="icon heart" onClick={props.onClick}><FaRegHeart size ={20}/></p>;
+    return <span className="icon heart" onClick={props.onClick}><FaRegHeart size ={25}/></span>;
 }
 
 function IsNotFav(props) {
-    return <p className="icon toggled heart" onClick={props.onClick}><FaHeart size ={20}/></p>;
+    return <span className="icon toggled heart" onClick={props.onClick}><FaHeart size ={25}/></span>;
 }
 
 class FavouriteButton extends React.Component {
@@ -27,9 +27,8 @@ class FavouriteButton extends React.Component {
 
   componentDidMount() {
     const isFaved = this.handleCheck(this.state.meal_id);
+
     this.setState({ isFaved: isFaved });
-    console.log(this.state.favorites);
-    console.log('test ' + isFaved);
   }
 
   updateLikes() {
@@ -69,9 +68,21 @@ class FavouriteButton extends React.Component {
 
   removeLike() {    
     const jwtToken = localStorage.getItem('jwtToken');
-    const meal_id = this.state.meal_id;
 
-    const url = `/favorites/${meal_id}`
+    axios.delete('/favorites', { headers: {"x-access-token" : `${jwtToken}`}, data: {"mealId": this.state.meal_id} })
+    .then(response => {
+        if ((response.status === 200) || (response.status === 204)) {
+            this.setState({ isFaved: false });
+            console.log(response);
+        } else {
+            console.log(`Error`);
+        }
+    })
+    .catch(error => {
+        console.log("some error is being caught: %s", error)
+    });
+
+    /*const url = `/favorites/${favourite_id}`
 
     axios.delete(url, { headers: {"x-access-token" : `${jwtToken}`} })
     .then(response => {
@@ -84,22 +95,33 @@ class FavouriteButton extends React.Component {
     })
     .catch(error => {
         console.log("some error is being caught: %s", error)
-    });
+    });*/
   }
 
   handleCheck(meal_id) {
     return this.state.favorites.some(item => meal_id === item.mealId);
   }
-// there is some bug in my FaCode, need help with it 
+
   render(){
+    //console.log(this.props);
+    //const isFaved = this.state.isFaved;
+
     let favBtn;
     if (this.state.isFaved) {
         favBtn = <IsNotFav onClick={this.removeLike} />;
     } else {
         favBtn = <IsFav onClick={this.addLikes} />;
     }
+
     return (
       <div>
+          {/* //both of these should change or toggle for favourtie and non favourite button */}
+          {/* //need to update value of hidden on click and hide and show it  */}
+          
+          {/*<FaHeart size ={20} hidden = {true}/> 
+          <FaRegHeart size ={20} hidden = {false}/>
+          */}
+
           {favBtn}
       </div>
     );
