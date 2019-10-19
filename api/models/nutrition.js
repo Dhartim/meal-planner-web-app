@@ -1,7 +1,7 @@
-'use strict';
+
 module.exports = (sequelize, DataTypes) => {
   const Nutrition = sequelize.define('Nutrition', {
-    mealId: DataTypes.INTEGER,
+    mealId: DataTypes.STRING,
     calories: DataTypes.INTEGER,
     servingSize: DataTypes.STRING,
     totalFat: DataTypes.STRING,
@@ -10,12 +10,12 @@ module.exports = (sequelize, DataTypes) => {
     sodium: DataTypes.STRING,
     totalCarbohydrates: DataTypes.STRING,
     fiber: DataTypes.STRING,
-    sugars: DataTypes.STRING,
+    sugar: DataTypes.STRING,
     protein: DataTypes.STRING,
-    vitaminsAndMinerals: DataTypes.STRING
+    vitaminsAndMinerals: DataTypes.STRING,
   }, {});
-  Nutrition.associate = function(models) {
-    Nutrition.belongsTo(models.Meals, { foreignKey: 'mealId' })
+  Nutrition.associate = function (models) {
+    Nutrition.belongsTo(models.Meal, { foreignKey: 'mealId' });
     // associations can be defined here
   };
   return Nutrition;

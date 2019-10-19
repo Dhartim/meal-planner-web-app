@@ -8,7 +8,6 @@ module.exports = {
     recipes.forEach((recipe) => {
       recipesArray.push({
         dishName: recipe.name,
-        nutritionInfo: faker.lorem.sentence(),
         imgUrl: recipe.imageURL,
         prepTime: `${Math.floor(Math.random() * 30)} min`,
         cookTime: `${Math.floor(Math.random() * 60)} min`,
