@@ -6,7 +6,7 @@ import Slider from "react-slick";
 import './cuisineCards.css';
 
 function CuisineCards(props) {
-  console.log(props);
+  //console.log(props);
   /*const cards = props.meals.map(meal => 
     <
       MealCard 
@@ -35,6 +35,7 @@ function CuisineCards(props) {
                           key={meal.id}
                           {...meal }
                           cuisineType = {props.cuisineType}
+                          favorites = {props.favorites}
                         />
                     )
                 }
