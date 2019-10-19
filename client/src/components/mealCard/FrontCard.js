@@ -25,18 +25,8 @@ export class FrontCard extends Component{
                 </div>
             </Tooltip>
         );
-
-       // const longTitle = meal.prepTime;
-        //console.log(meal);
         return ( 
             <Card style={{ width: '18rem' }}>
-                {/*<OverlayTrigger
-                    placement="right-start"
-                    delay={{ show: 250, hide: 400 }}
-                    overlay={renderTooltip}
-                >
-                    <Card.Img variant="top" src={meal.imgUrl} />
-                </OverlayTrigger> */}
                 <OverlayTrigger
                   key="right-start"
                   placement="right-start"
@@ -64,10 +54,6 @@ export class FrontCard extends Component{
                     <div className="favourite-block">
                         <FavouriteButton meal_id={meal.id} favorites={meal.favorites}/>
                     </div>
-                    {/* <p className="icon" onClick={this.handleFavouriteBoxClick}>
-                        <FaRegStar />
-                    </p> */}
-                    {/*<Button variant="primary">More Details</Button>*/}
                     <MealDetailModal meal= {meal}/>
                 </Card.Body>
             </Card>

@@ -81,21 +81,6 @@ class FavouriteButton extends React.Component {
     .catch(error => {
         console.log("some error is being caught: %s", error)
     });
-
-    /*const url = `/favorites/${favourite_id}`
-
-    axios.delete(url, { headers: {"x-access-token" : `${jwtToken}`} })
-    .then(response => {
-        if ((response.status === 200) || (response.status === 204)) {
-            this.setState({ isFaved: false });
-            console.log(response);
-        } else {
-            console.log(`Error`);
-        }
-    })
-    .catch(error => {
-        console.log("some error is being caught: %s", error)
-    });*/
   }
 
   handleCheck(meal_id) {
@@ -103,9 +88,6 @@ class FavouriteButton extends React.Component {
   }
 
   render(){
-    //console.log(this.props);
-    //const isFaved = this.state.isFaved;
-
     let favBtn;
     if (this.state.isFaved) {
         favBtn = <IsNotFav onClick={this.removeLike} />;
@@ -115,13 +97,6 @@ class FavouriteButton extends React.Component {
 
     return (
       <div>
-          {/* //both of these should change or toggle for favourtie and non favourite button */}
-          {/* //need to update value of hidden on click and hide and show it  */}
-          
-          {/*<FaHeart size ={20} hidden = {true}/> 
-          <FaRegHeart size ={20} hidden = {false}/>
-          */}
-
           {favBtn}
       </div>
     );
