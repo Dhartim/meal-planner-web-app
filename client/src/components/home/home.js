@@ -48,7 +48,7 @@ export class Home extends Component {
           key={cuisine.id}
           meals={cuisine.Meals}
           cuisineType= { cuisine.cuisineType }
-          favorites= {this.state.favorites}
+          // favorites= {this.state.favorites}
         />
       );
 
