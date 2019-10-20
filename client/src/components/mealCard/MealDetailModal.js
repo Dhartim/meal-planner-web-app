@@ -38,7 +38,7 @@ function MealDetailModal(props) {
                                 <FavouriteButton meal_id={meal.id} favorites={meal.favorites}/>
                             </li>
                             <li>
-                            {/* TODO: add functionality of delete  */}
+                            {/* TODO: REMOVE DELETE FUNCTIONALOITY   */}
                                 <FaRegTrashAlt />
                             </li>
                         </ul>

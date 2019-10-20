@@ -13,12 +13,13 @@ export class FrontCard extends Component{
     
     render(){
         const meal = this.props.meal;
-
+        console.log(meal);
         const renderTooltipTemp = (
             <Tooltip id="tooltip-right-start">
               <div>
+              {/* //TODO: get data from database */}
                     Prep-Time:{meal.prepTime} <br/>
-                    Calories: 90 <br/>
+                    Calories: {}<br/>
                     Fat: 30<br/>
                     Protein: 30<br/>
                     Carbs: 30<br/>
