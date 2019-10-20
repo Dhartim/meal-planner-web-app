@@ -69,7 +69,13 @@ class FavouriteButton extends React.Component {
   removeLike() {    
     const jwtToken = localStorage.getItem('jwtToken');
 
-    axios.delete('/favorites', { headers: {"x-access-token" : `${jwtToken}`}, data: {"mealId": this.state.meal_id} })
+    axios.delete('/favorites', {
+      headers: {"x-access-token" : `${jwtToken}`
+      },
+      data: {
+        "mealId": this.state.meal_id
+      }
+    })
     .then(response => {
         if ((response.status === 200) || (response.status === 204)) {
             this.setState({ isFaved: false });

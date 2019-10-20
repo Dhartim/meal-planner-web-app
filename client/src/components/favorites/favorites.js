@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import CuisineCards from "../cuisineCards";
+import MealCard from "../mealCard";
+// import CuisineCards from "../cuisineCards";
 
 export class Favorites extends Component {
   constructor(props) {
@@ -30,20 +31,40 @@ export class Favorites extends Component {
   }
 
   render() {
-    const { loggedIn } = this.state;
+    const { loggedIn, favorites } = this.state;
     let favoritesList = [];
 
+    // TODO: update frontend api and backend api to get if a meal is liked rather than workarounds
     if(loggedIn) {
-      // favoritesList = this.state.favorites.map(favorite =>
-      //   favorite.Meals.length > 0 &&
+      for(let i = 0; i < favorites.length; i++) {
+        let favorite = favorites[i];
+        console.log("favorite=%s", favorite);
+        favoritesList.push(
+          <
+            MealCard
+            key={favorite.id}
+            meal={favorite}
+            cuisineType = {favorite.cuisineType}
+            // favorites = {favorite.favorites}
+            // meal={favorite}
+            // key={favorite.id}
+            // meals={favorite.Meals}
+            // cuisineType={favorite.cuisineType}
+            // favorites={this.state.favorites}
+          />
+        )
+      }
+      // favorites.map(favorite => {
+      //   console.log("favorite=%s", favorite.id);
+      //   return favorite.Meals.length > 0 &&
       //   <
       //     CuisineCards
-      //     key={cuisine.id}
-      //     meals={cuisine.Meals}
-      //     cuisineType={cuisine.cuisineType}
-      //     favorites={this.state.favorites}
+      //     key={favorite.id}
+      //     meals={favorite.Meals}
+      //     cuisineType={favorite.cuisineType}
+      //     // favorites={this.state.favorites}
       //   />
-      // );
+      // });
     } else {
 
     }

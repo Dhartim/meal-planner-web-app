@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const { Favorite } = require('../models');
+const { Favorite, Meal } = require('../models');
 const config = require('../config/config.json');
 
 function getUserId(req) {
@@ -16,7 +16,26 @@ function list(req, res) {
       userId: userid,
     },
   })
-    .then((favorites) => res.status(200).send(favorites))
+    .then((favorites) => {
+      let favoriteMealIds = [];
+      for(let i = 0; i < favorites.length; i++) {
+        favoriteMealIds.push(favorites[i].id);
+      }
+      console.log("favoriteMealIds: %s", favoriteMealIds);
+      return Meal
+        .findAll({
+          where: {
+            id: favoriteMealIds,
+          }
+        })
+        .then(meals => {
+          console.log("meals: %s", meals);
+          for(let j = 0; j < meals.length; j++) {
+            console.log("meals: %s", meals[j].id);
+          }
+          res.status(200).send(meals);
+        })
+    })
     .catch((error) => res.status(400).send(error));
 }
 

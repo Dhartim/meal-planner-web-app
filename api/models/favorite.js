@@ -5,8 +5,13 @@ module.exports = (sequelize, DataTypes) => {
     mealId: DataTypes.INTEGER,
   }, {});
   Favorite.associate = function (models) {
-    Favorite.belongsTo(models.User, { foreignKey: 'userId' });
-    Favorite.belongsTo(models.Meal, { foreignKey: 'mealId' });
+    Favorite.belongsTo(models.User, {
+      foreignKey: 'userId'
+    });
+    Favorite.belongsTo(models.Meal, {
+      foreignKey: 'mealId',
+      onDelete: 'CASCADE'
+    });
   };
   return Favorite;
 };
