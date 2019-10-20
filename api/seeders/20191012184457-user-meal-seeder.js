@@ -7,44 +7,40 @@ module.exports = {
 
       Example:
       */
-    queryInterface.bulkInsert('Cuisines', [
+    queryInterface.bulkInsert('UserMeals', [
       {
-        cuisineType: 'Mexican',
+        userId: 1,
+        mealId: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        cuisineType: 'Italian',
+        userId: 1,
+        mealId: 2,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        cuisineType: 'American',
+        userId: 3,
+        mealId: 4,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        cuisineType: 'French',
+        userId: 2,
+        mealId: 1,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        cuisineType: 'Chinese',
+        userId: 3,
+        mealId: 2,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        cuisineType: 'Japanese',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        cuisineType: 'Mediterranean',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
-      {
-        cuisineType: 'Indian',
+        userId: 2,
+        mealId: 4,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -57,6 +53,6 @@ module.exports = {
 
       Example:
       */
-    queryInterface.bulkDelete('Cuisines', null, {})
-  ,
+    queryInterface.bulkDelete('UserMeals', null, {}),
+
 };

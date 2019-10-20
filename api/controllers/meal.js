@@ -1,4 +1,4 @@
-const { Meal, Cuisine } = require('../models');
+const { Meal, Cuisine, Nutrition } = require('../models');
 
 function list(req, res) {
   return Meal.findAll({
@@ -6,10 +6,15 @@ function list(req, res) {
     order: [
       ['dishName', 'Desc'],
     ],
-    include: [{
-      model: Cuisine,
-      attributes: ['cuisineType'],
-    }],
+    include: [
+      {
+        model: Cuisine,
+        attributes: ['cuisineType'],
+      },
+      {
+        model: Nutrition,
+      },
+    ],
   })
     .then((Meals) => res.status(200).send(Meals))
     .catch((error) => res.status(400).send(error));

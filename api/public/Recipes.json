@@ -44,6 +44,182 @@
         "originalURL": "http://www.food.com/recipe/to-die-for-crock-pot-roast-27208"
     },
     {
+        "name": "lasagna",
+        "ingredients": [
+            {
+                "quantity": "1",
+                "name": " beef roast",
+                "type": "Meat"
+            },
+            {
+                "quantity": "1 package",
+                "name": "brown gravy mix",
+                "type": "Baking"
+            },
+            {
+                "quantity": "1 package",
+                "name": "dried Italian salad dressing mix",
+                "type": "Condiments"
+            },
+            {
+                "quantity": "1 package",
+                "name": "dry ranch dressing mix",
+                "type": "Condiments"
+            },
+            {
+                "quantity": "1/2 cup",
+                "name": "water",
+                "type": "Drinks"
+            }
+        ],
+        "steps": [
+            "Place beef roast in crock pot.",
+            "Mix the dried mixes together in a bowl and sprinkle over the roast.",
+            "Pour the water around the roast.",
+            "Cook on low for 7-9 hours."
+        ],
+        "timers": [
+            0,
+            0,
+            0,
+            420
+        ],
+        "imageURL": "https://cdn.pixabay.com/photo/2017/02/15/15/17/meal-2069021_960_720.jpg",
+        "originalURL": "http://www.food.com/recipe/to-die-for-crock-pot-roast-27208"
+    },
+    {
+        "name": "Chana Masala",
+        "ingredients": [
+            {
+                "quantity": "1",
+                "name": " beef roast",
+                "type": "Meat"
+            },
+            {
+                "quantity": "1 package",
+                "name": "brown gravy mix",
+                "type": "Baking"
+            },
+            {
+                "quantity": "1 package",
+                "name": "dried Italian salad dressing mix",
+                "type": "Condiments"
+            },
+            {
+                "quantity": "1 package",
+                "name": "dry ranch dressing mix",
+                "type": "Condiments"
+            },
+            {
+                "quantity": "1/2 cup",
+                "name": "water",
+                "type": "Drinks"
+            }
+        ],
+        "steps": [
+            "Place beef roast in crock pot.",
+            "Mix the dried mixes together in a bowl and sprinkle over the roast.",
+            "Pour the water around the roast.",
+            "Cook on low for 7-9 hours."
+        ],
+        "timers": [
+            0,
+            0,
+            0,
+            420
+        ],
+        "imageURL": "https://cdn.pixabay.com/photo/2017/12/07/12/22/food-3003693_960_720.jpg",
+        "originalURL": "http://www.food.com/recipe/to-die-for-crock-pot-roast-27208"
+    },
+    {
+        "name": "Ramen",
+        "ingredients": [
+            {
+                "quantity": "1",
+                "name": " beef roast",
+                "type": "Meat"
+            },
+            {
+                "quantity": "1 package",
+                "name": "brown gravy mix",
+                "type": "Baking"
+            },
+            {
+                "quantity": "1 package",
+                "name": "dried Italian salad dressing mix",
+                "type": "Condiments"
+            },
+            {
+                "quantity": "1 package",
+                "name": "dry ranch dressing mix",
+                "type": "Condiments"
+            },
+            {
+                "quantity": "1/2 cup",
+                "name": "water",
+                "type": "Drinks"
+            }
+        ],
+        "steps": [
+            "Place beef roast in crock pot.",
+            "Mix the dried mixes together in a bowl and sprinkle over the roast.",
+            "Pour the water around the roast.",
+            "Cook on low for 7-9 hours."
+        ],
+        "timers": [
+            0,
+            0,
+            0,
+            420
+        ],
+        "imageURL": "https://cdn.pixabay.com/photo/2015/05/13/16/16/noodle-soup-765706_960_720.jpg",
+        "originalURL": "http://www.food.com/recipe/to-die-for-crock-pot-roast-27208"
+    },
+    {
+        "name": "Chicken Crepe",
+        "ingredients": [
+            {
+                "quantity": "1",
+                "name": " beef roast",
+                "type": "Meat"
+            },
+            {
+                "quantity": "1 package",
+                "name": "brown gravy mix",
+                "type": "Baking"
+            },
+            {
+                "quantity": "1 package",
+                "name": "dried Italian salad dressing mix",
+                "type": "Condiments"
+            },
+            {
+                "quantity": "1 package",
+                "name": "dry ranch dressing mix",
+                "type": "Condiments"
+            },
+            {
+                "quantity": "1/2 cup",
+                "name": "water",
+                "type": "Drinks"
+            }
+        ],
+        "steps": [
+            "Place beef roast in crock pot.",
+            "Mix the dried mixes together in a bowl and sprinkle over the roast.",
+            "Pour the water around the roast.",
+            "Cook on low for 7-9 hours."
+        ],
+        "timers": [
+            0,
+            0,
+            0,
+            420
+        ],
+        "imageURL": "https://cdn.pixabay.com/photo/2014/12/22/16/50/pancake-577386_960_720.jpg",
+        "originalURL": "http://www.food.com/recipe/to-die-for-crock-pot-roast-27208"
+    },
+    {
         "name": "Roasted Asparagus",
         "ingredients": [
             {

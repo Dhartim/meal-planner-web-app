@@ -20,7 +20,6 @@ function listByType(req, res) {
 }
 
 function list(req, res) {
-  
   return Cuisine.findAll({
     include: [{
       model: Meal,
@@ -32,5 +31,5 @@ function list(req, res) {
 
 module.exports = {
   listByType,
-  list, 
+  list,
 };

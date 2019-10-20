@@ -10,4 +10,7 @@ module.exports = (app) => {
   require('./favorites')(app);
   require('./cuisines')(app);
   require('./authorization')(app);
+  require('./userMeals')(app);
+  require('./customers')(app);
+  require('./nutrition')(app);
 };
