@@ -21,7 +21,6 @@ export class Favorites extends Component {
         headers: {"x-access-token" : `${jwtToken}`}
       })
       .then(res => {
-        console.log("res %s", res.data);
         this.setState({
           favorites: res.data,
           loggedIn: true
@@ -38,19 +37,19 @@ export class Favorites extends Component {
     if(loggedIn) {
       for(let i = 0; i < favorites.length; i++) {
         let favorite = favorites[i];
-        console.log("favorite[%d]={dishName: %s\nnutritionInfo: %s\nimgUrl: %s\nprepTime: %s\ncookTime: %s\nrecipe: %s\ncuisineId: %s\ncuisineType: %s\n}", i,
-          favorite.dishName,
-          favorite.nutritionInfo,
-          favorite.imgUrl,
-          favorite.prepTime,
-          favorite.cookTime,
-          favorite.recipe,
-          favorite.cuisineId);
+        // console.log("favorite[%d]={dishName: %s\nnutritionInfo: %s\nimgUrl: %s\nprepTime: %s\ncookTime: %s\nrecipe: %s\ncuisineId: %s\ncuisineType: %s\n}", i,
+        //   favorite.dishName,
+        //   favorite.nutritionInfo,
+        //   favorite.imgUrl,
+        //   favorite.prepTime,
+        //   favorite.cookTime,
+        //   favorite.recipe,
+        //   favorite.cuisineId);
         favoritesList.push(
           <
             MealCard
             key={favorite.id}
-            meal={favorite}
+            {...favorite}
             cuisineType = {favorite.cuisineType}
             // favorites = {favorite.favorites}
             // meal={favorite}
@@ -77,9 +76,7 @@ export class Favorites extends Component {
     }
     return(
       <div>
-        FAVORITES
-        <p/>
-        TODO:
+        <h2>FAVORITES</h2>
         {favoritesList}
       </div>
     );

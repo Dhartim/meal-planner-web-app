@@ -11,7 +11,7 @@ export class Home extends Component {
 
     this.state = {
       cuisines: [],
-      favorites: [],
+      // favorites: [],
       loader1: true,
       loader2: true,
     }
@@ -63,7 +63,6 @@ export class Home extends Component {
 
     return(
       <div>
-        <Favorites />
         {
           !isLoading ? cuisineList : <Spinner />
         }

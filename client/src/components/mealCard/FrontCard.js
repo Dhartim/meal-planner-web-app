@@ -6,7 +6,13 @@ import MealDetailModal from './MealDetailModal';
 import FavouriteButton from "./FavouriteButton";
 
 export class FrontCard extends Component{
-    state = { checked: false };
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        checked: false,
+      };
+    }
     
     handleCheckboxChange = event =>
       this.setState({ checked: event.target.checked });
