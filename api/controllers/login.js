@@ -17,6 +17,8 @@ function login(req, res) {
         user.password,
       );
 
+      console.log('validpass: ', validPassword)
+
       !validPassword && res.status(400).send({ auth: false, token: null });
 
       const token = jwt.sign(

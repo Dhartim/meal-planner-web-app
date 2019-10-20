@@ -3,7 +3,8 @@ const { Favorite } = require('../models');
 const config = require('../config/config.json');
 
 function getUserId(req) {
-  const token = req.headers.authorization.split(' ')[1];
+  /*const token = req.headers.authorization.split(' ')[1];*/
+  const token = req.headers['x-access-token'];
   const decode = jwt.verify(token, config.jwt.jwtSecret);
   return decode.user.id;
 }
@@ -30,7 +31,7 @@ function add(req, res) {
     .catch((error) => res.status(400).send(error));
 }
 
-function destroy(req, res) {
+/*function destroy(req, res) {
   return Favorite
     .findByPk(req.params.id)
     .then((favorite) => {
@@ -43,7 +44,29 @@ function destroy(req, res) {
         .then(() => res.status(204).send())
         .catch((error) => res.status(400).send(error));
     });
+}*/
+
+function destroy(req, res) {
+  const userid = getUserId(req);
+
+  return Favorite.findOne({
+    where: {
+      userId: userid,
+      mealId: req.body.mealId
+    },
+  })
+  .then((favorite) => {
+    if (!favorite) {
+      return res.status(400).send({
+        message: 'Could not find favorite to delete',
+      });
+    }
+    return favorite.destroy()
+      .then(() => res.status(204).send())
+      .catch((error) => res.status(400).send(error));
+  });
 }
+
 module.exports = {
   list,
   add,
