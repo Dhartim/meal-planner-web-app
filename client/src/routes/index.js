@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-
 // Routes
 import Signup from '../components/signup';
 import Home from '../components/home';
+import MealCard from '../components/mealCard'
 import BadRequest from '../components/badrequest';
 import Navbar from "../components/navbar/navbar";
 import NavbarAuthCheck from "../components/auth";
@@ -20,12 +20,12 @@ class AppRouter extends Component {
         <Route component={NavbarAuthCheck(Navbar)} />
         <div>
           <Switch>
-            <Route exact path={'/home'} components={Home} /* Home route *//>
-            <Route exact path={'/register'} component={Signup} /* Signup route *//>
-            <Route exact path={'/login'} component={Login}/>
             <Redirect from={'/home'} to={'/'}/>
             <Route exact path={'/'} component={Home} />
-            <Route path={'/register'} component={Signup} /* Signup route *//>
+            <Route exact path={'/home'} components={Home} /* Home route *//>
+            <Route exact path={'/register'} component={Signup} /* Signup route *//>
+            <Route exact path={'/mealCard'} component={MealCard} /*showing meal card *//>
+            <Route exact path={'/login'} component={Login}/>
             <Route path="*" component={BadRequest} />
           </Switch>
         </div>

@@ -16,7 +16,7 @@ export default function NavbarAuthCheck(ComponentToAuthorize) {
       axios
         .get('/checkauth', {
           headers: {
-            'x-access-token': localStorage.getItem('token')
+            'x-access-token': localStorage.getItem('jwtToken')
           }
         })
         .then(res => {
@@ -42,7 +42,6 @@ export default function NavbarAuthCheck(ComponentToAuthorize) {
         return null;
       }
       if (redirect) {
-        // return <Redirect to="/login" />;
         console.log("Not logged in")
       }
       return (

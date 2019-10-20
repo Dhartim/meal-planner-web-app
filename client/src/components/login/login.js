@@ -1,114 +1,93 @@
 import React, { Component } from "react";
-// import { Button, FormGroup, FormControl, FormControlLabel } from "react-bootstrap";
 import { Form, Button } from 'react-bootstrap'
 import Axios from "axios";
 
 import "./login.css";
+import TextField from "@material-ui/core/TextField";
 
 export default class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.onSubmit = this.onSubmit.bind(this);
 
-    onSubmit = (e) => {
-        e.preventDefault();
-
-        const { email, password } = this.state;
-
-        Axios.post('http://localhost:9000/login', { email, password })
-            .then((response) => {
-                console.log(response);
-
-                if (response.payload.status == 200) {
-                    sessionStorage.setItem('jwtToken', response.payload.data.token);
-                } else {
-                    // TODO: Redirect and display message
-                }
-            })
+    this.state = {
+      email: '',
+      password: '',
     };
-    // constructor(props) {
-    //     console.log("super props")
-    //     // super(props);
-    //     console.log(props)
-    //     console.log("state")
-    //     this.state = {
-    //         email: "",
-    //         password: ""
-    //     };
-    //     console.log(this.state)
-    // }
+  }
 
-    // validateForm() {
-    //     return this.state.email.length > 0 && this.state.password.length > 0;
-    // }
-    //
-    // handleChange = event => {
-    //     this.setState({
-    //         [event.target.id]: event.target.value
-    //     });
-    // }
-    //
-    // handleSubmit = event => {
-    //     event.preventDefault();
-    // }
+  onSubmit = (e) => {
+    e.preventDefault();
+  };
 
-    render() {
-        return (
+  tryLogin = () => {
+    const { email, password } = this.state;
 
-            <Form>
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" />
-                </Form.Group>
-                <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" />
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
+    Axios.post('/login', {
+      email: email,
+      password: password
+    })
+    .then((response) => {
+      console.log(`token=${response.headers.token}`);
+      console.log(`status=${response.status}`);
 
-            /*<div>
-                <p>FUCK REACT</p>
-                 <form>
-                     <FormGroup>
-                         <FormControlLabel>Email</FormControlLabel>
-                     </FormGroup>
-                     <FormGroup>
-                         <FormControlLabel>Password</FormControlLabel>
-                     </FormGroup>
-                     <Button>Login</Button>
-                 </form>
-             </div>
+      if (response.status === 200) {
+        console.log(`Got token`);
+        localStorage.setItem('jwtToken', response.headers.token);
+        this.props.history.push('/');
+        window.location.reload();
+      } else {
+        console.log(`Must redirect`);
+        // TODO: Redirect and display message
+      }
+    })
+    .catch(error => {
+      console.log("LOGIN - error status code: %s", error);
+    });
+  };
+  render() {
+    return (
 
-
-            <div className="Login">
-                 <form onSubmit={this.handleSubmit}>
-                     <FormGroup controlId="email" bsSize="large">
-                         <FormControlLabel>Email</FormControlLabel>
-                         <FormControl
-                             autoFocus
-                             type="email"
-                             value={this.state.email}
-                             onChange={this.handleChange}
-                         />
-                     </FormGroup>
-                     <FormGroup controlId="password" bsSize="large">
-                         <FormControlLabel>Password</FormControlLabel>
-                         <FormControl
-                             value={this.state.password}
-                             onChange={this.handleChange}
-                             type="password"
-                         />
-                     </FormGroup>
-                     <Button
-                         block
-                         bsSize="large"
-                         disabled={!this.validateForm()}
-                         type="submit"
-                     >
-                         Login
-                     </Button>
-                 </form>
-             </div>*/
-        );
-    }
+      <Form onSubmit={this.onSubmit}>
+        <Form.Group controlId="formBasicEmail">
+          <TextField
+            variant="outlined"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            value={this.state.email}
+            type={'email'}
+            autoComplete="email"
+            onChange={e => {
+              this.setState({ email: e.target.value });
+              this.setState({ validEmail: e.target.validity.valid });
+            }}
+          />
+        </Form.Group>
+        <Form.Group controlId="formBasicPassword">
+          <TextField
+            variant="outlined"
+            required
+            fullWidth
+            name="password"
+            value={this.state.password}
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            onChange={e => {
+              this.setState({ password: e.target.value })
+            }}
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit" onClick={() => {
+          this.tryLogin();
+        }}>
+          Submit
+        </Button>
+      </Form>
+    );
+  }
 }

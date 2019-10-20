@@ -1,0 +1,79 @@
+h1 {
+	margin: 0;
+  }
+  .clear {
+	  clear: both;
+  }
+  .card-container {
+	perspective: 800px;
+	width: fit-content;
+  }
+  .top-block {
+	  text-align: center;
+  }
+  @media only screen and (min-width: 768px) {
+	  .top-block {
+		  text-align: left; 
+	  } 
+  }
+  @media only screen and (min-width: 992px) {
+	  .image-block {
+		  display: inline-block;
+		  width: 50%;
+		  vertical-align: middle; 
+		  padding-right: 10px;
+	  } 
+  }
+  .image-block img {
+	  width: 100%;
+	  height: auto;
+	  display: inline-block;
+	  vertical-align: bottom;
+  }
+  .content-block {
+	  padding: 15px 0; 
+  }
+  @media only screen and (min-width: 992px) {
+	  .content-block {
+		  padding: 0;
+		  display: inline-block;
+		  width: 49%;
+		  vertical-align: middle; 
+	  } 
+  }
+  .content-block p {
+	  line-height: 20px;
+	  font-size: 13px;
+	  margin-bottom: 5px; 
+  }
+  .action-block {
+	  margin: 10px 0;
+	  text-align: center;
+  }
+  .action-block ul{
+	  padding: 0;
+	  margin: 0;
+	  border-bottom: 1px solid #ded6d6;
+	  padding: 15px 0;
+  }
+  .action-block li {
+	  list-style: none;
+	  display:inline-block;
+	  padding-right: 20px;
+	  font-size: 25px;
+  }
+  .action-block li img{
+	  width: 20px;
+  }
+  .info-block-1 {
+	  margin-bottom: 30px;
+  }
+  .icon svg {
+	  cursor: pointer;
+  }
+  .favourite-block {
+	  padding-bottom: 15px;
+  }
+  span.icon.toggled.heart {
+	  color: red;
+  }
