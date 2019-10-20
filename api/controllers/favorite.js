@@ -30,7 +30,7 @@ function add(req, res) {
     .catch((error) => res.status(400).send(error));
 }
 
-function destroy(req, res) {
+/*function destroy(req, res) {
   return Favorite
     .findByPk(req.params.id)
     .then((favorite) => {
@@ -43,7 +43,29 @@ function destroy(req, res) {
         .then(() => res.status(204).send())
         .catch((error) => res.status(400).send(error));
     });
+}*/
+
+function destroy(req, res) {
+  const userid = getUserId(req);
+
+  return Favorite.findOne({
+    where: {
+      userId: userid,
+      mealId: req.body.mealId
+    },
+  })
+  .then((favorite) => {
+    if (!favorite) {
+      return res.status(400).send({
+        message: 'Could not find favorite to delete',
+      });
+    }
+    return favorite.destroy()
+      .then(() => res.status(204).send())
+      .catch((error) => res.status(400).send(error));
+  });
 }
+
 module.exports = {
   list,
   add,

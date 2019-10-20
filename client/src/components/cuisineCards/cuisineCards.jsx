@@ -1,24 +1,37 @@
-import React, { Component } from "react";
+import React from "react";
 import MealCard from "../mealCard";
-import Axios from 'axios'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
 import './cuisineCards.css';
 
 function CuisineCards(props) {
-  const cards = props.meals.map(meal => 
-    <
-      MealCard 
-      key={meal.id}
-      {...meal }
-      cuisineType = {props.cuisineType}
-    />
-  )
-  // console.log(cards)
-  return(
-    <div className='cuisine_list'>
-      <h3></h3>
-      {cards}
-    </div>
-  )
+    var settings = {
+        dots: true,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 4
+    };
+
+    return(
+        <div className="cuisine-list">
+            <h2>{ props.cuisineType }</h2>
+            <Slider {...settings}>
+                {
+                    props.meals.map(meal =>
+                        <
+                          MealCard 
+                          key={meal.id}
+                          {...meal }
+                          cuisineType = {props.cuisineType}
+                          favorites = {props.favorites}
+                        />
+                    )
+                }
+            </Slider>
+        </div>
+    )
 }
 
 export default CuisineCards;
