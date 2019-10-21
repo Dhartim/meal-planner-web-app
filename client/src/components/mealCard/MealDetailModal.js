@@ -13,7 +13,6 @@ function MealDetailModal(props) {
     const handleShow = () => setShow(true);
 
     const meal = props.meal;
-
     return (
         <div className="meal-details-block">
             <Button variant="primary" onClick={handleShow}>
@@ -46,7 +45,7 @@ function MealDetailModal(props) {
                     <div className="description-block">
                         <div className="info-block-1">
                             <h5>Nutrition Info</h5>
-                            <p>{meal.nutritionInfo}</p>
+                            <p>{meal.Nutrition}</p>
                         </div>
                         <div className="info-block-2">
                             <h5>Recipe</h5>
