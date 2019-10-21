@@ -21,10 +21,12 @@ function list(req, res) {
   })
     .then((favorites) => {
       let favoriteMealIds = [];
+      // push the favorites mealId into the array
       for(let i = 0; i < favorites.length; i++) {
         favoriteMealIds.push(favorites[i].mealId);
       }
       console.log("favoriteMealIds: %s", favoriteMealIds);
+      // Use the array of mealIds to find all those meals
       return Meal
         .findAll({
           where: {
@@ -32,9 +34,12 @@ function list(req, res) {
           }
         })
         .then(meals => {
-          for(let j = 0; j < meals.length; j++) {
-            console.log("meals[%d]: %s", j, meals[j].id);
-          }
+          // logging purposes
+          // for(let j = 0; j < meals.length; j++) {
+          //   console.log("meals[%d]: %s", j, meals[j].id);
+          // }
+          // return the meals instead of favorite objects as the favorites table is mainly to keep track of
+          // the primaryKey associations
           res.status(200).send(meals);
         })
     })
@@ -52,10 +57,8 @@ function isFavorite(req, res) {
       }
     })
     .then(favorite => {
-      const isNull = favorite === null;
-      // console.log("isNull=%s", isNull);
-
-      if(!isNull) {
+      // If found a favorite, tell client that this meal is a favorite
+      if(favorite !== null) {
         console.log("userId=%d, mealId=%d", favorite.userId, favorite.mealId);
         res.status(200).send({
           isFavorite: true

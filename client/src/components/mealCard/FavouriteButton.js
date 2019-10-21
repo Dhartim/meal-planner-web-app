@@ -18,7 +18,6 @@ class FavouriteButton extends React.Component {
     this.state ={
       isFaved: false,
       meal_id: this.props.meal_id,
-      // favorites: this.props.favorites
     };
     this.addLikes = this.addLikes.bind(this);
     this.removeLike = this.removeLike.bind(this);
@@ -35,7 +34,6 @@ class FavouriteButton extends React.Component {
     if(meal_id === undefined) {
       meal_id = 0;
     }
-    // console.log("meal_id=%d", meal_id);
 
     axios
       .get(`/favorites/isfavorite/${meal_id}`, {
@@ -115,10 +113,6 @@ class FavouriteButton extends React.Component {
         console.log("some error is being caught: %s", error)
     });
   }
-
-  // handleCheck(meal_id) {
-  //   return this.state.favorites.some(item => meal_id === item.mealId);
-  // }
 
   render(){
     const { isFaved } = this.state;
