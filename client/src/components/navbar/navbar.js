@@ -15,8 +15,7 @@ import {
 } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
 import useStyles from "./navbarstyle";
-import ChevronLeftIcon from "@material-ui/core/SvgIcon/SvgIcon";
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import {FaHeart} from "react-icons/fa";
 
 export function Navbar(props) {
@@ -78,7 +77,7 @@ export function Navbar(props) {
           >
             <div className={classes.drawerHeader}>
               <IconButton onClick={handleDrawerClose}>
-                {classes.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                <ChevronLeftIcon />
               </IconButton>
             </div>
             <Divider />
@@ -146,7 +145,7 @@ export function Navbar(props) {
           >
             <div className={classes.drawerHeader}>
               <IconButton onClick={handleDrawerClose}>
-                {classes.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+                <ChevronLeftIcon />
               </IconButton>
             </div>
             <Divider />
