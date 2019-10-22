@@ -16,10 +16,11 @@ import {
   Typography
 } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
-import useStyles from "./navbarstyle";
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { FaHeart, FaHome } from "react-icons/fa";
 import { MdAccountCircle } from "react-icons/md"
+
+import useStyles from "./navbarstyle";
 
 export function Navbar(props) {
     const classes = useStyles();
@@ -142,6 +143,7 @@ export function Navbar(props) {
               [classes.contentShift]: open,
             })}
           >
+            <div className={classes.drawerHeader} />
             {props.children}
           </main>
         </div>
