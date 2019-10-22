@@ -12,7 +12,7 @@ module.exports = {
         prepTime: `${Math.floor(Math.random() * 30)} min`,
         cookTime: `${Math.floor(Math.random() * 60)} min`,
         recipe: faker.lorem.sentences(),
-        cuisineId: Math.floor(Math.random() * 8),
+        cuisineId: Math.ceil(Math.random() * 8),
         createdAt: new Date(),
         updatedAt: new Date(),
       });

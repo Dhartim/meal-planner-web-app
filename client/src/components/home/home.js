@@ -12,7 +12,15 @@ export class Home extends Component {
       favorites: [],
       loader1: true,
       loader2: true,
+      modalRendering: false,
     }
+  }
+
+  startModal = () => {
+    this.setState({modalRendering: true})
+  }
+  submitModal = () => {
+    this.setState({modalRendering: false})
   }
 
   componentDidMount(){
