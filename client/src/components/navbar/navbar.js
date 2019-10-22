@@ -3,6 +3,7 @@ import React from 'react';
 import {
   AppBar,
   Button,
+  ClickAwayListener,
   Divider,
   Drawer,
   IconButton,
@@ -16,7 +17,8 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import useStyles from "./navbarstyle";
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import {FaHeart} from "react-icons/fa";
+import { FaHeart, FaHome } from "react-icons/fa";
+import { MdAccountCircle } from "react-icons/md"
 
 export function Navbar(props) {
     const classes = useStyles();
@@ -32,78 +34,103 @@ export function Navbar(props) {
     };
 
     return (
-      <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="menu"
-              onClick={handleDrawerOpen}
-              edge="start"
-              className={classes.menuButton}>
-              <MenuIcon/>
-            </IconButton>
-            <Typography className={classes.title}>
-              <Button
-                href={'/'}
+      <ClickAwayListener onClickAway={handleDrawerClose}>
+        <div className={classes.root}>
+          <AppBar position="static">
+            <Toolbar>
+              <IconButton
                 color="inherit"
-              >
-                <Typography component={'span'} variant="h6" className={classes.title}>
-                  Meal Planner
-                </Typography>
-              </Button>
-            </Typography>
-            {authorized === true ? <br/> : <Button href={'/register'} className={classes.auth} color="inherit">Sign up</Button>}
-            {authorized === true ?
-              <Button
-                href={'/'}
-                className={classes.auth}
-                color="inherit"
-                onClick={() => {
-                  localStorage.removeItem('jwtToken');
-                }}
-              >
-                Logout
-              </Button>
-              :
-              <Button
-                href={'/login'}
-                className={classes.auth}
-                color="inherit"
-              >
-                Login
-              </Button>
-            }
-          </Toolbar>
-        </AppBar>
-        <Drawer
-          className={classes.drawer}
-          variant="persistent"
-          anchor="left"
-          open={open}
-          classes={{
-            paper: classes.drawerPaper,
-          }}
-        >
-          <div className={classes.drawerHeader}>
-            <IconButton onClick={handleDrawerClose}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </div>
-          <Divider />
-          <List>
-            <ListItem button component="a" href='/favorites' key={'Favorites'}>
-              <ListItemIcon>
-                <span className="icon toggled heart">
-                  <FaHeart size ={25}/>
-                </span>
-              </ListItemIcon>
-              <ListItemText primary={'Favorites'} />
-            </ListItem>
-          </List>
-          {/*<Divider />*/}
-        </Drawer>
-      </div>
+                aria-label="menu"
+                onClick={handleDrawerOpen}
+                edge="start"
+                className={classes.menuButton}>
+                <MenuIcon/>
+              </IconButton>
+              <Typography className={classes.title}>
+                <Button
+                  href={'/'}
+                  color="inherit"
+                >
+                  <Typography component={'span'} variant="h6" className={classes.title}>
+                    Meal Planner
+                  </Typography>
+                </Button>
+              </Typography>
+              {authorized === true ? <br/> :
+                <Button
+                  href={'/register'}
+                  className={classes.auth}
+                  color="inherit"
+                >
+                  Sign up
+                </Button>}
+              {authorized === true ?
+                <Button
+                  href={'/'}
+                  className={classes.auth}
+                  color="inherit"
+                  onClick={() => {
+                    localStorage.removeItem('jwtToken');
+                  }}
+                >
+                  Logout
+                </Button>
+                :
+                <Button
+                  href={'/login'}
+                  className={classes.auth}
+                  color="inherit"
+                >
+                  Login
+                </Button>
+              }
+            </Toolbar>
+          </AppBar>
+          <Drawer
+            className={classes.drawer}
+            variant="persistent"
+            anchor="left"
+            open={open}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+          >
+            <div className={classes.drawerHeader}>
+              <IconButton onClick={handleDrawerClose}>
+                <ChevronLeftIcon />
+              </IconButton>
+            </div>
+            <Divider />
+            <List>
+              <ListItem button component="a" href='/' key={'Home'}>
+                <ListItemIcon>
+                  <span>
+                    <FaHome size ={25}/>
+                  </span>
+                </ListItemIcon>
+                <ListItemText primary={'Home'} />
+              </ListItem>
+              <ListItem button component="a" href='/' key={'Profile'}>
+                <ListItemIcon>
+                  <span>
+                    <MdAccountCircle size ={25}/>
+                  </span>
+                </ListItemIcon>
+                <ListItemText primary={'Profile'} />
+              </ListItem>
+              <ListItem button component="a" href='/favorites' key={'Favorites'}>
+                <ListItemIcon>
+                  <span className="greyHeart">
+                    <FaHeart size ={25}/>
+                  </span>
+                </ListItemIcon>
+                <ListItemText primary={'Favorites'} />
+              </ListItem>
+            </List>
+            <Divider />
+          </Drawer>
+        </div>
+      </ClickAwayListener>
     )
 }
 export default Navbar;

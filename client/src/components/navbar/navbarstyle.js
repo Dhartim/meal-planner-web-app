@@ -29,6 +29,7 @@ export const useStyles = makeStyles(theme => ({
     drawer: {
       width: drawerWidth,
       flexShrink: 0,
+      background: "blue"
     },
     drawerPaper: {
       width: drawerWidth,
@@ -55,6 +56,9 @@ export const useStyles = makeStyles(theme => ({
         duration: theme.transitions.duration.enteringScreen,
       }),
       marginLeft: 0,
+    },
+    greyHeart: {
+      color: "grey"
     },
   })
 );
