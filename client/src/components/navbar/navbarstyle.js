@@ -15,6 +15,12 @@ export const useStyles = makeStyles(theme => ({
     auth: {
       align: 'right'
     },
+    appBar: {
+      transition: theme.transitions.create(['margin', 'width'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+    },
     appBarShift: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
@@ -29,7 +35,6 @@ export const useStyles = makeStyles(theme => ({
     drawer: {
       width: drawerWidth,
       flexShrink: 0,
-      background: "blue"
     },
     drawerPaper: {
       width: drawerWidth,

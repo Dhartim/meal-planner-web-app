@@ -1,4 +1,5 @@
 import React from 'react';
+import clsx from 'clsx';
 
 import {
   AppBar,
@@ -36,14 +37,19 @@ export function Navbar(props) {
     return (
       <ClickAwayListener onClickAway={handleDrawerClose}>
         <div className={classes.root}>
-          <AppBar position="static">
+          <AppBar
+            position="fixed"
+            className={clsx(classes.appBar, {
+              [classes.appBarShift]: open,
+            })}
+          >
             <Toolbar>
               <IconButton
                 color="inherit"
                 aria-label="menu"
                 onClick={handleDrawerOpen}
                 edge="start"
-                className={classes.menuButton}>
+                className={clsx(classes.menuButton, open && classes.hide)}>
                 <MenuIcon/>
               </IconButton>
               <Typography className={classes.title}>
@@ -89,6 +95,7 @@ export function Navbar(props) {
           <Drawer
             className={classes.drawer}
             variant="persistent"
+            color="inherit"
             anchor="left"
             open={open}
             classes={{
