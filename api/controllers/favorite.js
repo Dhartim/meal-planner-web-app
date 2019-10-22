@@ -6,7 +6,6 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 function getUserId(req) {
-  /*const token = req.headers.authorization.split(' ')[1];*/
   const token = req.headers['x-access-token'];
   const decode = jwt.verify(token, config.jwt.jwtSecret);
   return decode.user.id;

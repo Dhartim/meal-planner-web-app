@@ -8,6 +8,7 @@ import Login from "../components/login";
 import MealCard from '../components/mealCard'
 import Navbar from "../components/navbar/navbar";
 import NavbarAuthCheck from "../components/auth";
+import Stripe from "../components/stripe";
 import Signup from '../components/signup';
 
 
@@ -27,6 +28,7 @@ class AppRouter extends Component {
             <Route exact path={'/register'} component={Signup} /* Signup route *//>
             <Route exact path={'/mealCard'} component={MealCard} /*showing meal card *//>
             <Route exact path={'/login'} component={Login}/>
+            <Route exact path={'/stripe'} component={Stripe}/>
             <Route path="*" component={BadRequest} />
           </Switch>
         </div>

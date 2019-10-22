@@ -15,7 +15,7 @@ module.exports = {
         cookTime: `${Math.floor(Math.random() * 60)} min`,
         recipe: faker.lorem.sentences(),
         // cuisineId: Math.floor(Math.random() * 8),
-        cuisineId: Math.floor(i++),
+        cuisineId: i++,
         createdAt: new Date(),
         updatedAt: new Date(),
       })
