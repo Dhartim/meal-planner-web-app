@@ -4,7 +4,7 @@ const drawerWidth = 240;
 
 export const useStyles = makeStyles(theme => ({
     root: {
-      flexGrow: 1,
+      display: 'flex',
     },
     menuButton: {
       marginRight: theme.spacing(2),

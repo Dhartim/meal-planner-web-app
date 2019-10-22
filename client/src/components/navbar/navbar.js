@@ -137,6 +137,13 @@ export function Navbar(props) {
             </List>
             <Divider />
           </Drawer>
+          <main
+            className={clsx(classes.content, {
+              [classes.contentShift]: open,
+            })}
+          >
+            {props.children}
+          </main>
         </div>
       </ClickAwayListener>
     )
