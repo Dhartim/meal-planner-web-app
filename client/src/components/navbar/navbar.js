@@ -56,6 +56,7 @@ export function Navbar(props) {
                 <Button
                   href={'/'}
                   color="inherit"
+                  className={classes.textButton}
                 >
                   <Typography component={'span'} variant="h6" className={classes.title}>
                     Meal Planner
@@ -109,7 +110,7 @@ export function Navbar(props) {
             </div>
             <Divider />
             <List>
-              <ListItem button component="a" href='/' key={'Home'}>
+              <ListItem button component="a" href='/' key={'Home'} className={classes.listItem}>
                 <ListItemIcon>
                   <span>
                     <FaHome size ={25}/>
@@ -117,7 +118,7 @@ export function Navbar(props) {
                 </ListItemIcon>
                 <ListItemText primary={'Home'} />
               </ListItem>
-              <ListItem button component="a" href='/' key={'Profile'}>
+              <ListItem button component="a" href='/' key={'Profile'} className={classes.listItem}>
                 <ListItemIcon>
                   <span>
                     <MdAccountCircle size ={25}/>
@@ -125,7 +126,7 @@ export function Navbar(props) {
                 </ListItemIcon>
                 <ListItemText primary={'Profile'} />
               </ListItem>
-              <ListItem button component="a" href='/favorites' key={'Favorites'}>
+              <ListItem button component="a" href='/favorites' key={'Favorites'} className={classes.listItem}>
                 <ListItemIcon>
                   <span className="greyHeart">
                     <FaHeart size ={25}/>

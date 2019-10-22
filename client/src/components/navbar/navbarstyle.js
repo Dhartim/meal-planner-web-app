@@ -12,8 +12,21 @@ export const useStyles = makeStyles(theme => ({
     title: {
       flexGrow: 1,
     },
+    textButton: {
+      '&:hover': {
+        color: "#ffffff"
+      }
+    },
     auth: {
-      align: 'right'
+      align: 'right',
+      '&:hover': {
+        color: "#ffffff"
+      },
+    },
+    listItem: {
+      '&:hover': {
+        color: "#212121"
+      }
     },
     appBar: {
       transition: theme.transitions.create(['margin', 'width'], {
