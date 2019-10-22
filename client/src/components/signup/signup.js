@@ -13,6 +13,7 @@ import Container from '@material-ui/core/Container';
 // Styles and layouts
 import useStyles from './signupstyle';
 import TextField from "@material-ui/core/TextField";
+import {Redirect} from "react-router-dom";
 
 export class SignUp extends Component {
   constructor(props) {
@@ -28,7 +29,18 @@ export class SignUp extends Component {
      }
   }
 
-  signup = async () => {
+  onSubmit(e) {
+    e.preventDefault();
+    console.log(`The values are ${this.state.firstName}, ${this.state.lastName}, ${this.state.email} , ${this.state.password}`)
+    this.setState({
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+    })
+  }
+
+  signup = () => {
     console.log("SIGNUP");
     const { firstName, lastName, email, password } = this.state;
 
@@ -40,12 +52,15 @@ export class SignUp extends Component {
         password: password
       })
       .then(res => {
+        this.setState({errorText: ''});
         console.log("response token: %s", res.headers.token);
         localStorage.setItem('jwtToken', res.headers.token);
-        this.setState({errorText: 'SUCCESS!!!'});
+        this.props.history.push('/');
+        window.location.reload();
       })
       .catch(error => {
-        console.log("error status code: %s", error.response.status);
+        console.log("error: %s", error);
+        window.location.reload();
         let statusCode = error.response.status;
         if(statusCode === 409) {
           this.setState({errorText: 'Email is already taken. Please try again.'});
@@ -54,6 +69,7 @@ export class SignUp extends Component {
     } catch (err) {
       console.log("some error is being caught: %s", err)
     }
+    window.location.reload();
   };
 
   firstName = () => {
@@ -151,17 +167,6 @@ export class SignUp extends Component {
       </Typography>
     );
   };
-  //onsubmit function
-  onSubmit(e) {
-    e.preventDefault();
-    console.log(`The values are ${this.state.firstName}, ${this.state.lastName}, ${this.state.email} , ${this.state.password}`)
-    this.setState({
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-    })
-  }
 
   render() {
     const classes = useStyles;

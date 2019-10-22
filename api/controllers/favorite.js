@@ -1,15 +1,8 @@
-const jwt = require('jsonwebtoken');
 const { Favorite, Meal } = require('../models');
-const config = require('../config/config.json');
+const getUserId = require('../middleware/getUserId');
 
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
-
-function getUserId(req) {
-  const token = req.headers['x-access-token'];
-  const decode = jwt.verify(token, config.jwt.jwtSecret);
-  return decode.user.id;
-}
 
 function list(req, res) {
   const userid = getUserId(req);
