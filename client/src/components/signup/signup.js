@@ -31,7 +31,7 @@ export class SignUp extends Component {
   signup = async () => {
     console.log("SIGNUP");
     const { firstName, lastName, email, password } = this.state;
-
+    console.log(this.state);
     try {
       return axios.post('/register', {
         firstName: firstName,
@@ -46,6 +46,7 @@ export class SignUp extends Component {
       })
       .catch(error => {
         console.log("error status code: %s", error.response.status);
+        console.log(error)
         let statusCode = error.response.status;
         if(statusCode === 409) {
           this.setState({errorText: 'Email is already taken. Please try again.'});

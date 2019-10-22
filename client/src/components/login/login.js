@@ -22,12 +22,13 @@ export default class Login extends Component {
 
   tryLogin = () => {
     const { email, password } = this.state;
-
+    console.log(this.state)
     Axios.post('/login', {
       email: email,
       password: password
     })
     .then((response) => {
+      console.log(response);
       console.log(`token=${response.headers.token}`);
       console.log(`status=${response.status}`);
 
@@ -43,6 +44,7 @@ export default class Login extends Component {
     })
     .catch(error => {
       console.log("LOGIN - error status code: %s", error);
+      console.log(error);
     });
   };
   render() {
