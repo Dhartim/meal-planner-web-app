@@ -31,29 +31,30 @@ export function Navbar(props) {
       setOpen(false);
     };
 
-    if(authorized) {
-      return (
-        <div className={classes.root}>
-          <AppBar position="static">
-            <Toolbar>
-              <IconButton
+    return (
+      <div className={classes.root}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="menu"
+              onClick={handleDrawerOpen}
+              edge="start"
+              className={classes.menuButton}>
+              <MenuIcon/>
+            </IconButton>
+            <Typography className={classes.title}>
+              <Button
+                href={'/'}
                 color="inherit"
-                aria-label="menu"
-                onClick={handleDrawerOpen}
-                edge="start"
-                className={classes.menuButton}>
-                <MenuIcon/>
-              </IconButton>
-              <Typography className={classes.title}>
-                <Button
-                  href={'/'}
-                  color="inherit"
-                >
-                  <Typography component={'span'} variant="h6" className={classes.title}>
-                    Meal Planner
-                  </Typography>
-                </Button>
-              </Typography>
+              >
+                <Typography component={'span'} variant="h6" className={classes.title}>
+                  Meal Planner
+                </Typography>
+              </Button>
+            </Typography>
+            {authorized === true ? <br/> : <Button href={'/register'} className={classes.auth} color="inherit">Sign up</Button>}
+            {authorized === true ?
               <Button
                 href={'/'}
                 className={classes.auth}
@@ -64,67 +65,7 @@ export function Navbar(props) {
               >
                 Logout
               </Button>
-            </Toolbar>
-          </AppBar>
-          <Drawer
-            className={classes.drawer}
-            variant="persistent"
-            anchor="left"
-            open={open}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-          >
-            <div className={classes.drawerHeader}>
-              <IconButton onClick={handleDrawerClose}>
-                <ChevronLeftIcon />
-              </IconButton>
-            </div>
-            <Divider />
-            <List>
-              <Button
-                href={'/favorites'}
-                color="inherit"
-              >
-                <ListItem button key={'Favorites'}>
-                  <ListItemIcon>
-                    <span className="icon toggled heart">
-                      <FaHeart size ={25}/>
-                    </span>
-                  </ListItemIcon>
-                  <ListItemText primary={'Favorites'} />
-                </ListItem>
-              </Button>
-            </List>
-            {/*<Divider />*/}
-          </Drawer>
-        </div>
-      )
-    } else {
-      return (
-        <div className={classes.root}>
-          <AppBar position="static">
-            <Toolbar>
-              <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                <MenuIcon/>
-              </IconButton>
-              <Typography className={classes.title}>
-                <Button
-                  href={'/'}
-                  color="inherit"
-                >
-                  <Typography component={'span'} variant="h6" className={classes.title}>
-                    Meal Planner
-                  </Typography>
-                </Button>
-              </Typography>
-              <Button
-                href={'/register'}
-                className={classes.auth}
-                color="inherit"
-              >
-                Sign up
-              </Button>
+              :
               <Button
                 href={'/login'}
                 className={classes.auth}
@@ -132,37 +73,37 @@ export function Navbar(props) {
               >
                 Login
               </Button>
-            </Toolbar>
-          </AppBar>
-          <Drawer
-            className={classes.drawer}
-            variant="persistent"
-            anchor="left"
-            open={open}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-          >
-            <div className={classes.drawerHeader}>
-              <IconButton onClick={handleDrawerClose}>
-                <ChevronLeftIcon />
-              </IconButton>
-            </div>
-            <Divider />
-            <List>
-              <ListItem button key={'Favorites'}>
-                <ListItemIcon>
-              <span className="icon toggled heart">
-                <FaHeart size ={25}/>
-              </span>
-                </ListItemIcon>
-                <ListItemText primary={'Favorites'} />
-              </ListItem>
-            </List>
-            {/*<Divider />*/}
-          </Drawer>
-        </div>
-      )
-    }
+            }
+          </Toolbar>
+        </AppBar>
+        <Drawer
+          className={classes.drawer}
+          variant="persistent"
+          anchor="left"
+          open={open}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+        >
+          <div className={classes.drawerHeader}>
+            <IconButton onClick={handleDrawerClose}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </div>
+          <Divider />
+          <List>
+            <ListItem button component="a" href='/favorites' key={'Favorites'}>
+              <ListItemIcon>
+                <span className="icon toggled heart">
+                  <FaHeart size ={25}/>
+                </span>
+              </ListItemIcon>
+              <ListItemText primary={'Favorites'} />
+            </ListItem>
+          </List>
+          {/*<Divider />*/}
+        </Drawer>
+      </div>
+    )
 }
 export default Navbar;
