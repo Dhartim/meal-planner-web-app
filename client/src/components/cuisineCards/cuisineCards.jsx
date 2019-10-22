@@ -25,7 +25,7 @@ function CuisineCards(props) {
                           key={meal.id}
                           {...meal }
                           cuisineType = {props.cuisineType}
-                          favorites = {props.favorites}
+                          // favorites = {props.favorites}
                         />
                     )
                 }

@@ -6,10 +6,16 @@ import MealDetailModal from './MealDetailModal';
 import FavouriteButton from "./FavouriteButton";
 
 export class FrontCard extends Component{
-    state = { checked: false }
+    constructor(props) {
+      super(props);
+
+      this.state = {
+        checked: false,
+      };
+    }
     
     handleCheckboxChange = event =>
-      this.setState({ checked: event.target.checked })
+      this.setState({ checked: event.target.checked });
     
     render(){
         const meal = this.props.meal;
@@ -52,7 +58,7 @@ export class FrontCard extends Component{
                         ))}
                     </Form>
                     <div className="favourite-block">
-                        <FavouriteButton meal_id={meal.id} favorites={meal.favorites}/>
+                        <FavouriteButton meal_id={meal.id} />
                     </div>
                     <MealDetailModal meal= {meal}/>
                 </Card.Body>
