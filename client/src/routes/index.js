@@ -9,7 +9,8 @@ import MealCard from '../components/mealCard'
 import Navbar from "../components/navbar/navbar";
 import NavbarAuthCheck from "../components/auth";
 import Signup from '../components/signup';
-
+import Login from "../components/login";
+import Stripe from "../components/stripe";
 
 // <Route exact path={'/profiles'} components={Profiles} /* Profile list route *//>
 // ErrorBoundaries catch any non-event handler queries. Use try/catch for event-handlers (ex. button or onclick events)
@@ -27,6 +28,7 @@ class AppRouter extends Component {
             <Route exact path={'/register'} component={Signup} /* Signup route *//>
             <Route exact path={'/mealCard'} component={MealCard} /*showing meal card *//>
             <Route exact path={'/login'} component={Login}/>
+            <Route exact path={'/stripe'} component={Stripe}/>
             <Route path="*" component={BadRequest} />
           </Switch>
         </div>
