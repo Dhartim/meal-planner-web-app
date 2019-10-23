@@ -1,0 +1,8 @@
+.favorites__row {
+  padding :2rem, 2rem, 2rem, 1rem;
+  display:flex;
+}
+
+.card-container {
+  padding-right: 2rem;
+}
