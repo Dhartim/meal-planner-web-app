@@ -9,12 +9,10 @@ import Box from '@material-ui/core/Box';
 import FastfoodSharpIcon from '@material-ui/icons/FastfoodSharp';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import Questionnaire from '../questionnaire'
 
 // Styles and layouts
 import useStyles from './signupstyle';
 import TextField from "@material-ui/core/TextField";
-import {Redirect} from "react-router-dom";
 
 export class SignUp extends Component {
   constructor(props) {
@@ -30,18 +28,7 @@ export class SignUp extends Component {
      }
   }
 
-  onSubmit(e) {
-    e.preventDefault();
-    console.log(`The values are ${this.state.firstName}, ${this.state.lastName}, ${this.state.email} , ${this.state.password}`)
-    this.setState({
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-    })
-  }
-
-  signup = () => {
+  signup = async () => {
     console.log("SIGNUP");
     const { firstName, lastName, email, password } = this.state;
 
@@ -53,15 +40,12 @@ export class SignUp extends Component {
         password: password
       })
       .then(res => {
-        this.setState({errorText: ''});
         console.log("response token: %s", res.headers.token);
         localStorage.setItem('jwtToken', res.headers.token);
-        this.props.history.push('/');
-        window.location.reload();
+        this.setState({errorText: 'SUCCESS!!!'});
       })
       .catch(error => {
-        console.log("error: %s", error);
-        window.location.reload();
+        console.log("error status code: %s", error.response.status);
         let statusCode = error.response.status;
         if(statusCode === 409) {
           this.setState({errorText: 'Email is already taken. Please try again.'});
@@ -70,7 +54,6 @@ export class SignUp extends Component {
     } catch (err) {
       console.log("some error is being caught: %s", err)
     }
-    window.location.reload();
   };
 
   firstName = () => {
@@ -168,6 +151,17 @@ export class SignUp extends Component {
       </Typography>
     );
   };
+  //onsubmit function
+  onSubmit(e) {
+    e.preventDefault();
+    console.log(`The values are ${this.state.firstName}, ${this.state.lastName}, ${this.state.email} , ${this.state.password}`)
+    this.setState({
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+    })
+  }
 
   render() {
     const classes = useStyles;
