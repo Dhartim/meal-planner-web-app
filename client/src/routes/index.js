@@ -9,6 +9,7 @@ import Navbar from "../components/navbar/navbar";
 import NavbarAuthCheck from "../components/auth";
 import Login from "../components/login";
 import Stripe from "../components/stripe";
+import AccountPage from "../components/accountPage";
 
 
 // <Route exact path={'/profiles'} components={Profiles} /* Profile list route *//>
@@ -30,6 +31,7 @@ class AppRouter extends Component {
             <Route exact path={'/mealCard'} component={MealCard} /*showing meal card *//>
             <Route exact path={'/login'} component={Login}/>
             <Route exact path={'/stripe'} component={Stripe}/>
+            <Route exact path={'/account'} component={AccountPage}/>
             <Route path="*" component={BadRequest} />
           </Switch>
         </div>
