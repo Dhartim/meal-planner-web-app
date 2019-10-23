@@ -1,12 +1,25 @@
 import React, { useState } from "react";
+import {makeStyles} from "@material-ui/core";
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button';
+
 import './mealCard.css';
 import { FaRegTrashAlt } from "react-icons/fa";
-import FavouriteButton from "./FavouriteButton";
+import Card from "react-bootstrap/Card";
 
+const useStyles = makeStyles(theme => ({
+      drawerHeader: {
+          display: 'flex',
+          alignItems: 'center',
+          padding: theme.spacing(0, 1),
+          ...theme.mixins.toolbar,
+          justifyContent: 'flex-end',
+      },
+  })
+);
 
 function MealDetailModal(props) {
+    const classes = useStyles();
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -19,6 +32,7 @@ function MealDetailModal(props) {
                 More Details
             </Button>
             <Modal show={show} onHide={handleClose}>
+                <div className={classes.drawerHeader} />
                 <Modal.Header closeButton>
                     <Modal.Title>{meal.dishName}</Modal.Title>
                 </Modal.Header>
@@ -30,17 +44,6 @@ function MealDetailModal(props) {
                         <div className="content-block">
                             <h6>{meal.prepTime} to prep</h6>
                         </div>
-                    </div>
-                    <div className="action-block">
-                        <ul>
-                            <li>
-                                <FavouriteButton meal_id={meal.id} favorites={meal.favorites}/>
-                            </li>
-                            <li>
-                            {/* TODO: REMOVE DELETE FUNCTIONALOITY   */}
-                                <FaRegTrashAlt />
-                            </li>
-                        </ul>
                     </div>
                     <div className="description-block">
                         <div className="info-block-1">
