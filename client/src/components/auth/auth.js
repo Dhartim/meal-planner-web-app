@@ -9,6 +9,7 @@ export default function NavbarAuthCheck(ComponentToAuthorize) {
       this.state = {
         loading: true,
         loggedIn: false,
+        redirect: false,
       };
     }
 
@@ -31,7 +32,7 @@ export default function NavbarAuthCheck(ComponentToAuthorize) {
           }
         })
         .catch(err => {
-          console.error(err);
+          console.log("auth error: %s", err);
           this.setState({ loading: false, redirect: true });
         });
     }

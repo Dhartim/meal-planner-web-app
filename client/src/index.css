@@ -12,7 +12,7 @@ code {
     monospace;
 }
 
-.form-control label,
+/* .form-control label,
 .form-control input,
 .form-control textarea {
   width: 100%;
@@ -51,4 +51,4 @@ code {
 
 .radio-label__container{
   padding-left: 3rem;
-}
+} */

@@ -2,29 +2,11 @@
 
 // libraries
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const { User } = require('../models');
-const config = require('../config/secret');
+const generateToken = require('../middleware/tokenGen');
 
 const notFound = { message: 'User Not Found' };
 
-/* Function to generate a JWT token for the user */
-function generateToken(user) {
-  // payload to create token; does not contain sensitive info
-  const payload = {
-    userId: user.id,
-    email: user.email,
-  };
-  try {
-    return token = jwt.sign(payload, config.secret, {
-      expiresIn: config.duration, // expires after 24 hours
-    });
-  } catch (Error) {
-    return res.status(400).send({
-      message: 'Unable to get token.',
-    });
-  }
-}
 
 function create(req, res) {
   return User
@@ -49,7 +31,7 @@ function create(req, res) {
         });
       }
 
-      const token = generateToken(user);
+      const token = generateToken(res, user);
       res.set('token', token);
 
       console.log('token: %s, user: %s', token, user.id);

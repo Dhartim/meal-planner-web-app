@@ -1,25 +1,38 @@
 import React, { useState } from "react";
+import {makeStyles} from "@material-ui/core";
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button';
+
 import './mealCard.css';
 import { FaRegTrashAlt } from "react-icons/fa";
-import FavouriteButton from "./FavouriteButton";
+import Card from "react-bootstrap/Card";
 
+const useStyles = makeStyles(theme => ({
+      drawerHeader: {
+          display: 'flex',
+          alignItems: 'center',
+          padding: theme.spacing(0, 1),
+          ...theme.mixins.toolbar,
+          justifyContent: 'flex-end',
+      },
+  })
+);
 
 function MealDetailModal(props) {
+    const classes = useStyles();
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     const meal = props.meal;
-
     return (
         <div className="meal-details-block">
             <Button variant="primary" onClick={handleShow}>
                 More Details
             </Button>
             <Modal show={show} onHide={handleClose}>
+                <div className={classes.drawerHeader} />
                 <Modal.Header closeButton>
                     <Modal.Title>{meal.dishName}</Modal.Title>
                 </Modal.Header>
@@ -32,21 +45,30 @@ function MealDetailModal(props) {
                             <h6>{meal.prepTime} to prep</h6>
                         </div>
                     </div>
-                    <div className="action-block">
-                        <ul>
-                            <li>
-                                <FavouriteButton meal_id={meal.id} favorites={meal.favorites}/>
-                            </li>
-                            <li>
-                            {/* TODO: add functionality of delete  */}
-                                <FaRegTrashAlt />
-                            </li>
-                        </ul>
-                    </div>
                     <div className="description-block">
                         <div className="info-block-1">
-                            <h5>Nutrition Info</h5>
-                            <p>{meal.nutritionInfo}</p>
+                            <div className="row">
+                                <div class="col-sm-9">
+                                <h5>Nutrition Info</h5>
+                                    <div class="row">
+                                    {/* TODO :// any better way to retrieve these data from db  */}
+                                    <div className="col-6 col-sm-6">
+                                        Calories:{meal.Nutrition.calories}<br/>
+                                        Total Fat: {meal.Nutrition.totalFat}<br/>
+                                        Saturated Fat:{meal.Nutrition.saturatedFat}<br/>
+                                        Cholestrol: {meal.Nutrition.cholesterol}<br/>
+                                        Sodium: {meal.Nutrition.sodium} <br/>
+                                        Total Carb: {meal.Nutrition.totalCarbohydrates}<br/>
+                                    </div>
+                                    <div className="col-6 col-sm-6">
+                                        Fiber: {meal.Nutrition.fiber} <br/>
+                                        Sugar: {meal.Nutrition.sugar} <br/>
+                                        Protein: {meal.Nutrition.protein}<br/>
+                                        Vitamins & Minerals:  {meal.Nutrition.vitaminsAndMinerals}<br/>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div className="info-block-2">
                             <h5>Recipe</h5>
