@@ -38,7 +38,7 @@ function create(req, res) {
 
       return res.status(201).send({
         data: {
-          user,
+          userId: user.id,
         },
       });
     })
