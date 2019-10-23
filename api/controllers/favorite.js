@@ -1,4 +1,4 @@
-const { Favorite, Meal } = require('../models');
+const { Favorite, Meal, Nutrition } = require('../models');
 const getUserId = require('../middleware/getUserId');
 
 const Sequelize = require('sequelize');
@@ -23,7 +23,10 @@ function list(req, res) {
         .findAll({
           where: {
             id: favoriteMealIds,
-          }
+          },
+          include: [{
+            model: Nutrition,
+          }],
         })
         .then(meals => {
           // logging purposes
