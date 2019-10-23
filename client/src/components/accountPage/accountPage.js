@@ -56,8 +56,11 @@ export default class AccountPage extends Component {
 
         return (
             <div>
+                <AccountConsumer>
+                    {this.value}
+                </AccountConsumer>
                 {/*<p>*/}
-                resp: {resp}
+                {/*resp: {resp}*/}
                 {/*</p>*/}
             </div>
         )

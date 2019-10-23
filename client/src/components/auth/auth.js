@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import axios from 'axios';
 
+import AccountContext from "../accountPage/accountContext";
+
 export default function NavbarAuthCheck(ComponentToAuthorize) {
 
   return class extends Component {

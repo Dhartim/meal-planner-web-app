@@ -4,7 +4,8 @@ import Axios from "axios";
 
 import "./login.css";
 import TextField from "@material-ui/core/TextField";
-import AccountContext from "../accountPage/accountContext"
+// import AccountContext from "../accountPage/accountContext";
+// import AccountProvider from "../accountPage/accountContext";
 
 export default class Login extends Component {
   constructor(props) {
@@ -39,9 +40,9 @@ export default class Login extends Component {
         localStorage.setItem('jwtToken', response.headers.token);
         this.props.history.push('/');
         window.location.reload();
-        AccountContext.email = email;
-        console.log("AccountContext")
-        console.log(AccountContext)
+        // AccountContext.email = email;
+        // console.log("AccountContext");
+        // console.log(AccountContext);
       } else {
         console.log(`Must redirect`);
         // TODO: Redirect and display message
@@ -93,6 +94,7 @@ export default class Login extends Component {
         }}>
           Submit
         </Button>
+        {/*<AccountProvider value={this.state}/>*/}
       </Form>
     );
   }
