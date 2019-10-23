@@ -9,12 +9,13 @@ module.exports = {
     recipes.forEach((recipe) => {
       recipesArray.push({
         dishName: recipe.name,
+        nutritionInfo: faker.lorem.sentence(),
         imgUrl: recipe.imageURL,
         prepTime: `${Math.floor(Math.random() * 30)} min`,
         cookTime: `${Math.floor(Math.random() * 60)} min`,
         recipe: faker.lorem.sentences(),
         // cuisineId: Math.floor(Math.random() * 8),
-        cuisineId: Math.floor(i++),
+        cuisineId: i++,
         createdAt: new Date(),
         updatedAt: new Date(),
       })
