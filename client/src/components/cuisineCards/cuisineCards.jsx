@@ -27,8 +27,7 @@ function CuisineCards(props) {
                           cuisineType = {props.cuisineType}
                           favorites = {props.favorites}
                         />
-                    )
-                }
+                    )}
             </Slider>
         </div>
     )
