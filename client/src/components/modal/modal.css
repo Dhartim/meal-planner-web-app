@@ -1,16 +1,18 @@
   
 .modal {
   width: 90%;
+  height: auto;
   background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   position: fixed;
-  top: 20vh;
+  top: 25vh;
   left: 5%;
+  display:block;
 }
 
 .modal__header {
   padding: 1rem;
-  background: #5101d1;
+  background: blue;
   color: white;
 }
 
