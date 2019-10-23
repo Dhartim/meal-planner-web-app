@@ -11,21 +11,21 @@ const radioGroup = props => {
   let rgroup = radio.map((prop, i) => {
     let { id, name, value } = prop;
     return(
-      <div>
+      <div className="radio-group__input" key={id + i}>
         <input 
           type="radio"
-          class="radio-group__button" 
+          className="radio-group__button" 
           id={ id + i } 
           name={ name }
           value={ value }
         />
-        <label for={ id + i }> {value.capitalize()} </label>
+        <label htmlFor={ id + i }> {value.capitalize()} </label>
       </div>
       )
     })
   
   return(
-  <div class="radio-group__container">
+  <div className="radio-group__container">
     {rgroup}
   </div>
   )

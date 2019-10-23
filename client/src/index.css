@@ -25,6 +25,7 @@ code {
 
 .form-control {
   margin-bottom: 1rem;
+  height: 3rem;
 }
 
 .form-actions button,
@@ -46,4 +47,8 @@ code {
 .btn:active {
   background: blue;
   border-color: blue;
+}
+
+.radio-label__container{
+  padding-left: 3rem;
 }

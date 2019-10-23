@@ -9,6 +9,7 @@ import Box from '@material-ui/core/Box';
 import FastfoodSharpIcon from '@material-ui/icons/FastfoodSharp';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import Questionnaire from '../questionnaire'
 
 // Styles and layouts
 import useStyles from './signupstyle';
