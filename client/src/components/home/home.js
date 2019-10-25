@@ -10,7 +10,6 @@ export class Home extends Component {
 
     this.state = {
       cuisines: [],
-      // favorites: [],
       loader: true,
       loader2: true,
     }
@@ -27,30 +26,25 @@ export class Home extends Component {
   }
 
   render() {
-
     let isLoading = true;
     let cuisineList = [];
 
     if(!this.state.loader)
     {
-      
-      cuisineList = this.state.cuisines.map(cuisine => 
-        cuisine.Meals.length > 0 && 
+      cuisineList = this.state.cuisines.map(cuisine =>
+        cuisine.Meals.length > 0 &&
         <
-          CuisineCards 
+          CuisineCards
           key={cuisine.id}
           meals={cuisine.Meals}
           cuisineType= { cuisine.cuisineType }
         />
       );
-
       isLoading = false;
     }
     else
     {
-     
       isLoading = true;
-      
     }
 
     return(

@@ -5,21 +5,21 @@ module.exports = {
   up: (queryInterface, Sequelize) => {
     const recipes = require('../public/Recipes.json');
     let recipesArray = [];
-    let i = 0;
-    recipes.forEach((recipe) => {
-      recipesArray.push({
-        dishName: recipe.name,
-        nutritionInfo: faker.lorem.sentence(),
-        imgUrl: recipe.imageURL,
-        prepTime: `${Math.floor(Math.random() * 30)} min`,
-        cookTime: `${Math.floor(Math.random() * 60)} min`,
-        recipe: faker.lorem.sentences(),
-        // cuisineId: Math.floor(Math.random() * 8),
-        cuisineId: i++,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      })
-    });
+    let len = 3;
+    for (let i = 0; i<len; i++){
+      recipes.forEach((recipe) => {
+        recipesArray.push({
+          dishName: recipe.name,
+          imgUrl: recipe.imageURL,
+          prepTime: `${Math.floor(Math.random() * 30)} min`,
+          cookTime: `${Math.floor(Math.random() * 60)} min`,
+          recipe: faker.lorem.sentences(),
+          cuisineId: recipe.cuisineId,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        })
+      });
+    }
     return queryInterface.bulkInsert('Meals', recipesArray)
   },
 

@@ -43,32 +43,27 @@ export class SignUp extends Component {
     console.log("SIGNUP");
     const { firstName, lastName, email, password } = this.state;
 
-    try {
-      return axios.post('/register', {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password
-      })
-      .then(res => {
-        this.setState({errorText: ''});
-        console.log("response token: %s", res.headers.token);
-        localStorage.setItem('jwtToken', res.headers.token);
-        this.props.history.push('/');
-        window.location.reload();
-      })
-      .catch(error => {
-        console.log("error: %s", error);
-        window.location.reload();
-        let statusCode = error.response.status;
-        if(statusCode === 409) {
-          this.setState({errorText: 'Email is already taken. Please try again.'});
-        }
-      });
-    } catch (err) {
-      console.log("some error is being caught: %s", err)
-    }
-    window.location.reload();
+    return axios.post('/register', {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password
+    })
+    .then(res => {
+      this.setState({errorText: ''});
+      console.log("response token: %s", res.headers.token);
+      localStorage.setItem('jwtToken', res.headers.token);
+      this.props.history.push('/preferences');
+      window.location.reload();
+    })
+    .catch(error => {
+      console.log("Axios post error: %s", error);
+      window.location.reload();
+      let statusCode = error.response.status;
+      if(statusCode === 409) {
+        this.setState({errorText: 'Email is already taken. Please try again.'});
+      }
+    });
   };
 
   firstName = () => {
@@ -209,7 +204,7 @@ export class SignUp extends Component {
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

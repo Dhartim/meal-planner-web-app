@@ -41,7 +41,8 @@
             420
         ],
         "imageURL": "http://img.sndimg.com/food/image/upload/w_266/v1/img/recipes/27/20/8/picVfzLZo.jpg",
-        "originalURL": "http://www.food.com/recipe/to-die-for-crock-pot-roast-27208"
+        "originalURL": "http://www.food.com/recipe/to-die-for-crock-pot-roast-27208",
+        "cuisineId": 3
     },
     {
         "name": "lasagna",
@@ -85,7 +86,8 @@
             420
         ],
         "imageURL": "https://cdn.pixabay.com/photo/2017/02/15/15/17/meal-2069021_960_720.jpg",
-        "originalURL": "http://www.food.com/recipe/to-die-for-crock-pot-roast-27208"
+        "originalURL": "http://www.food.com/recipe/to-die-for-crock-pot-roast-27208",
+        "cuisineId": 2
     },
     {
         "name": "Chana Masala",
@@ -129,7 +131,8 @@
             420
         ],
         "imageURL": "https://cdn.pixabay.com/photo/2017/12/07/12/22/food-3003693_960_720.jpg",
-        "originalURL": "http://www.food.com/recipe/to-die-for-crock-pot-roast-27208"
+        "originalURL": "http://www.food.com/recipe/to-die-for-crock-pot-roast-27208",
+        "cuisineId": 8
     },
     {
         "name": "Ramen",
@@ -173,7 +176,8 @@
             420
         ],
         "imageURL": "https://cdn.pixabay.com/photo/2015/05/13/16/16/noodle-soup-765706_960_720.jpg",
-        "originalURL": "http://www.food.com/recipe/to-die-for-crock-pot-roast-27208"
+        "originalURL": "http://www.food.com/recipe/to-die-for-crock-pot-roast-27208",
+        "cuisineId": 9
     },
     {
         "name": "Chicken Crepe",
@@ -217,7 +221,8 @@
             420
         ],
         "imageURL": "https://cdn.pixabay.com/photo/2014/12/22/16/50/pancake-577386_960_720.jpg",
-        "originalURL": "http://www.food.com/recipe/to-die-for-crock-pot-roast-27208"
+        "originalURL": "http://www.food.com/recipe/to-die-for-crock-pot-roast-27208",
+        "cuisineId": 4
     },
     {
         "name": "Roasted Asparagus",
@@ -263,7 +268,8 @@
             0
         ],
         "imageURL": "http://img.sndimg.com/food/image/upload/w_266/v1/img/recipes/50/84/7/picMcSyVd.jpg",
-        "originalURL": "http://www.food.com/recipe/roasted-asparagus-50847"
+        "originalURL": "http://www.food.com/recipe/roasted-asparagus-50847",
+        "cuisineId": 3
     },
     {
         "name": "Curried Lentils and Rice",
@@ -308,7 +314,8 @@
             20,
             0
         ],
-        "imageURL": "http://dagzhsfg97k4.cloudfront.net/wp-content/uploads/2012/05/lentils3.jpg"
+        "imageURL": "http://dagzhsfg97k4.cloudfront.net/wp-content/uploads/2012/05/lentils3.jpg",
+        "cuisineId": 8
     },
     {
         "name": "Big Night Pizza",
@@ -372,7 +379,8 @@
             15,
             0
         ],
-        "imageURL": "http://upload.wikimedia.org/wikipedia/commons/c/c7/Spinach_pizza.jpg"
+        "imageURL": "http://upload.wikimedia.org/wikipedia/commons/c/c7/Spinach_pizza.jpg",
+        "cuisineId": 2
     },
     {
         "name": "Cranberry and Apple Stuffed Acorn Squash Recipe",
@@ -429,7 +437,8 @@
             0
         ],
         "imageURL": "http://elanaspantry.com/wp-content/uploads/2008/10/acorn_squash_with_cranberry.jpg",
-        "originalURL": ""
+        "originalURL": "",
+        "cuisineId": 2
     },
     {
         "name": "Mic's Yorkshire Puds",
@@ -478,10 +487,11 @@
             30
         ],
         "imageURL": "http://upload.wikimedia.org/wikipedia/commons/f/f9/Yorkshire_Pudding.jpg",
-        "originalURL": "http://upload.wikimedia.org/wikipedia/commons/f/f9/Yorkshire_Pudding.jpg"
+        "originalURL": "http://upload.wikimedia.org/wikipedia/commons/f/f9/Yorkshire_Pudding.jpg",
+        "cuisineId": 3
     },
     {
-        "name": "Old-Fashioned Oatmeal Cookies",
+        "name": "Olga's Oatmeal Cookies",
         "ingredients": [
             {
                 "quantity": "1 cup",
@@ -569,7 +579,8 @@
             0
         ],
         "imageURL": "http://s3.amazonaws.com/gmi-digital-library/65caecf7-a8f7-4a09-8513-2659cf92871e.jpg",
-        "originalURL": "#"
+        "originalURL": "#",
+        "cuisineId": 3
     },
     {
         "name": "Blueberry Oatmeal Squares",
@@ -645,8 +656,9 @@
             0,
             0
         ],
-        "imageURL": "http://www.canadianliving.com/img/photos/biz/blueberry-oatmeal-squares5801359401371.jpg",
-        "originalURL": "http://www.canadianliving.com/food/blueberry_oatmeal_squares.php"
+        "imageURL": "https://www.averiecooks.com/wp-content/uploads/2015/02/blueberrycrumblebars-5.jpg",
+        "originalURL": "http://www.canadianliving.com/food/blueberry_oatmeal_squares.php",
+        "cuisineId": 4
     },
     {
         "name": "Curried chicken salad",
@@ -735,6 +747,7 @@
             0
         ],
         "imageURL": "http://www.chatelaine.com/wp-content/uploads/2013/05/Curried-chicken-salad.jpg",
-        "originalURL": "http://www.chatelaine.com/recipe/stovetop-cooking-method/curried-chicken-salad/"
+        "originalURL": "http://www.chatelaine.com/recipe/stovetop-cooking-method/curried-chicken-salad/",
+        "cuisineId": 8
     }
 ]

@@ -18,7 +18,7 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { FaHeart, FaHome } from "react-icons/fa";
-import { MdAccountCircle } from "react-icons/md"
+import { MdAccountCircle, MdRestaurant } from "react-icons/md"
 
 import useStyles from "./navbarstyle";
 
@@ -126,6 +126,14 @@ export function Navbar(props) {
                 </span>
               </ListItemIcon>
               <ListItemText primary={'Profile'} />
+            </ListItem>
+            <ListItem button component="a" href='/preferences' key={'Preferences'} className={classes.listItem}>
+              <ListItemIcon>
+                <span>
+                  <MdRestaurant size ={25}/>
+                </span>
+              </ListItemIcon>
+              <ListItemText primary={'Preferences'} />
             </ListItem>
             <ListItem button component="a" href='/favorites' key={'Favorites'} className={classes.listItem}>
               <ListItemIcon>

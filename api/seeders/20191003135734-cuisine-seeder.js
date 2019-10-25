@@ -48,6 +48,11 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        cuisineType: 'Japananse',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ], {}),
 
   down: (queryInterface, Sequelize) =>

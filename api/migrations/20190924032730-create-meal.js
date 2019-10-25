@@ -29,7 +29,6 @@ module.exports = {
       type: Sequelize.INTEGER,
       foreignKey: true,
     },
-
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE,

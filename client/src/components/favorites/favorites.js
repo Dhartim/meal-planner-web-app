@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import MealCard from "../mealCard";
+import './favorites.css';
 
 export class Favorites extends Component {
   constructor(props) {
@@ -60,7 +61,10 @@ export class Favorites extends Component {
     return(
       <div>
         <h2>FAVORITES</h2>
-        {favoritesList}
+
+        <div className="favorites__row">
+          {favoritesList}
+        </div>
       </div>
     );
   }
