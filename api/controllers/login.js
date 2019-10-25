@@ -1,7 +1,6 @@
-const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { User } = require('../models');
-const config = require('../config/config.json');
+const generateToken = require('../middleware/tokenGen');
 
 function login(req, res) {
   const { body } = req;
@@ -21,15 +20,7 @@ function login(req, res) {
 
       !validPassword && res.status(400).send({ auth: false, token: null });
 
-      const token = jwt.sign(
-        {
-          user,
-        },
-        config.jwt.jwtSecret,
-        {
-          expiresIn: config.jwt.jwtDuration,
-        },
-      );
+      const token = generateToken(res, user);
       res.set('token', token);
 
       res.status(200).send({
