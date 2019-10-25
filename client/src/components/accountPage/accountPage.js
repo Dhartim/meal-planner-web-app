@@ -1,18 +1,10 @@
 import React, { Component } from "react";
 import Axios from "axios";
 
-import AccountContext, {AccountProvider} from "../accountPage/accountContext";
-import AccountConsumer from "../accountPage/accountContext"
-
 export default class AccountPage extends Component {
     constructor(props) {
         super(props);
-        // console.log("state")
-        // console.log(this.state);
-        // console.log(this.props);
 
-        // const resp = this.getAccountDetails()
-        // this.state = this.getAccountDetails();
         this.state = {
             email: "",
             firstName: "",
@@ -21,47 +13,37 @@ export default class AccountPage extends Component {
         };
     }
 
-    getAccountDetails = () => {
-        // const { email, firstName, lastName } = this.state;
-        console.log("Context")
-        console.log(AccountContext)
-        console.log(AccountConsumer)
-        console.log(AccountProvider)
-        // const email = AccountContext.email;
-        // console.log(AccountContext)
-        // console.log("EMAIL")
-        // console.log(email)
-        // Axios.get('/accountDetails', {params: {
-        //     email: email}
-        //     // firstName: firstName,
-        //     // lastName: lastName
-        // })
-        //     .then((response) => {
-        //         console.log("response")
-        //         console.log(response.headers);
-        //         console.log(response.body)
-        //
-        //         if (response.status === 200) {
-        //             console.log(response.status);
-        //         }
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //     })
-    }
+    componentDidMount() {
+        const jwtToken = localStorage.getItem('jwtToken');
+        Axios.get('/account', {
+            headers: {"x-access-token" : jwtToken}
+        })
+            .then((response) => {
+                if (response.status === 200) {
+                    console.log(response.status);
+                    let account = response.data.account
+                    this.setState({
+                        email: account.email,
+                        firstName: account.firstName,
+                        lastName: account.lastName,
+                        userId: account.id
+                    })
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    };
 
     render() {
-
-        let resp = this.getAccountDetails();
-
-        return (
+       return (
             <div>
-                <AccountConsumer>
-                    {this.value}
-                </AccountConsumer>
-                {/*<p>*/}
-                {/*resp: {resp}*/}
-                {/*</p>*/}
+                <p>
+                Email: {this.state.email}
+                </p>
+                <p>
+                Name: {this.state.firstName} {this.state.lastName}
+                </p>
             </div>
         )
     }
