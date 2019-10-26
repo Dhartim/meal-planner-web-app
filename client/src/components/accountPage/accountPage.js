@@ -52,8 +52,13 @@ export default class AccountPage extends Component {
 
     render() {
 
+        let currTime = new Date();
         let message;
-        if (this.state.customerId) {
+
+        console.log(this.state);
+        console.log(this.state.expiresAt)
+        console.log(currTime)
+        if (this.state.customerId && new Date(this.state.expiresAt) > currTime) {
             message = <div>
                 <p>
                     Your subscription is current.
