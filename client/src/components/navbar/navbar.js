@@ -55,7 +55,7 @@ export function Navbar(props) {
             </IconButton>
             <Typography className={classes.title}>
               <Button
-                href={'/'}
+                href={'/dashboard'}
                 color="inherit"
                 className={classes.textButton}
               >
@@ -111,7 +111,7 @@ export function Navbar(props) {
           </div>
           <Divider />
           <List>
-            <ListItem button component="a" href='/' key={'Home'} className={classes.listItem}>
+            <ListItem button component="a" href='/dashboard' key={'Home'} className={classes.listItem}>
               <ListItemIcon>
                 <span>
                   <FaHome size ={25}/>
