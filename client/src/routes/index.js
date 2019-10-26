@@ -11,6 +11,7 @@ import NavbarAuthCheck from "../components/auth";
 import Questionnaire from "../components/questionnaire";
 import Stripe from "../components/stripe";
 import Signup from '../components/signup';
+import LandingPage from '../components/landingPage';
 
 
 // <Route exact path={'/profiles'} components={Profiles} /* Profile list route *//>
@@ -34,8 +35,9 @@ class AppRouter extends Component {
         <AuthorizedNavbar>
           <div>
             <Switch>
-              <Redirect from={'/home'} to={'/'}/>
-              <Route exact path={'/'} component={Home} />
+              {/* <Redirect from={'/home'} to={'/'}/> */}
+              <Route exact path={'/'} component={LandingPage} />
+              <Route exact path={'/dashboard'} component={Home} />
               <Route exact path={'/favorites'} component={Favorites} /* Home route *//>
               <Route exact path={'/register'} component={Signup} /* Signup route *//>
               <Route exact path={'/mealCard'} component={MealCard} /*showing meal card *//>
