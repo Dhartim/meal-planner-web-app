@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Axios from "axios";
 
+import Stripe from "../stripe";
+
 export default class AccountPage extends Component {
     constructor(props) {
         super(props);
@@ -9,7 +11,11 @@ export default class AccountPage extends Component {
             email: "",
             firstName: "",
             lastName: "",
-            userId: ""
+            userId: "",
+            customerId: "",
+            expiresAt: "",
+            createdAt: "",
+            updatedAt: "",
         };
     }
 
@@ -21,13 +27,22 @@ export default class AccountPage extends Component {
             .then((response) => {
                 if (response.status === 200) {
                     console.log(response.status);
-                    let account = response.data.account
+                    let account = response.data.account;
+                    let customer = account.Customer;
                     this.setState({
                         email: account.email,
                         firstName: account.firstName,
                         lastName: account.lastName,
                         userId: account.id
-                    })
+                    });
+                    if (customer) {
+                        this.setState({
+                            customerId: customer.id,
+                            expiresAt: customer.expiresAt,
+                            createdAt: customer.createdAt,
+                            updatedAt: customer.updatedAt,
+                        });
+                    }
                 }
             })
             .catch(error => {
@@ -36,6 +51,21 @@ export default class AccountPage extends Component {
     };
 
     render() {
+
+        let message;
+        if (this.state.customerId) {
+            message = <div>
+                <p>
+                    Your subscription is current.
+                </p>
+                <p>
+                    Expires: {this.state.expiresAt}
+                </p>
+            </div>
+        } else {
+            message = <Stripe />;
+        }
+
        return (
             <div>
                 <p>
@@ -44,6 +74,7 @@ export default class AccountPage extends Component {
                 <p>
                 Name: {this.state.firstName} {this.state.lastName}
                 </p>
+                {message}
             </div>
         )
     }
