@@ -14,7 +14,6 @@ import Signup from '../components/signup';
 
 import {UserProvider} from "../context/usercontext";
 import axios from "axios";
-// import {UserConsumer} from "../context/usercontext";
 
 class AppRouter extends Component {
   constructor(props) {
@@ -63,48 +62,7 @@ class AppRouter extends Component {
     }
   }
 
-  /*
-
-              <Route exact path={'/'}>
-                <UserProvider value={this.state}>
-                  <Home/>
-                </UserProvider>
-              </Route>
-              <Route exact path={'/favorites'}>
-                <UserProvider value={this.state}>
-                  <Favorites/>
-                </UserProvider>
-              </Route>
-              <Route exact path={'/register'}>
-                <UserProvider value={this.state}>
-                  <Signup/>
-                </UserProvider>
-              </Route>
-              <Route exact path={'/mealCard'}>
-                <UserProvider value={this.state}>
-                  <MealCard/>
-                </UserProvider>
-              </Route>
-              <Route exact path={'/login'}>
-                <UserProvider value={this.state}>
-                  <Login/>
-                </UserProvider>
-              </Route>
-              <Route exact path={'/stripe'}>
-                <UserProvider value={this.state}>
-                  <Stripe/>
-                </UserProvider>
-              </Route>
-              <Route exact path={'/preferences'}>
-                <UserProvider value={this.state}>
-                  <Questionnaire/>
-                </UserProvider>
-              </Route>
-              <Route path="*" component={BadRequest}/>
-   */
   render() {
-    // const AuthorizedNavbar = this.AuthorizedNavbar;
-
     return (
       <div>
         <UserProvider value={this.state}>

@@ -31,13 +31,13 @@ const mapStateToProps = (state, ownProps) => {
 
 export function Navbar(props) {
   const userContext = useContext(UserContext);
+  const userId = userContext.userId;
   const loading = userContext.loading;
-  console.log("navbar - id=%d", userContext.userId);
+  console.log("navbar - id=%d", userId);
   console.log("navbar - loading=%s", loading);
 
   const classes = useStyles();
   const [authorized, setAuthorized] = React.useState(false);
-  // const [loading, setLoading] = React.useState(true);
 
   useEffect(() => {
     setAuthorized(userContext.authorized);
