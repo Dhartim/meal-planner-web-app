@@ -40,9 +40,9 @@ export function Navbar(props) {
   // const [loading, setLoading] = React.useState(true);
 
   useEffect(() => {
-    setAuthorized(props.authorized);
+    setAuthorized(userContext.authorized);
     // setLoading(false);
-  }, [props.authorized]);
+  }, [userContext.authorized]);
   console.log(`logged in=${authorized}`);
 
   const [open, setOpen] = React.useState(false);
@@ -82,8 +82,8 @@ export function Navbar(props) {
                 </Typography>
               </Button>
             </Typography>
-            {loading ? <br/> :
-              authorized ? <br/> :
+            {loading ? <div/> :
+              authorized ? <div/> :
               <Button
                 href={'/register'}
                 className={classes.auth}
@@ -92,7 +92,7 @@ export function Navbar(props) {
                 Sign up
               </Button>
             }
-            {loading ? <br/> :
+            {loading ? <div/> :
               authorized ?
               <Button
                 href={'/'}

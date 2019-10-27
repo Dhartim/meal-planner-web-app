@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 // Routes
 import BadRequest from '../components/badrequest';
@@ -104,14 +104,13 @@ class AppRouter extends Component {
    */
   render() {
     // const AuthorizedNavbar = this.AuthorizedNavbar;
-    const { authorized } = this.state;
 
     return (
       <div>
         <UserProvider value={this.state}>
           <div>
             <Switch>
-              <Navbar authorized={authorized} {...this.props}>
+              <Navbar {...this.props}>
                 <Route exact path={'/'} component={Home}/>
                 <Route exact path={'/favorites'} component={Favorites} /* Home route *//>
                 <Route exact path={'/register'} component={Signup} /* Signup route *//>
@@ -119,7 +118,7 @@ class AppRouter extends Component {
                 <Route exact path={'/login'} component={Login}/>
                 <Route exact path={'/stripe'} component={Stripe}/>
                 <Route exact path={'/preferences'} component={Questionnaire}/>
-                <Route exact path="*" component={BadRequest}/>
+                <Route component={BadRequest}/>
               </Navbar>
             </Switch>
           </div>

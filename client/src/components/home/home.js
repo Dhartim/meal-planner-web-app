@@ -35,8 +35,8 @@ export class Home extends Component {
     let isLoading = true;
     let cuisineList = [];
 
-    const user = this.context;
-    console.log("HOME - context={userId: %s, authenticated: %s}", user.userId, user.authenticated);
+    const userContext = this.context;
+    console.log("HOME - context={userId: %s, authorized: %s}", userContext.userId, userContext.authorized);
 
     if(!this.state.loader)
     {
