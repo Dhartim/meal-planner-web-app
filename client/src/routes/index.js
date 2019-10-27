@@ -20,7 +20,6 @@ class AppRouter extends Component {
   constructor(props) {
     super(props);
 
-    // TODO - figure out how to set these routes as children so that they render correctly under the navbar
     this.state = {
       AuthorizedNavbar: NavbarAuthCheck(Navbar),
     }
