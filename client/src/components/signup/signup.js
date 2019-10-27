@@ -15,7 +15,6 @@ import {
 // Styles and layouts
 import useStyles from './signupstyle';
 import TextField from "@material-ui/core/TextField";
-import {Redirect} from "react-router-dom";
 
 export class SignUp extends Component {
   constructor(props) {
