@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios";
 
+import './accountPage.css'
 import Stripe from "../stripe";
 
 export default class AccountPage extends Component {
@@ -29,6 +30,9 @@ export default class AccountPage extends Component {
                     console.log(response.status);
                     let account = response.data.account;
                     let customer = account.Customer;
+                    if (!account.id) {
+
+                    }
                     this.setState({
                         email: account.email,
                         firstName: account.firstName,
@@ -72,7 +76,7 @@ export default class AccountPage extends Component {
         }
 
        return (
-            <div>
+            <div className="centered">
                 <p>
                 Email: {this.state.email}
                 </p>
