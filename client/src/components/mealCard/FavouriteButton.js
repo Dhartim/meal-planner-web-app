@@ -35,25 +35,31 @@ class FavouriteButton extends React.Component {
       meal_id = 0;
     }
 
-    axios
-      .get(`/favorites/isfavorite/${meal_id}`, {
-        headers: {
-          'x-access-token': localStorage.getItem('jwtToken')
-        }
-      })
-      .then(res => {
-        if ((res.status === 201) || (res.status === 200)) {
-          this.setState({
-            isFaved: res.data.isFavorite
-          });
-          // console.log(res);
-        } else {
-          console.log(`Error`);
-        }
-      })
-      .catch(error => {
-        console.log("error: %s", error);
-      })
+    const token = localStorage.getItem('jwtToken');
+
+    if(token !== null) {
+      axios
+        .get(`/favorites/isfavorite/${meal_id}`, {
+          headers: {
+            'x-access-token': token
+          }
+        })
+        .then(res => {
+          if ((res.status === 201) || (res.status === 200)) {
+            this.setState({
+              isFaved: res.data.isFavorite
+            });
+            // console.log(res);
+          } else {
+            console.log(`Error`);
+          }
+        })
+        .catch(error => {
+          console.log("error: %s", error);
+        })
+    } else {
+      console.log("favorite button - unauthorized.");
+    }
   };
 
   updateLikes() {
