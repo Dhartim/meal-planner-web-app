@@ -1,9 +1,11 @@
 import React, { Component } from "react"
 
-import RadioGroup from '../radioGroup';
-import Grid from "@material-ui/core/Grid";
+import RadioGroup from '../subcomponents/radioGroup';
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
+// import { Form, Button } from 'react-bootstrap'
+import Axios from "axios";
+import "./questionnaire.css";
 
 export class Questionnaire extends Component {
   constructor(props) {
@@ -86,11 +88,11 @@ export class Questionnaire extends Component {
               variant="contained"
               color="primary"
               onClick={() => {
-                this.props.history.push('/');
+                this.props.history.push('/dashboard');
                 window.location.reload();
               }}
             >
-              Sign Up
+              Continue
             </Button>
           </form>
         </div>

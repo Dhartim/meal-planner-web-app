@@ -11,6 +11,7 @@ import Navbar from "../components/navbar/navbar";
 import Questionnaire from "../components/questionnaire";
 import Stripe from "../components/stripe";
 import Signup from '../components/signup';
+import LandingPage from '../components/landingPage';
 
 import {UserProvider} from "../context/usercontext";
 import axios from "axios";
@@ -69,7 +70,8 @@ class AppRouter extends Component {
           <div>
             <Switch>
               <Navbar {...this.props}>
-                <Route exact path={'/'} component={Home}/>
+                <Route exact path={'/'} component={LandingPage}/>
+                <Route exact path={'/dashboard'} component={Home} />
                 <Route exact path={'/favorites'} component={Favorites} /* Home route *//>
                 <Route exact path={'/register'} component={Signup} /* Signup route *//>
                 <Route exact path={'/mealCard'} component={MealCard} /*showing meal card *//>
@@ -77,6 +79,7 @@ class AppRouter extends Component {
                 <Route exact path={'/stripe'} component={Stripe}/>
                 <Route exact path={'/preferences'} component={Questionnaire}/>
                 <Route component={BadRequest}/>
+                {/* <Route path="*" compongent={BadRequest} /> */}
               </Navbar>
             </Switch>
           </div>

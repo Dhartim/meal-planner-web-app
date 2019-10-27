@@ -41,7 +41,7 @@ export default class Login extends Component {
 
         console.log(`Got token`);
         localStorage.setItem('jwtToken', response.headers.token);
-        this.props.history.push('/');
+        this.props.history.push('/dashboard');
         // window.location.reload();
       } else {
         console.log(`Must redirect`);
