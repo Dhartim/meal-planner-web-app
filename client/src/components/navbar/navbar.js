@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import clsx from 'clsx';
 
 import {
@@ -21,10 +21,28 @@ import { FaHeart, FaHome } from "react-icons/fa";
 import { MdAccountCircle, MdRestaurant } from "react-icons/md"
 
 import useStyles from "./navbarstyle";
+import UserContext from "../../context/usercontext";
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    location: ownProps.location
+  }
+};
 
 export function Navbar(props) {
+  const userContext = useContext(UserContext);
+  const loading = userContext.loading;
+  console.log("navbar - id=%d", userContext.userId);
+  console.log("navbar - loading=%s", loading);
+
   const classes = useStyles();
-  const authorized = props.auth;
+  const [authorized, setAuthorized] = React.useState(false);
+  // const [loading, setLoading] = React.useState(true);
+
+  useEffect(() => {
+    setAuthorized(props.authorized);
+    // setLoading(false);
+  }, [props.authorized]);
   console.log(`logged in=${authorized}`);
 
   const [open, setOpen] = React.useState(false);
@@ -64,15 +82,18 @@ export function Navbar(props) {
                 </Typography>
               </Button>
             </Typography>
-            {authorized === true ? <br/> :
+            {loading ? <br/> :
+              authorized ? <br/> :
               <Button
                 href={'/register'}
                 className={classes.auth}
                 color="inherit"
               >
                 Sign up
-              </Button>}
-            {authorized === true ?
+              </Button>
+            }
+            {loading ? <br/> :
+              authorized ?
               <Button
                 href={'/'}
                 className={classes.auth}
@@ -119,30 +140,40 @@ export function Navbar(props) {
               </ListItemIcon>
               <ListItemText primary={'Home'} />
             </ListItem>
-            <ListItem button component="a" href='/' key={'Profile'} className={classes.listItem}>
-              <ListItemIcon>
-                <span>
-                  <MdAccountCircle size ={25}/>
-                </span>
-              </ListItemIcon>
-              <ListItemText primary={'Profile'} />
-            </ListItem>
-            <ListItem button component="a" href='/preferences' key={'Preferences'} className={classes.listItem}>
-              <ListItemIcon>
-                <span>
-                  <MdRestaurant size ={25}/>
-                </span>
-              </ListItemIcon>
-              <ListItemText primary={'Preferences'} />
-            </ListItem>
-            <ListItem button component="a" href='/favorites' key={'Favorites'} className={classes.listItem}>
-              <ListItemIcon>
-                <span className="greyHeart">
-                  <FaHeart size ={25}/>
-                </span>
-              </ListItemIcon>
-              <ListItemText primary={'Favorites'} />
-            </ListItem>
+
+            {authorized ?
+              <ListItem button component="a" href='/' key={'Profile'} className={classes.listItem}>
+                <ListItemIcon>
+                  <span>
+                    <MdAccountCircle size ={25}/>
+                  </span>
+                </ListItemIcon>
+                <ListItemText primary={'Profile'} />
+              </ListItem>
+              : <div/>
+            }
+            {authorized ?
+              <ListItem button component="a" href='/preferences' key={'Preferences'} className={classes.listItem}>
+                <ListItemIcon>
+                  <span>
+                    <MdRestaurant size ={25}/>
+                  </span>
+                </ListItemIcon>
+                <ListItemText primary={'Preferences'} />
+              </ListItem>
+              : <div/>
+            }
+            {authorized ?
+              <ListItem button component="a" href='/favorites' key={'Favorites'} className={classes.listItem}>
+                <ListItemIcon>
+                  <span className="greyHeart">
+                    <FaHeart size ={25}/>
+                  </span>
+                </ListItemIcon>
+                <ListItemText primary={'Favorites'} />
+              </ListItem>
+              : <div/>
+            }
           </List>
           <Divider />
         </Drawer>
@@ -158,4 +189,5 @@ export function Navbar(props) {
     </ClickAwayListener>
   )
 }
+
 export default Navbar;
