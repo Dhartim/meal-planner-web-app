@@ -2,8 +2,7 @@ const { User, Customer } = require('../models');
 const getUserId = require('../middleware/getUserId');
 
 function getAccount(req, res) {
-    const ret = getUserId(req);
-    const userId = ret.user.id;
+    const userId = getUserId(req);
 
     return User
         .findOne({
