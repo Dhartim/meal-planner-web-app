@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 
-import RadioGroup from '../radioGroup';
+import RadioGroup from '../subcomponents/radioGroup';
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 // import { Form, Button } from 'react-bootstrap'

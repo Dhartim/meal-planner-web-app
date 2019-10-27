@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import CuisineCards from '../cuisineCards'
-import Spinner from '../spinner'
+import Spinner from '../subcomponents/spinner'
 
 export class Home extends Component {
   constructor(props) {
