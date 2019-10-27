@@ -10,11 +10,8 @@ import Navbar from "../components/navbar/navbar";
 import NavbarAuthCheck from "../components/auth";
 import Questionnaire from "../components/questionnaire";
 import Stripe from "../components/stripe";
-<<<<<<< HEAD
 import AccountPage from "../components/accountPage";
-=======
 import Signup from '../components/signup';
->>>>>>> 3e6def30011756a5a49be27f01a046319393ade7
 
 
 // <Route exact path={'/profiles'} components={Profiles} /* Profile list route *//>
