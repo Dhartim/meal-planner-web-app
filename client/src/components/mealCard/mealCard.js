@@ -1,22 +1,13 @@
 import React from 'react';
 import './mealCard.css';
-import FrontCard from './FrontCard';
-import BackCard from './BackCard';
+import Card from './FrontCard';
 
-function Card(props) {
-  
+function mealCard(props) {
   return (
     <div className="card-container">
-        <div className="card">
-            <div className="front">
-                <FrontCard meal= {props}/>
-            </div>
-            <div className="back">
-                <BackCard meal= {props}/>
-            </div>
-        </div>
+      <Card meal= {props} />
     </div>
   );
 }
 
-export default Card;
+export default mealCard;

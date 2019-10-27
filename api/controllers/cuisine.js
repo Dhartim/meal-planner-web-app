@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const { Cuisine, Meal } = require('../models');
+const { Cuisine, Meal, Nutrition } = require('../models');
 
 function listByType(req, res) {
   const cType = req.query.type;
@@ -13,6 +13,9 @@ function listByType(req, res) {
     ),
     include: [{
       model: Meal,
+          include: [{
+            model: Nutrition,
+          }],
     }],
   })
     .then((meals) => res.status(200).send(meals))
@@ -23,6 +26,9 @@ function list(req, res) {
   return Cuisine.findAll({
     include: [{
       model: Meal,
+          include: [{
+            model: Nutrition,
+          }],
     }],
   })
     .then((meals) => res.status(200).send(meals))
