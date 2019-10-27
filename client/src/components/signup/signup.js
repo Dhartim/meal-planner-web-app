@@ -13,6 +13,7 @@ import Container from '@material-ui/core/Container';
 // Styles and layouts
 import useStyles from './signupstyle';
 import TextField from "@material-ui/core/TextField";
+import {Redirect} from "react-router-dom";
 
 export class SignUp extends Component {
   constructor(props) {
@@ -28,33 +29,42 @@ export class SignUp extends Component {
      }
   }
 
-  signup = async () => {
+  onSubmit(e) {
+    e.preventDefault();
+    console.log(`The values are ${this.state.firstName}, ${this.state.lastName}, ${this.state.email} , ${this.state.password}`)
+    this.setState({
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+    })
+  }
+
+  signup = () => {
     console.log("SIGNUP");
     const { firstName, lastName, email, password } = this.state;
-    console.log(this.state);
-    try {
-      return axios.post('/register', {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password
-      })
-      .then(res => {
-        console.log("response token: %s", res.headers.token);
-        localStorage.setItem('jwtToken', res.headers.token);
-        this.setState({errorText: 'SUCCESS!!!'});
-      })
-      .catch(error => {
-        console.log("error status code: %s", error.response.status);
-        console.log(error)
-        let statusCode = error.response.status;
-        if(statusCode === 409) {
-          this.setState({errorText: 'Email is already taken. Please try again.'});
-        }
-      });
-    } catch (err) {
-      console.log("some error is being caught: %s", err)
-    }
+
+    return axios.post('/register', {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password
+    })
+    .then(res => {
+      this.setState({errorText: ''});
+      console.log("response token: %s", res.headers.token);
+      localStorage.setItem('jwtToken', res.headers.token);
+      this.props.history.push('/preferences');
+      window.location.reload();
+    })
+    .catch(error => {
+      console.log("Axios post error: %s", error);
+      window.location.reload();
+      let statusCode = error.response.status;
+      if(statusCode === 409) {
+        this.setState({errorText: 'Email is already taken. Please try again.'});
+      }
+    });
   };
 
   firstName = () => {
@@ -152,17 +162,6 @@ export class SignUp extends Component {
       </Typography>
     );
   };
-  //onsubmit function
-  onSubmit(e) {
-    e.preventDefault();
-    console.log(`The values are ${this.state.firstName}, ${this.state.lastName}, ${this.state.email} , ${this.state.password}`)
-    this.setState({
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-    })
-  }
 
   render() {
     const classes = useStyles;
@@ -206,7 +205,7 @@ export class SignUp extends Component {
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

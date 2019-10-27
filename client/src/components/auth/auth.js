@@ -11,31 +11,44 @@ export default function NavbarAuthCheck(ComponentToAuthorize) {
       this.state = {
         loading: true,
         loggedIn: false,
+        redirect: false,
       };
     }
 
     componentDidMount() {
-      axios
-        .get('/checkauth', {
-          headers: {
-            'x-access-token': localStorage.getItem('jwtToken')
-          }
-        })
-        .then(res => {
-          if (res.status === 200) {
+      const token = localStorage.getItem('jwtToken');
+      console.log("token=%s", token);
+      if(token !== null) {
+        axios
+          .get('/checkauth', {
+            headers: {
+              'x-access-token': token
+            }
+          })
+          .then(res => {
+            if (res.status === 200) {
+              this.setState({
+                loading: false,
+                loggedIn: true,
+              });
+              console.log("Authorized.")
+            } else {
+              throw new Error(res.error);
+            }
+          })
+          .catch(err => {
+            console.log("auth error: %s", err);
             this.setState({
               loading: false,
-              loggedIn: true,
+              redirect: true
             });
-            console.log("Authorized.")
-          } else {
-            throw new Error(res.error);
-          }
-        })
-        .catch(err => {
-          console.error(err);
-          this.setState({ loading: false, redirect: true });
+          });
+      } else {
+        this.setState({
+          loading: false,
+          loggedIn: false,
         });
+      }
     }
 
     render() {
