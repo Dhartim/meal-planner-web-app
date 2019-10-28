@@ -13,4 +13,5 @@ module.exports = (app) => {
   require('./userMeals')(app);
   require('./customers')(app);
   require('./nutrition')(app);
+  require('./email')(app);
 };

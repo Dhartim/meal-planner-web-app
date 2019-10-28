@@ -27,16 +27,33 @@ export class Email extends Component{
        firstName: '',
        email: '',
        body: '',
+       message:'',
      }
   }
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(`The values are ${this.state.firstName}, ${this.state.lastName}, ${this.state.email} , ${this.state.password}`)
+    console.log(`The values are ${this.state.firstName}, ${this.state.email}, ${this.state.body}`)
     this.setState({
       firstName: '',
       email: '',
       body:''
+    })
+  }
+
+  sendEmail() {
+    console.log(this)
+    const { firstName, email, body, message } = this.state;
+    return axios.post('/contactUs', {
+      firstName: firstName,
+      email: email,
+      body: body
+    })
+    .then(res => {
+      this.setState({message: 'Message Sent'})
+    })
+    .catch(err=> {
+      this.setState({message: 'Message could not be sent, try again later'})
     })
   }
   
@@ -105,6 +122,8 @@ export class Email extends Component{
 
   render() {
     const classes = useStyles;
+    const { message } = this.state;
+    let sent =  message.length > 0 ? "email__message-sent" : "email__message-not-sent";
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -130,13 +149,14 @@ export class Email extends Component{
               color="primary"
               className={classes.submit}
               onClick={() => {
-                  
+                  this.sendEmail()
                 }
               }
             >
               Send
             </Button>
           </form>
+          <h1 className={sent}>{message}</h1>
         </div>
       </Container>
     )
