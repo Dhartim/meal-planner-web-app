@@ -1,4 +1,5 @@
 import React from 'react';
+import Email from '../subcomponents/email';
 
 import './landingPage.css';
 
@@ -26,8 +27,8 @@ const landingPage = () => {
           </div>
         </div>
       </div>
-      <div className="landing-page__text">
-        <h1>Let's Eat Healthy</h1>
+      <div className="landing-page__contact-us">
+        <Email/>
       </div>
     </div>
   );
