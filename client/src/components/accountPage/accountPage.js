@@ -79,6 +79,7 @@ export default class AccountPage extends Component {
 
        return (
             <div className="centered">
+                <img className={'centered-image'} src={require('./headshot.png')}/>
                 <h3>
                     Welcome back {this.state.firstName} {this.state.lastName}!
                 </h3>
