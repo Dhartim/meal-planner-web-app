@@ -69,8 +69,8 @@ class AppRouter extends Component {
       <div>
         <UserProvider value={this.state}>
           <div>
-            <Switch>
-              <Navbar {...this.props}>
+            <Navbar {...this.props}>
+              <Switch>
                 <Route exact path={'/'} component={LandingPage}/>
                 <Route exact path={'/dashboard'} component={Home} />
                 <Route exact path={'/favorites'} component={Favorites} /* Home route *//>
@@ -81,8 +81,8 @@ class AppRouter extends Component {
                 <Route exact path={'/preferences'} component={Questionnaire}/>
                 <Route exact path={'/account'} component={AccountPage} />
                 <Route component={BadRequest}/>
-              </Navbar>
-            </Switch>
+              </Switch>
+            </Navbar>
           </div>
         </UserProvider>
       </div>
