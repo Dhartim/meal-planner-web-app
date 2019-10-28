@@ -7,6 +7,7 @@ const userMeal = require('./userMeal');
 const customer = require('./customer');
 const nutrition = require('./nutrition');
 const account = require('./account');
+const email = require('./email');
 
 module.exports = {
   user,
@@ -18,4 +19,5 @@ module.exports = {
   customer,
   nutrition,
   account,
+  email,
 };
