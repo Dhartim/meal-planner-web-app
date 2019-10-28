@@ -63,12 +63,14 @@ export default class AccountPage extends Component {
         console.log(this.state.expiresAt)
         console.log(currTime)
         if (this.state.customerId && new Date(this.state.expiresAt) > currTime) {
+            let expired = new Date(this.state.expiresAt);
+            console.log(expired)
             message = <div>
                 <p>
                     Your subscription is current.
                 </p>
                 <p>
-                    Expires: {this.state.expiresAt}
+                    It will expire {expired.toString()}
                 </p>
             </div>
         } else {
@@ -77,11 +79,12 @@ export default class AccountPage extends Component {
 
        return (
             <div className="centered">
+                <h3>
+                    Welcome back {this.state.firstName} {this.state.lastName}!
+                </h3>
+                <br/>
                 <p>
-                Email: {this.state.email}
-                </p>
-                <p>
-                Name: {this.state.firstName} {this.state.lastName}
+                Your current email is {this.state.email}
                 </p>
                 {message}
             </div>
