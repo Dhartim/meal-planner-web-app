@@ -24,13 +24,15 @@ export default class Login extends Component {
   };
 
   tryLogin = () => {
+    // const EmailContext = React.createContext('email')
     const { email, password } = this.state;
-
+    console.log(this.state)
     Axios.post('/login', {
       email: email,
       password: password
     })
     .then((response) => {
+      console.log(response);
       console.log(`token=${response.headers.token}`);
       console.log(`status=${response.status}`);
 
@@ -41,7 +43,7 @@ export default class Login extends Component {
 
         console.log(`Got token`);
         localStorage.setItem('jwtToken', response.headers.token);
-        this.props.history.push('/');
+        this.props.history.push('/dashboard');
         // window.location.reload();
       } else {
         console.log(`Must redirect`);
@@ -50,11 +52,11 @@ export default class Login extends Component {
     })
     .catch(error => {
       console.log("LOGIN - error status code: %s", error);
+      console.log(error);
     });
   };
   render() {
     return (
-
       <Form onSubmit={this.onSubmit}>
         <Form.Group controlId="formBasicEmail">
           <TextField
@@ -94,6 +96,7 @@ export default class Login extends Component {
         }}>
           Submit
         </Button>
+        {/*<AccountProvider value={this.state}/>*/}
       </Form>
     );
   }

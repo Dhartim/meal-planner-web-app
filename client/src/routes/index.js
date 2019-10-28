@@ -10,7 +10,9 @@ import MealCard from '../components/mealCard'
 import Navbar from "../components/navbar/navbar";
 import Questionnaire from "../components/questionnaire";
 import Stripe from "../components/stripe";
+import AccountPage from "../components/accountPage";
 import Signup from '../components/signup';
+import LandingPage from '../components/landingPage';
 
 import {UserProvider} from "../context/usercontext";
 import axios from "axios";
@@ -69,13 +71,15 @@ class AppRouter extends Component {
           <div>
             <Navbar {...this.props}>
               <Switch>
-                <Route exact path={'/'} component={Home}/>
-                <Route exact path={'/favorites'} component={Favorites} /* Home route *//>
-                <Route exact path={'/register'} component={Signup} /* Signup route *//>
-                <Route exact path={'/mealCard'} component={MealCard} /*showing meal card *//>
+                <Route exact path={'/'} component={LandingPage}/>
+                <Route exact path={'/dashboard'} component={Home} />
+                <Route exact path={'/favorites'} component={Favorites}/>
+                <Route exact path={'/register'} component={Signup}/>
+                <Route exact path={'/mealCard'} component={MealCard}/>
                 <Route exact path={'/login'} component={Login}/>
                 <Route exact path={'/stripe'} component={Stripe}/>
                 <Route exact path={'/preferences'} component={Questionnaire}/>
+                <Route exact path={'/account'} component={AccountPage} />
                 <Route component={BadRequest}/>
               </Switch>
             </Navbar>

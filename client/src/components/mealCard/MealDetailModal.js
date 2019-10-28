@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button';
-
 import './mealCard.css';
-import Card from "react-bootstrap/Card";
-
 
 function MealDetailModal(props) {
     const [show, setShow] = useState(false);
@@ -18,7 +15,8 @@ function MealDetailModal(props) {
             <Button variant="primary" onClick={handleShow}>
                 More Details
             </Button>
-            <Modal show={show} onHide={handleClose}>
+            {/* //add styling to modal  */}
+            <Modal show={show} onHide={handleClose} className = "modalstyle">
                 <Modal.Header closeButton>
                     <Modal.Title>{meal.dishName}</Modal.Title>
                 </Modal.Header>
