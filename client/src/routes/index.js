@@ -78,7 +78,7 @@ class AppRouter extends Component {
                 <Route exact path={'/login'} component={Login}/>
                 <Route exact path={'/stripe'} component={Stripe}/>
                 <Route exact path={'/preferences'} component={Questionnaire}/>
-                <Route component={BadRequest}/>
+                {/* <Route component={BadRequest}/> */}
                 {/* <Route path="*" compongent={BadRequest} /> */}
               </Navbar>
             </Switch>
