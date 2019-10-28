@@ -67,8 +67,8 @@ class AppRouter extends Component {
       <div>
         <UserProvider value={this.state}>
           <div>
-            <Switch>
-              <Navbar {...this.props}>
+            <Navbar {...this.props}>
+              <Switch>
                 <Route exact path={'/'} component={Home}/>
                 <Route exact path={'/favorites'} component={Favorites} /* Home route *//>
                 <Route exact path={'/register'} component={Signup} /* Signup route *//>
@@ -77,8 +77,8 @@ class AppRouter extends Component {
                 <Route exact path={'/stripe'} component={Stripe}/>
                 <Route exact path={'/preferences'} component={Questionnaire}/>
                 <Route component={BadRequest}/>
-              </Navbar>
-            </Switch>
+              </Switch>
+            </Navbar>
           </div>
         </UserProvider>
       </div>
