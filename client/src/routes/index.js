@@ -10,6 +10,7 @@ import MealCard from '../components/mealCard'
 import Navbar from "../components/navbar/navbar";
 import Questionnaire from "../components/questionnaire";
 import Stripe from "../components/stripe";
+import AccountPage from "../components/accountPage";
 import Signup from '../components/signup';
 import LandingPage from '../components/landingPage';
 
@@ -68,8 +69,8 @@ class AppRouter extends Component {
       <div>
         <UserProvider value={this.state}>
           <div>
-            <Switch>
-              <Navbar {...this.props}>
+            <Navbar {...this.props}>
+              <Switch>
                 <Route exact path={'/'} component={LandingPage}/>
                 <Route exact path={'/dashboard'} component={Home} />
                 <Route exact path={'/favorites'} component={Favorites} /* Home route *//>
@@ -78,10 +79,10 @@ class AppRouter extends Component {
                 <Route exact path={'/login'} component={Login}/>
                 <Route exact path={'/stripe'} component={Stripe}/>
                 <Route exact path={'/preferences'} component={Questionnaire}/>
-                {/* <Route component={BadRequest}/> */}
-                {/* <Route path="*" compongent={BadRequest} /> */}
-              </Navbar>
-            </Switch>
+                <Route exact path={'/account'} component={AccountPage} />
+                <Route component={BadRequest}/>
+              </Switch>
+            </Navbar>
           </div>
         </UserProvider>
       </div>

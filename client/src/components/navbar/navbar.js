@@ -142,7 +142,7 @@ export function Navbar(props) {
             </ListItem>
 
             {authorized ?
-              <ListItem button component="a" href='/' key={'Profile'} className={classes.listItem}>
+              <ListItem button component="a" href='/account' key={'Profile'} className={classes.listItem}>
                 <ListItemIcon>
                   <span>
                     <MdAccountCircle size ={25}/>
