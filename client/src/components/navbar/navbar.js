@@ -73,7 +73,7 @@ export function Navbar(props) {
             </IconButton>
             <Typography className={classes.title}>
               <Button
-                href={'/dashboard'}
+                href={'/'}
                 color="inherit"
                 className={classes.textButton}
               >
@@ -132,7 +132,7 @@ export function Navbar(props) {
           </div>
           <Divider />
           <List>
-            <ListItem button component="a" href='/dashboard' key={'Home'} className={classes.listItem}>
+            <ListItem button component="a" href='/' key={'Home'} className={classes.listItem}>
               <ListItemIcon>
                 <span>
                   <FaHome size ={25}/>
@@ -142,7 +142,7 @@ export function Navbar(props) {
             </ListItem>
 
             {authorized ?
-              <ListItem button component="a" href='/account' key={'Profile'} className={classes.listItem}>
+              <ListItem button component="a" href='/' key={'Profile'} className={classes.listItem}>
                 <ListItemIcon>
                   <span>
                     <MdAccountCircle size ={25}/>

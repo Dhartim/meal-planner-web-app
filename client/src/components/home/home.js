@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import CuisineCards from '../cuisineCards'
-import Spinner from '../subcomponents/spinner'
+import Spinner from '../spinner'
 
 import {UserContext} from "../../context/usercontext";
 
