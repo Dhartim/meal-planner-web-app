@@ -15,4 +15,5 @@ module.exports = (app) => {
   require('./nutrition')(app);
   require('./account')(app);
   require('./email')(app);
+  require('./recommendation')(app);
 };
