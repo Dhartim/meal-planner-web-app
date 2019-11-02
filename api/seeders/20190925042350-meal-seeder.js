@@ -1,6 +1,9 @@
 
 const faker = require('faker');
 
+function getRecipes(arr){
+
+}
 module.exports = {
   up: (queryInterface, Sequelize) => {
     const recipes = require('../public/Recipes.json');
@@ -13,7 +16,7 @@ module.exports = {
           imgUrl: recipe.imageURL,
           prepTime: `${Math.floor(Math.random() * 30)} min`,
           cookTime: `${Math.floor(Math.random() * 60)} min`,
-          recipe: faker.lorem.sentences(),
+          recipe: recipe.join(" "),
           cuisineId: recipe.cuisineId,
           createdAt: new Date(),
           updatedAt: new Date(),
