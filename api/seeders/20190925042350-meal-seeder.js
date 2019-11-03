@@ -16,7 +16,7 @@ module.exports = {
           imgUrl: recipe.imageURL,
           prepTime: `${Math.floor(Math.random() * 30)} min`,
           cookTime: `${Math.floor(Math.random() * 60)} min`,
-          recipe: recipe.join(" "),
+          recipe: recipe.steps.join(" "),
           cuisineId: recipe.cuisineId,
           createdAt: new Date(),
           updatedAt: new Date(),
