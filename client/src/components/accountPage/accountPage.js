@@ -4,6 +4,8 @@ import Axios from "axios";
 import './accountPage.css'
 import Stripe from "../stripe";
 
+const defaultIcon = require('./headshot.png');
+
 export default class AccountPage extends Component {
     constructor(props) {
         super(props);
@@ -79,7 +81,7 @@ export default class AccountPage extends Component {
 
        return (
             <div className="centered">
-                <img className={'centered-image'} src={require('./headshot.png')}/>
+                <img className={'centered-image'} src={defaultIcon} alt={defaultIcon}/>
                 <h3>
                     Welcome back {this.state.firstName} {this.state.lastName}!
                 </h3>

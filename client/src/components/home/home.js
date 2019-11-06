@@ -28,7 +28,9 @@ export class Home extends Component {
           loader: false
         })
       })
-      .catch(error => error)
+      .catch(error => {
+        console.log("Error = %s", error);
+      })
   }
 
   render() {

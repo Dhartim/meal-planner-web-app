@@ -31,8 +31,14 @@ function list(req, res) {
           }],
     }],
   })
-    .then((meals) => res.status(200).send(meals))
-    .catch((error) => res.status(400).send(error));
+  .then((meals) => {
+    console.log("meals=%s", meals);
+    res.status(200).send(meals)
+  })
+  .catch((error) => {
+    console.log("cuisine error = %s", error);
+    res.status(400).send(error)
+  });
 }
 
 module.exports = {
