@@ -2,10 +2,15 @@ const { Recommendation, Meal, Nutrition } = require('../models');
 const getUserId = require('../middleware/getUserId');
 
 function getMealsList(req) {
-  return Recommendation
-    .where({
+  let price = req.params.price;
+  let diet = req.params.diet;
+  let 
+  return Meal.findAll({
+    where({
       
     })
+
+  })
 }
 
 function add(req, res) {

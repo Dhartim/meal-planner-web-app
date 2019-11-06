@@ -1,12 +1,10 @@
 
 const faker = require('faker');
 
-function getRecipes(arr){
-
-}
 module.exports = {
   up: (queryInterface, Sequelize) => {
     const recipes = require('../public/Recipes.json');
+    const diets = ['Vegetarian', 'Vegan', 'Keto', 'Paleo', 'Low-Fat']
     let recipesArray = [];
     let len = 3;
     for (let i = 0; i<len; i++){
@@ -18,6 +16,8 @@ module.exports = {
           cookTime: `${Math.floor(Math.random() * 60)} min`,
           recipe: recipe.steps.join(" "),
           cuisineId: recipe.cuisineId,
+          price: faker.commerce.price(),
+          dietType: diets[Math.floor(Math.random() * diets.length)],
           createdAt: new Date(),
           updatedAt: new Date(),
         })
