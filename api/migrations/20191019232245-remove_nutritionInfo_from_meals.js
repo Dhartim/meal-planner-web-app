@@ -8,6 +8,7 @@ module.exports = {
       Example:
       */
     queryInterface.removeColumn('Meals', 'nutritionInfo'),
+    
 
   down: (queryInterface, Sequelize) =>
     /*
