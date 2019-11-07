@@ -32,19 +32,20 @@ class Ingredients extends React.Component {
             })
         })
         .catch(error => error)
-        console.log("ingredients = " , this.state.listOfIngredients);
-     }
+    }
+
     render(){
+        console.log("ingredients = " , this.state.listOfIngredients);
+        //got ingredients and quantity from backend 
+        const ingredients = this.state.listOfIngredients.map(ingredient => <div>{ingredient.name}</div>);
+        const quantity = this.state.listOfIngredients.map(ingredientsQuantity => <div>{ingredientsQuantity.quantity}</div>);
         return(
             <div className= "row">
-                <div className ="col-6 col-sm-6">
-
-                    {/* will pull ingredients from db once api is ready */}
-                    {/* display ingredients here frrom db */}
+                <div className ="col-8 col-sm-8">
+                    {ingredients}
                 </div>
-                <div className ="col-6 col-sm-6">
-                    {/* pull quantity from db */}
-                    {/* it will have measurement or quantity of ingredients  */}
+                <div className ="col-4 col-sm-">
+                    {quantity}
                 </div>
                 <div className ="col-12 col-sm-12">
                 {/* send an email with ingredients and price to user */}
