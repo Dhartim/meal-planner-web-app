@@ -16,7 +16,7 @@ class Ingredients extends React.Component {
       }
      componentDidMount(){
         const token = localStorage.getItem('jwtToken');
-        var { meal_id } = this.state; //this meal id is incorrect
+        var { meal_id } = this.state; 
         console.log("MEAL ID FOR INGREDIENTS = ", meal_id);
         console.log(`/api/ingredients/${meal_id}`);
         axios
@@ -28,7 +28,7 @@ class Ingredients extends React.Component {
         })
         .then(res => {
             this.setState({
-            listOfIngredients: res.data // cant update this, dont know why ???
+            listOfIngredients: res.data 
             })
         })
         .catch(error => error)
@@ -48,7 +48,7 @@ class Ingredients extends React.Component {
                     {quantity}
                 </div>
                 <div className ="col-12 col-sm-12">
-                {/* send an email with ingredients and price to user */}
+                {/* TODO :// send an email with ingredients and price to user */}
                     <Button><FaCartPlus/> Buy Ingredients</Button>
                 </div>
             </div>
