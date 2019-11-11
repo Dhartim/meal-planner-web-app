@@ -47,12 +47,7 @@ module.exports = {
         cuisineType: 'Indian',
         createdAt: new Date(),
         updatedAt: new Date(),
-      },
-      {
-        cuisineType: 'Japananse',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      },
+      }
     ], {}),
 
   down: (queryInterface, Sequelize) =>

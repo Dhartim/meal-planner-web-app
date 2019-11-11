@@ -6,23 +6,22 @@ module.exports = {
     const recipes = require('../public/Recipes.json');
     const diets = ['Vegetarian', 'Vegan', 'Keto', 'Paleo', 'Low-Fat']
     let recipesArray = [];
-    let len = 3;
-    for (let i = 0; i<len; i++){
-      recipes.forEach((recipe) => {
-        recipesArray.push({
-          dishName: recipe.name,
-          imgUrl: recipe.imageURL,
-          prepTime: `${Math.floor(Math.random() * 30)} min`,
-          cookTime: `${Math.floor(Math.random() * 60)} min`,
-          recipe: recipe.steps.join(" "),
-          cuisineId: recipe.cuisineId,
-          price: faker.commerce.price(),
-          dietType: diets[Math.floor(Math.random() * diets.length)],
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        })
-      });
-    }
+    
+    recipes.forEach((recipe) => {
+      recipesArray.push({
+        dishName: recipe.name,
+        imgUrl: recipe.imageURL,
+        prepTime: `${Math.floor(Math.random() * 30)} min`,
+        cookTime: `${Math.floor(Math.random() * 60)} min`,
+        recipe: recipe.steps.join(" "),
+        cuisineId: recipe.cuisineId,
+        price: faker.commerce.price(),
+        dietType: diets[Math.floor(Math.random() * diets.length)],
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      })
+    });
+    
     return queryInterface.bulkInsert('Meals', recipesArray)
   },
 

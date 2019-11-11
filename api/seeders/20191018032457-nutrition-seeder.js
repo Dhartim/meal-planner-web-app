@@ -1,11 +1,14 @@
+const { Meal } = require('../models');
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: async (queryInterface, Sequelize) => {
     let nutritionArray= [];
-    for (let i=1; i<=39; i++){
+    const meals = await Meal.findAll();
+    
+    await meals.forEach((meal)=>{
       nutritionArray.push({
-        mealId: i,
-        servingSize: `${Math.floor(Math.random() * 1000)} grams`,
+        mealId: meal.id,
+        servingSize: `${Math.floor(Math.random() * 1000)} g`,
         calories: `${Math.floor(Math.random() * 1000)} cal`,
         totalFat: `${Math.floor(Math.random() * 20)} g`,
         saturatedFat: `${Math.floor(Math.random() * 10)} g`,
@@ -19,8 +22,8 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       })
-    }
-    return queryInterface.bulkInsert('Nutrition', nutritionArray)
+    })
+    return await queryInterface.bulkInsert('Nutrition', nutritionArray)
   },
 
   down: (queryInterface, Sequelize) =>
