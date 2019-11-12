@@ -53,13 +53,9 @@ function MealDetailModal(props) {
                                     </div>
                                     </div>
                                 </div>
-                                {/* this is for ingredients */}
                                 <div class="col-sm-9">
                                     <h5>Ingredients</h5>
                                         <Ingredients meal_id={meal.id} />
-                                    {/* pull ingredients from database  */}
-                                    {/* have a button for amazon fresh  */}
-                                    {/* <Ingredients /> */}
                                 </div>
                             </div>
                         </div>
