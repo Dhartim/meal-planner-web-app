@@ -66,9 +66,16 @@ class WebPage:
 if __name__ == '__main__':
     # https://www.epicurious.com/recipes-menus/what-to-cook-this-cozy-fall-weekend-november-8-10-2019-gallery
     # Above might be helpful for later
-    url = 'https://www.epicurious.com/recipes/food/views/red-pesto-rigatoni-pasta'
-    page = WebPage(url)
-    if page:
-        pprint(page.json)
-    else:
-        print("Page does not exist")
+    # url = 'https://www.epicurious.com/recipes/food/views/red-pesto-rigatoni-pasta'
+    new_json = {}
+    with open('recipes.json', 'r') as json_file:
+        data = json.load(json_file)
+        for cat in data:
+            new_json[cat] = []
+            for url in data[cat]:
+                print(url)
+                details = WebPage(url)
+                new_json[cat].append(details.json)
+
+    with open('new_data.json', 'w') as outfile:
+        json.dump(new_json, outfile)

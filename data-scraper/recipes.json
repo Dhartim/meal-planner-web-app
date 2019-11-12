@@ -1,0 +1,53 @@
+{
+  "Japanese": [
+    "https://www.epicurious.com/recipes/food/views/crispy-skin-salmon-with-miso-honey-sauce",
+    "https://www.epicurious.com/recipes/food/views/sheet-pan-chicken-meatballs-and-charred-broccoli",
+    "https://www.epicurious.com/recipes/food/views/better-than-takeout-stir-fried-udon",
+    "https://www.epicurious.com/recipes/food/views/summertime-japanese-somen-noodles-on-ice",
+    "https://www.epicurious.com/recipes/food/views/miso-and-mayo-marinated-short-ribs-with-sriracha-sauce",
+    "https://www.epicurious.com/recipes/food/views/vegetarian-miso-tahini-squash-soup-with-brown-rice",
+    "https://www.epicurious.com/recipes/food/views/slow-cooker-miso-butter-roast-chicken-and-potatoes",
+    "https://www.epicurious.com/recipes/food/views/spicy-tahini-and-avocado-soba"
+  ],
+  "Greek": [
+    "https://www.epicurious.com/recipes/food/views/saucy-beans-and-artichoke-hearts-with-feta",
+    "https://www.epicurious.com/recipes/food/views/new-and-improved-greek-salad",
+    "https://www.epicurious.com/recipes/food/views/grilled-greens-and-cheese-on-toast",
+    "https://www.epicurious.com/recipes/food/views/greek-style-shrimp-pasta-with-kale",
+    "https://www.epicurious.com/recipes/food/views/grilled-pork-chops-with-plums-halloumi-and-lemon",
+    "https://www.epicurious.com/recipes/food/views/swordfish-steaks-with-asparagus-and-frisee-salad",
+    "https://www.epicurious.com/recipes/food/views/pasta-with-swordfish-and-cherry-tomato-sauce-56389845",
+    "https://www.epicurious.com/recipes/food/views/grilled-chicken-caesar-sandwiches",
+    "https://www.epicurious.com/recipes/food/views/saucy-beans-and-artichoke-hearts-with-feta"
+  ],
+  "Mexican": [
+    "https://www.epicurious.com/recipes/food/views/big-batch-black-beans",
+    "https://www.epicurious.com/recipes/food/views/stuffed-sweet-potatoes-with-beans-and-guacamole",
+    "https://www.epicurious.com/recipes/food/views/spicy-black-bean-and-corn-tacos",
+    "https://www.epicurious.com/recipes/food/views/broccoli-bolognese-with-orecchiette",
+    "https://www.epicurious.com/recipes/food/views/potatoes-roasted-poblano-chiles-mexican-sour-cream-papas-con-rajas-y-crema-acida",
+    "https://www.epicurious.com/recipes/food/views/chipotle-grilled-pork-shoulder-steaks-with-corn-salsa",
+    "https://www.epicurious.com/recipes/food/views/arctic-char-tostadas",
+    "https://www.epicurious.com/recipes/food/views/enchiladas-divorciadas"
+  ],
+  "Italian": [
+    "https://www.epicurious.com/recipes/food/views/sunday-sauce-with-braciole-meatballs-and-sausage",
+    "https://www.epicurious.com/recipes/food/views/the-silkiest-carbonara-395077",
+    "https://www.epicurious.com/recipes/food/views/classic-spaghetti-and-meatballs",
+    "https://www.epicurious.com/recipes/food/views/winter-italian-chopped-salad",
+    "https://www.epicurious.com/recipes/food/views/miso-pork-ribs-with-chile-honey-glaze",
+    "https://www.epicurious.com/recipes/food/views/baked-pasta-shells-with-sausage-and-greens",
+    "https://www.epicurious.com/recipes/food/views/penne-alla-vodka-106042",
+    "https://www.epicurious.com/recipes/food/views/sausage-and-ricotta-baked-cannelloni"
+  ],
+  "New American": [
+    "https://www.epicurious.com/recipes/food/views/the-simplest-roast-turkey-232985",
+    "https://www.epicurious.com/recipes/food/views/cuban-rice-and-beans",
+    "https://www.epicurious.com/recipes/food/views/gluten-free-eggplant-parmesan",
+    "https://www.epicurious.com/recipes/food/views/eggplant-omelet-tortang-talong",
+    "https://www.epicurious.com/recipes/food/views/blender-chermoula-sauce",
+    "https://www.epicurious.com/recipes/food/views/panchos-argentinos-argentine-style-hot-dogs",
+    "https://www.epicurious.com/recipes/food/views/chicken-piccata",
+    "https://www.epicurious.com/recipes/food/views/detroit-style-pizza"
+  ]
+}
