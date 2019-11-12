@@ -68,7 +68,6 @@ class Ingredients extends React.Component {
                     {quantity}
                 </div>
                 <div className ="col-12 col-sm-12">
-                    {/* TODO:// Email is working but need to check with an actual email id */}
                     <Button onClick={() => {this.sendEmail()}}><FaCartPlus/> Buy Ingredients</Button>
                 </div>
             </div>
