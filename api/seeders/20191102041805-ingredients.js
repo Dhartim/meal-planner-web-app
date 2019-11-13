@@ -19,6 +19,8 @@ module.exports = {
       recipe.ingredients.forEach(ingredient => {
         if ( ingredientMap[ingredient.name] === undefined ) {
           ingredientMap[ingredient.name] = ingredient
+          // ingredientMap["price"] = faker.commerce.price(),
+          // ingredientMap["quantity"] = "100 g"
           ingredientMap[ingredient.name]["createdAt"] = new Date()
           ingredientMap[ingredient.name]["updatedAt"] = new Date()
         }

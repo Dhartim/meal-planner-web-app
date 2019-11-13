@@ -2,25 +2,44 @@ const { Recommendation, Meal, Nutrition } = require('../models');
 const getUserId = require('../middleware/getUserId');
 
 function getMealsList(req) {
-  let price = req.params.price;
-  let diet = req.params.diet;
-  let 
+  const { price, diet, mealFreq, calories, fat, protein, carbs, weight, desiredWeight } = req.params;
+
   return Meal.findAll({
     where({
       
     })
-
   })
 }
 
-function add(req, res) {
+function addMealsToRecommendation(req, res) {
   const userid = getUserId(req);
   const meals = getMealsList(req)
-  return Recommendation
+  meals.forEach(meal => {
+    Recommendation
     .create({
       userId: userid,
       mealId: req.body.mealId,
-    })
-    .then((recommendation) => res.status(201).send(recommendation))
-    .catch((error) => res.status(400).send(error));
+    }).catch((error) => res.status(400).send(error));
+  }).then((recommendation) => res.status(201).send(recommendation))
+}
+
+function removeMeal(req, res) {
+  const userid = getUserId(req);
+
+  return Recommendation.findOne({
+    where: {
+      userId: userid,
+      mealId: req.body.mealId
+    },
+  })
+  .then((recommendation) => {
+    if (!recommendation) {
+      return res.status(400).send({
+        message: 'Could not find recommendation to delete',
+      });
+    }
+    return recommendation.destroy()
+      .then(() => res.status(204).send())
+      .catch((error) => res.status(400).send(error));
+  });
 }
