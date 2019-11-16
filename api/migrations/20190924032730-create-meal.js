@@ -29,6 +29,9 @@ module.exports = {
       type: Sequelize.INTEGER,
       foreignKey: true,
     },
+    desc: {
+      type: Sequelize.STRING(2048),
+    },
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE,

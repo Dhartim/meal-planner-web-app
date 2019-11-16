@@ -20,6 +20,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       foreignKey: true,
     },
+    desc: {
+      type: DataTypes.STRING(2048),
+    },
   }, {});
   Meal.associate = function (models) {
     Meal.belongsTo(models.Cuisine, { foreignKey: 'cuisineId' });
