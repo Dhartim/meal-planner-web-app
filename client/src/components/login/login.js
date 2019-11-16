@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Card } from 'react-bootstrap'
 import Axios from "axios";
 
 import "./login.css";
 import TextField from "@material-ui/core/TextField";
 import {UserContext} from "../../context/usercontext";
-
+import "./login.css";
 export default class Login extends Component {
   static contextType = UserContext;
 
@@ -57,9 +57,10 @@ export default class Login extends Component {
   };
   render() {
     return (
-      <Form onSubmit={this.onSubmit}>
-        <Form.Group controlId="formBasicEmail">
-          <TextField
+      <Card className="login_card">
+      <Form onSubmit={this.onSubmit} className="formfields">
+        <Form.Group controlId="formBasicEmail" >
+          <TextField 
             variant="outlined"
             required
             fullWidth
@@ -91,13 +92,14 @@ export default class Login extends Component {
             }}
           />
         </Form.Group>
-        <Button variant="primary" type="submit" onClick={() => {
-          this.tryLogin();
-        }}>
-          Submit
-        </Button>
+          <Button className="login_button" variant="primary" type="submit" onClick={() => {
+            this.tryLogin();
+          }}>
+            Log In
+          </Button>
         {/*<AccountProvider value={this.state}/>*/}
       </Form>
+      </Card>
     );
   }
 }

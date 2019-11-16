@@ -3,9 +3,10 @@ const faker = require('faker');
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    const recipes = require('../public/Recipes.json');
+    const recipes = require('../public/epicurious_recipes.json');
+    const diets = ['Vegetarian', 'Vegan', 'Keto', 'Paleo', 'Low-Fat']
     let recipesArray = [];
-    let len = 3;
+    let len = 1;
     for (let i = 0; i<len; i++){
       recipes.forEach((recipe) => {
         recipesArray.push({
@@ -13,8 +14,11 @@ module.exports = {
           imgUrl: recipe.imageURL,
           prepTime: `${Math.floor(Math.random() * 30)} min`,
           cookTime: `${Math.floor(Math.random() * 60)} min`,
-          recipe: faker.lorem.sentences(),
+          recipe: recipe.steps,
+          desc: recipe.desc,
           cuisineId: recipe.cuisineId,
+          price: faker.commerce.price(),
+          dietType: diets[Math.floor(Math.random() * diets.length)],
           createdAt: new Date(),
           updatedAt: new Date(),
         })
@@ -31,5 +35,4 @@ module.exports = {
       Example:
       */
     queryInterface.bulkDelete('Meals', null, {}),
-
 };
