@@ -3,6 +3,11 @@ from pprint import pprint
 import requests
 from bs4 import BeautifulSoup
 
+cuisine_mappings = {"Mexican": 1, "Italian": 2,
+                    "American": 3, "French": 4,
+                    "Chinese": 5, "Japanese": 6,
+                    "Mediterranean": 7, "Indian": 8,
+                    "Japanese": 9}
 
 class WebPage:
 
@@ -43,8 +48,12 @@ class WebPage:
         self.json['imageURL'] = img_url.find('source')['srcset']
 
     def get_serving_size(self):
-        serving_size = self.html.select_one('dd', class_='yield')
-        self.json['servingSize'] = serving_size.text
+        try:
+            serving_size = self.html.select_one('dd', class_='yield')
+            self.json['servingSize'] = serving_size.text
+        except AttributeError:
+            self.json['servingSize'] = '2'
+
 
     def get_ingredients(self):
         ingredients = self.html.find_all('li', class_='ingredient')
@@ -68,11 +77,9 @@ class WebPage:
             nutrition[labels[index].text] = data[index].text
         self.json['nutrition'] = nutrition
 
-    def add_id(self, cuisine_id):
-        self.json['cuisineId'] = cuisine_id
-
     def add_category(self, category):
         self.json['category'] = category
+        self.json['cuisineId'] = cuisine_mappings[category]
 
 
 if __name__ == '__main__':
@@ -87,10 +94,9 @@ if __name__ == '__main__':
             for url in data[cat]:
                 print(url)
                 details = WebPage(url)
-                details.add_id(cuisine_id)
                 details.add_category(cat)
                 new_json.append(details.json)
                 cuisine_id += 1
 
-    with open('new_data.json', 'w') as outfile:
+    with open('../api/public/epicurious_recipes.json', 'w+') as outfile:
         json.dump(new_json, outfile)

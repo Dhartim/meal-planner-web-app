@@ -9,7 +9,7 @@
     "https://www.epicurious.com/recipes/food/views/slow-cooker-miso-butter-roast-chicken-and-potatoes",
     "https://www.epicurious.com/recipes/food/views/spicy-tahini-and-avocado-soba"
   ],
-  "Greek": [
+  "Mediterranean": [
     "https://www.epicurious.com/recipes/food/views/saucy-beans-and-artichoke-hearts-with-feta",
     "https://www.epicurious.com/recipes/food/views/new-and-improved-greek-salad",
     "https://www.epicurious.com/recipes/food/views/grilled-greens-and-cheese-on-toast",
@@ -40,7 +40,7 @@
     "https://www.epicurious.com/recipes/food/views/penne-alla-vodka-106042",
     "https://www.epicurious.com/recipes/food/views/sausage-and-ricotta-baked-cannelloni"
   ],
-  "New American": [
+  "American": [
     "https://www.epicurious.com/recipes/food/views/the-simplest-roast-turkey-232985",
     "https://www.epicurious.com/recipes/food/views/cuban-rice-and-beans",
     "https://www.epicurious.com/recipes/food/views/gluten-free-eggplant-parmesan",
@@ -49,5 +49,30 @@
     "https://www.epicurious.com/recipes/food/views/panchos-argentinos-argentine-style-hot-dogs",
     "https://www.epicurious.com/recipes/food/views/chicken-piccata",
     "https://www.epicurious.com/recipes/food/views/detroit-style-pizza"
+  ],
+  "French": [
+    "https://www.epicurious.com/recipes/food/views/caramelized-onion-pasta",
+    "https://www.epicurious.com/recipes/food/views/chicken-and-bacon-choucroute-with-potato-salad",
+    "https://www.epicurious.com/recipes/food/views/braised-leeks-peas-and-lettuce",
+    "https://www.epicurious.com/recipes/food/views/charred-steak-and-broccolini-with-cheese-sauce",
+    "https://www.epicurious.com/recipes/food/views/grilled-ratatouille-pasta-salad"
+  ],
+  "Chinese": [
+    "https://www.epicurious.com/recipes/food/views/cashew-chicken",
+    "https://www.epicurious.com/recipes/food/views/liu-shaokuns-spicy-buckwheat-noodles-with-chicken-107966",
+    "https://www.epicurious.com/recipes/food/views/crispy-kimchi-and-scallion-pancakes",
+    "https://www.epicurious.com/recipes/food/views/manchurian-green-beans-with-tofu",
+    "https://www.epicurious.com/recipes/food/views/chinese-five-spice-steak-with-oranges-and-sesame-broccolini",
+    "https://www.epicurious.com/recipes/food/views/spicy-dry-fried-beef"
+  ],
+  "Indian": [
+    "https://www.epicurious.com/recipes/food/views/sweet-and-sour-dal-bhat",
+    "https://www.epicurious.com/recipes/food/views/tandoori-chicken-bowls",
+    "https://www.epicurious.com/recipes/food/views/tandoori-chicken-bowls",
+    "https://www.epicurious.com/recipes/food/views/coconut-apple-ginger-dal",
+    "https://www.epicurious.com/recipes/food/views/curried-chickpea-and-lentil-dal",
+    "https://www.epicurious.com/recipes/food/views/manchurian-green-beans-with-tofu",
+    "https://www.epicurious.com/recipes/food/views/weeknight-tandoori-chicken",
+    "https://www.epicurious.com/recipes/food/views/yogurtbraised-chicken-legs-with-garlic-and-ginger"
   ]
 }
