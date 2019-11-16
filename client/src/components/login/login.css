@@ -1,4 +1,4 @@
-.card{
+.loginBox{
     width: 500px;
     height: 500px;
     margin-left: auto;
@@ -8,14 +8,14 @@
     box-sizing: border-box;
     border-radius: 45px;
 }
-Button{
+.button{
     margin-left: 95px;
     width: 200px;
 }
 .formfields{
     width: 400px;
     border-radius: 45px;
-    margin-top: auto ;
+    margin-top: 150px ;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: auto ;

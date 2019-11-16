@@ -57,7 +57,7 @@ export default class Login extends Component {
   };
   render() {
     return (
-      <Card className="card">
+      <div className="loginBox">
       <Form onSubmit={this.onSubmit} className="formfields">
         <Form.Group controlId="formBasicEmail" >
           <TextField 
@@ -92,14 +92,14 @@ export default class Login extends Component {
             }}
           />
         </Form.Group>
-          <Button variant="primary" type="submit" onClick={() => {
+          <Button className="button" variant="primary" type="submit" onClick={() => {
             this.tryLogin();
           }}>
             Log In
           </Button>
         {/*<AccountProvider value={this.state}/>*/}
       </Form>
-      </Card>
+      </div>
     );
   }
 }
