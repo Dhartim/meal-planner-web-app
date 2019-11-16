@@ -67,7 +67,4 @@ export class Home extends Component {
     );
   }
 }
-
-// Home.contextType = UserContext;
-
 export default Home;

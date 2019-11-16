@@ -2,7 +2,7 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     let nutritionArray= [];
-    for (let i=1; i<=39; i++){
+    for (let i=1; i<=60; i++){
       nutritionArray.push({
         mealId: i,
         servingSize: `${Math.floor(Math.random() * 1000)} grams`,
