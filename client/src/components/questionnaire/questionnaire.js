@@ -4,7 +4,7 @@ import RadioGroup from '../subcomponents/radioGroup';
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
 // import { Form, Button } from 'react-bootstrap'
-import Axios from "axios";
+import axios from "axios";
 import "./questionnaire.css";
 
 export class Questionnaire extends Component {
@@ -15,6 +15,34 @@ export class Questionnaire extends Component {
     }
   }
 
+  createPreferences = () => {
+      const {
+          diet,
+          calories,
+          fat,
+          protein,
+          carbs,
+          weight,
+          desiredWeight,
+          mealCount,
+          priceLimit
+      } = this.state;
+
+      return axios.post('/preferences', {
+          diet: diet,
+          calories: calories,
+          fat: fat,
+          protein: protein,
+          carbs: carbs,
+          weight: weight,
+          desiredWeight: desiredWeight,
+          mealCount: mealCount,
+          priceLimit: priceLimit
+      })
+          .catch(err => {
+              console.log(err)
+          })
+  }
 
   render() {
     return(
@@ -35,8 +63,8 @@ export class Questionnaire extends Component {
             </div>
             <div className="form-text__container">
               <div className="form-control">
-                <label htmlFor="macros">Macros</label>
-                <input type="number" id="macros" placeholder="Enter Calorie Goal"/>
+                <label htmlFor="calories">Calories</label>
+                <input type="number" id="calories" placeholder="Enter Calorie Goal"/>
               </div>
               <div className="form-control">
                 <label htmlFor="fat">Fat</label>
