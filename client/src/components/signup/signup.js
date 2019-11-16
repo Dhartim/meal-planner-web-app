@@ -53,6 +53,7 @@ export class SignUp extends Component {
     })
     .then(res => {
       this.setState({errorText: ''});
+      //console.log("RESPONSE" + res);
       console.log("response token: %s", res.headers.token);
       localStorage.setItem('jwtToken', res.headers.token);
       this.props.history.push('/preferences');

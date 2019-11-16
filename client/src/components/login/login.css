@@ -1,0 +1,23 @@
+.card{
+    width: 500px;
+    height: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    background: #FFFFFF;
+    border: 1px solid #254F66;
+    box-sizing: border-box;
+    border-radius: 45px;
+}
+Button{
+    margin-left: 95px;
+    width: 200px;
+}
+.formfields{
+    width: 400px;
+    border-radius: 45px;
+    margin-top: auto ;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto ;
+    
+}

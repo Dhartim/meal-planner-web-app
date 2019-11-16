@@ -35,7 +35,7 @@ class Ingredients extends React.Component {
     }
 
     sendEmail() {
-        const { listOfIngredients, meal_id } = this.state;
+        const { listOfIngredients} = this.state;
         const jwtToken = localStorage.getItem('jwtToken');
 
         return axios.post('/sendIngredient', {
@@ -71,7 +71,6 @@ class Ingredients extends React.Component {
                     <Button onClick={() => {this.sendEmail()}}><FaCartPlus/> Buy Ingredients</Button>
                 </div>
             </div>
-            
         );
     }
 }
