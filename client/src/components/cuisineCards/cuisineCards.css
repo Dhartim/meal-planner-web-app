@@ -6,11 +6,16 @@
 }
 
 .cuisine-list {
-    padding: 50px 30px;
+	width: 1400px;
+    padding: 20px 30px;
+	margin-left: auto;
+	margin-right: auto;
     text-align: left;
 }
 .cuisine-list h2{
-    padding: 20px 0px;
+    padding: 20px 0px 20px 2rem;
+	margin-left: auto;
+	color: #fff;
 }
 .slick-track {
 	margin: 0;

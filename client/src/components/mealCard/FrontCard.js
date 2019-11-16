@@ -26,8 +26,16 @@ export class FrontCard extends Component{
                 </div>
             </Tooltip>
         );
+
+        let mealDesc;
+        let limit = 230;
+        if (meal.desc.length > limit) {
+            mealDesc = meal.desc.substring(0, limit) + "..."
+        } else {
+            mealDesc = meal.desc
+        }
         return ( 
-            <Card style={{ width: '18rem' }}>
+            <Card>
                 <OverlayTrigger
                   key="right-start"
                   placement="right-start"
@@ -37,14 +45,19 @@ export class FrontCard extends Component{
                 </OverlayTrigger>
                 <Card.Body>
                     <Card.Title>{meal.dishName}</Card.Title>
+                    <hr className={"card-divider"}/>
                     <Card.Text>
-                        {meal.cuisineType}<br />
-                        Preptime : {meal.prepTime}
+                        <div className={"meal-desc"}>
+                            {mealDesc}
+                        </div>
+                    </Card.Text>
+                    <Card.Text>
+                        Prep time : {meal.prepTime}
                     </Card.Text>
                     <Form>
                         {['checkbox'].map(type => (
                             <div key={`default-${type}`} className="mb-3">
-                            <Form.Check 
+                            <Form.Check
                                 type={type}
                                 id={`default-${type}`}
                                 label={`I ate it`}
@@ -57,6 +70,23 @@ export class FrontCard extends Component{
                     </div>
                     <MealDetailModal meal= {meal}/>
                 </Card.Body>
+                <Card.Footer/>
+                {/*<Card.Footer>*/}
+                {/*    <div className={"macro-container"}>*/}
+                {/*        <div className="meal-macros">*/}
+                {/*            <h3>Cals</h3>*/}
+                {/*            <p>10</p>*/}
+                {/*        </div>*/}
+                {/*        <div className="meal-macros middle">*/}
+                {/*            <h3>Fat</h3>*/}
+                {/*            <p>10</p>*/}
+                {/*        </div>*/}
+                {/*        <div className="meal-macros">*/}
+                {/*            <h3>Sugar</h3>*/}
+                {/*            <p>20</p>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*</Card.Footer>*/}
             </Card>
         );
     }
