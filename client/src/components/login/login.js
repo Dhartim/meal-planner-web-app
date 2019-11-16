@@ -57,7 +57,7 @@ export default class Login extends Component {
   };
   render() {
     return (
-      <Card className="login-card">
+      <Card className="login_card">
       <Form onSubmit={this.onSubmit} className="formfields">
         <Form.Group controlId="formBasicEmail" >
           <TextField 
@@ -92,7 +92,7 @@ export default class Login extends Component {
             }}
           />
         </Form.Group>
-          <Button className="login-button" variant="primary" type="submit" onClick={() => {
+          <Button className="login_button" variant="primary" type="submit" onClick={() => {
             this.tryLogin();
           }}>
             Log In

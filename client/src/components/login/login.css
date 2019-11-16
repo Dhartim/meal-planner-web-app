@@ -1,4 +1,4 @@
-.login-card{
+.login_card{
     width: 500px;
     height: 500px;
     margin-left: auto;
@@ -8,7 +8,7 @@
     box-sizing: border-box;
     border-radius: 45px;
 }
-.login-button{
+.login_button{
     margin-left: 95px;
     width: 200px;
 }
