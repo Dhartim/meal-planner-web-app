@@ -13,35 +13,51 @@ function getPreferences(req, res) {
 }
 
 function createPreferences(req, res) {
-  const values = {
-    userId: req.params.id,
-    calories: req.params.calories,
-    fat: req.params.fat,
-    protein: req.params.protein,
-    carbs: req.params.carbs,
-    currentWeight: req.params.weight,
-    desiredWeight: req.params.desiredWeight,
-  };
+    console.log("CREATE PREFERENCES");
 
-  return Preference.create(values)
-    .then((result) => res.stat(200).send({
-      message: result,
-    }))
-    .catch((err) => res.status(404).send({
-      message: err,
-    }));
+    let values = {
+        // userId: req.body.userId,
+        diet: req.body.diet,
+        calories: req.body.calories,
+        fat: req.body.fat,
+        protein: req.body.protein,
+        carbs: req.body.carbs,
+        weight: req.body.weight,
+        desiredWeight: req.body.desiredWeight,
+        mealCount: req.body.mealCount,
+        priceLimit: req.body.priceLimit
+    };
+
+    console.log(values);
+
+    return Preference.findOrCreate({
+        where: {userId: req.body.userId},
+        defaults: values
+    })
+        .then(result => {
+            return res.stat(200).send({
+                message: "New preferences created"
+            })
+        })
+        .catch(err => {
+            return res.status(404).send({
+                message: err
+            })
+        })
 }
 
 function updatePreferences(req, res) {
   const updatedValues = {};
 
-  const params = [
+  let params = [
     'calories',
     'fat',
     'protein',
     'carbs',
-    'currentWeight',
+    'weight',
     'desiredWeight',
+    'mealCount',
+    'priceLimit'
   ];
 
   let p;
@@ -71,8 +87,8 @@ function updatePreferences(req, res) {
     });
 }
 
-module.export = {
-  getPreferences,
-  createPreferences,
-  updatePreferences,
+module.exports = {
+    getPreferences,
+    createPreferences,
+    updatePreferences,
 };
