@@ -1,4 +1,4 @@
-const preferenceController = require('../controllers/preference');
+const preferenceController = require('../controllers').preference;
 const checkAuth = require('../middleware/checkAuth');
 
 module.exports = (app) => {

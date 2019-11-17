@@ -1,4 +1,5 @@
-const { Preference } = require('../models');
+ const { Preference } = require('../models');
+const getUserId = require('../middleware/getUserId');
 
 function getPreferences(req, res) {
   return Preference.findByPk(req.params.id)
@@ -13,37 +14,38 @@ function getPreferences(req, res) {
 }
 
 function createPreferences(req, res) {
-    console.log("CREATE PREFERENCES");
+  
+  console.log("CREATE PREFERENCES");
+  let userId = getUserId(req);
+  let values = {
+    userId: userId,
+    diet: req.body.diet,
+    calories: req.body.calories,
+    fat: req.body.fat,
+    protein: req.body.protein,
+    carbs: req.body.carbs,
+    weight: req.body.weight,
+    desiredWeight: req.body.desiredWeight,
+    mealCount: req.body.mealCount,
+    priceLimit: req.body.priceLimit
+  };
 
-    let values = {
-        // userId: req.body.userId,
-        diet: req.body.diet,
-        calories: req.body.calories,
-        fat: req.body.fat,
-        protein: req.body.protein,
-        carbs: req.body.carbs,
-        weight: req.body.weight,
-        desiredWeight: req.body.desiredWeight,
-        mealCount: req.body.mealCount,
-        priceLimit: req.body.priceLimit
-    };
+  console.log(values);
 
-    console.log(values);
-
-    return Preference.findOrCreate({
-        where: {userId: req.body.userId},
-        defaults: values
+  return Preference.findOrCreate({
+    where: {userId: userId},
+    defaults: values
+  })
+    .then(result => {
+        return res.stat(200).send({
+            message: "New preferences created"
+        })
     })
-        .then(result => {
-            return res.stat(200).send({
-                message: "New preferences created"
-            })
+    .catch(err => {
+        return res.status(404).send({
+            message: err
         })
-        .catch(err => {
-            return res.status(404).send({
-                message: err
-            })
-        })
+    })
 }
 
 function updatePreferences(req, res) {
@@ -88,7 +90,7 @@ function updatePreferences(req, res) {
 }
 
 module.exports = {
-    getPreferences,
-    createPreferences,
-    updatePreferences,
+  getPreferences,
+  createPreferences,
+  updatePreferences,
 };

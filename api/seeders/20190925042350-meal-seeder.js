@@ -4,7 +4,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     const recipes = require('../public/epicurious_recipes.json');
     const diets = ['Vegetarian', 'Vegan', 'Keto', 'Paleo', 'Low-Fat'];
-    const prices = ['$5.00', '$10.00', '$15.00', '$20.00'];
+    const prices = [5, 10, 15, 20];
 
     const cuisines = await Cuisine.findAll();
 
