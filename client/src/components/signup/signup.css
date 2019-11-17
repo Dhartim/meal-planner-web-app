@@ -1,0 +1,13 @@
+.signup_box{
+    width: 500px;
+    height: 500px;
+    background: #FFFFFF;
+    border: 1px solid #254F66;
+    box-sizing: border-box;
+    border-radius: 45px;
+}
+
+.signup_button{
+    margin-left: 95px;
+    width: 200px;
+}
