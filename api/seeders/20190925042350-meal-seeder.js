@@ -1,22 +1,22 @@
 const { Cuisine } = require('../models');
 
 module.exports = {
-  up: async(queryInterface, Sequelize) => {
+  up: async (queryInterface, Sequelize) => {
     const recipes = require('../public/epicurious_recipes.json');
-    const diets = ['Vegetarian', 'Vegan', 'Keto', 'Paleo', 'Low-Fat']
-    const prices = ['$5.00', '$10.00', '$15.00', '$20.00']
+    const diets = ['Vegetarian', 'Vegan', 'Keto', 'Paleo', 'Low-Fat'];
+    const prices = ['$5.00', '$10.00', '$15.00', '$20.00'];
 
     const cuisines = await Cuisine.findAll();
 
-    let recipesArray = [];
-    let nutritionArray= [];
+    const recipesArray = [];
+    const nutritionArray = [];
 
     await recipes.forEach((recipe, index) => {
       let cuisineId = 1;
-      
-      for( let i = 0; i < cuisines.length; i++ ) {
-        if ( cuisines[i].cuisineType === recipe.category) {
-          cuisineId = cuisines[i].id
+
+      for (let i = 0; i < cuisines.length; i++) {
+        if (cuisines[i].cuisineType === recipe.category) {
+          cuisineId = cuisines[i].id;
           break;
         }
       }
@@ -29,35 +29,35 @@ module.exports = {
         cookTime: `${Math.floor(Math.random() * 60)} min`,
         recipe: recipe.steps,
         desc: recipe.desc,
-        cuisineId: cuisineId,
+        cuisineId,
         price: prices[Math.floor(Math.random() * prices.length)],
         dietType: diets[Math.floor(Math.random() * diets.length)],
         createdAt: new Date(),
         updatedAt: new Date(),
-      })
+      });
 
-      let nutrition = recipe.nutrition; 
+      const { nutrition } = recipe;
 
-      if (nutrition){
+      if (nutrition) {
         nutritionArray.push({
-          mealId: index +1 ,
+          mealId: index + 1,
           servingSize: `${Math.floor(Math.random() * 1000)} g`,
-          calories: `${ nutrition.Calories } cal`,
-          totalFat: `${ nutrition.Fat }`,
-          saturatedFat: `${ nutrition['Saturated Fat'] }`,
+          calories: `${nutrition.Calories} cal`,
+          totalFat: `${nutrition.Fat}`,
+          saturatedFat: `${nutrition['Saturated Fat']}`,
           cholesterol: `${nutrition.Cholesterol}`,
           sodium: `${nutrition.Sodium}`,
-          totalCarbohydrates: `${ nutrition.Carbohydrates}`,
-          fiber: `${ nutrition.Fiber}`,
+          totalCarbohydrates: `${nutrition.Carbohydrates}`,
+          fiber: `${nutrition.Fiber}`,
           sugar: `${nutrition.Fiber}`,
-          protein: `${ nutrition.Protein }`,
+          protein: `${nutrition.Protein}`,
           vitaminsAndMinerals: `vitamin C ${Math.floor(Math.random() * 100)} mg, calcium ${Math.floor(Math.random() * 100)} mg`,
           createdAt: new Date(),
           updatedAt: new Date(),
-        })
+        });
       } else {
         nutritionArray.push({
-          mealId: index +1 ,
+          mealId: index + 1,
           servingSize: `${Math.floor(Math.random() * 1000)} g`,
           calories: `${Math.floor(Math.random() * 1000)} cal`,
           totalFat: `${Math.floor(Math.random() * 20)} g`,
@@ -71,12 +71,12 @@ module.exports = {
           vitaminsAndMinerals: `vitamin C ${Math.floor(Math.random() * 100)} mg, calcium ${Math.floor(Math.random() * 100)} mg`,
           createdAt: new Date(),
           updatedAt: new Date(),
-        })
+        });
       }
     });
-      
-    await queryInterface.bulkInsert('Meals', recipesArray)
-    await queryInterface.bulkInsert('Nutrition', nutritionArray)
+
+    await queryInterface.bulkInsert('Meals', recipesArray);
+    await queryInterface.bulkInsert('Nutrition', nutritionArray);
   },
 
   down: async (queryInterface, Sequelize) =>
@@ -86,5 +86,5 @@ module.exports = {
 
       Example:
       */
-    await queryInterface.bulkDelete('Meals', null, {})
+    await queryInterface.bulkDelete('Meals', null, {}),
 };

@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Nutrition.associate = function (models) {
     Nutrition.belongsTo(models.Meal, { foreignKey: 'mealId' });
-    Nutrition.belongsTo(models.Ingredient, { foreignKey: 'ingredientId' })
+    Nutrition.belongsTo(models.Ingredient, { foreignKey: 'ingredientId' });
     // associations can be defined here
   };
   return Nutrition;

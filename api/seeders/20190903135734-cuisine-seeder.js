@@ -47,7 +47,7 @@ module.exports = {
         cuisineType: 'Indian',
         createdAt: new Date(),
         updatedAt: new Date(),
-      }
+      },
     ], {}),
 
   down: (queryInterface, Sequelize) =>
