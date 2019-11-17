@@ -37,7 +37,7 @@ function createPreferences(req, res) {
     })
         .then(result => {
             return res.stat(200).send({
-                message: result
+                message: "New preferences created"
             })
         })
         .catch(err => {
