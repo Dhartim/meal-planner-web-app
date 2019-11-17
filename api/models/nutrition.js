@@ -5,14 +5,14 @@ module.exports = (sequelize, DataTypes) => {
     ingredientId: DataTypes.STRING,
     calories: DataTypes.INTEGER,
     servingSize: DataTypes.STRING,
-    totalFat: DataTypes.STRING,
+    totalFat: DataTypes.INTEGER,
     saturatedFat: DataTypes.STRING,
     cholesterol: DataTypes.STRING,
     sodium: DataTypes.STRING,
-    totalCarbohydrates: DataTypes.STRING,
+    totalCarbohydrates: DataTypes.INTEGER,
     fiber: DataTypes.STRING,
     sugar: DataTypes.STRING,
-    protein: DataTypes.STRING,
+    protein: DataTypes.INTEGER,
     vitaminsAndMinerals: DataTypes.STRING,
   }, {});
   Nutrition.associate = function (models) {

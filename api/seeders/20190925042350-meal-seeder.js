@@ -38,19 +38,19 @@ module.exports = {
 
       const { nutrition } = recipe;
 
-      if (nutrition) {
+      if (Object.keys(nutrition).length >0) {
         nutritionArray.push({
           mealId: index + 1,
           servingSize: `${Math.floor(Math.random() * 1000)} g`,
-          calories: `${nutrition.Calories} cal`,
-          totalFat: `${nutrition.Fat}`,
+          calories: nutrition.Calories,
+          totalFat: `${nutrition.Fat.split(' ')[0]}`,
           saturatedFat: `${nutrition['Saturated Fat']}`,
           cholesterol: `${nutrition.Cholesterol}`,
           sodium: `${nutrition.Sodium}`,
-          totalCarbohydrates: `${nutrition.Carbohydrates}`,
+          totalCarbohydrates: `${nutrition.Carbohydrates.split(' ')[0]}`,
           fiber: `${nutrition.Fiber}`,
           sugar: `${nutrition.Fiber}`,
-          protein: `${nutrition.Protein}`,
+          protein: `${nutrition.Protein.split(' ')[0]}`,
           vitaminsAndMinerals: `vitamin C ${Math.floor(Math.random() * 100)} mg, calcium ${Math.floor(Math.random() * 100)} mg`,
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -59,15 +59,15 @@ module.exports = {
         nutritionArray.push({
           mealId: index + 1,
           servingSize: `${Math.floor(Math.random() * 1000)} g`,
-          calories: `${Math.floor(Math.random() * 1000)} cal`,
-          totalFat: `${Math.floor(Math.random() * 20)} g`,
+          calories: Math.floor(Math.random() * 1000),
+          totalFat: Math.floor(Math.random() * 20),
           saturatedFat: `${Math.floor(Math.random() * 10)} g`,
           cholesterol: `${Math.floor(Math.random() * 20)} mg`,
           sodium: `${Math.floor(Math.random() * 1000)} mg`,
-          totalCarbohydrates: `${Math.floor(Math.random() * 100)} g`,
+          totalCarbohydrates: Math.floor(Math.random() * 100),
           fiber: `${Math.floor(Math.random() * 20)} g`,
           sugar: `${Math.floor(Math.random() * 80)} g`,
-          protein: `${Math.floor(Math.random() * 60)} g`,
+          protein: Math.floor(Math.random() * 60),
           vitaminsAndMinerals: `vitamin C ${Math.floor(Math.random() * 100)} mg, calcium ${Math.floor(Math.random() * 100)} mg`,
           createdAt: new Date(),
           updatedAt: new Date(),
