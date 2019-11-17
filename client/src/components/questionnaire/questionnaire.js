@@ -15,43 +15,57 @@ export class Questionnaire extends Component {
     }
   }
 
-  createPreferences = () => {
-
-      console.log("CREATE PREFERENCES");
-
-      const {
-          diet,
-          calories,
-          fat,
-          protein,
-          carbs,
-          weight,
-          desiredWeight,
-          mealCount,
-          priceLimit
-      } = this.state;
-
-      return axios.post('/preferences', {
-          diet: diet,
-          calories: calories,
-          fat: fat,
-          protein: protein,
-          carbs: carbs,
-          weight: weight,
-          desiredWeight: desiredWeight,
-          mealCount: mealCount,
-          priceLimit: priceLimit
-      })
+  handleSubmit(event) {
+      console.log("ON SUBMIT");
+      console.log(event);
+      // const data = new FormData(event.target);
+      // console.log(data)
+      return axios.post('/preferences', this.state)
+          .then(res => {
+              console.log(res)
+          })
           .catch(err => {
               console.log(err)
           })
   }
 
+  // createPreferences = () => {
+  //
+  //     console.log("CREATE PREFERENCES");
+  //
+  //     const {
+  //         diet,
+  //         calories,
+  //         fat,
+  //         protein,
+  //         carbs,
+  //         weight,
+  //         desiredWeight,
+  //         mealCount,
+  //         priceLimit
+  //     } = this.state;
+  //
+  //     return axios.post('/preferences', {
+  //         diet: diet,
+  //         calories: calories,
+  //         fat: fat,
+  //         protein: protein,
+  //         carbs: carbs,
+  //         weight: weight,
+  //         desiredWeight: desiredWeight,
+  //         mealCount: mealCount,
+  //         priceLimit: priceLimit
+  //     })
+  //         .catch(err => {
+  //             console.log(err)
+  //         })
+  // }
+
   render() {
     return(
       <Container component="main" maxWidth="sm">
         <div>
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <div className="radio-label__container">
               <label htmlFor="diet">Diet</label>
               <RadioGroup
@@ -119,7 +133,8 @@ export class Questionnaire extends Component {
               variant="contained"
               color="primary"
               onClick={() => {
-                this.createPreferences()
+              //   this.createPreferences()
+                this.state = new FormData(this);
                 this.props.history.push('/dashboard');
                 window.location.reload();
               }}
