@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button';
+import Ingredients from './Ingredients';
 import './mealCard.css';
 
 function MealDetailModal(props) {
@@ -51,6 +52,10 @@ function MealDetailModal(props) {
                                         Vitamins & Minerals:  {meal.Nutrition.vitaminsAndMinerals}<br/>
                                     </div>
                                     </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <h5>Ingredients</h5>
+                                        <Ingredients meal_id={meal.id} />
                                 </div>
                             </div>
                         </div>

@@ -4,9 +4,20 @@ const config = require('../config/config.json');
 const secret = require('../config/secret');
 
 function getUserEmail(req) {
-  const token = req.headers['x-access-token'];
+  /*const token = req.headers['x-access-token'];
   const decode = jwt.verify(token, config.jwt.jwtSecret);
-  return decode.user.email;
+  return decode.user.email;*/
+
+  const token = req.headers['x-access-token'];
+  let userEmail = -1;
+  if(token !== undefined) {
+    const decode = jwt.verify(token, config.jwt.jwtSecret);
+    if(decode !== undefined) {
+      userEmail = decode.email;
+    }
+  }
+
+  return userEmail;
 }
 
 let transporter = nodemailer.createTransport({
@@ -33,7 +44,7 @@ function mailOptions(from, to, subject, text){
 }
 
 function contactUs (req, res) {
-//  console.log(transporter);
+  //  console.log(transporter);
   const {email, body, firstName} = req.body;
   const subject = `${firstName} is contacting you from: ${email}`;
   const meal_planner_email = 'jaldujaili@usfca.edu'; // email that will be sent to
@@ -59,7 +70,60 @@ function createSchedule() {
   console.log()
 }
 
+function ingredientMailOptions(from, to, subject, html){
+  return {
+    from: from,
+    to: to,
+    subject: subject,
+    html:html
+  }
+}
+
+function sendIngredient (req, res) {
+//  console.log(transporter);
+  const userEmail = getUserEmail(req);
+
+  if(userEmail != -1)
+  {
+    const listOfIngredients = req.body.listOfIngredients;
+    const subject = 'Ingredient List';
+    const meal_planner_email = 'jaldujaili@usfca.edu'; // email that will be sent to
+    
+    let ingredients = '';
+    listOfIngredients.forEach(function(ingredient) {
+      ingredients += '<div>'+ ingredient.name + ' : ' + ingredient.quantity + '</div>';
+    });
+
+    var body = '<!DOCTYPE html>'+
+        '<html><head><title>Ingredients</title>'+
+        '</head><body><div>'+
+        '<p>Thank you for buying ingredients.</p>'+
+        '<p>Here is ingredient list:</p>'+
+          ingredients +
+        '</div></body></html>';
+
+    const mOptions = ingredientMailOptions(meal_planner_email, userEmail, subject, body);
+
+    // console.log(mOptions)
+    transporter.sendMail(mOptions, function(err,data){
+      console.log('err:',err, ' data: ', data)
+      if ( err ){
+        res.send({
+          success: false,
+          message: err,
+        });
+      } else {
+        res.send({
+          success: true,
+          message: 'success',
+        });
+      }
+    })
+  }
+}
+
 module.exports = {
   contactUs,
-  createSchedule
+  createSchedule,
+  sendIngredient
 }

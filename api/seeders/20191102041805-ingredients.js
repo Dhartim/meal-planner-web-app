@@ -12,17 +12,17 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
-    const recipes = require('../public/Recipes.json');
+   const recipes = require('../public/epicurious_recipes.json');
     
     let ingredientMap = {};
     recipes.forEach((recipe) => {
       recipe.ingredients.forEach(ingredient => {
-        if ( ingredientMap[ingredient.name] === undefined ) {
-          ingredientMap[ingredient.name] = ingredient
+        if ( ingredientMap[ingredient] === undefined ) {
+          ingredientMap[ingredient] = { name: ingredient }
           // ingredientMap["price"] = faker.commerce.price(),
           // ingredientMap["quantity"] = "100 g"
-          ingredientMap[ingredient.name]["createdAt"] = new Date()
-          ingredientMap[ingredient.name]["updatedAt"] = new Date()
+          ingredientMap[ingredient]["createdAt"] = new Date()
+          ingredientMap[ingredient]["updatedAt"] = new Date()
         }
       })
     });
