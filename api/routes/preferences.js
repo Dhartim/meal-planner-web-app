@@ -1,8 +1,8 @@
-const preferenceController = require('../controllers').preference;
-const checkAuth = require('../middleware/checkAuth')
+const preferenceController = require('../controllers/preference');
+const checkAuth = require('../middleware/checkAuth');
 
 module.exports = (app) => {
-    app.get('/api/preferences', checkAuth, preferenceController.getPreferences);
-    app.post('/api/preferences', checkAuth, preferenceController.createPreferences);
-    app.update('/api/preferences', checkAuth, preferenceController.updatePreferences);
+    app.get('/api/preferences', preferenceController.getPreferences);
+    app.post('/api/preferences', preferenceController.createPreferences);
+    app.put('/api/preferences', preferenceController.updatePreferences);
 }

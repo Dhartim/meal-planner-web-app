@@ -16,6 +16,9 @@ export class Questionnaire extends Component {
   }
 
   createPreferences = () => {
+
+      console.log("CREATE PREFERENCES");
+
       const {
           diet,
           calories,
@@ -116,6 +119,7 @@ export class Questionnaire extends Component {
               variant="contained"
               color="primary"
               onClick={() => {
+                this.createPreferences()
                 this.props.history.push('/dashboard');
                 window.location.reload();
               }}

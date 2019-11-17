@@ -1,4 +1,4 @@
-const {Preference} = require('../models')
+const { Preference } = require('../models');
 
 function getPreferences(req, res) {
     return Preference.findByPk(req.params.id)
@@ -14,17 +14,27 @@ function getPreferences(req, res) {
 
 function createPreferences(req, res) {
 
+    console.log("CREATE PREFERENCES");
+
     let values = {
-        userId: req.params.id,
-        calories: req.params.calories,
-        fat: req.params.fat,
-        protein: req.params.protein,
-        carbs: req.params.carbs,
-        currentWeight: req.params.weight,
-        desiredWeight: req.params.desiredWeight,
+        // userId: req.body.userId,
+        diet: req.body.diet,
+        calories: req.body.calories,
+        fat: req.body.fat,
+        protein: req.body.protein,
+        carbs: req.body.carbs,
+        weight: req.body.weight,
+        desiredWeight: req.body.desiredWeight,
+        mealCount: req.body.mealCount,
+        priceLimit: req.body.priceLimit
     };
 
-    return Preference.create(values)
+    console.log(values);
+
+    return Preference.findOrCreate({
+        where: {userId: req.body.userId},
+        defaults: values
+    })
         .then(result => {
             return res.stat(200).send({
                 message: result
@@ -46,8 +56,10 @@ function updatePreferences(req, res) {
         'fat',
         'protein',
         'carbs',
-        'currentWeight',
+        'weight',
         'desiredWeight',
+        'mealCount',
+        'priceLimit'
     ];
 
     let p;
@@ -77,8 +89,8 @@ function updatePreferences(req, res) {
         })
 }
 
-module.export = {
+module.exports = {
     getPreferences,
     createPreferences,
     updatePreferences,
-}
+};
