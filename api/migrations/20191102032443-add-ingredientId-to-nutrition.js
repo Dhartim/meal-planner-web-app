@@ -1,7 +1,6 @@
-'use strict';
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
+  up: (queryInterface, Sequelize) =>
     /*
       Add altering commands here.
       Return a promise to correctly handle asynchronicity.
@@ -9,16 +8,15 @@ module.exports = {
       Example:
       return queryInterface.createTable('users', { id: Sequelize.INTEGER });
     */
-    return Promise.all([
+    Promise.all([
       queryInterface.addColumn(
         'Nutrition',
         'ingredientId',
-        Sequelize.INTEGER
-      )
-    ]);
-  },
+        Sequelize.INTEGER,
+      ),
+    ]),
 
-  down: (queryInterface, Sequelize) => {
+  down: (queryInterface, Sequelize) =>
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.
@@ -26,8 +24,8 @@ module.exports = {
       Example:
       return queryInterface.dropTable('users');
     */
-   return Promise.all([
-    queryInterface.removeColumn('Nutrition', 'ingredientId')
-  ]);
-  }
+    Promise.all([
+      queryInterface.removeColumn('Nutrition', 'ingredientId'),
+    ]),
+
 };

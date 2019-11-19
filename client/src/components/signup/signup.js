@@ -1,20 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import FastfoodSharpIcon from '@material-ui/icons/FastfoodSharp';
+import {Container, Row, Col, Button} from 'react-bootstrap';
+import {GiMeal }from "react-icons/gi/";
 import { 
-  Avatar,
-  Button,
-  CssBaseline,
-  Link,
-  Grid,
-  Box,
-  Typography,
-  Container
+  Link
   } from '@material-ui/core';
-
-// Styles and layouts
-import useStyles from './signupstyle';
 import TextField from "@material-ui/core/TextField";
+// Styles and layouts
+import "./signup.css";
 
 export class SignUp extends Component {
   constructor(props) {
@@ -32,7 +25,7 @@ export class SignUp extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(`The values are ${this.state.firstName}, ${this.state.lastName}, ${this.state.email} , ${this.state.password}`)
+    console.log(`The values are ${this.state.firstName}, ${this.state.lastName}, ${this.state.email}, ${this.state.password}`)
     this.setState({
       firstName: '',
       lastName: '',
@@ -71,7 +64,6 @@ export class SignUp extends Component {
 
   firstName = () => {
     return(
-      <Grid item xs={12} sm={6}>
         <TextField
           variant="outlined"
           required
@@ -85,13 +77,11 @@ export class SignUp extends Component {
             this.setState({firstName: e.target.value})
           }}
         />
-      </Grid>
     );
   };
 
   lastName = () => {
     return(
-      <Grid item xs={12} sm={6}>
         <TextField
           variant="outlined"
           required
@@ -105,13 +95,11 @@ export class SignUp extends Component {
             this.setState({ lastName: e.target.value })
           }}
         />
-      </Grid>
     );
   };
 
   email = () => {
     return(
-      <Grid item xs={12}>
         <TextField
           variant="outlined"
           required
@@ -127,13 +115,11 @@ export class SignUp extends Component {
             this.setState({ validEmail: e.target.validity.valid });
           }}
         />
-      </Grid>
     );
   };
 
   password = () => {
     return(
-      <Grid item xs={12}>
         <TextField
           variant="outlined"
           required
@@ -148,76 +134,78 @@ export class SignUp extends Component {
             this.setState({ password: e.target.value })
           }}
         />
-      </Grid>
     );
   };
 
-  copyright = () => {
-    return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
-          Meal Planner
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  };
+  // copyright = () => {
+  //   return (
+  //     <h6 color="textSecondary" align="center">
+  //       {'Copyright © '}
+  //       <Link color="inherit" href="https://material-ui.com/">
+  //         Meal Planner
+  //       </Link>{' '}
+  //       {new Date().getFullYear()}
+  //       {'.'}
+  //     </h6>
+  //   );
+  // };
 
   render() {
-    const classes = useStyles;
-
     let { errorText, validEmail } = this.state;
 
     return (
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
+      <Container className="signup_box">
+        <div>
           <center>
-            <Avatar className={classes.avatar} >
-              <FastfoodSharpIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
+            <GiMeal size={50}/>
+            <h3>
               Sign up
-            </Typography>
+            </h3>
           </center>
-
-          <form className={classes.form} onSubmit={this.onSubmit}>
-            <Grid container spacing={2}>
-              {this.firstName("firstName", "First Name")}
-              {this.lastName("lastName", "Last Name")}
-              {this.email()}
-              {this.password()}
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              onClick={() => {
-                  if (validEmail) {
-                    this.signup()
-                  }
-                }
-              }
-            >
-              Sign Up
-            </Button>
-            <Grid container justify="flex-end">
-              <Grid item>
+          <span>&nbsp;</span>
+          <form  onSubmit={this.onSubmit}>
+            <Container>
+              <Row>
+                <Col>{this.firstName("firstName", "First Name")}</Col>
+                <Col>{this.lastName("lastName", "Last Name")}</Col>
+              </Row>
+              <span>&nbsp;</span>
+              <Row>
+                <Col>{this.email()}</Col>
+              </Row>
+              <span>&nbsp;</span>
+              <Row>
+                <Col>{this.password()}</Col>
+              </Row>
+              <span>&nbsp;</span>
+              <Row>
+              <center>
+                  <Col>
+                    <Button
+                      variant="primary"
+                      type="submit"
+                      className= "signup_button"
+                      onClick={() => {
+                          if (validEmail) {
+                            this.signup()
+                          }
+                        }
+                      }
+                    >
+                      Sign Up
+                    </Button>
+                  </Col>
+              </center>
+              </Row>
+              <span>&nbsp;</span>
+            </Container>
+            <Container justify="flex-end">
                 <Link href="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
-              </Grid>
-            </Grid>
+            </Container>
           </form>
         </div>
-        <Box mt={5}>
-          {this.copyright()}
-        </Box>
-        <br/>
         {errorText}
       </Container>
     );

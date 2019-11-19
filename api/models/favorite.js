@@ -6,11 +6,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Favorite.associate = function (models) {
     Favorite.belongsTo(models.User, {
-      foreignKey: 'userId'
+      foreignKey: 'userId',
     });
     Favorite.belongsTo(models.Meal, {
       foreignKey: 'mealId',
-      onDelete: 'CASCADE'
+      onDelete: 'CASCADE',
     });
   };
   return Favorite;

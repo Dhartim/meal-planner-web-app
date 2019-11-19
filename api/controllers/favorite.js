@@ -1,8 +1,8 @@
+const Sequelize = require('sequelize');
 const { Favorite, Meal, Nutrition } = require('../models');
 const getUserId = require('../middleware/getUserId');
 
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
+const { Op } = Sequelize;
 
 function list(req, res) {
   const userid = getUserId(req);
@@ -12,12 +12,12 @@ function list(req, res) {
     },
   })
     .then((favorites) => {
-      let favoriteMealIds = [];
+      const favoriteMealIds = [];
       // push the favorites mealId into the array
-      for(let i = 0; i < favorites.length; i++) {
+      for (let i = 0; i < favorites.length; i++) {
         favoriteMealIds.push(favorites[i].mealId);
       }
-      console.log("favoriteMealIds: %s", favoriteMealIds);
+      console.log('favoriteMealIds: %s', favoriteMealIds);
       // Use the array of mealIds to find all those meals
       return Meal
         .findAll({
@@ -28,7 +28,7 @@ function list(req, res) {
             model: Nutrition,
           }],
         })
-        .then(meals => {
+        .then((meals) => {
           // logging purposes
           // for(let j = 0; j < meals.length; j++) {
           //   console.log("meals[%d]: %s", j, meals[j].id);
@@ -36,7 +36,7 @@ function list(req, res) {
           // return the meals instead of favorite objects as the favorites table is mainly to keep track of
           // the primaryKey associations
           res.status(200).send(meals);
-        })
+        });
     })
     .catch((error) => res.status(400).send(error));
 }
@@ -47,26 +47,26 @@ function isFavorite(req, res) {
   return Favorite
     .findOne({
       where: {
-        userId: userId,
+        userId,
         mealId: req.params.mealId,
-      }
+      },
     })
-    .then(favorite => {
+    .then((favorite) => {
       // If found a favorite, tell client that this meal is a favorite
-      if(favorite !== null) {
-        console.log("userId=%d, mealId=%d", favorite.userId, favorite.mealId);
+      if (favorite !== null) {
+        console.log('userId=%d, mealId=%d', favorite.userId, favorite.mealId);
         res.status(200).send({
-          isFavorite: true
+          isFavorite: true,
         });
       } else {
         res.status(200).send({
-          isFavorite: false
+          isFavorite: false,
         });
       }
     })
-    .catch(error => {
-      console.log("error=%s", error);
-      res.status(400).send(error)
+    .catch((error) => {
+      console.log('error=%s', error);
+      res.status(400).send(error);
     });
 }
 
@@ -81,7 +81,7 @@ function add(req, res) {
     .catch((error) => res.status(400).send(error));
 }
 
-/*function destroy(req, res) {
+/* function destroy(req, res) {
   return Favorite
     .findByPk(req.params.id)
     .then((favorite) => {
@@ -94,7 +94,7 @@ function add(req, res) {
         .then(() => res.status(204).send())
         .catch((error) => res.status(400).send(error));
     });
-}*/
+} */
 
 function destroy(req, res) {
   const userid = getUserId(req);
@@ -102,19 +102,19 @@ function destroy(req, res) {
   return Favorite.findOne({
     where: {
       userId: userid,
-      mealId: req.body.mealId
+      mealId: req.body.mealId,
     },
   })
-  .then((favorite) => {
-    if (!favorite) {
-      return res.status(400).send({
-        message: 'Could not find favorite to delete',
-      });
-    }
-    return favorite.destroy()
-      .then(() => res.status(204).send())
-      .catch((error) => res.status(400).send(error));
-  });
+    .then((favorite) => {
+      if (!favorite) {
+        return res.status(400).send({
+          message: 'Could not find favorite to delete',
+        });
+      }
+      return favorite.destroy()
+        .then(() => res.status(204).send())
+        .catch((error) => res.status(400).send(error));
+    });
 }
 
 module.exports = {

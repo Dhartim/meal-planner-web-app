@@ -5,6 +5,7 @@ import CuisineCards from '../cuisineCards'
 import Spinner from '../subcomponents/spinner'
 
 import {UserContext} from "../../context/usercontext";
+import Recommendations from "../recommendations";
 
 export class Home extends Component {
   static contextType = UserContext;
@@ -60,6 +61,10 @@ export class Home extends Component {
 
     return(
       <div>
+        <div>
+          <h2>Recommendations</h2>
+          <Recommendations />
+        </div>
         {
           !isLoading ? cuisineList : <Spinner />
         }
