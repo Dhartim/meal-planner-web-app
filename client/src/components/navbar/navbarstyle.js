@@ -79,6 +79,10 @@ export const useStyles = makeStyles(theme => ({
     greyHeart: {
       color: "grey"
     },
+    navImage: {
+        height: '10px',
+        width: '10px'
+    },
   })
 );
 

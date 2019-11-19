@@ -5,7 +5,7 @@ import './landingPage.css';
 
 const landingPage = () => {
   return (
-    <div>
+    <div className={'landing-page-container'}>
       <div className="landing-page">
         <div className="landing-page__container">
           <div className="landing-page__meal-box">
@@ -28,7 +28,9 @@ const landingPage = () => {
         </div>
       </div>
       <div className="landing-page__contact-us">
-        <Email/>
+        <div className={'email-container'}>
+          <Email/>
+        </div>
       </div>
     </div>
   );

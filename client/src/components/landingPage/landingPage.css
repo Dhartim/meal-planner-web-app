@@ -49,7 +49,24 @@
   text-decoration: none;
 }
 
+.email-container {
+  background-color: white;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  /*background-color: #262833 !important;*/
+  /*color: #fff;*/
+  border-radius: 5px !important;
+}
 
+.MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth {
+  background-color: white;
+}
+
+.MuiButtonBase-root {
+  margin-top: 5px;
+}
 
 .landing-page__contact-us {
   display: flex;
