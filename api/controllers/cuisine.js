@@ -13,9 +13,9 @@ function listByType(req, res) {
     ),
     include: [{
       model: Meal,
-          include: [{
-            model: Nutrition,
-          }],
+      include: [{
+        model: Nutrition,
+      }],
     }],
   })
     .then((meals) => res.status(200).send(meals))
@@ -26,9 +26,9 @@ function list(req, res) {
   return Cuisine.findAll({
     include: [{
       model: Meal,
-          include: [{
-            model: Nutrition,
-          }],
+      include: [{
+        model: Nutrition,
+      }],
     }],
   })
     .then((meals) => res.status(200).send(meals))

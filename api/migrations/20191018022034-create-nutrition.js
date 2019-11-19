@@ -12,13 +12,13 @@ module.exports = {
       unique: true,
     },
     calories: {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER,
     },
     servingSize: {
       type: Sequelize.STRING,
     },
     totalFat: {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER,
     },
     saturatedFat: {
       type: Sequelize.STRING,
@@ -30,7 +30,7 @@ module.exports = {
       type: Sequelize.STRING,
     },
     totalCarbohydrates: {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER,
     },
     fiber: {
       type: Sequelize.STRING,
@@ -39,7 +39,7 @@ module.exports = {
       type: Sequelize.STRING,
     },
     protein: {
-      type: Sequelize.STRING,
+      type: Sequelize.INTEGER,
     },
     vitaminsAndMinerals: {
       type: Sequelize.STRING,
