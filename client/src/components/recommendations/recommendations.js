@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import MealCard from "../mealCard";
+//import Slider from "react-slick";
 
-//change api call for recommendation 
 export class Recommendations extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +17,7 @@ export class Recommendations extends Component {
     const jwtToken = localStorage.getItem('jwtToken');
 
     axios
-      .get('/favorites', {
+      .get('/recommendations', {
         headers: {"x-access-token" : `${jwtToken}`}
       })
       .then(res => {
@@ -27,18 +27,23 @@ export class Recommendations extends Component {
         })
       })
       .catch(error => error)
+      console.log("RECOMMENDATION = ", this.state.recommendations);
   }
 
   render() {
     const { loggedIn, recommendations } = this.state;
     let recommendationList = [];
-
-    // TODO: update frontend api and backend api to get if a meal is liked rather than workarounds
+    var settings = {
+      dots: true,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 4,
+      slidesToScroll: 4
+  };
     if(loggedIn) {
-      // for each favorited meal, render a new meal card
       for(let i = 0; i < recommendations.length; i++) {
         let recommend = recommendations[i];
-        recommendationList.push(
+        recommendationList.push( 
           <
             MealCard
             key={recommend.id}
@@ -53,7 +58,9 @@ export class Recommendations extends Component {
     return(
       <div>
         <div className="favorites__row">
-          {recommendationList}
+          {/* <Slider {...settings}> */}
+            {recommendationList}
+          {/* </Slider> */}
         </div>
       </div>
     );
