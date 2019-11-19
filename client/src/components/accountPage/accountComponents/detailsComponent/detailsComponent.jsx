@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import './detailsComponent.scss'
 
 function decamelize(str, separator){
-  console.log(str)
 	separator = typeof separator === 'undefined' ? '_' : separator;
 	let str2 = str
     .replace(/([a-z\d])([A-Z])/g, '$1' + separator + '$2')

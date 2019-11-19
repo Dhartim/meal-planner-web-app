@@ -38,7 +38,6 @@ function addMealsToRecommendation(req, res) {
     }
   }).then( function(preference) {
     let pref = preference[0].dataValues
-    console.log(pref)
     if (pref){
       const { calories, carbs, diet, fat, mealCount, priceLimit, protein } = pref
       const dietPerMeal =  calories / mealCount;

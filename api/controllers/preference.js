@@ -14,8 +14,7 @@ function getPreferences(req, res) {
 }
 
 function createPreferences(req, res) {
-  
-  console.log("CREATE PREFERENCES");
+  console.log("req--------: ", req.body);
   let userId = getUserId(req);
   let values = {
     userId: userId,
@@ -29,17 +28,23 @@ function createPreferences(req, res) {
     mealCount: req.body.mealCount,
     priceLimit: req.body.priceLimit
   };
-
-  console.log(values);
-
+  console.log("--------------userid: ", userId)
   return Preference.findOrCreate({
     where: {userId: userId},
     defaults: values
   })
-    .then(result => {
+    .then(([preference, created]) => {
+      console.log("prefs: ", preference, " created: ", created)
+      if (!created) {
+        console.log("===================================")
+        return updatePreferences(req, res)
+      } else {
+        message: "+++++++++++++++++++++++++++++++New preferences created"
         return res.stat(200).send({
-            message: "New preferences created"
+          message: 'created'
         })
+      }
+        
     })
     .catch(err => {
         return res.status(404).send({
@@ -49,6 +54,7 @@ function createPreferences(req, res) {
 }
 
 function updatePreferences(req, res) {
+  console.log("UUUUPPPPDTATIMG!!!!!!!!!!", req.body)
   const updatedValues = {};
 
   let params = [

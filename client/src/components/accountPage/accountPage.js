@@ -30,7 +30,6 @@ export default class AccountPage extends Component {
     })
     .then((response) => {
       if (response.status === 200) {
-        console.log(response.status);
         let account = response.data.account;
         let customer = account.Customer;
         let preferences = account.Preference;
