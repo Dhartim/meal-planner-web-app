@@ -1,4 +1,3 @@
-'use strict';
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
@@ -12,30 +11,32 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
-    const recipes = require('../public/Recipes.json');
-    
-    let ingredientMap = {};
+    const recipes = require('../public/epicurious_recipes.json');
+
+    const ingredientMap = {};
     recipes.forEach((recipe) => {
-      recipe.ingredients.forEach(ingredient => {
-        if ( ingredientMap[ingredient.name] === undefined ) {
-          ingredientMap[ingredient.name] = ingredient
-          ingredientMap[ingredient.name]["createdAt"] = new Date()
-          ingredientMap[ingredient.name]["updatedAt"] = new Date()
+      recipe.ingredients.forEach((ingredient) => {
+        if (ingredientMap[ingredient] === undefined) {
+          ingredientMap[ingredient] = { name: ingredient };
+          // ingredientMap["price"] = faker.commerce.price(),
+          // ingredientMap["quantity"] = "100 g"
+          ingredientMap[ingredient].createdAt = new Date();
+          ingredientMap[ingredient].updatedAt = new Date();
         }
-      })
+      });
     });
-    
-    let ingredientsArray = [...Object.values(ingredientMap) ]
-    return queryInterface.bulkInsert('Ingredients', ingredientsArray)
+
+    const ingredientsArray = [...Object.values(ingredientMap)];
+    return queryInterface.bulkInsert('Ingredients', ingredientsArray);
   },
 
-  down: (queryInterface, Sequelize) => {
+  down: (queryInterface, Sequelize) =>
     /*
       Add reverting commands here.
       Return a promise to correctly handle asynchronicity.
 
       Example:
       */
-      return queryInterface.bulkDelete('Ingredients', null, {});
-  }
+    queryInterface.bulkDelete('Ingredients', null, {}),
+
 };
