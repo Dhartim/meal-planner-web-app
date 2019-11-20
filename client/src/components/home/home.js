@@ -31,7 +31,6 @@ const mealCardSliderSettings = {
   slidesToScroll: 4
 };
 
-
 export class Home extends Component {
   static contextType = UserContext;
 
