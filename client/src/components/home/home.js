@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import axios from 'axios';
-
-import CuisineCards from '../cuisineCards'
 import Spinner from '../subcomponents/spinner'
 
 import {UserContext} from "../../context/usercontext";
@@ -9,6 +7,8 @@ import Recommendations from "../recommendations";
 import {Button, ButtonGroup} from "@material-ui/core";
 import MealCard from "../mealCard";
 import Slider from "react-slick";
+
+import './sliderCards.css';
 
 const sortingOrderStates = {
   CUISINE_TYPE: 'cuisineType',
@@ -20,12 +20,13 @@ const sortingOrderStates = {
   CALORIES: 'calories',
 };
 
-const dietType = {
-  VEGETARIAN: 'vegetarian',
-  VEGAN: 'vegan',
-  KETO: 'ketogenic',
-
-};
+// const dietType = {
+//   VEGETARIAN: 'Vegetarian',
+//   VEGAN: 'Vegan',
+//   KETO: 'Keto',
+//   PALEA: 'Paleo',
+//   LOW_FAT: 'Low-Fat',
+// };
 
 const mealCardSliderSettings = {
   dots: true,
@@ -43,7 +44,7 @@ export class Home extends Component {
     super(props);
 
     this.state = {
-      cuisines: [],
+      meals: [],
       sortOrderState: sortingOrderStates.CUISINE_TYPE,
       loader: true,
       loader2: true,
@@ -51,7 +52,25 @@ export class Home extends Component {
   }
 
   componentDidMount(){
+    const token = localStorage.getItem('jwtToken');
     const orderOption = localStorage.getItem('sortOrder');
+
+    axios
+      .get('/meals',{
+        headers: {
+          'x-access-token': token
+        }
+      })
+      .then(res => {
+        this.setState({
+          meals: res.data,
+          loader: false
+        })
+      })
+      .catch(error => {
+        console.log("Error = %s", error);
+      });
+
     console.log('orderOption=%s', orderOption);
 
     if(orderOption !== undefined && orderOption !== null) {
@@ -59,88 +78,153 @@ export class Home extends Component {
         sortOrderState: orderOption,
       })
     }
-
-    axios
-      .get('/cuisines')
-      .then(res => {
-        this.setState({
-          cuisines: res.data,
-          loader: false
-        })
-      })
-      .catch(error => {
-        console.log("Error = %s", error);
-      })
+    // axios
+    //   .get('/cuisines')
+    //   .then(res => {
+    //     this.setState({
+    //       cuisines: res.data,
+    //       loader: false
+    //     })
+    //   })
+    //   .catch(error => {
+    //     console.log("Error = %s", error);
+    //   })
   }
 
   render() {
-    const { order, cuisines } = this.state;
-    console.log('order=%s', order);
+    const { loader, meals, sortOrderState } = this.state;
+    console.log('sortOrderState=%s', sortOrderState);
 
     let isLoading = true;
 
-    var meals;
+    var mealList;
 
     const userContext = this.context;
     console.log("HOME - context={userId: %s, authorized: %s}", userContext.userId, userContext.authorized);
 
-    if(!this.state.loader)
-    {
-      switch(order) {
+    if(!loader) {
+      switch(sortOrderState) {
+        default:
         case sortingOrderStates.CUISINE_TYPE:
-          let cuisineList = [];
+          let cuisines = [];
+          let cuisineList = {};
 
-          cuisineList
-            = cuisines.map(cuisine =>
-              cuisine.Meals.length > 0 &&
-              <
-                CuisineCards
-                key={cuisine.id}
-                meals={cuisine.Meals}
-                cuisineType={cuisine.cuisineType}
-              />
-            );
+          for(let i = 0; i < meals.length; i++) {
+            let meal = meals[i];
+            let cuisineType = meal.Cuisine.cuisineType;
+            if(cuisineList[cuisineType] === undefined || cuisineList[cuisineType] === null) {
+              cuisineList[cuisineType] = [];
+            }
+            cuisineList[cuisineType].push(meal);
 
-          meals = cuisineList;
+            // cuisineList[cuisineType].forEach(list => {
+            //   console.log(list);
+            // });
+            // console.log(cuisineList);
+          }
+
+          for(var cuisineType in cuisineList) {
+            if (cuisineList.hasOwnProperty(cuisineType)) {
+              let listByType = cuisineList[cuisineType];
+              console.log(cuisineType);
+              console.log(listByType);
+              cuisines.push(
+                <div className="meal-list">
+                  <h2>{cuisineType}</h2>
+                  <Slider {...mealCardSliderSettings}>
+                    {
+                      listByType.map(meal => {
+                        let mealCard =
+                          <
+                            MealCard
+                            key={meal.id}
+                            {...meal}
+                            cuisineType={meal.cuisineType}
+                          />;
+                        // console.log(mealCard);
+                        return mealCard;
+                      })
+                    }
+                  </Slider>
+                </div>
+              );
+            }
+          }
+
+          console.log("cuisines");
+          console.log(cuisines);
+
+          mealList = cuisines;
           break;
         case sortingOrderStates.DIET_TYPE:
-          let mealsByDietType = [];
+          let dietTypeCardComponents = [];
+          let mealsByDietType = {};
 
-
-          {/*<h2>{ props.cuisineType }</h2>*/}
-
-          for(let i = 0; i < cuisines.length; i++) {
-            let meal = cuisines[i];
-            // console.log("favorite[%d]={dishName: %s\nnutritionInfo: %s\nimgUrl: %s\nprepTime: %s\ncookTime: %s\nrecipe: %s\ncuisineId: %s\ncuisineType: %s\n}", i,
-            //   favorite.dishName,
-            //   favorite.nutritionInfo,
-            //   favorite.imgUrl,
-            //   favorite.prepTime,
-            //   favorite.cookTime,
-            //   favorite.recipe,
-            //   favorite.cuisineId);
-
-            {/*<*/}
-            {/*  MealCard*/}
-            {/*  key={meal.id}*/}
-            {/*  {...meal}*/}
-            {/*  cuisineType = {meal.cuisineType}*/}
-            {/*/>*/}
-
-            // mealsByDietType.push(
-            //   <Slider {...mealCardSliderSettings}>
-            //     {
-            //       props.meals.map(meal =>
-            //         <
-            //           MealCard
-            //           key={meal.id}
-            //           {...meal }
-            //           cuisineType = {meal.cuisineType}
-            //         />
-            //       )}
-            //   </Slider>
-            // )
+          for(let i = 0; i < meals.length; i++) {
+            let meal = meals[i];
+            let dietType = meal.dietType;
+            if(mealsByDietType[dietType] === undefined || mealsByDietType[dietType] === null) {
+              mealsByDietType[dietType] = [];
+            }
+            mealsByDietType[dietType].push(meal);
           }
+
+          for(var dietType in mealsByDietType) {
+            if(mealsByDietType.hasOwnProperty(dietType)) {
+              let listByType = mealsByDietType[dietType];
+              console.log(dietType);
+              console.log(listByType);
+              dietTypeCardComponents.push(
+                <div className="meal-list">
+                  <h2>{dietType}</h2>
+                  <Slider {...mealCardSliderSettings}>
+                    {
+                      listByType.map(meal => {
+                        // console.log(mealCard);
+                        return (
+                          <
+                            MealCard
+                            key={meal.id}
+                            {...meal}
+                            cuisineType={meal.cuisineType}
+                          />
+                        );
+                      })
+                    }
+                  </Slider>
+                </div>
+              );
+            }
+          }
+
+          // for(let i = 0; i < meals.length; i++) {
+          //   let meal = meals[i];
+          //   console.log("meal.dietType=%s", meal.dietType);
+          //   mealsByDietType[meal.dietType].push(meal);
+          //   // console.log("favorite[%d]={dishName: %s\nnutritionInfo: %s\nimgUrl: %s\nprepTime: %s\ncookTime: %s\nrecipe: %s\ncuisineId: %s\ncuisineType: %s\n}", i,
+          //   //   favorite.dishName,
+          //   //   favorite.nutritionInfo,
+          //   //   favorite.imgUrl,
+          //   //   favorite.prepTime,
+          //   //   favorite.cookTime,
+          //   //   favorite.recipe,
+          //   //   favorite.cuisineId);
+          //
+          //   // mealsByDietType.push(
+          //   //   <Slider {...mealCardSliderSettings}>
+          //   //     {
+          //   //       props.meals.map(meal =>
+          //   //         <
+          //   //           MealCard
+          //   //           key={meal.id}
+          //   //           {...meal }
+          //   //           cuisineType = {meal.cuisineType}
+          //   //         />
+          //   //       )}
+          //   //   </Slider>
+          //   // )
+          // }
+          console.log(dietTypeCardComponents);
           // mealsByDietType
           //   = cuisines.map(cuisine =>
           //   cuisine.Meals.length > 0 &&
@@ -152,16 +236,16 @@ export class Home extends Component {
           //   />
           // );
 
-          meals = 'DIET_TYPE_PLACEHOLDER';
+          mealList = dietTypeCardComponents;
           break;
         case sortingOrderStates.CALORIES:
-          meals = 'CALORIES_PLACEHOLDER';
+          mealList = 'CALORIES_PLACEHOLDER';
           break;
         case sortingOrderStates.PRICE.ASCENDING:
-          meals = 'PRICE_ASCENDING_PLACEHOLDER';
+          mealList = 'PRICE_ASCENDING_PLACEHOLDER';
           break;
         case sortingOrderStates.PRICE.DESCENDING:
-          meals = 'PRICE_DESCENDING_PLACEHOLDER';
+          mealList = 'PRICE_DESCENDING_PLACEHOLDER';
           break;
       }
       isLoading = false;
@@ -185,7 +269,7 @@ export class Home extends Component {
                 localStorage.setItem('sortOrder', sortingOrderStates.CUISINE_TYPE);
                 this.setState({
                   sortOrderState: sortingOrderStates.CUISINE_TYPE
-                })
+                });
               }}
               color="inherit"
             >Cuisine Type</Button>
@@ -195,7 +279,7 @@ export class Home extends Component {
                 localStorage.setItem('sortOrder', sortingOrderStates.DIET_TYPE);
                 this.setState({
                   sortOrderState: sortingOrderStates.DIET_TYPE
-                })
+                });
               }}
               color="inherit"
             >Diet Type</Button>
@@ -205,7 +289,7 @@ export class Home extends Component {
                 localStorage.setItem('sortOrder', sortingOrderStates.CALORIES);
                 this.setState({
                   sortOrderState: sortingOrderStates.CALORIES
-                })
+                });
               }}
               color="inherit"
             >Calories</Button>
@@ -215,7 +299,7 @@ export class Home extends Component {
                 localStorage.setItem('sortOrder', sortingOrderStates.PRICE.ASCENDING);
                 this.setState({
                   sortOrderState: sortingOrderStates.PRICE.ASCENDING
-                })
+                });
               }}
               color="inherit"
             >Price Ascending</Button>
@@ -225,15 +309,17 @@ export class Home extends Component {
                 localStorage.setItem('sortOrder', sortingOrderStates.PRICE.DESCENDING);
                 this.setState({
                   sortOrderState: sortingOrderStates.PRICE.DESCENDING
-                })
+                });
               }}
               color="inherit"
             >Price Descending</Button>
           </ButtonGroup>
         </div>
-        {
-          !isLoading ? meals : <Spinner />
-        }
+        <div>
+          {
+            !isLoading ? mealList : <Spinner />
+          }
+        </div>
       </div>
     );
   }
