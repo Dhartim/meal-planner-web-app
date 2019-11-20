@@ -67,11 +67,9 @@ export class Home extends Component {
 
     console.log('orderOption=%s', orderOption);
 
-    if(orderOption !== undefined && orderOption !== null) {
-      this.setState({
-        sortOrderState: orderOption,
-      })
-    }
+    this.setState({
+      sortOrderState: orderOption !== undefined && orderOption !== null ? orderOption : sortingOrderStates.CUISINE_TYPE,
+    })
   }
 
   initializeMealsByType = (meals, sortOrder, ...args) => {
@@ -110,20 +108,19 @@ export class Home extends Component {
         console.log(listByType);
         // push a slider containing the meals of this cuisine type onto the list
         list.push(
-          <div className="meal-list">
+          <div key={keyName} className="meal-list">
             <h2>{keyName}</h2>
             <Slider {...mealCardSliderSettings}>
               {
                 listByType.map(meal => {
-                  let mealCard =
+                  return (
                     <
                       MealCard
                       key={meal.id}
                       {...meal}
                       cuisineType={meal.cuisineType}
-                    />;
-                  // console.log(mealCard);
-                  return mealCard;
+                    />
+                  );
                 })
               }
             </Slider>
