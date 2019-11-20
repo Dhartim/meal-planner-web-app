@@ -7,6 +7,8 @@ import Spinner from '../subcomponents/spinner'
 import {UserContext} from "../../context/usercontext";
 import Recommendations from "../recommendations";
 import {Button, ButtonGroup} from "@material-ui/core";
+import MealCard from "../mealCard";
+import Slider from "react-slick";
 
 const sortingOrderStates = {
   CUISINE_TYPE: 'cuisineType',
@@ -17,6 +19,22 @@ const sortingOrderStates = {
   },
   CALORIES: 'calories',
 };
+
+const dietType = {
+  VEGETARIAN: 'vegetarian',
+  VEGAN: 'vegan',
+  KETO: 'ketogenic',
+
+};
+
+const mealCardSliderSettings = {
+  dots: true,
+  infinite: false,
+  speed: 500,
+  slidesToShow: 4,
+  slidesToScroll: 4
+};
+
 
 export class Home extends Component {
   static contextType = UserContext;
@@ -56,11 +74,10 @@ export class Home extends Component {
   }
 
   render() {
-    const { order } = this.state;
+    const { order, cuisines } = this.state;
     console.log('order=%s', order);
 
     let isLoading = true;
-    let cuisineList = [];
 
     var meals;
 
@@ -71,8 +88,10 @@ export class Home extends Component {
     {
       switch(order) {
         case sortingOrderStates.CUISINE_TYPE:
+          let cuisineList = [];
+
           cuisineList
-            = this.state.cuisines.map(cuisine =>
+            = cuisines.map(cuisine =>
               cuisine.Meals.length > 0 &&
               <
                 CuisineCards
@@ -81,9 +100,58 @@ export class Home extends Component {
                 cuisineType={cuisine.cuisineType}
               />
             );
+
           meals = cuisineList;
           break;
         case sortingOrderStates.DIET_TYPE:
+          let mealsByDietType = [];
+
+
+          {/*<h2>{ props.cuisineType }</h2>*/}
+
+          for(let i = 0; i < cuisines.length; i++) {
+            let meal = cuisines[i];
+            // console.log("favorite[%d]={dishName: %s\nnutritionInfo: %s\nimgUrl: %s\nprepTime: %s\ncookTime: %s\nrecipe: %s\ncuisineId: %s\ncuisineType: %s\n}", i,
+            //   favorite.dishName,
+            //   favorite.nutritionInfo,
+            //   favorite.imgUrl,
+            //   favorite.prepTime,
+            //   favorite.cookTime,
+            //   favorite.recipe,
+            //   favorite.cuisineId);
+
+            {/*<*/}
+            {/*  MealCard*/}
+            {/*  key={meal.id}*/}
+            {/*  {...meal}*/}
+            {/*  cuisineType = {meal.cuisineType}*/}
+            {/*/>*/}
+
+            // mealsByDietType.push(
+            //   <Slider {...mealCardSliderSettings}>
+            //     {
+            //       props.meals.map(meal =>
+            //         <
+            //           MealCard
+            //           key={meal.id}
+            //           {...meal }
+            //           cuisineType = {meal.cuisineType}
+            //         />
+            //       )}
+            //   </Slider>
+            // )
+          }
+          // mealsByDietType
+          //   = cuisines.map(cuisine =>
+          //   cuisine.Meals.length > 0 &&
+          //   <
+          //     CuisineCards
+          //     key={cuisine.id}
+          //     meals={cuisine.Meals}
+          //     cuisineType={cuisine.cuisineType}
+          //   />
+          // );
+
           meals = 'DIET_TYPE_PLACEHOLDER';
           break;
         case sortingOrderStates.CALORIES:
