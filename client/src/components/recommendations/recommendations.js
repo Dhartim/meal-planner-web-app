@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import MealCard from "../mealCard";
-//import Slider from "react-slick";
-
+import Slider from "react-slick";
+import './recommendations.css'
 export class Recommendations extends Component {
   constructor(props) {
     super(props);
@@ -43,25 +43,23 @@ export class Recommendations extends Component {
     if(loggedIn) {
       for(let i = 0; i < recommendations.length; i++) {
         let recommend = recommendations[i];
+        console.log("Recommendation =", recommend);
         recommendationList.push( 
-          <
-            MealCard
-            key={recommend.id}
-            {...recommend}
-            cuisineType = {recommend.cuisineType}
+            <
+              MealCard
+              key={recommend.id}
+              {...recommend}
+              cuisineType = {recommend.cuisineType}
           />
         )
       }
     } else {
-
     }
     return(
-      <div>
-        <div className="favorites__row">
-          {/* <Slider {...settings}> */}
+      <div className="recommend__row">
+          <Slider {...settings}>
             {recommendationList}
-          {/* </Slider> */}
-        </div>
+          </Slider>
       </div>
     );
   }
