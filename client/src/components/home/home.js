@@ -6,6 +6,9 @@ import {UserContext} from "../../context/usercontext";
 import Recommendations from "../recommendations";
 import {Button, ButtonGroup} from "@material-ui/core";
 import MealCard from "../mealCard";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
 import './sliderCards.css';
@@ -19,14 +22,6 @@ const sortingOrderStates = {
   },
   CALORIES: 'calories',
 };
-
-// const dietType = {
-//   VEGETARIAN: 'Vegetarian',
-//   VEGAN: 'Vegan',
-//   KETO: 'Keto',
-//   PALEA: 'Paleo',
-//   LOW_FAT: 'Low-Fat',
-// };
 
 const mealCardSliderSettings = {
   dots: true,
@@ -78,17 +73,6 @@ export class Home extends Component {
         sortOrderState: orderOption,
       })
     }
-    // axios
-    //   .get('/cuisines')
-    //   .then(res => {
-    //     this.setState({
-    //       cuisines: res.data,
-    //       loader: false
-    //     })
-    //   })
-    //   .catch(error => {
-    //     console.log("Error = %s", error);
-    //   })
   }
 
   render() {
@@ -151,9 +135,6 @@ export class Home extends Component {
             }
           }
 
-          console.log("cuisines");
-          console.log(cuisines);
-
           mealList = cuisines;
           break;
         case sortingOrderStates.DIET_TYPE:
@@ -196,45 +177,6 @@ export class Home extends Component {
               );
             }
           }
-
-          // for(let i = 0; i < meals.length; i++) {
-          //   let meal = meals[i];
-          //   console.log("meal.dietType=%s", meal.dietType);
-          //   mealsByDietType[meal.dietType].push(meal);
-          //   // console.log("favorite[%d]={dishName: %s\nnutritionInfo: %s\nimgUrl: %s\nprepTime: %s\ncookTime: %s\nrecipe: %s\ncuisineId: %s\ncuisineType: %s\n}", i,
-          //   //   favorite.dishName,
-          //   //   favorite.nutritionInfo,
-          //   //   favorite.imgUrl,
-          //   //   favorite.prepTime,
-          //   //   favorite.cookTime,
-          //   //   favorite.recipe,
-          //   //   favorite.cuisineId);
-          //
-          //   // mealsByDietType.push(
-          //   //   <Slider {...mealCardSliderSettings}>
-          //   //     {
-          //   //       props.meals.map(meal =>
-          //   //         <
-          //   //           MealCard
-          //   //           key={meal.id}
-          //   //           {...meal }
-          //   //           cuisineType = {meal.cuisineType}
-          //   //         />
-          //   //       )}
-          //   //   </Slider>
-          //   // )
-          // }
-          console.log(dietTypeCardComponents);
-          // mealsByDietType
-          //   = cuisines.map(cuisine =>
-          //   cuisine.Meals.length > 0 &&
-          //   <
-          //     CuisineCards
-          //     key={cuisine.id}
-          //     meals={cuisine.Meals}
-          //     cuisineType={cuisine.cuisineType}
-          //   />
-          // );
 
           mealList = dietTypeCardComponents;
           break;
