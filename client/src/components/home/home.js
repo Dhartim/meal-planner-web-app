@@ -75,6 +75,59 @@ export class Home extends Component {
     }
   }
 
+  initializeMealsByType = (meals, ...typeName) => {
+    let mealsByType = {};
+    // loop through the list of meals
+    for(let i = 0; i < meals.length; i++) {
+      let meal = meals[i];
+      // Get the type by the typeName parameter(s)
+      let type = typeName.length === 1 ? meal[typeName[0]] : meal[typeName[0]][typeName[1]];
+      // if object does not have property with key of the type name, add it
+      if(!mealsByType.hasOwnProperty(type)) {
+        mealsByType[type] = [];
+      }
+      // push meal into the array for this  type
+      mealsByType[type].push(meal);
+    }
+
+    return mealsByType;
+  };
+
+  pushMealCardsToList = (objects) => {
+    let list = [];
+    // loop through the keys of the object
+    for(var keyName in objects) {
+      if (objects.hasOwnProperty(keyName)) {
+        let listByType = objects[keyName];
+        console.log(keyName);
+        console.log(listByType);
+        // push a slider containing the meals of this cuisine type onto the list
+        list.push(
+          <div className="meal-list">
+            <h2>{keyName}</h2>
+            <Slider {...mealCardSliderSettings}>
+              {
+                listByType.map(meal => {
+                  let mealCard =
+                    <
+                      MealCard
+                      key={meal.id}
+                      {...meal}
+                      cuisineType={meal.cuisineType}
+                    />;
+                  // console.log(mealCard);
+                  return mealCard;
+                })
+              }
+            </Slider>
+          </div>
+        );
+      }
+    }
+
+    return list;
+  };
+
   render() {
     const { loader, meals, sortOrderState } = this.state;
     console.log('sortOrderState=%s', sortOrderState);
@@ -90,93 +143,23 @@ export class Home extends Component {
       switch(sortOrderState) {
         default:
         case sortingOrderStates.CUISINE_TYPE:
-          let cuisines = [];
-          let cuisineList = {};
+          /*
+           * {
+           *    Keto: [{meal...}, ...],
+           *    Paleo: [{meal...}, ...],
+           *    Vegan: [{meal...}, ...],
+           *    Vegetarian: [{meal...}, ...],
+           *    Low-Fat: [{meal...}, ...],
+           * }
+           */
+          const cuisines = this.initializeMealsByType(meals, "Cuisine", "cuisineType");
+          const cuisineList = this.pushMealCardsToList(cuisines);
 
-          for(let i = 0; i < meals.length; i++) {
-            let meal = meals[i];
-            let cuisineType = meal.Cuisine.cuisineType;
-            if(cuisineList[cuisineType] === undefined || cuisineList[cuisineType] === null) {
-              cuisineList[cuisineType] = [];
-            }
-            cuisineList[cuisineType].push(meal);
-
-            // cuisineList[cuisineType].forEach(list => {
-            //   console.log(list);
-            // });
-            // console.log(cuisineList);
-          }
-
-          for(var cuisineType in cuisineList) {
-            if (cuisineList.hasOwnProperty(cuisineType)) {
-              let listByType = cuisineList[cuisineType];
-              console.log(cuisineType);
-              console.log(listByType);
-              cuisines.push(
-                <div className="meal-list">
-                  <h2>{cuisineType}</h2>
-                  <Slider {...mealCardSliderSettings}>
-                    {
-                      listByType.map(meal => {
-                        let mealCard =
-                          <
-                            MealCard
-                            key={meal.id}
-                            {...meal}
-                            cuisineType={meal.cuisineType}
-                          />;
-                        // console.log(mealCard);
-                        return mealCard;
-                      })
-                    }
-                  </Slider>
-                </div>
-              );
-            }
-          }
-
-          mealList = cuisines;
+          mealList = cuisineList;
           break;
         case sortingOrderStates.DIET_TYPE:
-          let dietTypeCardComponents = [];
-          let mealsByDietType = {};
-
-          for(let i = 0; i < meals.length; i++) {
-            let meal = meals[i];
-            let dietType = meal.dietType;
-            if(mealsByDietType[dietType] === undefined || mealsByDietType[dietType] === null) {
-              mealsByDietType[dietType] = [];
-            }
-            mealsByDietType[dietType].push(meal);
-          }
-
-          for(var dietType in mealsByDietType) {
-            if(mealsByDietType.hasOwnProperty(dietType)) {
-              let listByType = mealsByDietType[dietType];
-              console.log(dietType);
-              console.log(listByType);
-              dietTypeCardComponents.push(
-                <div className="meal-list">
-                  <h2>{dietType}</h2>
-                  <Slider {...mealCardSliderSettings}>
-                    {
-                      listByType.map(meal => {
-                        // console.log(mealCard);
-                        return (
-                          <
-                            MealCard
-                            key={meal.id}
-                            {...meal}
-                            cuisineType={meal.cuisineType}
-                          />
-                        );
-                      })
-                    }
-                  </Slider>
-                </div>
-              );
-            }
-          }
+          const mealsByDietType = this.initializeMealsByType(meals, 'dietType');
+          const  dietTypeCardComponents = this.pushMealCardsToList(mealsByDietType);
 
           mealList = dietTypeCardComponents;
           break;
