@@ -75,16 +75,24 @@ export class Home extends Component {
     }
   }
 
-  initializeMealsByType = (meals, ...typeName) => {
+  initializeMealsByType = (meals, sortOrder, ...args) => {
     let mealsByType = {};
     // loop through the list of meals
     for(let i = 0; i < meals.length; i++) {
       let meal = meals[i];
       // Get the type by the typeName parameter(s)
-      let type = typeName.length === 1 ? meal[typeName[0]] : meal[typeName[0]][typeName[1]];
+      let type = sortOrder === sortingOrderStates.CUISINE_TYPE ?  meal[args[0]][args[1]] : meal[args[0]];
       // if object does not have property with key of the type name, add it
-      if(!mealsByType.hasOwnProperty(type)) {
-        mealsByType[type] = [];
+      switch(sortOrder) {
+        // TODO - sorting by price, but eventually will need to filter out prices as well
+        // case sortingOrderStates.PRICE:
+        //   const maxPrice = typeArgs[1];
+        //   break;
+        default:
+          if(!mealsByType.hasOwnProperty(type)) {
+            mealsByType[type] = [];
+          }
+          break;
       }
       // push meal into the array for this  type
       mealsByType[type].push(meal);
@@ -152,14 +160,14 @@ export class Home extends Component {
            *    Low-Fat: [{meal...}, ...],
            * }
            */
-          const cuisines = this.initializeMealsByType(meals, "Cuisine", "cuisineType");
+          const cuisines = this.initializeMealsByType(meals, sortOrderState, "Cuisine", "cuisineType");
           const cuisineList = this.pushMealCardsToList(cuisines);
 
           mealList = cuisineList;
           break;
         case sortingOrderStates.DIET_TYPE:
-          const mealsByDietType = this.initializeMealsByType(meals, 'dietType');
-          const  dietTypeCardComponents = this.pushMealCardsToList(mealsByDietType);
+          const mealsByDietType = this.initializeMealsByType(meals, sortOrderState, 'dietType');
+          const dietTypeCardComponents = this.pushMealCardsToList(mealsByDietType);
 
           mealList = dietTypeCardComponents;
           break;
@@ -167,10 +175,16 @@ export class Home extends Component {
           mealList = 'CALORIES_PLACEHOLDER';
           break;
         case sortingOrderStates.PRICE.ASCENDING:
-          mealList = 'PRICE_ASCENDING_PLACEHOLDER';
+          const mealsByAscendingPrice = this.initializeMealsByType(meals, sortOrderState, "price");
+          const ascendingPriceCardComponents = this.pushMealCardsToList(mealsByAscendingPrice);
+
+          mealList = ascendingPriceCardComponents;
           break;
         case sortingOrderStates.PRICE.DESCENDING:
-          mealList = 'PRICE_DESCENDING_PLACEHOLDER';
+          const mealsByDescendingPrice = this.initializeMealsByType(meals, sortOrderState, "price");
+          const descendingPriceCardComponents = this.pushMealCardsToList(mealsByDescendingPrice);
+
+          mealList = descendingPriceCardComponents;
           break;
       }
       isLoading = false;
