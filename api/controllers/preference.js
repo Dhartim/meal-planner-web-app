@@ -2,7 +2,13 @@ const { Preference } = require('../models');
 const getUserId = require('../middleware/getUserId');
 
 function getPreferences(req, res) {
-    return Preference.findByPk(req.body.userId)
+    let userId;
+    if (!req.body.userId) {
+        userId = getUserId(req);
+    } else {
+        userId = req.body.userId;
+    }
+    return Preference.findByPk(userId)
         .then((preference) => {
             if (!preference) {
                 return res.status(404).send({
@@ -68,7 +74,12 @@ function updatePreferences(req, res) {
         'priceLimit'
     ];
 
-    let userId = req.body.userId;
+    let userId;
+    if (!req.body.userId) {
+        userId = getUserId(req);
+    } else {
+        userId = req.body.userId;
+    }
     let param;
     for (param of params) {
         let data = req.body[param];
