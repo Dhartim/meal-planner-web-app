@@ -13,15 +13,7 @@ import Slider from "react-slick";
 
 import './sliderCards.css';
 
-const sortingOrderStates = {
-  CUISINE_TYPE: 'cuisineType',
-  DIET_TYPE: 'dietType',
-  PRICE: {
-    ASCENDING: 'price.ascending',
-    DESCENDING: 'price.descending',
-  },
-  CALORIES: 'calories',
-};
+import { sortingOrderStates } from '../../routes/index'
 
 const mealCardSliderSettings = {
   dots: true,
@@ -36,18 +28,27 @@ export class Home extends Component {
 
   constructor(props) {
     super(props);
-
+    const orderOption = localStorage.getItem('sortOrder');
     this.state = {
       meals: [],
-      sortOrderState: sortingOrderStates.CUISINE_TYPE,
+      homeMealSortOrder: orderOption,
       loader: true,
       loader2: true,
     }
   }
 
   componentDidMount(){
+    const userContext = this.context;
     const token = localStorage.getItem('jwtToken');
     const orderOption = localStorage.getItem('sortOrder');
+
+    console.log('did mount? orderOption=%s', orderOption);
+
+    userContext.changeSortOrder(orderOption);
+    this.setState({
+      homeMealSortOrder: orderOption
+    });
+
 
     axios
       .get('/meals',{
@@ -65,11 +66,12 @@ export class Home extends Component {
         console.log("Error = %s", error);
       });
 
-    console.log('orderOption=%s', orderOption);
-
-    this.setState({
-      sortOrderState: orderOption !== undefined && orderOption !== null ? orderOption : sortingOrderStates.CUISINE_TYPE,
-    })
+    // console.log('did mount? orderOption=%s', orderOption);
+    //
+    // userContext.changeSortOrder(orderOption);
+    // this.setState({
+    //   homeMealSortOrder: orderOption !== undefined && orderOption !== null ? orderOption : sortingOrderStates.CUISINE_TYPE,
+    // })
   }
 
   initializeMealsByType = (meals, sortOrder, ...args) => {
@@ -104,8 +106,8 @@ export class Home extends Component {
     for(var keyName in objects) {
       if (objects.hasOwnProperty(keyName)) {
         let listByType = objects[keyName];
-        console.log(keyName);
-        console.log(listByType);
+        // console.log(keyName);
+        // console.log(listByType);
         // push a slider containing the meals of this cuisine type onto the list
         list.push(
           <div key={keyName} className="meal-list">
@@ -133,8 +135,8 @@ export class Home extends Component {
   };
 
   render() {
-    const { loader, meals, sortOrderState } = this.state;
-    console.log('sortOrderState=%s', sortOrderState);
+    const { loader, meals, homeMealSortOrder } = this.state;
+    console.log('homeMealSortOrder=%s', homeMealSortOrder);
 
     let isLoading = true;
 
@@ -144,7 +146,7 @@ export class Home extends Component {
     console.log("HOME - context={userId: %s, authorized: %s}", userContext.userId, userContext.authorized);
 
     if(!loader) {
-      switch(sortOrderState) {
+      switch(homeMealSortOrder) {
         default:
         case sortingOrderStates.CUISINE_TYPE:
           /*
@@ -156,13 +158,13 @@ export class Home extends Component {
            *    Low-Fat: [{meal...}, ...],
            * }
            */
-          const cuisines = this.initializeMealsByType(meals, sortOrderState, "Cuisine", "cuisineType");
+          const cuisines = this.initializeMealsByType(meals, homeMealSortOrder, "Cuisine", "cuisineType");
           const cuisineList = this.pushMealCardsToList(cuisines);
 
           mealList = cuisineList;
           break;
         case sortingOrderStates.DIET_TYPE:
-          const mealsByDietType = this.initializeMealsByType(meals, sortOrderState, 'dietType');
+          const mealsByDietType = this.initializeMealsByType(meals, homeMealSortOrder, 'dietType');
           const dietTypeCardComponents = this.pushMealCardsToList(mealsByDietType);
 
           mealList = dietTypeCardComponents;
@@ -171,13 +173,13 @@ export class Home extends Component {
           mealList = 'CALORIES_PLACEHOLDER';
           break;
         case sortingOrderStates.PRICE.ASCENDING:
-          const mealsByAscendingPrice = this.initializeMealsByType(meals, sortOrderState, "price");
+          const mealsByAscendingPrice = this.initializeMealsByType(meals, homeMealSortOrder, "price");
           const ascendingPriceCardComponents = this.pushMealCardsToList(mealsByAscendingPrice);
 
           mealList = ascendingPriceCardComponents;
           break;
         case sortingOrderStates.PRICE.DESCENDING:
-          const mealsByDescendingPrice = this.initializeMealsByType(meals, sortOrderState, "price");
+          const mealsByDescendingPrice = this.initializeMealsByType(meals, homeMealSortOrder, "price");
           const descendingPriceCardComponents = this.pushMealCardsToList(mealsByDescendingPrice);
 
           mealList = descendingPriceCardComponents;
@@ -201,20 +203,26 @@ export class Home extends Component {
             <Button
               variant="outlined"
               onClick={() => {
+                userContext.changeSortOrder(sortingOrderStates.CUISINE_TYPE);
                 localStorage.setItem('sortOrder', sortingOrderStates.CUISINE_TYPE);
                 this.setState({
-                  sortOrderState: sortingOrderStates.CUISINE_TYPE
+                  homeMealSortOrder: userContext.homeMealSortOrder
                 });
+                // this.forceUpdate();
+                window.location.reload();
               }}
               color="inherit"
             >Cuisine Type</Button>
             <Button
               variant="outlined"
               onClick={() => {
+                userContext.changeSortOrder(sortingOrderStates.DIET_TYPE);
                 localStorage.setItem('sortOrder', sortingOrderStates.DIET_TYPE);
                 this.setState({
-                  sortOrderState: sortingOrderStates.DIET_TYPE
+                  homeMealSortOrder: userContext.homeMealSortOrder,
                 });
+                // this.forceUpdate();
+                window.location.reload();
               }}
               color="inherit"
             >Diet Type</Button>
@@ -223,7 +231,7 @@ export class Home extends Component {
               onClick={() => {
                 localStorage.setItem('sortOrder', sortingOrderStates.CALORIES);
                 this.setState({
-                  sortOrderState: sortingOrderStates.CALORIES
+                  homeMealSortOrder: sortingOrderStates.CALORIES
                 });
               }}
               color="inherit"
@@ -233,7 +241,7 @@ export class Home extends Component {
               onClick={() => {
                 localStorage.setItem('sortOrder', sortingOrderStates.PRICE.ASCENDING);
                 this.setState({
-                  sortOrderState: sortingOrderStates.PRICE.ASCENDING
+                  homeMealSortOrder: sortingOrderStates.PRICE.ASCENDING
                 });
               }}
               color="inherit"
@@ -243,7 +251,7 @@ export class Home extends Component {
               onClick={() => {
                 localStorage.setItem('sortOrder', sortingOrderStates.PRICE.DESCENDING);
                 this.setState({
-                  sortOrderState: sortingOrderStates.PRICE.DESCENDING
+                  homeMealSortOrder: sortingOrderStates.PRICE.DESCENDING
                 });
               }}
               color="inherit"
