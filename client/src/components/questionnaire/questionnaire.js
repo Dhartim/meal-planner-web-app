@@ -3,8 +3,7 @@ import React, { Component } from "react"
 import RadioGroup from '../subcomponents/radioGroup';
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
-// import { Form, Button } from 'react-bootstrap'
-import axios from "axios";
+import Axios from "axios";
 import "./questionnaire.css";
 
 export class Questionnaire extends Component {
@@ -28,6 +27,7 @@ export class Questionnaire extends Component {
         console.log("CREATE PREFERENCES");
         const jwtToken = localStorage.getItem('jwtToken');
         console.log(jwtToken)
+
         const {
             diet,
             calories,
@@ -40,7 +40,8 @@ export class Questionnaire extends Component {
             priceLimit
         } = this.state;
 
-        return axios.post('/preferences', {
+        return Axios.post('/preferences', {
+                    // userId: userId,
                     diet: diet,
                     calories: calories,
                     fat: fat,
@@ -54,16 +55,15 @@ export class Questionnaire extends Component {
          { headers: {"x-access-token" : `${jwtToken}`}
             })
             .then(res => {
-                console.log("RES " + res)
+                console.log("RES " + res);
             })
             .catch(err => {
-                console.log("WTF?")
-                console.log(err)
+                console.log("ERROR " + err);
             })
     };
 
     handleChange (event) {
-        console.log(event.target.id)
+        console.log(event.target.id);
         this.setState({ [event.target.id]: event.target.value });
     }
 
