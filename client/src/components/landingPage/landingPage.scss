@@ -1,0 +1,20 @@
+
+.landing-page {
+  &__title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__title {
+    position: relative;
+  }
+  &__stars {
+    background-image: url("../../assets/images/stars.svg");
+    background-size: 'cover'; 
+  }
+
+  &__strawberry {
+    background-image: url("./strawberry.png");
+  }
+} 

@@ -1,0 +1,9 @@
+export const avocado = require('./avocado.png');
+export const cuttingBoard = require('./cuttingBoard.png')
+export const noodles = require('./noodles.png');
+export const pineapple = require('./pineapple.png');
+export const salad = require('./salad.png');
+export const salad2 = require('./salad2.png');
+export const yogurt = require('./yogurt.png');
+export const vegetable_dish= require('./vegetable_dish.png');
+export const stars = require('./stars.svg')
