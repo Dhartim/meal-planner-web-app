@@ -7,6 +7,8 @@ const login = require('./login');
 const meal = require('./meal');
 const mealIngredient = require('./mealIngredient');
 const nutrition = require('./nutrition');
+const preference = require('./preference')
+const recommendation = require('./recommendation');
 const user = require('./user');
 const userAte = require('./userAte');
 const userMeal = require('./userMeal');
@@ -22,6 +24,7 @@ module.exports = {
   meal,
   mealIngredient,
   nutrition,
+  preference,
   recommendation,
   userMeal,
   userAte,

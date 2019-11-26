@@ -18,4 +18,5 @@ module.exports = (app) => {
   require('./userMeals')(app);
   require('./users')(app);
   require('./userAte')(app);
+  require('./preferences')(app);
 };

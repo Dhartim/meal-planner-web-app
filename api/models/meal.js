@@ -16,9 +16,18 @@ module.exports = (sequelize, DataTypes) => {
     recipe: {
       type: DataTypes.STRING,
     },
+    price: {
+      type: DataTypes.INTEGER,
+    },
+    dietType: {
+      type: DataTypes.STRING,
+    },
     cuisineId: {
       type: DataTypes.INTEGER,
       foreignKey: true,
+    },
+    desc: {
+      type: DataTypes.STRING(2048),
     },
   }, {});
   Meal.associate = function (models) {

@@ -1,34 +1,66 @@
-const { Recommendation, Meal, Nutrition } = require('../models');
+const { Recommendation, Meal, Preference, Nutrition } = require('../models');
 const getUserId = require('../middleware/getUserId');
-
-function getMealsList(req) {
-  const { price, diet, mealFreq, calories, fat, protein, carbs, weight, desiredWeight } = req.params;
-
-  return Meal.findAll({
-    where({
-      
-    })
-  })
-}
+const Sequelize = require('sequelize');
+const {Op} = Sequelize
 
 function addMealsToRecommendation(req, res) {
-  const userid = getUserId(req);
-  const meals = getMealsList(req)
-  meals.forEach(meal => {
-    Recommendation
-    .create({
-      userId: userid,
-      mealId: req.body.mealId,
-    }).catch((error) => res.status(400).send(error));
-  }).then((recommendation) => res.status(201).send(recommendation))
+  const userId = getUserId(req);
+  return Preference.findAll({
+    where:{
+      userId: userId
+    }
+  }).then( function(preference) {
+    let pref = preference[0].dataValues
+    console.log(pref)
+    if (pref){
+      const { calories, carbs, diet, fat, mealCount, priceLimit, protein } = pref
+      const dietPerMeal =  calories / mealCount;
+      //TODO need to fix to filter through other macros
+
+      return Meal.findAll({
+        where: {
+          price: { [Op.lte] : priceLimit },
+          dietType: { [Op.iLike] : diet },
+        },
+        // include: {
+        //   model: Nutrition,
+        //   where: {
+        //     calories: { [Op.lte] : dietPerMeal },
+        //     totalCarbohydrates: { [Op.lte] : carbs },
+        //     totalFat: { [Op.lte] : fat},
+        //     protein: { [Op.lte] : protein },
+        //   }
+        // }
+      }).then(function(meals) {
+        res.status(200).send(meals)
+        meals.forEach(meal=> {
+          return Recommendation
+              .findOrCreate({
+                where: {
+                  userId: userId,
+                  mealId: meal.id,
+                },
+                defaults: {
+                  userId: userId,
+                  mealId: meal.id,
+                },
+              }).catch((error) => res.status(400).send({
+                  message: error,
+                })
+              );
+        })
+      }).catch(err=> console.log(err))
+    }
+  }).then(() => res.status(200).send())
+      .catch(err => res.status(400).send())
 }
 
 function removeMeal(req, res) {
-  const userid = getUserId(req);
+  const userId = getUserId(req);
 
   return Recommendation.findOne({
     where: {
-      userId: userid,
+      userId: userId,
       mealId: req.body.mealId
     },
   })
@@ -42,4 +74,9 @@ function removeMeal(req, res) {
       .then(() => res.status(204).send())
       .catch((error) => res.status(400).send(error));
   });
+}
+
+module.exports = {
+  addMealsToRecommendation,
+  removeMeal
 }
