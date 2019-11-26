@@ -11,7 +11,7 @@ const landingPage = () => {
                 <div className="landing-page__container">
                     <div className="landing-page__meal-box">
                         {/*<h1>Meal Planner</h1>*/}
-                        <Image className={"full-logo"} src={require("../../assets/images/full-logo.png")}/>
+                        <Image className={"full-logo"} src={require("../../assets/images/new-logo.png")}/>
                         <div className="landing-page__user-auth">
                             <Button
                                 className="btn-primary"

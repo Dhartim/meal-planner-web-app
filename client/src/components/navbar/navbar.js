@@ -83,7 +83,7 @@ export function Navbar(props) {
                 color="inherit"
                 className={classes.textButton}
               >
-                <Image className={'navImage'} src={require('../../assets/images/logo.png')} style={styles}/>
+                <Image className={'navImage'} src={require('../../assets/images/header-icon.png')} style={styles}/>
                 <Typography component={'span'} variant="h6" className={classes.title}>
                   {/*Meal Planner*/}
                 </Typography>
