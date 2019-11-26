@@ -108,7 +108,7 @@ export default class Login extends Component {
                         <Button variant="primary" type="submit" onClick={() => {
                             this.tryLogin();
                         }}>
-                            Submit
+                            LOGIN
                         </Button>
                         {/*<AccountProvider value={this.state}/>*/}
                     </Form>
