@@ -1,7 +1,19 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import axios from "axios";
 import MealCard from "../mealCard";
 import './favorites.css';
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
+const mealCardSliderSettings = {
+  dots: true,
+  infinite: false,
+  speed: 500,
+  slidesToShow: 4,
+  slidesToScroll: 4
+};
 
 export class Favorites extends Component {
   constructor(props) {
@@ -53,17 +65,19 @@ export class Favorites extends Component {
             {...favorite}
             cuisineType = {favorite.cuisineType}
           />
-        )
+        );
       }
     } else {
 
     }
+
     return(
       <div>
         <h2>FAVORITES</h2>
-
-        <div className="favorites__row">
-          {favoritesList}
+        <div className="meal-list">
+          <Slider {...mealCardSliderSettings}>
+            {favoritesList}
+          </Slider>
         </div>
       </div>
     );

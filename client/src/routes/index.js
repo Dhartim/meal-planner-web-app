@@ -17,9 +17,28 @@ import LandingPage from '../components/landingPage';
 import {UserProvider} from "../context/usercontext";
 import axios from "axios";
 
+export const sortingOrderStates = {
+  CUISINE_TYPE: 'cuisineType',
+  DIET_TYPE: 'dietType',
+  PRICE: {
+    ASCENDING: 'price.ascending',
+    DESCENDING: 'price.descending',
+  },
+  CALORIES: 'calories',
+};
+
 class AppRouter extends Component {
   constructor(props) {
     super(props);
+
+    this.checkIfSortOrderExists = (order) => {
+      let exists = false;
+      if (Object.values(sortingOrderStates).indexOf(order) > -1) {
+        exists = true;
+      }
+      console.log("order[%s] exists = %s", order, exists);
+      return exists;
+    };
 
     this.changeUser = (userId, authorized, loading) => {
       this.setState({
@@ -29,11 +48,28 @@ class AppRouter extends Component {
       })
     };
 
+    this.changeSortOrder = (newOrder) => {
+      const order = newOrder !== undefined && newOrder !== null &&
+                    this.checkIfSortOrderExists(newOrder) ?
+                      newOrder : sortingOrderStates.CUISINE_TYPE;
+
+      console.log("CHANGED ORDER TO: ");
+      console.log(order);
+
+      localStorage.setItem('sortOrder', order);
+
+      this.setState({
+        homeMealSortOrder: order,
+      })
+    };
+
     this.state = {
       userId: 0,
       authorized: false,
       loading: true,
       changeUser: this.changeUser,
+      homeMealSortOrder: sortingOrderStates.CUISINE_TYPE,
+      changeSortOrder: this.changeSortOrder,
     };
   }
 
@@ -41,6 +77,9 @@ class AppRouter extends Component {
     const token = localStorage.getItem('jwtToken');
     console.log("token=%s", token);
     if(token !== null) {
+      const orderOption = localStorage.getItem('sortOrder');
+      this.changeSortOrder(orderOption);
+
       axios
         .get('/checkauth', {
           headers: {

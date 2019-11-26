@@ -3,7 +3,7 @@ const { Meal, Cuisine, Nutrition } = require('../models');
 function list(req, res) {
   return Meal.findAll({
     // raw:true,
-    order: [
+    sortOrderState: [
       ['dishName', 'Desc'],
     ],
     include: [
