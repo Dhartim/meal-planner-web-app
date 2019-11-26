@@ -17,7 +17,7 @@ export const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.secondary.main,
     },
     form: {
-      width: '100%',
+      width: '10%',
       marginTop: theme.spacing(3),
     },
     submit: {

@@ -15,6 +15,8 @@ import {
 // Styles and layouts
 import useStyles from './signupstyle';
 import TextField from "@material-ui/core/TextField";
+import "./signup.css"
+import {Image} from "react-bootstrap";
 
 export class SignUp extends Component {
   constructor(props) {
@@ -153,7 +155,7 @@ export class SignUp extends Component {
 
   copyright = () => {
     return (
-      <Typography variant="body2" color="textSecondary" align="center">
+      <Typography className={"signup-footer"} variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
         <Link color="inherit" href="https://material-ui.com/">
           Meal Planner
@@ -172,18 +174,19 @@ export class SignUp extends Component {
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
-        <div className={classes.paper}>
-          <center>
-            <Avatar className={classes.avatar} >
-              <FastfoodSharpIcon />
-            </Avatar>
+        <div className={"form-container"}>
+          <center className={"center-elem"}>
+            {/*<Avatar className={classes.avatar} >*/}
+              {/*<FastfoodSharpIcon />*/}
+              <Image className={"small-logo"} src={require("../../assets/images/full-logo.png")}/>
+            {/*</Avatar>*/}
             <Typography component="h1" variant="h5">
               Sign up
             </Typography>
           </center>
 
           <form className={classes.form} onSubmit={this.onSubmit}>
-            <Grid container spacing={2}>
+            <Grid className={"form-container-2"} container spacing={2}>
               {this.firstName("firstName", "First Name")}
               {this.lastName("lastName", "Last Name")}
               {this.email()}
@@ -194,7 +197,8 @@ export class SignUp extends Component {
               fullWidth
               variant="contained"
               color="primary"
-              className={classes.submit}
+              // className={classes.submit}
+              className={"btn-primary"}
               onClick={() => {
                   if (validEmail) {
                     this.signup()
@@ -206,7 +210,7 @@ export class SignUp extends Component {
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link href="/login" variant="body2">
+                <Link className={"signin-link"} href="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
