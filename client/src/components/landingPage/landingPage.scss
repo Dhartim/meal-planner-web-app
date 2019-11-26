@@ -7,14 +7,58 @@
   }
 
   &__title {
-    position: relative;
+    position: absolute;
+    font-size:36px;
+    top: 10%;
+    left: 30%;
+    z-index: 1;
   }
-  &__stars {
-    background-image: url("../../assets/images/stars.svg");
-    background-size: 'cover'; 
+  &__header {
+    font-weight: bold;
+    font-size: 5.5rem;
+  }
+  
+  &__auth-btn {
+    font-weight: bold;
+    border-radius: 3%;
+    border: 1px solid rgba(255, 255, 255, 0.626);
+    color:whitesmoke;
+    width:100%;
+    background-color: #3f51b59c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 5rem;
   }
 
-  &__strawberry {
-    background-image: url("./strawberry.png");
+  &__auth-btn:hover {
+    background-color: #3f51b5f7;
+    color: whitesmoke;
+    text-decoration: none;
+  }
+
+  &__background {
+    background: rgb(255,255,255);
+    background: linear-gradient(110deg, rgba(255,255,255,1) 32%, rgba(113,126,200,1) 32%, rgba(80,96,188,1) 65%, rgba(63,81,181,1) 99%);  
   }
 } 
+.text {
+  font-size: 52px;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  margin: 15%;
+  justify-content: space-between;
+}
+
+.images {
+  display: flex;
+  height: 300px;
+  justify-content: space-around;
+  &-food {
+    border-radius: 25px;
+    display: block;
+    width: 25%;
+  }
+}
