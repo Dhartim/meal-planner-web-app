@@ -60,11 +60,11 @@ export class Favorites extends Component {
         }
         return (
             <div>
-                <div className={"favs-header"}>
+                <div className={"favorites-header"}>
                     <h1>Your Favorite Meals</h1>
                 </div>
 
-                <div className="favorites__row">
+                <div className="favorites-row">
                     {favoritesList}
                 </div>
             </div>

@@ -1,10 +1,12 @@
-.favorites__row {
+.favorites-row {
   padding :2rem 2rem 2rem 1rem;
   display: table-cell;
-  width: 930px !important;
+  /*width: 930px !important;*/
+  width: 100%;
   /*margin-left: auto;*/
   /*margin-right: auto;*/
   justify-content: center;
+  text-align: center;
 }
 
 .card-container {
@@ -13,14 +15,16 @@
   display: inline-block;
   margin-left: 20px;
   margin-right: 20px;
+  /*margin-left: auto;*/
+  /*margin-right: auto;*/
   margin-bottom: 20px;
+  text-align: left;
 }
 
-.favs-header {
+.favorites-header {
   color: #fff !important;
   opacity: 90%;
   text-align: center;
-  padding-top: 70px;
-  padding-bottom: 30px;
+  padding: 70px 2rem 30px;
   display: block;
 }
