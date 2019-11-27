@@ -48,15 +48,9 @@ function addMealsToRecommendation(req, res) {
           price: { [Op.lte] : priceLimit },
           dietType: { [Op.iLike] : diet },
         },
-        // include: {
-        //   model: Nutrition,
-        //   where: {
-        //     calories: { [Op.lte] : dietPerMeal },
-        //     totalCarbohydrates: { [Op.lte] : carbs },
-        //     totalFat: { [Op.lte] : fat},
-        //     protein: { [Op.lte] : protein },
-        //   }
-        // }
+        include: {
+          model: Nutrition,
+        }
       }).then(function(meals) {
         res.status(200).send(meals)
         meals.forEach(meal=> {
