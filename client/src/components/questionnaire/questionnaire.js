@@ -3,7 +3,7 @@ import React, { Component } from "react"
 import RadioGroup from '../subcomponents/radioGroup';
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
-import Axios from "axios";
+import axios from "axios";
 import "./questionnaire.css";
 
 export class Questionnaire extends Component {

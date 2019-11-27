@@ -1,4 +1,4 @@
-const { User, Customer, Preference } = require('../models');
+const { User, Customer, Preference, UserAte } = require('../models');
 const getUserId = require('../middleware/getUserId');
 
 function getAccount(req, res) {
@@ -12,6 +12,7 @@ function getAccount(req, res) {
       include: [
         { model: Customer },
         { model: Preference },
+        { model: UserAte}
       ],
       attributes: ['id', 'email', 'firstName', 'lastName'],
     })

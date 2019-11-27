@@ -6,7 +6,7 @@ import ProfileComponent from './accountComponents/profileComponent';
 import DetailComponent from './accountComponents/detailsComponent';
 import './accountPage.scss'
 
-const defaultIcon = require('./headshot.png');
+// const defaultIcon = require('./headshot.png');
 
 export default class AccountPage extends Component {
   constructor(props) {
@@ -22,6 +22,7 @@ export default class AccountPage extends Component {
       createdAt: "",
       updatedAt: "",
       preferences: {},
+      meals: {},
     };
   }
 
@@ -35,6 +36,7 @@ export default class AccountPage extends Component {
         let account = response.data.account;
         let customer = account.Customer;
         let preferences = account.Preference;
+        let userMeals = account.UserAte;
         if (!account.id) {
 
         }
@@ -57,6 +59,11 @@ export default class AccountPage extends Component {
             preferences: preferences,
           })
         }
+        if (userMeals) {
+          this.setState({
+            userMeals: userMeals
+          })
+        }
       }
     })
     .catch(error => {
@@ -72,6 +79,7 @@ export default class AccountPage extends Component {
       // console.log(this.state);
       // console.log(this.state.expiresAt)
       // console.log(currTime)
+      console.log(this.state)
       if (this.state.customerId && new Date(this.state.expiresAt) > currTime) {
           let expired = new Date(this.state.expiresAt);
           console.log(expired)
