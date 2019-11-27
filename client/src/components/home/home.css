@@ -1,0 +1,54 @@
+h2 {
+    color: #fff;
+    /*padding: 70px;*/
+    opacity: 87%;
+}
+
+.slick-arrow {
+    color: white !important;
+}
+
+.slick-prev:before {
+    color: white !important;
+}
+.slick-next:before {
+    color: white !important;
+}
+
+.slick-prev:after {
+    color: white !important;
+}
+.slick-next:after {
+    color: white !important;
+}
+
+.slick-dots {
+    margin-top: 10px !important;
+}
+
+.slick-dots li button:before {
+    color: white !important;
+}
+
+.cuisine-list {
+    width: 1400px;
+    padding: 20px 30px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.meal-list h2 {
+    padding-left: 50px;
+}
+
+.recs-container {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.recs-container h2 {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}

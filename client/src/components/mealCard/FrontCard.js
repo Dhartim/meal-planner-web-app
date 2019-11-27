@@ -70,23 +70,6 @@ export class FrontCard extends Component{
                     </div>
                     <MealDetailModal meal= {meal}/>
                 </Card.Body>
-                {/*<Card.Footer/>*/}
-                {/*<Card.Footer>*/}
-                {/*    <div className={"macro-container"}>*/}
-                {/*        <div className="meal-macros">*/}
-                {/*            <h3>Cals</h3>*/}
-                {/*            <p>10</p>*/}
-                {/*        </div>*/}
-                {/*        <div className="meal-macros middle">*/}
-                {/*            <h3>Fat</h3>*/}
-                {/*            <p>10</p>*/}
-                {/*        </div>*/}
-                {/*        <div className="meal-macros">*/}
-                {/*            <h3>Sugar</h3>*/}
-                {/*            <p>20</p>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*</Card.Footer>*/}
             </Card>
         );
     }

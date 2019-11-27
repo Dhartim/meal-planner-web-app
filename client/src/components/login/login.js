@@ -63,10 +63,7 @@ export default class Login extends Component {
                 <CssBaseline/>
                 <div className={"form-container"}>
                     <center className={"center-elem"}>
-                        {/*<Avatar className={classes.avatar} >*/}
-                        {/*<FastfoodSharpIcon />*/}
                         <Image className={"small-logo"} src={require("../../assets/images/new-logo.png")}/>
-                        {/*</Avatar>*/}
                         <Typography component="h1" variant="h5">
                             Sign in
                         </Typography>
@@ -110,12 +107,8 @@ export default class Login extends Component {
                         }}>
                             LOGIN
                         </Button>
-                        {/*<AccountProvider value={this.state}/>*/}
                     </Form>
                 </div>
-                {/*<Box mt={5}>*/}
-                {/*    {this.copyright()}*/}
-                {/*</Box>*/}
                 <br/>
             </Container>
         );

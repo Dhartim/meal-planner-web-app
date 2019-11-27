@@ -59,6 +59,8 @@ export function Navbar(props) {
     setOpen(false);
   };
 
+  const homeLink = authorized ? '/dashboard' : '';
+
   return (
     <ClickAwayListener onClickAway={handleDrawerClose}>
       <div className={classes.root}>
@@ -79,7 +81,7 @@ export function Navbar(props) {
             </IconButton>
             <Typography className={classes.title}>
               <Button
-                href={'/dashboard'}
+                href={homeLink}
                 color="inherit"
                 className={classes.textButton}
               >
@@ -139,7 +141,7 @@ export function Navbar(props) {
           </div>
           <Divider />
           <List>
-            <ListItem button component="a" href='/dashboard' key={'Home'} className={classes.listItem}>
+            <ListItem button component="a" href={homeLink} key={'Home'} className={classes.listItem}>
               <ListItemIcon>
                 <span>
                   <FaHome size ={25}/>

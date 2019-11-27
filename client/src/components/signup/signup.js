@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import FastfoodSharpIcon from '@material-ui/icons/FastfoodSharp';
-import { 
+import {
   Avatar,
   Button,
   CssBaseline,
@@ -10,26 +10,26 @@ import {
   Box,
   Typography,
   Container
-  } from '@material-ui/core';
+} from '@material-ui/core';
 
 // Styles and layouts
 import useStyles from './signupstyle';
 import TextField from "@material-ui/core/TextField";
 import "./signup.css"
-import {Image} from "react-bootstrap";
+import { Image } from "react-bootstrap";
 
 export class SignUp extends Component {
   constructor(props) {
     super(props);
-    this.onSubmit = this.onSubmit.bind(this); 
-     this.state = {
-       firstName: '',
-       lastName: '',
-       email: '',
-       password: '',
-       validEmail: false,
-       errorText: '',
-     }
+    this.onSubmit = this.onSubmit.bind(this);
+    this.state = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+      validEmail: false,
+      errorText: '',
+    }
   }
 
   onSubmit(e) {
@@ -53,25 +53,25 @@ export class SignUp extends Component {
       email: email,
       password: password
     })
-    .then(res => {
-      this.setState({errorText: ''});
-      console.log("response token: %s", res.headers.token);
-      localStorage.setItem('jwtToken', res.headers.token);
-      this.props.history.push('/preferences');
-      window.location.reload();
-    })
-    .catch(error => {
-      console.log("Axios post error: %s", error);
-      window.location.reload();
-      let statusCode = error.response.status;
-      if(statusCode === 409) {
-        this.setState({errorText: 'Email is already taken. Please try again.'});
-      }
-    });
+      .then(res => {
+        this.setState({ errorText: '' });
+        console.log("response token: %s", res.headers.token);
+        localStorage.setItem('jwtToken', res.headers.token);
+        this.props.history.push('/preferences');
+        window.location.reload();
+      })
+      .catch(error => {
+        console.log("Axios post error: %s", error);
+        window.location.reload();
+        let statusCode = error.response.status;
+        if (statusCode === 409) {
+          this.setState({ errorText: 'Email is already taken. Please try again.' });
+        }
+      });
   };
 
   firstName = () => {
-    return(
+    return (
       <Grid item xs={12} sm={6}>
         <TextField
           variant="outlined"
@@ -80,10 +80,10 @@ export class SignUp extends Component {
           id="firstName"
           label="First Name"
           name="firstName"
-          value= {this.state.firstName}
+          value={this.state.firstName}
           autoComplete="fname"
           onChange={e => {
-            this.setState({firstName: e.target.value})
+            this.setState({ firstName: e.target.value })
           }}
         />
       </Grid>
@@ -91,7 +91,7 @@ export class SignUp extends Component {
   };
 
   lastName = () => {
-    return(
+    return (
       <Grid item xs={12} sm={6}>
         <TextField
           variant="outlined"
@@ -100,7 +100,7 @@ export class SignUp extends Component {
           id="lastName"
           label="Last Name"
           name="lastName"
-          value= {this.state.lastName}
+          value={this.state.lastName}
           autoComplete="lname"
           onChange={e => {
             this.setState({ lastName: e.target.value })
@@ -111,7 +111,7 @@ export class SignUp extends Component {
   };
 
   email = () => {
-    return(
+    return (
       <Grid item xs={12}>
         <TextField
           variant="outlined"
@@ -133,7 +133,7 @@ export class SignUp extends Component {
   };
 
   password = () => {
-    return(
+    return (
       <Grid item xs={12}>
         <TextField
           variant="outlined"
@@ -177,8 +177,8 @@ export class SignUp extends Component {
         <div className={"form-container"}>
           <center className={"center-elem"}>
             {/*<Avatar className={classes.avatar} >*/}
-              {/*<FastfoodSharpIcon />*/}
-              <Image className={"small-logo"} src={require("../../assets/images/new-logo.png")}/>
+            {/*<FastfoodSharpIcon />*/}
+            <Image className={"small-logo"} src={require("../../assets/images/new-logo.png")} />
             {/*</Avatar>*/}
             <Typography component="h1" variant="h5">
               Sign up
@@ -200,10 +200,10 @@ export class SignUp extends Component {
               // className={classes.submit}
               className={"btn-primary"}
               onClick={() => {
-                  if (validEmail) {
-                    this.signup()
-                  }
+                if (validEmail) {
+                  this.signup()
                 }
+              }
               }
             >
               Sign Up
@@ -220,7 +220,7 @@ export class SignUp extends Component {
         <Box mt={5}>
           {this.copyright()}
         </Box>
-        <br/>
+        <br />
         {errorText}
       </Container>
     );

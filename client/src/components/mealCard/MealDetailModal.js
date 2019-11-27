@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button';
+import Ingredients from './Ingredients';
 import './mealCard.css';
 
 function MealDetailModal(props) {
@@ -10,11 +11,6 @@ function MealDetailModal(props) {
     const handleShow = () => setShow(true);
 
     const meal = props.meal;
-    // const recipeItems = meal.map((item) => <li>{item}</li>);
-
-    console.log("RECIPE TYPE")
-    console.log(meal.recipe.replace("\",", "\"|").replace("{", "").replace("}", ""))
-    // console.log(meal.recipe.split("\","))
 
     return (
         <div className="meal-details-block">
@@ -58,6 +54,10 @@ function MealDetailModal(props) {
                                             Vitamins & Minerals: {meal.Nutrition.vitaminsAndMinerals}<br/>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <h5>Ingredients</h5>
+                                        <Ingredients meal_id={meal.id} />
                                 </div>
                             </div>
                         </div>

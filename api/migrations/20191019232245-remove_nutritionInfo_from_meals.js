@@ -9,6 +9,7 @@ module.exports = {
       */
     queryInterface.removeColumn('Meals', 'nutritionInfo'),
 
+
   down: (queryInterface, Sequelize) =>
     /*
       Add reverting commands here.

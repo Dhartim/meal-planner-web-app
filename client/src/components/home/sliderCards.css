@@ -1,0 +1,20 @@
+.meal_list {
+	display:flex;
+	justify-content: space-evenly;
+	align-items: center;
+	overflow: scroll;
+}
+
+.meal-list {
+    padding: 50px 30px;
+    text-align: left;
+}
+.meal-list h2{
+    padding: 20px 0px;
+}
+.slick-track {
+	margin: 0;
+}
+.slick-prev:before, .slick-next:before {
+	color: #3f52b5;
+}

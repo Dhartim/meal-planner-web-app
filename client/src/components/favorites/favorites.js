@@ -3,6 +3,18 @@ import axios from "axios";
 import MealCard from "../mealCard";
 import './favorites.css';
 
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
+const mealCardSliderSettings = {
+  dots: true,
+  infinite: false,
+  speed: 500,
+  slidesToShow: 4,
+  slidesToScroll: 4
+};
+
 export class Favorites extends Component {
     constructor(props) {
         super(props);

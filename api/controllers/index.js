@@ -1,23 +1,29 @@
-const user = require('./user');
+const account = require('./account');
+const cuisine = require('./cuisine');
+const customer = require('./customer');
+const email = require('./email');
+const favorite = require('./favorite');
 const login = require('./login');
 const meal = require('./meal');
-const favorite = require('./favorite');
-const cuisine = require('./cuisine');
-const userMeal = require('./userMeal');
-const customer = require('./customer');
+const mealIngredient = require('./mealIngredient');
 const nutrition = require('./nutrition');
-const account = require('./account');
-const email = require('./email');
+const preference = require('./preference')
+const recommendation = require('./recommendation');
+const user = require('./user');
+const userMeal = require('./userMeal');
 
 module.exports = {
-  user,
+  account,
+  cuisine,
+  customer,
+  email,
+  favorite,
   login,
   meal,
-  favorite,
-  cuisine,
-  userMeal,
-  customer,
+  mealIngredient,
   nutrition,
-  account,
-  email,
+  preference,
+  recommendation,
+  userMeal,
+  user,
 };

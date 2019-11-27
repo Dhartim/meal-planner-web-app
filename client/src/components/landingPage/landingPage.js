@@ -1,12 +1,28 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Email from '../subcomponents/email';
 
 import './landingPage.css';
+
+import UserContext from "../../context/usercontext";
+import {Redirect} from "react-router-dom";
+import Spinner from "../subcomponents/spinner";
 import {Button, Image} from "react-bootstrap";
 
-const landingPage = () => {
-    return (
-        <div className={'landing-page-container'}>
+export function LandingPage() {
+
+  const userContext = useContext(UserContext);
+  const authorized = userContext.authorized;
+  const loading = userContext.loading;
+
+  var toRender;
+
+  if (authorized && !loading) {
+    toRender = <Redirect to="/dashboard"/>;
+  } else if(loading) {
+    toRender = <Spinner />;
+  } else {
+    toRender =
+      <div className={'landing-page-container'}>
             <div className="landing-page">
                 <div className="landing-page__container">
                     <div className="landing-page__meal-box">
@@ -81,7 +97,9 @@ const landingPage = () => {
                 </div>
             </div>
         </div>
-    );
+  }
+
+  return (toRender);
 }
 
-export default landingPage;
+export default LandingPage;
