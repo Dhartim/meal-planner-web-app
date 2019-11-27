@@ -12,7 +12,6 @@ const recommendation = require('./recommendation');
 const user = require('./user');
 const userAte = require('./userAte');
 const userMeal = require('./userMeal');
-const recommendation = require('./recommendation');
 
 module.exports = {
   account,
