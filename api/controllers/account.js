@@ -1,4 +1,4 @@
-const { User, Customer } = require('../models');
+const { User, Customer, Preference } = require('../models');
 const getUserId = require('../middleware/getUserId');
 
 function getAccount(req, res) {
@@ -11,15 +11,16 @@ function getAccount(req, res) {
       },
       include: [
         { model: Customer },
+        { model: Preference },
       ],
       attributes: ['id', 'email', 'firstName', 'lastName'],
     })
     .then((account) => {
-      console.log('Account');
-      console.log(account);
+      // console.log('Account');
+      // console.log(account);
       res.status(200).send({ account });
     }).catch((error) => {
-      console.log(error);
+      // console.log(error);
       res.status(400).send('Could not get account details');
     });
 }

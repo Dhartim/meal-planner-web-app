@@ -3,6 +3,33 @@ const getUserId = require('../middleware/getUserId');
 const Sequelize = require('sequelize');
 const {Op} = Sequelize
 
+function getMeals (req, res) {
+  const userId = getUserId(req);
+  return Recommendation.findAll({
+    where: {
+      userId: userId
+    }
+  }).then(recommendations => {
+    const recMealIds = [];
+      for (let i = 0; i < recommendations.length; i++) {
+        recMealIds.push(recommendations[i].mealId);
+      }
+      return Meal
+        .findAll({
+          where: {
+            id: recMealIds,
+          },
+          include: [{
+            model: Nutrition,
+          }],
+        })
+        .then((meals) => {
+          res.status(200).send(meals);
+        });
+    })
+    .catch((error) => res.status(400).send(error));
+}
+
 function addMealsToRecommendation(req, res) {
   const userId = getUserId(req);
   return Preference.findAll({
@@ -11,7 +38,6 @@ function addMealsToRecommendation(req, res) {
     }
   }).then( function(preference) {
     let pref = preference[0].dataValues
-    console.log(pref)
     if (pref){
       const { calories, carbs, diet, fat, mealCount, priceLimit, protein } = pref
       const dietPerMeal =  calories / mealCount;
@@ -78,5 +104,6 @@ function removeMeal(req, res) {
 
 module.exports = {
   addMealsToRecommendation,
-  removeMeal
+  removeMeal,
+  getMeals
 }

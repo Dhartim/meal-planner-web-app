@@ -3,31 +3,30 @@ import React, { Component } from "react"
 import RadioGroup from '../subcomponents/radioGroup';
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
-// import { Form, Button } from 'react-bootstrap'
-import axios from "axios";
+import Axios from "axios";
 import "./questionnaire.css";
 
 export class Questionnaire extends Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      diet: "",
-      macros: 0,
-      fat: 0,
-      protein: 0,
-      carbs: 0,
-      weight: 0,
-      desiredWeight: 0,
-      dailyMealFrequency: 0,
-      priceLimit: 0,
+        this.state = {
+            diet: '',
+            calories:'',
+            fat:'',
+            protein:'',
+            carbs:'',
+            weight:'',
+            desiredWeight:'',
+            mealCount:'',
+            priceLimit:''
+        }
     }
-  }
 
   createPreferences = () => {
-
       console.log("CREATE PREFERENCES");
-
+      const jwtToken = localStorage.getItem('jwtToken');
+      console.log(jwtToken)
       const {
           diet,
           calories,
@@ -40,7 +39,8 @@ export class Questionnaire extends Component {
           priceLimit
       } = this.state;
 
-      return axios.post('/preferences', {
+      return axios
+        .post('/preferences', {
           diet: diet,
           calories: calories,
           fat: fat,
@@ -50,13 +50,21 @@ export class Questionnaire extends Component {
           desiredWeight: desiredWeight,
           mealCount: mealCount,
           priceLimit: priceLimit
+        },
+        { headers: {"x-access-token" : `${jwtToken}`} 
       })
           .catch(err => {
               console.log(err)
           })
   }
 
+  handleChange (event) {
+    console.log(event.target.id)
+    this.setState({ [event.target.id]: event.target.value });
+  }
+
   render() {
+    console.log('hello')
     return(
       <Container component="main" maxWidth="sm">
         <div>
@@ -76,27 +84,27 @@ export class Questionnaire extends Component {
             <div className="form-text__container">
               <div className="form-control">
                 <label htmlFor="calories">Calories</label>
-                <input type="number" id="calories" placeholder="Enter Calorie Goal"/>
+                <input type="number" value={this.state.calories} onChange={this.handleChange.bind(this)} id="calories" placeholder="Enter Calorie Goal"/>
               </div>
               <div className="form-control">
                 <label htmlFor="fat">Fat</label>
-                <input type="number" id="fat" placeholder="Enter Fat in grams"/>
+                <input type="number" value={this.state.fat} onChange={this.handleChange.bind(this)} id="fat" placeholder="Enter Fat in grams"/>
               </div>
               <div className="form-control">
                 <label htmlFor="protein">Protein</label>
-                <input type="number" id="protein" placeholder="Enter Protein in grams"/>
+                <input type="number" value={this.state.protein} onChange={this.handleChange.bind(this)} id="protein" placeholder="Enter Protein in grams"/>
               </div>
               <div className="form-control">
                 <label htmlFor="carbs">Carbs</label>
-                <input type="number" id="carbs" placeholder="Enter Carbs in grams"/>
+                <input type="number" value={this.state.carbs} onChange={this.handleChange.bind(this)} id="carbs" placeholder="Enter Carbs in grams"/>
               </div>
               <div className="form-control">
                 <label htmlFor="weight">Weight</label>
-                <input type="number" id="weight" placeholder="Enter lbs"/>
+                <input type="number" value={this.state.weight} onChange={this.handleChange.bind(this)} id="weight" placeholder="Enter lbs"/>
               </div>
               <div className="form-control">
                 <label htmlFor="desiredWeight">Desired Weight</label>
-                <input type="number" id="desiredWeight" placeholder="Enter Desired lbs"/>
+                <input type="number" value={this.state.desiredWeight} onChange={this.handleChange.bind(this)} id="desiredWeight" placeholder="Enter Desired lbs"/>
               </div>
             </div>
             <div className="radio-label__container">
@@ -129,8 +137,8 @@ export class Questionnaire extends Component {
               color="primary"
               onClick={() => {
                 this.createPreferences()
-                this.props.history.push('/dashboard');
-                window.location.reload();
+                // this.props.history.push('/account');
+                // window.location.reload();
               }}
             >
               Continue
