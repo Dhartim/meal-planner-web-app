@@ -149,6 +149,14 @@
   font-size: large;
 }
 
+.about-text h1 {
+  opacity: 87%;
+}
+
+.about-text p {
+  opacity: 70%;
+}
+
 .about-divider {
   /*height: 60%;*/
   background-color: #ff6961;
