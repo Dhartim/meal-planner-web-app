@@ -3,26 +3,25 @@ import React, { Component } from "react"
 import RadioGroup from '../subcomponents/radioGroup';
 import Button from "@material-ui/core/Button";
 import Container from "@material-ui/core/Container";
-// import { Form, Button } from 'react-bootstrap'
-import axios from "axios";
+import Axios from "axios";
 import "./questionnaire.css";
 
 export class Questionnaire extends Component {
-  constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      diet: "",
-      macros: 0,
-      fat: 0,
-      protein: 0,
-      carbs: 0,
-      weight: 0,
-      desiredWeight: 0,
-      dailyMealFrequency: 0,
-      priceLimit: 0,
+        this.state = {
+            diet: '',
+            calories:'',
+            fat:'',
+            protein:'',
+            carbs:'',
+            weight:'',
+            desiredWeight:'',
+            mealCount:'',
+            priceLimit:''
+        }
     }
-  }
 
   createPreferences = () => {
       console.log("CREATE PREFERENCES");
