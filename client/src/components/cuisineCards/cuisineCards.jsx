@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import './cuisineCards.css';
 
+
 function CuisineCards(props) {
     var settings = {
         dots: true,
@@ -25,7 +26,6 @@ function CuisineCards(props) {
                           key={meal.id}
                           {...meal }
                           cuisineType = {props.cuisineType}
-                          // favorites = {props.favorites}
                         />
                     )}
             </Slider>

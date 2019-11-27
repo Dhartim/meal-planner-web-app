@@ -12,15 +12,15 @@ export class Questionnaire extends Component {
     super(props);
 
     this.state = {
-      diet: '',
-      calories:'',
-      fat:'',
-      protein:'',
-      carbs:'',
-      weight:'',
-      desiredWeight:'',
-      mealCount:'',
-      priceLimit:''
+      diet: "",
+      macros: 0,
+      fat: 0,
+      protein: 0,
+      carbs: 0,
+      weight: 0,
+      desiredWeight: 0,
+      dailyMealFrequency: 0,
+      priceLimit: 0,
     }
   }
 

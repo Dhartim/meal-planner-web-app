@@ -6,6 +6,8 @@ import ProfileComponent from './accountComponents/profileComponent';
 import DetailComponent from './accountComponents/detailsComponent';
 import './accountPage.scss'
 
+const defaultIcon = require('./headshot.png');
+
 export default class AccountPage extends Component {
   constructor(props) {
     super(props);
