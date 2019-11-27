@@ -4,6 +4,7 @@ import Axios from "axios";
 import Stripe from "../stripe";
 import ProfileComponent from './accountComponents/profileComponent';
 import DetailComponent from './accountComponents/detailsComponent';
+import BarChartComponent from './accountComponents/chartsComponents'
 import './accountPage.scss'
 
 // const defaultIcon = require('./headshot.png');
@@ -100,6 +101,10 @@ export default class AccountPage extends Component {
               <ProfileComponent state = {this.state}  message = { message } />
               <div className='info__container'>
                 <div className="sideBar__container"></div>
+                <div  className="chart">
+                  <span className="chart__title">Macros for the day</span>
+                  <BarChartComponent />
+                </div>
                 <DetailComponent preference = {this.state.preferences} />
 
               </div>
