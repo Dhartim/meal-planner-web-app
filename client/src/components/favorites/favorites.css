@@ -1,8 +1,26 @@
 .favorites__row {
-  padding :2rem, 2rem, 2rem, 1rem;
-  display:flex;
+  padding :2rem 2rem 2rem 1rem;
+  display: table-cell;
+  width: 930px !important;
+  /*margin-left: auto;*/
+  /*margin-right: auto;*/
+  justify-content: center;
 }
 
 .card-container {
   padding-right: 2rem;
+  width: 400px;
+  display: inline-block;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+.favs-header {
+  color: #fff !important;
+  opacity: 90%;
+  text-align: center;
+  padding-top: 70px;
+  padding-bottom: 30px;
+  display: block;
 }

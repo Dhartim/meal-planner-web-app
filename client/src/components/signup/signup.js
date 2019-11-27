@@ -178,7 +178,7 @@ export class SignUp extends Component {
           <center className={"center-elem"}>
             {/*<Avatar className={classes.avatar} >*/}
               {/*<FastfoodSharpIcon />*/}
-              <Image className={"small-logo"} src={require("../../assets/images/full-logo.png")}/>
+              <Image className={"small-logo"} src={require("../../assets/images/new-logo.png")}/>
             {/*</Avatar>*/}
             <Typography component="h1" variant="h5">
               Sign up

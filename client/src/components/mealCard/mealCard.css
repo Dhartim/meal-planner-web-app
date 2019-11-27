@@ -14,7 +14,7 @@ h1 {
 
 .card {
 	width: 400px;
-	height: 700px;
+	/*height: 680px;*/
 	margin-left: auto;
 	margin-right: auto;
     background-color: #262833 !important;
@@ -28,12 +28,16 @@ h1 {
     height: 48px;
 }
 
+.modal-titles {
+    opacity: 87%;
+}
+
 .card-text {
     opacity: 70%;
 }
 
 .card-divider {
-    border-color: #FFAF5F;
+    border-color: #ff8680;
 }
 
 .meal-desc {
@@ -130,9 +134,9 @@ h1 {
 @media only screen and (min-width: 992px) {
     .image-block {
         display: inline-block;
-        width: 50%;
+        width: 100%;
         vertical-align: middle;
-        padding-right: 10px;
+        /*padding-right: 10px;*/
     }
 }
 
@@ -141,6 +145,16 @@ h1 {
     height: auto;
     display: inline-block;
     vertical-align: bottom;
+}
+
+.img-responsive {
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.modal-content {
+    background-color: var(--dark) !important;
+    color: #fff;
 }
 
 .content-block {
@@ -198,9 +212,9 @@ h1 {
 }
 
 span.icon.toggled.heart {
-    color: #ff6961;
+    color: var(--red);
 }
 
 .modalstyle {
-    padding: 30px;
+    padding-top: 6%;
 }
