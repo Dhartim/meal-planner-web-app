@@ -199,7 +199,8 @@ export class Home extends Component {
             <h2>Recommendations</h2>
             <Recommendations />
           </div>
-          <div>
+          <hr className={"page-hr"}/>
+          <div className={"button-container"}>
             <ButtonGroup color="primary" aria-label="outlined primary button group">
               <Button
                   variant="outlined"

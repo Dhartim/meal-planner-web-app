@@ -32,10 +32,14 @@ h2 {
 
 .cuisine-list {
     width: 1400px;
-    padding: 20px 30px;
+    padding: 0px 30px;
     margin-left: auto;
     margin-right: auto;
     text-align: left;
+}
+
+.meal-list {
+    padding-top: 20px !important;
 }
 
 .meal-list h2 {
@@ -49,6 +53,27 @@ h2 {
 }
 
 .recs-container h2 {
-    padding-top: 50px;
+    padding-top: 30px;
     padding-bottom: 20px;
+}
+
+.button-container {
+    /*padding-top: 80px;*/
+    text-align: center;
+}
+
+.button-container button {
+    background-color: #6f80dc !important;
+    border-color: #6f80dc !important;
+    color: #fff;
+    /*padding: 5px !important;*/
+}
+
+.page-hr {
+    background-color: #ff6961;
+    display: block;
+    width: 78%;
+    height: 1px;
+    margin-top: 80px;
+    margin-bottom: 80px;
 }
