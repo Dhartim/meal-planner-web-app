@@ -66,7 +66,16 @@ h2 {
     background-color: #6f80dc !important;
     border-color: #6f80dc !important;
     color: #fff;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 5px !important;
+    width: 200px;
+    height: 38px;
     /*padding: 5px !important;*/
+}
+
+button:hover {
+    background-color: var(--dark) !important;
 }
 
 .page-hr {
