@@ -85,9 +85,9 @@ export function LandingPage() {
                         </p>
                     </div>
                     <div className={"about-text"}>
-                        <img className={"about-image"} src={require("../../assets/images/ calendar.png")}/>
-                        <img className={"about-image"} src={require("../../assets/images/dashboard.png")}/>
-                        <img className={"about-image"} src={require("../../assets/images/bowl.png")}/>
+                        <img alt={"calendar"} className={"about-image"} src={require("../../assets/images/ calendar.png")}/>
+                        <img alt={"dashboard"} className={"about-image"} src={require("../../assets/images/dashboard.png")}/>
+                        <img alt={"bowl"} className={"about-image"} src={require("../../assets/images/bowl.png")}/>
                     </div>
                 </div>
             </div>
