@@ -53,7 +53,7 @@ export function LandingPage() {
                 </div>
                 <hr className={"about-divider"}/>
                 <div className={"about-text"}>
-                    <p>Meal Planneris an app to get you in the habit of eating healthy. It does this by tracking and
+                    <p>Meal Planner is an app to get you in the habit of eating healthy. It does this by tracking and
                         managing your meals according to your diet requirements. Every week Meal Planner will deliver
                         your personalized weekly meal plan to you. Meal Planner is the easier way to start eating
                         healthy.</p>
