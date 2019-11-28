@@ -1,0 +1,88 @@
+h2 {
+    color: #fff;
+    /*padding: 70px;*/
+    opacity: 87%;
+}
+
+.slick-arrow {
+    color: white !important;
+}
+
+.slick-prev:before {
+    color: white !important;
+}
+.slick-next:before {
+    color: white !important;
+}
+
+.slick-prev:after {
+    color: white !important;
+}
+.slick-next:after {
+    color: white !important;
+}
+
+.slick-dots {
+    margin-top: 10px !important;
+}
+
+.slick-dots li button:before {
+    color: white !important;
+}
+
+.cuisine-list {
+    width: 1400px;
+    padding: 0px 30px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.meal-list {
+    padding-top: 20px !important;
+}
+
+.meal-list h2 {
+    padding-left: 50px;
+}
+
+.recs-container {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.recs-container h2 {
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+.button-container {
+    /*padding-top: 80px;*/
+    text-align: center;
+}
+
+.button-container button {
+    background-color: #6f80dc !important;
+    border-color: #6f80dc !important;
+    color: #fff;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 5px !important;
+    width: 200px;
+    height: 38px;
+    /*padding: 5px !important;*/
+}
+
+button:hover {
+    background-color: var(--dark) !important;
+}
+
+.page-hr {
+    background-color: #ff6961;
+    display: block;
+    width: 78%;
+    height: 1px;
+    margin-top: 80px;
+    margin-bottom: 80px;
+}

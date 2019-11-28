@@ -1,22 +1,17 @@
-.login_card{
-    width: 500px;
-    height: 500px;
-    margin-left: auto;
-    margin-right: auto;
-    background: #FFFFFF;
-    border: 1px solid #254F66;
-    box-sizing: border-box;
-    border-radius: 45px;
+.btn {
+    width: 100%;
 }
-.login_button{
-    margin-left: 95px;
-    width: 200px;
+
+.center-elem {
+    width: 350px;
+    height: 350px;
 }
-.formfields{
-    width: 400px;
-    border-radius: 45px;
-    margin-top: 150px ;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: auto ;
+
+.small-logo {
+    width: 250px;
+    height: 250px !important;
+}
+
+.form-container {
+    margin-top: 40px;
 }
