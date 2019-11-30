@@ -4,12 +4,13 @@ import { OverlayTrigger, Form } from "react-bootstrap";
 import Tooltip from 'react-bootstrap/Tooltip'                                    
 import MealDetailModal from './MealDetailModal';
 import FavouriteButton from "./FavouriteButton";
+import UserAteButton from "./UserAteButton";
 
 export class FrontCard extends Component{
-    state = { checked: false }
+    // state = { checked: false }
     
-    handleCheckboxChange = event =>
-      this.setState({ checked: event.target.checked })
+    // handleCheckboxChange = event =>
+    //   this.setState({ checked: event.target.checked })
     
     render(){
         const meal = this.props.meal;
@@ -54,7 +55,8 @@ export class FrontCard extends Component{
                     <Card.Text>
                         Prep time : {meal.prepTime}
                     </Card.Text>
-                    <Form>
+                    <UserAteButton meal={meal.id}/>
+                    {/* <Form>
                         {['checkbox'].map(type => (
                             <div key={`default-${type}`} className="mb-3">
                             <Form.Check
@@ -64,7 +66,7 @@ export class FrontCard extends Component{
                             />
                             </div>
                         ))}
-                    </Form>
+                    </Form> */}
                     <div className="favourite-block">
                         <FavouriteButton meal_id={meal.id} favorites={meal.favorites}/>
                     </div>
