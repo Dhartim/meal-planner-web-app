@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 import { Bar } from 'react-chartjs-2';
 
 export default class BarChart extends Component {
+  constructor(props) {
+    super(props);
+    console.log(this.props)
+    this.state = {
+      barData: this.props.data
+    }
+  }
   render() {
     return (
       <div className='chart'>
-        {console.log(this.props.data)}
         <Bar
-          data={this.props.data}
+          data={this.state.barData}
           width={300}
           height={300}
           options={{ maintainAspectRatio: false }}

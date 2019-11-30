@@ -6,6 +6,7 @@ import ProfileComponent from './accountComponents/profileComponent';
 import DetailComponent from './accountComponents/detailsComponent';
 import BarChartComponent from './accountComponents/chartsComponents'
 import './accountPage.scss'
+const date = require('date-and-time');
 
 // const defaultIcon = require('./headshot.png');
 
@@ -102,25 +103,44 @@ export default class AccountPage extends Component {
   //           'rgba(153, 102, 255, 0.2)',
   //           'rgba(255, 159, 64, 0.2)'
   //       ],
+
+  mergeMeals(meal, newMeal) {
+    meal.price = meal.price +  newMeal.price;
+    for (let key in meal.Nutrition) {
+      if ( typeof(meal.Nutrition[key]) === "number" ) {
+        meal.Nutrition[key] += newMeal.Nutrition[key];
+      }
+    }
+    return meal;
+  }
  
   setWeek(today, dateData) {
     let dates = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    let data = []
-    let startDate = new Date (today.getDate() - today.getDay());
-    let endDate = new Date (today.getDate() + (7 - today.getDay()));
+    let data = new Array(dates.length)
+    let startDate = date.addDays(today, -today.getDay())
+    let endDate = date.addDays(today, 7-today.getDay());
+    let label = `Week of ${date.format(startDate, 'MMM. DD YYYY')}`;
     for(let i = 0; i < dates.length; i++ ) {
-      let day = new Date(dateData[i])
+      let day = new Date(dateData[i].createdAt)
       
-      if (startDate<=day && day >= endDate){
-        data.push(day.getDay())
+      if (startDate<=day && day <= endDate) {
+        if (!data[day.getDay()]){
+          data[day.getDay()] = dateData[i].Meal
+        } else {
+          let meal = data[day.getDay()]
+          let newMeal = dateData[i].Meal
+          data[day.getDay()] = this.mergeMeals(meal, newMeal)
+        }
       }
     }
+    console.log(data)
+
     this.setState({
       weekData: {
         labels: dates, 
         datasets: [
           {
-            label: `Week ${startDate.getDate} / ${startDate.getMonth} / ${startDate.getFullYear}`,
+            label,
             data,
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
@@ -157,16 +177,22 @@ export default class AccountPage extends Component {
   }
 
   componentDidMount() {
+    // const jwtToken = localStorage.getItem('jwtToken');
+    // // this.getAccountInfo(jwtToken)
+    // this.getGraphData(jwtToken)
+  };
+
+  componentWillMount() {
     const jwtToken = localStorage.getItem('jwtToken');
     // this.getAccountInfo(jwtToken)
     this.getGraphData(jwtToken)
-  };
+  }
 
   render() {
 
       let currTime = new Date();
       let message;
-      console.log(this.state)
+      // console.log(this.state)
       if (this.state.customerId && new Date(this.state.expiresAt) > currTime) {
           let expired = new Date(this.state.expiresAt);
           console.log(expired)
@@ -189,7 +215,7 @@ export default class AccountPage extends Component {
                 <div className="sideBar__container"></div>
                 <div  className="chart">
                   <span className="chart__title">Macros for the day</span>
-                  <BarChartComponent  data={this.state.weekData}/>
+                  <BarChartComponent  data={this.state.weekData} kind='price'/>
                 </div>
                 <DetailComponent preference = {this.state.preferences} />
 
