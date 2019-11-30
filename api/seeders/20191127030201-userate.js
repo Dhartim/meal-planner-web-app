@@ -12,15 +12,93 @@ module.exports = {
       {
         userId: 1,
         mealId: 1,
-        createdAt: new Date(),
+        createdAt: new Date("11/22/2019"),
         updatedAt: new Date()
       },
       {
         userId: 1,
         mealId: 2,
-        createdAt: new Date(),
+        createdAt: new Date("11/22/2019"),
         updatedAt: new Date()
-      }
+      },
+      {
+        userId: 1,
+        mealId: 3,
+        createdAt: new Date("11/23/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 4,
+        createdAt: new Date("11/24/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 5,
+        createdAt: new Date("11/25/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 4,
+        createdAt: new Date("11/26/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 3,
+        createdAt: new Date("11/27/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 2,
+        createdAt: new Date("11/28/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 1,
+        createdAt: new Date("11/29/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 2,
+        createdAt: new Date("11/20/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 2,
+        createdAt: new Date("11/21/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 2,
+        createdAt: new Date("11/22/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 2,
+        createdAt: new Date("11/23/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 2,
+        createdAt: new Date("11/24/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 2,
+        createdAt: new Date("11/25/2019"),
+        updatedAt: new Date()
+      },
     ], {});
   },
 
@@ -31,6 +109,6 @@ module.exports = {
       
       Example:
      */
-      return queryInterface.bulkDelete('Userates', null, {});
+      return queryInterface.bulkDelete('UserAtes', null, {});
   }
 };

@@ -23,7 +23,10 @@ export default class AccountPage extends Component {
       createdAt: "",
       updatedAt: "",
       preferences: {},
-      meals: {},
+      userMeals: {},
+      dayData: {},
+      weekData: {},
+      monthData: {}
     };
   }
 
@@ -71,17 +74,28 @@ export default class AccountPage extends Component {
     })
   }
 
+  setData(data) {
+    let today = new Date();
+  }
+
   getGraphData(jwtToken) {
-    Axios.get('/account', {
+    Axios.get('/ates', {
       headers: {"x-access-token" : jwtToken}
     }).then(response => {
-
-    })
+      console.log(response)
+      if (response.status===200) {
+        let data = response.data;
+        setData(data)
+      }
+    }).catch(error => {
+      console.log(error);
+  })
   }
 
   componentDidMount() {
     const jwtToken = localStorage.getItem('jwtToken');
-    this.getAccountInfo(jwtToken)
+    // this.getAccountInfo(jwtToken)
+    this.getGraphData(jwtToken)
   };
 
   render() {
@@ -111,7 +125,7 @@ export default class AccountPage extends Component {
                 <div className="sideBar__container"></div>
                 <div  className="chart">
                   <span className="chart__title">Macros for the day</span>
-                  <BarChartComponent  />
+                  <BarChartComponent  data={''}/>
                 </div>
                 <DetailComponent preference = {this.state.preferences} />
 

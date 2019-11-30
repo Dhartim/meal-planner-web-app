@@ -9,35 +9,21 @@ function list(req, res) {
     where: {
       userId: userid,
     },
+    attributes: ['createdAt'],
+    order: [
+      ['createdAt', 'DESC'],
+    ],
+    include:[{
+      model: Meal,
+      attributes: ['price'],
+      include:[{
+        model: Nutrition,
+        attributes: ['calories', 'totalFat', 'saturatedFat', 'cholesterol', 'sodium', 'totalCarbohydrates', 'fiber', 'sugar', 'protein']
+      }]
+    }]
   })
     .then((userAtes) => {
-      let userMealIds = [];
-      // push the userAtes mealId into the array
-      for(let i = 0; i < userAtes.length; i++) {
-        userMealIds.push(userAtes[i].mealId);
-      }
-      console.log("userMealIds: %s", userMealIds);
-      // Use the array of mealIds to find all those meals
-      return Meal
-        .findAll({
-          where: {
-            id: userMealIds,
-          },
-          attributes: ['price', 'createdAt'],
-          include: [{
-            model: Nutrition,
-            attributes: ['calories', 'totalFat', 'saturatedFat', 'cholesterol', 'sodium', 'totalCarbohydrates', 'fiber', 'sugar', 'protein']
-          }],
-        })
-        .then(meals => {
-          // logging purposes
-          // for(let j = 0; j < meals.length; j++) {
-          //   console.log("meals[%d]: %s", j, meals[j].id);
-          // }
-          // return the meals instead of favorite objects as the favorites table is mainly to keep track of
-          // the primaryKey associations
-          res.status(200).send(meals);
-        })
+      res.status(200).send(userAtes);
     })
     .catch((error) => res.status(400).send(error));
 }
