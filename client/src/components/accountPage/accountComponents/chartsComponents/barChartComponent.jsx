@@ -1,34 +1,66 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
+import { Bar } from 'react-chartjs-2';
 
-import {RadialChart, Hint} from 'react-vis';
-
-export default class SimpleRadialChart extends Component {
-  state = {
-    value: false
-  };
+export default class BarChart extends Component {
   render() {
-    const {value} = this.state;
     return (
-      <RadialChart
-        className={'donut-chart-example'}
-        innerRadius={100}
-        radius={140}
-        getAngle={d => d.theta}
-        data={[
-          {theta: 2, className: 'custom-class'},
-          {theta: 6},
-          {theta: 2},
-          {theta: 3},
-          {theta: 1}
-        ]}
-        onValueMouseOver={v => this.setState({value: v})}
-        onSeriesMouseOut={v => this.setState({value: false})}
-        width={300}
-        height={300}
-        padAngle={0.04}
-      >
-        {value !== false && <Hint value={value} />}
-      </RadialChart>
-    );
+      <div className='chart'>
+        {console.log(this.props.data)}
+        <Bar
+          data={this.props.data}
+          width={300}
+          height={300}
+          options={{ maintainAspectRatio: false }}
+        />
+      </div>
+    )
   }
 }
+
+
+
+
+
+// import {
+//     XYPlot,
+//     XAxis, // Shows the values on x axis
+//     YAxis, // Shows the values on y axis
+//     VerticalBarSeries,
+//     LabelSeries
+// } from 'react-vis';
+// export default class BarChart extends React.Component {
+//     render() {
+//         const data = this.props.data;
+//         const chartWidth = 800;
+//         const chartHeight = 500;
+//         const chartDomain = [0, chartHeight];
+//         return (
+//             <XYPlot 
+//                 xType="ordinal" 
+//                 width={chartWidth} 
+//                 height={chartHeight} 
+//                 yDomain={chartDomain}
+//             >
+//                 <XAxis />
+//                 <YAxis />
+//                 <VerticalBarSeries
+//                     data={data}
+//                         labelsStyle={{
+//                             textAnchor: 'middle',
+//                             fontSize: 12,
+//                             fontWeight: 500,
+//                             fill: '#e9e9e9'
+//                         }}
+//                 />
+//                 <LabelSeries
+//                     data={data.map(obj => {
+//                         return { ...obj, label: obj.y.toString() }
+//                     })}
+//                     labelAnchorX="middle"
+//                     labelAnchorY="text-after-edge"
+                  
+//                 />
+//             </XYPlot>
+//         );
+//     }
+// }

@@ -23,8 +23,10 @@ function list(req, res) {
           where: {
             id: userMealIds,
           },
+          attributes: ['price', 'createdAt'],
           include: [{
             model: Nutrition,
+            attributes: ['calories', 'totalFat', 'saturatedFat', 'cholesterol', 'sodium', 'totalCarbohydrates', 'fiber', 'sugar', 'protein']
           }],
         })
         .then(meals => {

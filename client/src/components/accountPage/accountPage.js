@@ -27,8 +27,7 @@ export default class AccountPage extends Component {
     };
   }
 
-  componentDidMount() {
-    const jwtToken = localStorage.getItem('jwtToken');
+  getAccountInfo(jwtToken) {
     Axios.get('/account', {
       headers: {"x-access-token" : jwtToken}
     })
@@ -70,16 +69,25 @@ export default class AccountPage extends Component {
     .catch(error => {
         console.log(error);
     })
+  }
+
+  getGraphData(jwtToken) {
+    Axios.get('/account', {
+      headers: {"x-access-token" : jwtToken}
+    }).then(response => {
+
+    })
+  }
+
+  componentDidMount() {
+    const jwtToken = localStorage.getItem('jwtToken');
+    this.getAccountInfo(jwtToken)
   };
 
   render() {
 
       let currTime = new Date();
       let message;
-
-      // console.log(this.state);
-      // console.log(this.state.expiresAt)
-      // console.log(currTime)
       console.log(this.state)
       if (this.state.customerId && new Date(this.state.expiresAt) > currTime) {
           let expired = new Date(this.state.expiresAt);
@@ -103,7 +111,7 @@ export default class AccountPage extends Component {
                 <div className="sideBar__container"></div>
                 <div  className="chart">
                   <span className="chart__title">Macros for the day</span>
-                  <BarChartComponent />
+                  <BarChartComponent  />
                 </div>
                 <DetailComponent preference = {this.state.preferences} />
 
