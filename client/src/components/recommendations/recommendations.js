@@ -27,7 +27,7 @@ export class Recommendations extends Component {
         })
       })
       .catch(error => error)
-      console.log("RECOMMENDATION = ", this.state.recommendations);
+     //console.log("RECOMMENDATION = ", this.state.recommendations);
   }
 
   render() {
@@ -43,7 +43,7 @@ export class Recommendations extends Component {
     if(loggedIn) {
       for(let i = 0; i < recommendations.length; i++) {
         let recommend = recommendations[i];
-        console.log("Recommendation =", recommend);
+       // console.log("Recommendation =", recommend);
         recommendationList.push( 
             <
               MealCard
