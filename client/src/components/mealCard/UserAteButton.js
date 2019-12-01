@@ -65,14 +65,6 @@ class UserAteButton extends React.Component {
     }
 //how to call these 2 functions ??
 //Also need to do create At something??
-/*
-Jordan Aldujaili 10:17 PM
-sorry.. so i only mean use created at to make sure the user doesnt keep hitting 
-the “i ate” button on the same day. it should clear out everyday so if the user wants to
-eat the same meal the next day, we can still record it and they wont see the 
-i ate box filled in from yesterday. its okay for this table to have the same 
-userid and the same mealId, as long as its not created at has a different day.
-*/
   render(){
       if(this.state.checked)
       {
