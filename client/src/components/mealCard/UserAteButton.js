@@ -13,25 +13,33 @@ class UserAteButton extends React.Component {
         };
         
        // this.isChecked = this.isChecked.bind(this);
-        this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+        this.hasAte = this.hasAte.bind(this);
+       // this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
         this.addChecked = this.addChecked.bind(this);
         this.removeChecked = this.removeChecked.bind(this);
     }
 
-    handleCheckboxChange = () =>{
-        this.setState(initialState => ({
-          checked: !initialState.checked,
-        }));
-    }
+    componentDidMount() {
+        // const isFaved = this.handleCheck(this.state.meal_id)
+        this.hasAte();
+      }
+    // handleCheckboxChange = () =>{
+    //     this.setState(initialState => ({
+    //       checked: !initialState.checked,
+    //     }));
+    // }
 
     addChecked(){
         const jwtToken = localStorage.getItem('jwtToken');
     
-        axios.post('/ate', {"mealId": this.state.meal_id},{ headers: {"x-access-token" : `${jwtToken}`} })
+        axios.post('/ate', 
+            {"mealId": this.state.meal_id},
+            { headers: {"x-access-token" : `${jwtToken}`} }
+        )
         .then(response => {
             if ((response.status === 201) || (response.status === 200)) {
                 this.setState({ checked : true });
-                console.log(response);
+                console.log("RESPONSE = ",response);
             } else {
                 console.log(`Error`);
             }
@@ -40,7 +48,7 @@ class UserAteButton extends React.Component {
             console.log("some error is being caught: %s", error)
         });
     }
-
+//this is not working properly. remove is not working , because meal IDS are not tracked properlycle
     removeChecked() {    
         const jwtToken = localStorage.getItem('jwtToken');
     
@@ -63,19 +71,42 @@ class UserAteButton extends React.Component {
             console.log("some error is being caught: %s", error)
         });
     }
+
+    hasAte() {
+        var { meal_id } = this.state;
+        if(meal_id === undefined) {
+          meal_id = 0;
+        }
+    
+        const token = localStorage.getItem('jwtToken');
+    
+        if(token !== null) {
+          axios
+            .get(`/hasAte/${meal_id}`, {
+              headers: {
+                'x-access-token': token
+              }
+            })
+            .then(res => {
+              if ((res.status === 201) || (res.status === 200)) {
+                this.setState({
+                  checked: res.data.hasAte
+                });
+                // console.log(res);
+              } else {
+                console.log(`Error`);
+              }
+            })
+            .catch(error => {
+              console.log("error: %s", error);
+            })
+        } else {
+          console.log("User Ate button - unauthorized.");
+        }
+      };
 //how to call these 2 functions ??
 //Also need to do create At something??
   render(){
-      if(this.state.checked)
-      {
-          //when checkbox is checked
-          //call post api 
-      }
-      else
-      {
-          //when checkbox is not checked.
-          //call delete api
-      }
     return (
       <div>
         <Form>
@@ -86,7 +117,7 @@ class UserAteButton extends React.Component {
                 id={`default-${type}`}
                 label={`I ate it`}
                 checked={this.state.checked}
-                onChange = {this.handleCheckboxChange}
+                onChange = {this.addChecked}
              />
             </div>
             ))}
