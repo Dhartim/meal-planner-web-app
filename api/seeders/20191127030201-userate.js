@@ -96,7 +96,19 @@ module.exports = {
       {
         userId: 1,
         mealId: 2,
-        createdAt: new Date("11/25/2019"),
+        createdAt: new Date("12/01/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 3,
+        createdAt: new Date("12/01/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 1,
+        createdAt: new Date("12/02/2019"),
         updatedAt: new Date()
       },
     ], {});

@@ -183,7 +183,7 @@ export default class AccountPage extends Component {
 
   componentDidMount() {
     const jwtToken = localStorage.getItem('jwtToken');
-    // // this.getAccountInfo(jwtToken)
+    this.getAccountInfo(jwtToken)
     this.getGraphData(jwtToken)
   };
 
