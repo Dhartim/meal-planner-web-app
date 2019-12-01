@@ -4,69 +4,59 @@ import { Bar } from 'react-chartjs-2';
 export default class BarChart extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props)
     this.state = {
       barData: this.props.data
     }
   }
+
+  componentWillReceiveProps(props) {
+    let temp = []
+    
+    if(props.data.datasets.length>0){
+      let dataset = props.data.datasets[0];
+      let label = dataset.label
+
+      dataset.data.forEach(day =>{
+        if(day === undefined ){
+          temp.push(0);
+        }else{
+          props.kind === 'price' ? temp.push(day[props.kind]) : temp.push(day.Nutrition[props.kind])
+        }
+      })
+      console.log('setting state')
+      this.setState({
+        barData: {
+          labels: props.data.labels,
+          dataset:{
+            label: props.data.datasets[0],
+            data: temp,
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+            ]
+          }
+        }
+      })
+    }
+  }
+
+  static defaultProps = {
+    displayTitle:true,
+    displayLegend: true,
+    legendPosition:'right',
+  }
+
   render() {
+    const options = { scales: { yAxes: [{ ticks: { beginAtZero: true, fontSize: 16, fontColor:'white' } }], xAxes: [{ ticks: { beginAtZero: true, fontSize: 16,fontColor:'white' } }] } }
     return (
       <div className='chart'>
+        {console.log('bardata', this.props.barData)}
         <Bar
           data={this.state.barData}
-          width={300}
+          options={options}
           height={300}
-          options={{ maintainAspectRatio: false }}
+          width={300}
         />
       </div>
     )
   }
 }
-
-
-
-
-
-// import {
-//     XYPlot,
-//     XAxis, // Shows the values on x axis
-//     YAxis, // Shows the values on y axis
-//     VerticalBarSeries,
-//     LabelSeries
-// } from 'react-vis';
-// export default class BarChart extends React.Component {
-//     render() {
-//         const data = this.props.data;
-//         const chartWidth = 800;
-//         const chartHeight = 500;
-//         const chartDomain = [0, chartHeight];
-//         return (
-//             <XYPlot 
-//                 xType="ordinal" 
-//                 width={chartWidth} 
-//                 height={chartHeight} 
-//                 yDomain={chartDomain}
-//             >
-//                 <XAxis />
-//                 <YAxis />
-//                 <VerticalBarSeries
-//                     data={data}
-//                         labelsStyle={{
-//                             textAnchor: 'middle',
-//                             fontSize: 12,
-//                             fontWeight: 500,
-//                             fill: '#e9e9e9'
-//                         }}
-//                 />
-//                 <LabelSeries
-//                     data={data.map(obj => {
-//                         return { ...obj, label: obj.y.toString() }
-//                     })}
-//                     labelAnchorX="middle"
-//                     labelAnchorY="text-after-edge"
-                  
-//                 />
-//             </XYPlot>
-//         );
-//     }
-// }

@@ -75,34 +75,40 @@ export default class AccountPage extends Component {
     })
   }
   
-  sameDay(d1, d2) {
-    return d1.getFullYear() === d2.getFullYear() &&
-      d1.getMonth() === d2.getMonth() &&
-      d1.getDate() === d2.getDate();
-  }
-  
   setDay(today, data) {
-    
+    let nutrition = {}
+    let label = date.format(today, 'MM DD YYYY')
     for (let i = 0; i< data.length; i++){
-      if (this.sameDay(new Date(data[i].createdAt), new Date())){
-
+      let day = new Date(data[i].createdAt)
+      if (date.isSameDay(day, new Date())){
+        if (Object.keys(nutrition).length === 0 && nutrition.constructor === Object){
+          Object.assign(nutrition, data[i].Meal)
+        }else{
+          nutrition = this.mergeMeals(nutrition, data[i].Meal)
+        }
       }
-      return
     }
+    let labels=[]
+    let values = []
+    for(let key in nutrition.Nutrition){
+      if(typeof(nutrition.Nutrition[key])==='number'){
+        labels.push(key)
+        values.push(nutrition.Nutrition[key])
+      }
+    }
+    this.setState({
+      dayData: {
+        labels: labels,
+        datasets: {
+          label,
+          data: values,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+          ]
+        }
+      }
+    })
   }
-  // data: {
-  //   labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-  //   datasets: [{
-  //       label: '# of Votes',
-  //       data: [12, 19, 3, 5, 2, 3],
-  //       backgroundColor: [
-  //           'rgba(255, 99, 132, 0.2)',
-  //           'rgba(54, 162, 235, 0.2)',
-  //           'rgba(255, 206, 86, 0.2)',
-  //           'rgba(75, 192, 192, 0.2)',
-  //           'rgba(153, 102, 255, 0.2)',
-  //           'rgba(255, 159, 64, 0.2)'
-  //       ],
 
   mergeMeals(meal, newMeal) {
     meal.price = meal.price +  newMeal.price;
@@ -157,7 +163,7 @@ export default class AccountPage extends Component {
 
   setData(data) {
     let today = new Date();
-    // this.setDay(today, data)
+    this.setDay(today, data)
     this.setWeek(today, data);
     // this.setMonth(today, data);
   }
@@ -166,7 +172,6 @@ export default class AccountPage extends Component {
     Axios.get('/ates', {
       headers: {"x-access-token" : jwtToken}
     }).then(response => {
-      console.log(response)
       if (response.status===200) {
         let data = response.data;
         this.setData(data)
@@ -177,19 +182,12 @@ export default class AccountPage extends Component {
   }
 
   componentDidMount() {
-    // const jwtToken = localStorage.getItem('jwtToken');
+    const jwtToken = localStorage.getItem('jwtToken');
     // // this.getAccountInfo(jwtToken)
-    // this.getGraphData(jwtToken)
+    this.getGraphData(jwtToken)
   };
 
-  componentWillMount() {
-    const jwtToken = localStorage.getItem('jwtToken');
-    // this.getAccountInfo(jwtToken)
-    this.getGraphData(jwtToken)
-  }
-
   render() {
-
       let currTime = new Date();
       let message;
       // console.log(this.state)
@@ -210,6 +208,7 @@ export default class AccountPage extends Component {
 
       return (
           <div>
+            {console.log('day: ', this.state.dayData, ' week: ', this.state.weekData)}
               <ProfileComponent state = {this.state}  message = { message } />
               <div className='info__container'>
                 <div className="sideBar__container"></div>
