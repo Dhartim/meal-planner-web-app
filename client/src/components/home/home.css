@@ -1,6 +1,5 @@
 h2 {
     color: #fff;
-    /*padding: 70px;*/
     opacity: 87%;
 }
 
@@ -71,11 +70,11 @@ h2 {
     border-radius: 5px !important;
     width: 200px;
     height: 38px;
-    /*padding: 5px !important;*/
 }
 
-button:hover {
+.button-container button:hover {
     background-color: var(--dark) !important;
+    border-color: var(--dark) !important;
 }
 
 .page-hr {
