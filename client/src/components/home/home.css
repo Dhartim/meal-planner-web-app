@@ -45,6 +45,12 @@ h2 {
     padding-left: 50px;
 }
 
+.recs {
+    padding-left: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
 .recs-container {
     text-align: center;
     margin-left: auto;
@@ -84,4 +90,12 @@ h2 {
     height: 1px;
     margin-top: 80px;
     margin-bottom: 80px;
+}
+
+h6 {
+    padding-left: 10px !important;
+}
+
+.dropdown-item {
+    margin: auto;
 }
