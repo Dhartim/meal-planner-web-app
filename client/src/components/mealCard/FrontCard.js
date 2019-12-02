@@ -55,7 +55,7 @@ export class FrontCard extends Component{
                     <Card.Text>
                         Prep time : {meal.prepTime}
                     </Card.Text>
-                    <UserAteButton meal={meal.id}/>
+                    <UserAteButton meal_id={meal.id}/>
                     {/* <Form>
                         {['checkbox'].map(type => (
                             <div key={`default-${type}`} className="mb-3">

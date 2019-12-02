@@ -100,7 +100,7 @@ class UserAteButton extends React.Component {
 //how to call these 2 functions ??
 //Also need to do create At something??
   render(){
-      const {isEaten} = this.state.checked
+      const isEaten = this.state.checked
       console.log(isEaten)
     return (
       <div>
