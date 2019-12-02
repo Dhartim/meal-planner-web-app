@@ -12,7 +12,7 @@ export class CompactCard extends Component {
             <Card>
                 <img className={"compact-card"} src={meal.imgUrl}/>
                 <div className={"compact-card"}>
-                    <p>{meal.dishName}</p>
+                    {meal.dishName}
                 </div>
                 <div>
                     <Button>Details</Button>
