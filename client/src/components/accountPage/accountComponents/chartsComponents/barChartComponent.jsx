@@ -67,9 +67,6 @@ export default class BarChart extends Component {
   }
 
   render() {
-    const options = {
-      
-  }
     const { barData } = this.state;
     return (
       <div className='chart'>
@@ -113,8 +110,7 @@ export default class BarChart extends Component {
                     fontColor:'white' 
                   } 
                 }
-              ] 
-            } 
+              ]} 
             }
           }
           height={300}

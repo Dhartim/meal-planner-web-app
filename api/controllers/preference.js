@@ -95,9 +95,15 @@ function updatePreferences(req, res) {
           updatedValues[param] = data
       }
   }
-
-  return Preference.update(updatedValues, { where: { userId } })
+  console.log('updated values:', updatedValues)
+  return Preference.update(updatedValues, 
+    { 
+      where: {
+        userId 
+      } 
+    })
     .then((preference) => {
+      console.log('perferences: ', preference)
       if (!preference) {
         return res.status(404).send({
           message: 'User does not have preferences.',
