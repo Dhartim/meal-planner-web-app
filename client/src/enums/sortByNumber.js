@@ -1,4 +1,4 @@
-export const sortByPrice = {
+export const sortByNumber = {
   ANYTHING: 'Anything',
   ASCENDING: 'Ascending',
   DESCENDING: 'Descending',

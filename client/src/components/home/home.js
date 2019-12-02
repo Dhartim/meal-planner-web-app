@@ -14,10 +14,11 @@ import Slider from "react-slick";
 
 import './sliderCards.css';
 
-import { sortingOrderStates } from '../../enums/sortOrder'
+import { filterOrderStates } from '../../enums/filterOrder'
 import { cuisineType, cuisineTypeList } from '../../enums/cuisineType'
 import { dietType, dietTypeList } from '../../enums/dietType'
-import { sortByPrice } from "../../enums/price";
+import { sortByNumber } from "../../enums/sortByNumber";
+import { sortOrder } from "../../enums/sortOrder";
 
 const mealCardSliderSettings = {
   dots: true,
@@ -40,7 +41,7 @@ export class Home extends Component {
     dietTypeList.forEach(type => {
       dietFilterItems.push(
         <Dropdown.Item onClick={() => {
-          this.setSort(sortingOrderStates.DIET_TYPE);
+          this.setSort(filterOrderStates.DIET_TYPE);
           this.setFilter(type);
         }}>{type}</Dropdown.Item>
       );
@@ -49,7 +50,7 @@ export class Home extends Component {
     cuisineTypeList.forEach(type => {
       cuisineFilterItems.push(
         <Dropdown.Item onClick={() => {
-          this.setSort(sortingOrderStates.CUISINE_TYPE);
+          this.setSort(filterOrderStates.CUISINE_TYPE);
           this.setFilter(type);
         }}>{type}</Dropdown.Item>
       )
@@ -59,7 +60,9 @@ export class Home extends Component {
       meals: [],
       homeMealSortOrder: orderOption,
       filter: dietType.ANYTHING,
-      priceSort: sortByPrice.ANYTHING,
+      currentSort: sortOrder.NONE,
+      priceSort: sortByNumber.ANYTHING,
+      calorieSort: sortByNumber.ANYTHING,
       loader: true,
       loader2: true,
     }
@@ -79,6 +82,7 @@ export class Home extends Component {
 
     this.initializeFilter();
     this.initializePriceSort();
+    this.initializeCalorieSort();
 
     axios
       .get('/meals',{
@@ -97,19 +101,73 @@ export class Home extends Component {
       });
   }
 
+  validNumberSortOrder = (sort) => {
+    for (let k in sortByNumber) {
+      if (sortByNumber[k] === sort) {
+        return true;
+      }
+    }
+    return false;
+  };
+
   initializePriceSort = () => {
     const sort = localStorage.getItem('priceSort');
-    this.setState({
-      priceSort: sort
-    });
+    if(this.validNumberSortOrder(sort)) {
+      this.setState({
+        currentSort: sortOrder.PRICE,
+        priceSort: sort
+      });
+    } else {
+      this.setState({
+        currentSort: sortOrder.NONE,
+        priceSort: sortByNumber.ANYTHING
+      });
+    }
   };
 
   setPriceSort = (sort) => {
-    console.log("priceSort=%s", sort);
     localStorage.setItem('priceSort', sort);
-    this.setState({
-      priceSort: sort
-    });
+    if(this.validNumberSortOrder(sort)) {
+      this.setState({
+        currentSort: sortOrder.PRICE,
+        priceSort: sort
+      });
+    } else {
+      this.setState({
+        currentSort: sortOrder.NONE,
+        priceSort: sortByNumber.ANYTHING
+      });
+    }
+  };
+
+  initializeCalorieSort = () => {
+    const sort = localStorage.getItem('calorieSort');
+    if(this.validNumberSortOrder(sort)) {
+      this.setState({
+        currentSort: sortOrder.CALORIES,
+        calorieSort: sort
+      });
+    } else {
+      this.setState({
+        currentSort: sortOrder.NONE,
+        calorieSort: sortByNumber.ANYTHING
+      });
+    }
+  };
+
+  setCalorieSort = (sort) => {
+    localStorage.setItem('calorieSort', sort);
+    if(this.validNumberSortOrder(sort)) {
+      this.setState({
+        currentSort: sortOrder.CALORIES,
+        calorieSort: sort
+      });
+    } else {
+      this.setState({
+        currentSort: sortOrder.NONE,
+        calorieSort: sortByNumber.ANYTHING
+      });
+    }
   };
 
   setSort = (type) => {
@@ -145,7 +203,7 @@ export class Home extends Component {
     for(let i = 0; i < meals.length; i++) {
       let meal = meals[i];
       // Get the type by the typeName parameter(s)
-      let type = sortOrder === sortingOrderStates.CUISINE_TYPE ?  meal[args[0]][args[1]] : meal[args[0]];
+      let type = sortOrder === filterOrderStates.CUISINE_TYPE ?  meal[args[0]][args[1]] : meal[args[0]];
       // Filter out headers that aren't being searched for
       if(filter === dietType.ANYTHING || filter === cuisineType.ANYTHING || type === filter) {
         // if object does not have property with key of the type name, add it
@@ -176,13 +234,13 @@ export class Home extends Component {
                 [].concat(listByType)
                   .filter(meal => { // Filter out any meals that don't match
                     switch(homeMealSortOrder) {
-                      case sortingOrderStates.DIET_TYPE:
+                      case filterOrderStates.DIET_TYPE:
                         let validDiet = false;
                         if (filter === dietType.ANYTHING || meal.dietType === filter) {
                           validDiet = true;
                         }
                         return validDiet;
-                      case sortingOrderStates.CUISINE_TYPE:
+                      case filterOrderStates.CUISINE_TYPE:
                         let validCuisine = false;
                         if (filter === cuisineType.ANYTHING || meal.Cuisine.cuisineType === filter) {
                           validCuisine = true;
@@ -193,18 +251,32 @@ export class Home extends Component {
                     }
                   })
                   .sort((meal1, meal2) => {
-                    switch(this.state.priceSort) {
-                      case sortByPrice.DESCENDING:
-                        return meal2.price - meal1.price;
-                      case sortByPrice.ASCENDING:
-                        return meal1.price - meal2.price;
+                    switch(this.state.currentSort) {
+                      case sortOrder.CALORIES:
+                        switch(this.state.calorieSort) {
+                          case sortByNumber.DESCENDING:
+                            return meal2.Nutrition.calories - meal1.Nutrition.calories;
+                          case sortByNumber.ASCENDING:
+                            return meal1.Nutrition.calories - meal2.Nutrition.calories;
+                          default:
+                            return 0;
+                        }
+                      case sortOrder.PRICE:
+                        switch(this.state.priceSort) {
+                          case sortByNumber.DESCENDING:
+                            return meal2.price - meal1.price;
+                          case sortByNumber.ASCENDING:
+                            return meal1.price - meal2.price;
+                          default:
+                            return 0;
+                        }
                       default:
                         return 0;
                     }
                   })
                   .map(meal => {
-                    console.log(this.state.priceSort);
-                    console.log(meal.price);
+                    // console.log(meal.price);
+                    // console.log(meal.Nutrition.calories);
                     return (
                       <
                         MealCard
@@ -239,7 +311,7 @@ export class Home extends Component {
     if(!loader) {
       switch(homeMealSortOrder) {
         default:
-        case sortingOrderStates.CUISINE_TYPE:
+        case filterOrderStates.CUISINE_TYPE:
           /*
            * {
            *    Keto: [{meal...}, ...],
@@ -254,7 +326,7 @@ export class Home extends Component {
 
           mealList = cuisineList;
           break;
-        case sortingOrderStates.DIET_TYPE:
+        case filterOrderStates.DIET_TYPE:
           const mealsByDietType = this.initializeMealsByType(meals, homeMealSortOrder, 'dietType');
           const dietTypeCardComponents = this.pushMealCardsToList(mealsByDietType);
 
@@ -290,19 +362,33 @@ export class Home extends Component {
             </Dropdown>
             <Dropdown>
               <Dropdown.Toggle id="dropdown-basic">
-                Price
+                Sort
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
+
+                <h6>Price</h6>
                 <Dropdown.Item onClick={() => {
-                  this.setPriceSort(sortByPrice.ANYTHING);
+                  this.setPriceSort(sortByNumber.ANYTHING);
                 }}>-</Dropdown.Item>
                 <Dropdown.Item onClick={() => {
-                  this.setPriceSort(sortByPrice.ASCENDING);
+                  this.setPriceSort(sortByNumber.ASCENDING);
                 }}>Ascending</Dropdown.Item>
                 <Dropdown.Item onClick={() => {
-                  this.setPriceSort(sortByPrice.DESCENDING);
+                  this.setPriceSort(sortByNumber.DESCENDING);
                 }}>Descending</Dropdown.Item>
+
+                <h6>Calories</h6>
+                <Dropdown.Item onClick={() => {
+                  this.setCalorieSort(sortByNumber.ANYTHING);
+                }}>-</Dropdown.Item>
+                <Dropdown.Item onClick={() => {
+                  this.setCalorieSort(sortByNumber.ASCENDING);
+                }}>Ascending</Dropdown.Item>
+                <Dropdown.Item onClick={() => {
+                  this.setCalorieSort(sortByNumber.DESCENDING);
+                }}>Descending</Dropdown.Item>
+
               </Dropdown.Menu>
             </Dropdown>
           </ButtonGroup>

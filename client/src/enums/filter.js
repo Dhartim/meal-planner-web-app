@@ -1,2 +1,0 @@
-import { sortingOrderStates } from "./sortOrder"
-
