@@ -5,6 +5,8 @@ import Stripe from "../stripe";
 import ProfileComponent from './accountComponents/profileComponent';
 import DetailComponent from './accountComponents/detailsComponent';
 import BarChartComponent from './accountComponents/chartsComponents'
+import RadioGroup from '../subcomponents/radioGroup';
+
 import './accountPage.scss'
 const date = require('date-and-time');
 
@@ -27,7 +29,8 @@ export default class AccountPage extends Component {
       userMeals: {},
       dayData: {},
       weekData: {},
-      monthData: {}
+      monthData: {},
+      kind:'price'
     };
   }
 
@@ -187,6 +190,14 @@ export default class AccountPage extends Component {
     this.getGraphData(jwtToken)
   };
 
+  onRadioClick = kind => {
+    console.log('kind:', kind)
+    this.setState({
+      kind: kind
+    })
+    console.log(this.state)
+  }
+
   render() {
       let currTime = new Date();
       let message;
@@ -214,10 +225,23 @@ export default class AccountPage extends Component {
                 <div className="sideBar__container"></div>
                 <div  className="chart">
                   <span className="chart__title">Macros for the day</span>
-                  <BarChartComponent  data={this.state.weekData} kind='price'/>
+                  <BarChartComponent  data={this.state.weekData} kind={this.state.kind}/>
+                  <RadioGroup
+                    radio={[
+                      {id: "weekChart", name: "weekChart", value: "price", label: "Price", onClick:this.onRadioClick.bind(this, 'price'), checked:"true"},
+                      {id: "weekChart", name: "weekChart", value: "calories", label: "Calories", onClick:this.onRadioClick.bind(this, 'calories')},
+                      {id: "weekChart", name: "weekChart", value: "totalFat", label: "Fat", onClick:this.onRadioClick.bind(this, 'totalFat')},
+                      {id: "weekChart", name: "weekChart", value: "totalCarbohydrates", label: "Carbs", onClick:this.onRadioClick.bind(this, 'totalCarbohydrates')},
+                      {id: "weekChart", name: "weekChart", value: "protein", label: "Protein", onClick:this.onRadioClick.bind(this, 'protein')},
+                    ]}
+                    state={this.state.kind}
+                    
+                  />
+                </div>
+                <div className="dayChart">
+                  
                 </div>
                 <DetailComponent preference = {this.state.preferences} />
-
               </div>
           </div>
       )
