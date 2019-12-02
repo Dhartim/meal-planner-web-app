@@ -1,7 +1,33 @@
 .recommend__row {
-  padding :2rem, 2rem, 2rem, 1rem;
+    /*padding: 2rem, 2rem, 2rem, 1rem;*/
 }
 
 .card-container {
-  padding-right: 2rem;
+    padding-right: 2rem;
+}
+
+.slick-arrow {
+    color: white !important;
+}
+
+.slick-prev:before {
+    color: white !important;
+}
+.slick-next:before {
+    color: white !important;
+}
+
+.slick-prev:after {
+    color: white !important;
+}
+.slick-next:after {
+    color: white !important;
+}
+
+.slick-dots {
+    margin-top: 10px !important;
+}
+
+.slick-dots li button:before {
+    color: white !important;
 }

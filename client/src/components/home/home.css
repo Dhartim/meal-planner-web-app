@@ -1,6 +1,5 @@
 h2 {
     color: #fff;
-    /*padding: 70px;*/
     opacity: 87%;
 }
 
@@ -46,6 +45,12 @@ h2 {
     padding-left: 50px;
 }
 
+.recs {
+    padding-left: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
 .recs-container {
     text-align: center;
     margin-left: auto;
@@ -71,11 +76,11 @@ h2 {
     border-radius: 5px !important;
     width: 200px;
     height: 38px;
-    /*padding: 5px !important;*/
 }
 
-button:hover {
+.button-container button:hover {
     background-color: var(--dark) !important;
+    border-color: var(--dark) !important;
 }
 
 .page-hr {
@@ -85,4 +90,12 @@ button:hover {
     height: 1px;
     margin-top: 80px;
     margin-bottom: 80px;
+}
+
+h6 {
+    padding-left: 10px !important;
+}
+
+.dropdown-item {
+    margin: auto;
 }

@@ -4,8 +4,17 @@ import Axios from "axios";
 import Stripe from "../stripe";
 import ProfileComponent from './accountComponents/profileComponent';
 import DetailComponent from './accountComponents/detailsComponent';
-import BarChartComponent from './accountComponents/chartsComponents'
+import BarChartComponent from './accountComponents/chartsComponents';
+import DonutChart from './accountComponents/chartsComponents';
+import RadioGroup from '../subcomponents/radioGroup';
+import { Pie } from 'react-chartjs-2';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
+
 import './accountPage.scss'
+const date = require('date-and-time');
 
 // const defaultIcon = require('./headshot.png');
 
@@ -26,7 +35,8 @@ export default class AccountPage extends Component {
       userMeals: {},
       dayData: {},
       weekData: {},
-      monthData: {}
+      monthData: {},
+      kind:'price'
     };
   }
 
@@ -74,55 +84,118 @@ export default class AccountPage extends Component {
     })
   }
   
-  sameDay(d1, d2) {
-    return d1.getFullYear() === d2.getFullYear() &&
-      d1.getMonth() === d2.getMonth() &&
-      d1.getDate() === d2.getDate();
-  }
-  
   setDay(today, data) {
-    
+    let nutrition = {}
+    let label = date.format(today, 'MM DD YYYY')
     for (let i = 0; i< data.length; i++){
-      if (this.sameDay(new Date(data[i].createdAt), new Date())){
-
+      let day = new Date(data[i].createdAt)
+      if (date.isSameDay(day, new Date())){
+        if (Object.keys(nutrition).length === 0 && nutrition.constructor === Object){
+          Object.assign(nutrition, data[i].Meal)
+        }else{
+          nutrition = this.mergeMeals(nutrition, data[i].Meal)
+        }
       }
-      return
     }
+    let labels=[]
+    let values = []
+    let totalCalories = 0;
+
+    for(let key in nutrition.Nutrition){
+      if(typeof(nutrition.Nutrition[key])==='number'){
+        if ( key!=='calories') {
+          if (key==='totalFat'){
+            totalCalories += nutrition.Nutrition[key] * 9
+          } else {
+            totalCalories += nutrition.Nutrition[key] * 7
+          }
+        }
+      }
+    }
+    for(let key in nutrition.Nutrition){
+      if(typeof(nutrition.Nutrition[key])==='number'){
+        if ( key!=='calories') {
+          labels.push(key)
+          let cal = 0;
+          if (key==='totalFat'){
+            cal = nutrition.Nutrition[key] * 9
+          } else {
+            cal = nutrition.Nutrition[key] * 7
+          }
+          values.push(Math.round((cal/totalCalories)*100))
+        }
+      }
+    }
+    this.setState({
+      dayData: {
+        labels: labels,
+        datasets: [
+          {
+          label,
+          data: values,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)'
+          ]
+        }
+      ]
+      }
+    })
   }
-  // data: {
-  //   labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-  //   datasets: [{
-  //       label: '# of Votes',
-  //       data: [12, 19, 3, 5, 2, 3],
-  //       backgroundColor: [
-  //           'rgba(255, 99, 132, 0.2)',
-  //           'rgba(54, 162, 235, 0.2)',
-  //           'rgba(255, 206, 86, 0.2)',
-  //           'rgba(75, 192, 192, 0.2)',
-  //           'rgba(153, 102, 255, 0.2)',
-  //           'rgba(255, 159, 64, 0.2)'
-  //       ],
+
+  mergeMeals(meal, newMeal) {
+    meal.price = meal.price +  newMeal.price;
+    for (let key in meal.Nutrition) {
+      if ( typeof(meal.Nutrition[key]) === "number" ) {
+        meal.Nutrition[key] += newMeal.Nutrition[key];
+      }
+    }
+    return meal;
+  }
  
   setWeek(today, dateData) {
     let dates = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    let data = []
-    let startDate = new Date (today.getDate() - today.getDay());
-    let endDate = new Date (today.getDate() + (7 - today.getDay()));
+    let data = [undefined *7]
+    let rawToday = new Date(date.format(today, 'MM DD YYYY'));
+    let startDate = date.addDays(rawToday, -today.getDay())
+    let endDate = date.addDays(rawToday, 7-today.getDay());
+    let label = this.state.kind;
+    // let label = `Week of ${date.format(startDate, 'MMM. DD YYYY')}`;
     for(let i = 0; i < dates.length; i++ ) {
-      let day = new Date(dateData[i])
-      
-      if (startDate<=day && day >= endDate){
-        data.push(day.getDay())
-      }
+      let day = new Date(dateData[i].createdAt)
+      if (startDate<=day && day <= endDate) {
+        if (!data[day.getDay()]){
+          data[day.getDay()] = dateData[i].Meal
+
+        } else {
+          let meal = data[day.getDay()]
+          let newMeal = dateData[i].Meal
+          data[day.getDay()] = this.mergeMeals(meal, newMeal)
+        }
+      } 
+
     }
+
+    let datum = data.map(d=>{
+      return d ? d : 0
+    })
+
     this.setState({
       weekData: {
         labels: dates, 
         datasets: [
           {
-            label: `Week ${startDate.getDate} / ${startDate.getMonth} / ${startDate.getFullYear}`,
-            data,
+            label,
+            data:datum,
             backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 99, 132, 0.2)',
               'rgba(255, 99, 132, 0.2)',
             ]
           }
@@ -137,7 +210,7 @@ export default class AccountPage extends Component {
 
   setData(data) {
     let today = new Date();
-    // this.setDay(today, data)
+    this.setDay(today, data)
     this.setWeek(today, data);
     // this.setMonth(today, data);
   }
@@ -146,7 +219,6 @@ export default class AccountPage extends Component {
     Axios.get('/ates', {
       headers: {"x-access-token" : jwtToken}
     }).then(response => {
-      console.log(response)
       if (response.status===200) {
         let data = response.data;
         this.setData(data)
@@ -158,18 +230,27 @@ export default class AccountPage extends Component {
 
   componentDidMount() {
     const jwtToken = localStorage.getItem('jwtToken');
-    // this.getAccountInfo(jwtToken)
+    this.getAccountInfo(jwtToken)
     this.getGraphData(jwtToken)
   };
 
-  render() {
+  onRadioClick = kind => {
+    this.setState({
+      kind: kind
+    })
+  }
+  static defaultProps = {
+    displayTitle:true,
+    displayLegend: true,
+    legendPosition:'bottom',
+  }
 
+  render() {
       let currTime = new Date();
       let message;
-      console.log(this.state)
       if (this.state.customerId && new Date(this.state.expiresAt) > currTime) {
           let expired = new Date(this.state.expiresAt);
-          console.log(expired)
+          // console.log(expired)
           message = <div>
               <p>
                   Your subscription is current.
@@ -182,17 +263,73 @@ export default class AccountPage extends Component {
           message = <Stripe />;
       }
 
+      let settings = {
+        dots: true,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    };
+
       return (
           <div>
               <ProfileComponent state = {this.state}  message = { message } />
               <div className='info__container'>
-                <div className="sideBar__container"></div>
-                <div  className="chart">
-                  <span className="chart__title">Macros for the day</span>
-                  <BarChartComponent  data={this.state.weekData}/>
+                <div className="details-container">
+                  <DetailComponent preference = {this.state.preferences} />
                 </div>
-                <DetailComponent preference = {this.state.preferences} />
-
+                <div className="chart__container">
+                <div  className="chart">
+                  <Slider {...settings}>
+                  <div className="dayChart">
+                    <Pie
+                      data={this.state.dayData}
+                      options={{
+                        title:{
+                          display:"stuff",
+                          text:"Today's Macros",
+                          fontSize:25,
+                          fontColor: 'white'
+                        },
+                        legend:{
+                          display:true,
+                          position:'bottom',
+                          labels: {
+                            fontSize: 25,
+                            fontColor: 'white'
+                          }
+                        },
+                        label: {
+                          fontSize: 25
+                        },
+                        tooltips: {
+                          titleFontSize: 20,
+                          bodyFontSize: 20
+                        }
+                      }
+                    }
+                    height={300}
+                    ></Pie>
+                  </div>
+                  <div className="weekChart">
+                    <BarChartComponent  data={this.state.weekData} kind={this.state.kind}/>
+                    <RadioGroup
+                      radio={[
+                        {id: "weekChart", name: "weekChart", value: "price", label: "Price", onClick:this.onRadioClick.bind(this, 'price'), checked:"true"},
+                        {id: "weekChart", name: "weekChart", value: "calories", label: "Calories", onClick:this.onRadioClick.bind(this, 'calories')},
+                        {id: "weekChart", name: "weekChart", value: "totalFat", label: "Fat", onClick:this.onRadioClick.bind(this, 'totalFat')},
+                        {id: "weekChart", name: "weekChart", value: "totalCarbohydrates", label: "Carbs", onClick:this.onRadioClick.bind(this, 'totalCarbohydrates')},
+                        {id: "weekChart", name: "weekChart", value: "protein", label: "Protein", onClick:this.onRadioClick.bind(this, 'protein')},
+                      ]}
+                      state={this.state.kind}
+                      />
+                  </div>
+                  </Slider>
+                  
+                </div>
+                </div>
+                
+                
               </div>
           </div>
       )

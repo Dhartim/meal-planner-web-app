@@ -66,13 +66,13 @@ module.exports = {
       {
         userId: 1,
         mealId: 2,
-        createdAt: new Date("11/20/2019"),
+        createdAt: new Date("11/30/2019"),
         updatedAt: new Date()
       },
       {
         userId: 1,
-        mealId: 2,
-        createdAt: new Date("11/21/2019"),
+        mealId: 4,
+        createdAt: new Date("11/30/2019"),
         updatedAt: new Date()
       },
       {
@@ -96,7 +96,49 @@ module.exports = {
       {
         userId: 1,
         mealId: 2,
-        createdAt: new Date("11/25/2019"),
+        createdAt: new Date("12/01/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 2,
+        createdAt: new Date("12/01/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 4,
+        createdAt: new Date("12/02/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 7,
+        createdAt: new Date("12/01/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 5,
+        createdAt: new Date("12/01/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 6,
+        createdAt: new Date("12/02/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 7,
+        createdAt: new Date("12/03/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 6,
+        createdAt: new Date("12/03/2019"),
         updatedAt: new Date()
       },
     ], {});
