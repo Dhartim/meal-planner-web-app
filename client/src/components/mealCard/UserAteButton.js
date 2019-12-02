@@ -20,9 +20,8 @@ class UserAteButton extends React.Component {
     }
 
     componentDidMount() {
-        // const isFaved = this.handleCheck(this.state.meal_id)
         this.hasAte();
-      }
+    }
     // handleCheckboxChange = () =>{
     //     this.setState(initialState => ({
     //       checked: !initialState.checked,
@@ -107,6 +106,7 @@ class UserAteButton extends React.Component {
 //how to call these 2 functions ??
 //Also need to do create At something??
   render(){
+      
     return (
       <div>
         <Form>
