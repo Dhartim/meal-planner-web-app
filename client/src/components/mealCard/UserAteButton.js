@@ -1,7 +1,5 @@
 import React from 'react';
 import axios from "axios";
-//when checked -> it should call some api
-//wen unchecked it should call some other api
 import {Form} from "react-bootstrap";
 class UserAteButton extends React.Component {
     constructor(props)
@@ -40,7 +38,6 @@ class UserAteButton extends React.Component {
             console.log("some error is being caught: %s", error)
         });
     }
-//this is not working properly. remove is not working , because meal IDS are not tracked properlycle
     removeChecked() {    
         const jwtToken = localStorage.getItem('jwtToken');
     
@@ -97,11 +94,9 @@ class UserAteButton extends React.Component {
           console.log("User Ate button - unauthorized.");
         }
     }  
-//how to call these 2 functions ??
-//Also need to do create At something??
+
   render(){
       const isEaten = this.state.checked
-      console.log(isEaten)
     return (
       <div>
         <Form>

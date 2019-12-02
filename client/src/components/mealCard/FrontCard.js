@@ -7,11 +7,6 @@ import FavouriteButton from "./FavouriteButton";
 import UserAteButton from "./UserAteButton";
 
 export class FrontCard extends Component{
-    // state = { checked: false }
-    
-    // handleCheckboxChange = event =>
-    //   this.setState({ checked: event.target.checked })
-    
     render(){
         const meal = this.props.meal;
         // console.log("Meals = " , this.props);
@@ -56,17 +51,6 @@ export class FrontCard extends Component{
                         Prep time : {meal.prepTime}
                     </Card.Text>
                     <UserAteButton meal_id={meal.id}/>
-                    {/* <Form>
-                        {['checkbox'].map(type => (
-                            <div key={`default-${type}`} className="mb-3">
-                            <Form.Check
-                                type={type}
-                                id={`default-${type}`}
-                                label={`I ate it`}
-                            />
-                            </div>
-                        ))}
-                    </Form> */}
                     <div className="favourite-block">
                         <FavouriteButton meal_id={meal.id} favorites={meal.favorites}/>
                     </div>
