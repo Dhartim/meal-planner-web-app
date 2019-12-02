@@ -1,13 +1,61 @@
-.signup_box{
-    width: 500px;
-    height: 500px;
-    background: #FFFFFF;
-    border: 1px solid #254F66;
-    box-sizing: border-box;
-    border-radius: 45px;
+.MuiTextField-root {
+    background-color: white !important;
 }
 
-.signup_button{
-    margin-left: 95px;
-    width: 200px;
+.form-container {
+    background-color: var(--dark);
+    padding: 15px;
+    border-radius: 5px;
+    color: #fff;
+}
+
+.center-elem {
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+
+.form-container-2 {
+    padding-bottom: 15px;
+}
+
+.MuiGrid-item {
+    border-radius: 20px !important;
+    padding-top: 15px;
+}
+
+.button {
+    padding-top: 5px !important;
+    color: var(--blue) !important;
+}
+
+.signin-link {
+    margin-top: 10px !important;
+    padding-bottom: 0px !important;
+    color: var(--blue);
+}
+
+.btn-primary {
+    background-color: #6f80dc !important;
+    border-color: #6f80dc !important;
+}
+
+.btn-primary:hover {
+    background-color: var(--purple);
+}
+
+.signup-footer {
+    color: #fff !important;
+    /*margin*/
+}
+
+.small-logo {
+    background-color: var(--dark);
+    border: none;
+    height: 100px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.form-container {
+    margin-top: 40px;
 }

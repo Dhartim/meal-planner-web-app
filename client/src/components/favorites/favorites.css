@@ -1,8 +1,30 @@
-.favorites__row {
-  padding :2rem, 2rem, 2rem, 1rem;
-  display:flex;
+.favorites-row {
+  padding :2rem 2rem 2rem 1rem;
+  display: table-cell;
+  /*width: 930px !important;*/
+  width: 100%;
+  /*margin-left: auto;*/
+  /*margin-right: auto;*/
+  justify-content: center;
+  text-align: center;
 }
 
 .card-container {
   padding-right: 2rem;
+  width: 400px;
+  display: inline-block;
+  margin-left: 20px;
+  margin-right: 20px;
+  /*margin-left: auto;*/
+  /*margin-right: auto;*/
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.favorites-header {
+  color: #fff !important;
+  opacity: 90%;
+  text-align: center;
+  padding: 70px 2rem 30px;
+  display: block;
 }

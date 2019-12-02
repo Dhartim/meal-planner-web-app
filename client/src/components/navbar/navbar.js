@@ -22,12 +22,18 @@ import { MdAccountCircle, MdRestaurant } from "react-icons/md"
 
 import useStyles from "./navbarstyle";
 import UserContext from "../../context/usercontext";
+import {Image} from "react-bootstrap";
 
 const mapStateToProps = (state, ownProps) => {
   return {
     location: ownProps.location
   }
 };
+
+let styles = {
+  height:'35px',
+  paddingRight:'5px'
+}
 
 export function Navbar(props) {
   const userContext = useContext(UserContext);
@@ -79,8 +85,9 @@ export function Navbar(props) {
                 color="inherit"
                 className={classes.textButton}
               >
+                <Image className={'navImage'} src={require('../../assets/images/header-icon.png')} style={styles}/>
                 <Typography component={'span'} variant="h6" className={classes.title}>
-                  Meal Planner
+                  {/*Meal Planner*/}
                 </Typography>
               </Button>
             </Typography>

@@ -33,6 +33,7 @@ export const useStyles = makeStyles(theme => ({
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
+        background: "#2f3051",
     },
     appBarShift: {
       width: `calc(100% - ${drawerWidth}px)`,
@@ -61,7 +62,7 @@ export const useStyles = makeStyles(theme => ({
     },
     content: {
       flexGrow: 1,
-      padding: theme.spacing(3),
+      // padding: theme.spacing(3),
       transition: theme.transitions.create('margin', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
@@ -77,6 +78,10 @@ export const useStyles = makeStyles(theme => ({
     },
     greyHeart: {
       color: "grey"
+    },
+    navImage: {
+        height: '10px',
+        width: '10px'
     },
   })
 );

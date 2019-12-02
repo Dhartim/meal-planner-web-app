@@ -13,6 +13,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 
 import './sliderCards.css';
+import './home.css'
 
 import { filterOrderStates } from '../../enums/filterOrder'
 import { cuisineType, cuisineTypeList } from '../../enums/cuisineType'
@@ -24,8 +25,8 @@ const mealCardSliderSettings = {
   dots: true,
   infinite: false,
   speed: 500,
-  slidesToShow: 4,
-  slidesToScroll: 4
+  slidesToShow: 3,
+  slidesToScroll: 3
 };
 
 const dietFilterItems = [];
@@ -85,17 +86,18 @@ export class Home extends Component {
     this.initializeCalorieSort();
 
     axios
-      .get('/meals',{
-        headers: {
-          'x-access-token': token
-        }
-      })
-      .then(res => {
-        this.setState({
-          meals: res.data,
-          loader: false
+        .get('/meals',{
+          headers: {
+            'x-access-token': token
+          }
         })
-      })
+        .then(res => {
+          this.setState({
+            meals: res.data,
+            loader: false
+          })
+        })
+      
       .catch(error => {
         console.log("Error = %s", error);
       });
@@ -341,64 +343,65 @@ export class Home extends Component {
     }
 
     return(
-      <div>
         <div>
-          <h2>Recommendations</h2>
-          <Recommendations />
-        </div>
-        <div>
-          <ButtonGroup color="primary" aria-label="outlined primary button group">
-            <Dropdown>
-              <Dropdown.Toggle id="dropdown-basic">
-                Filter
+          <div className={"cuisine-list"}>
+            <h2 className={"recs"}>Recommendations</h2>
+            <Recommendations />
+          </div>
+          <hr className={"page-hr"}/>
+          <div className={"button-container"}>
+            <ButtonGroup color="primary" aria-label="outlined primary button group">
+              <Dropdown>
+                <Dropdown.Toggle id="dropdown-basic">
+                  Filter
               </Dropdown.Toggle>
 
-              <Dropdown.Menu>
-                <h6>Diet Type</h6>
-                {dietFilterItems}
-                <h6>Cuisine Type</h6>
-                {cuisineFilterItems}
-              </Dropdown.Menu>
-            </Dropdown>
-            <Dropdown>
-              <Dropdown.Toggle id="dropdown-basic">
-                Sort
+                <Dropdown.Menu>
+                  <h6>Diet Type</h6>
+                  {dietFilterItems}
+                  <h6>Cuisine Type</h6>
+                  {cuisineFilterItems}
+                </Dropdown.Menu>
+              </Dropdown>
+              <Dropdown>
+                <Dropdown.Toggle id="dropdown-basic">
+                  Sort
               </Dropdown.Toggle>
 
-              <Dropdown.Menu>
+                <Dropdown.Menu>
 
-                <h6>Price</h6>
-                <Dropdown.Item onClick={() => {
-                  this.setPriceSort(sortByNumber.ANYTHING);
-                }}>-</Dropdown.Item>
-                <Dropdown.Item onClick={() => {
-                  this.setPriceSort(sortByNumber.ASCENDING);
-                }}>Ascending</Dropdown.Item>
-                <Dropdown.Item onClick={() => {
-                  this.setPriceSort(sortByNumber.DESCENDING);
-                }}>Descending</Dropdown.Item>
+                  <h6>Price</h6>
+                  <Dropdown.Item onClick={() => {
+                    this.setPriceSort(sortByNumber.ANYTHING);
+                  }}>-</Dropdown.Item>
+                  <Dropdown.Item onClick={() => {
+                    this.setPriceSort(sortByNumber.ASCENDING);
+                  }}>Ascending</Dropdown.Item>
+                  <Dropdown.Item onClick={() => {
+                    this.setPriceSort(sortByNumber.DESCENDING);
+                  }}>Descending</Dropdown.Item>
 
-                <h6>Calories</h6>
-                <Dropdown.Item onClick={() => {
-                  this.setCalorieSort(sortByNumber.ANYTHING);
-                }}>-</Dropdown.Item>
-                <Dropdown.Item onClick={() => {
-                  this.setCalorieSort(sortByNumber.ASCENDING);
-                }}>Ascending</Dropdown.Item>
-                <Dropdown.Item onClick={() => {
-                  this.setCalorieSort(sortByNumber.DESCENDING);
-                }}>Descending</Dropdown.Item>
+                  <h6>Calories</h6>
+                  <Dropdown.Item onClick={() => {
+                    this.setCalorieSort(sortByNumber.ANYTHING);
+                  }}>-</Dropdown.Item>
+                  <Dropdown.Item onClick={() => {
+                    this.setCalorieSort(sortByNumber.ASCENDING);
+                  }}>Ascending</Dropdown.Item>
+                  <Dropdown.Item onClick={() => {
+                    this.setCalorieSort(sortByNumber.DESCENDING);
+                  }}>Descending</Dropdown.Item>
 
-              </Dropdown.Menu>
-            </Dropdown>
-          </ButtonGroup>
+                </Dropdown.Menu>
+              </Dropdown>
+            </ButtonGroup>
+          </div>
+          <div className={'cuisine-list'}>
+            {
+              !isLoading ? mealList : <Spinner />
+            }
+          </div>
         </div>
-        <div>
-          {
-            !isLoading ? mealList : <Spinner />
-          }
-        </div>
-      </div>
     );
   }
 }
