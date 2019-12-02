@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import Spinner from '../subcomponents/spinner'
 
+import {Dropdown} from "react-bootstrap";
 import {UserContext} from "../../context/usercontext";
 import Recommendations from "../recommendations";
 import {Button, ButtonGroup} from "@material-ui/core";
@@ -13,7 +14,9 @@ import Slider from "react-slick";
 
 import './sliderCards.css';
 
-import { sortingOrderStates } from '../../routes/index'
+import { sortingOrderStates } from '../../enums/sortOrder'
+import { cuisineType, cuisineTypeList } from '../../enums/cuisineType'
+import { dietType, dietTypeList } from '../../enums/dietType'
 
 const mealCardSliderSettings = {
   dots: true,
@@ -23,15 +26,38 @@ const mealCardSliderSettings = {
   slidesToScroll: 4
 };
 
+const dietFilterItems = [];
+const cuisineFilterItems = [];
+
 export class Home extends Component {
   static contextType = UserContext;
 
   constructor(props) {
     super(props);
     const orderOption = localStorage.getItem('sortOrder');
+
+    dietTypeList.forEach(type => {
+      dietFilterItems.push(
+        <Dropdown.Item onClick={() => {
+          this.setSort(sortingOrderStates.DIET_TYPE);
+          this.setFilter(type);
+        }}>{type}</Dropdown.Item>
+      );
+    });
+
+    cuisineTypeList.forEach(type => {
+      cuisineFilterItems.push(
+        <Dropdown.Item onClick={() => {
+          this.setSort(sortingOrderStates.CUISINE_TYPE);
+          this.setFilter(type);
+        }}>{type}</Dropdown.Item>
+      )
+    });
+
     this.state = {
       meals: [],
       homeMealSortOrder: orderOption,
+      filter: dietType.ANYTHING,
       loader: true,
       loader2: true,
     }
@@ -49,6 +75,7 @@ export class Home extends Component {
       homeMealSortOrder: orderOption
     });
 
+    this.initializeFilter();
 
     axios
       .get('/meals',{
@@ -74,33 +101,56 @@ export class Home extends Component {
     // })
   }
 
+  setSort = (type) => {
+    const userContext = this.context;
+    userContext.changeSortOrder(type);
+    localStorage.setItem('sortOrder', type);
+    this.setState({
+      homeMealSortOrder: type
+    });
+    window.location.reload();
+  };
+
+  initializeFilter = () => {
+    const item = localStorage.getItem('filter');
+    const filter = item !== undefined && item !== null ? item : dietType.ANYTHING;
+    this.setState({
+      filter: filter,
+    });
+  };
+
+  setFilter = filter => {
+    this.setState({
+      filter: filter,
+    });
+    localStorage.setItem('filter', filter);
+  };
+
   initializeMealsByType = (meals, sortOrder, ...args) => {
+    const { filter } = this.state;
+
     let mealsByType = {};
     // loop through the list of meals
     for(let i = 0; i < meals.length; i++) {
       let meal = meals[i];
       // Get the type by the typeName parameter(s)
       let type = sortOrder === sortingOrderStates.CUISINE_TYPE ?  meal[args[0]][args[1]] : meal[args[0]];
-      // if object does not have property with key of the type name, add it
-      switch(sortOrder) {
-        // TODO - sorting by price, but eventually will need to filter out prices as well
-        // case sortingOrderStates.PRICE:
-        //   const maxPrice = typeArgs[1];
-        //   break;
-        default:
-          if(!mealsByType.hasOwnProperty(type)) {
-            mealsByType[type] = [];
-          }
-          break;
+      // Filter out headers that aren't being searched for
+      if(filter === dietType.ANYTHING || filter === cuisineType.ANYTHING || type === filter) {
+        // if object does not have property with key of the type name, add it
+        if (!mealsByType.hasOwnProperty(type)) {
+          mealsByType[type] = [];
+        }
+        // push meal into the array for this  type
+        mealsByType[type].push(meal);
       }
-      // push meal into the array for this  type
-      mealsByType[type].push(meal);
     }
 
     return mealsByType;
   };
 
   pushMealCardsToList = (objects) => {
+    const { filter, homeMealSortOrder } = this.state;
     let list = [];
     // loop through the keys of the object
     for(var keyName in objects) {
@@ -114,16 +164,36 @@ export class Home extends Component {
             <h2>{keyName}</h2>
             <Slider {...mealCardSliderSettings}>
               {
-                listByType.map(meal => {
-                  return (
-                    <
-                      MealCard
-                      key={meal.id}
-                      {...meal}
-                      cuisineType={meal.cuisineType}
-                    />
-                  );
-                })
+                listByType
+                  .filter(meal => { // Filter out any meals that don't match
+                    switch(homeMealSortOrder) {
+                      case sortingOrderStates.DIET_TYPE:
+                        let validDiet = false;
+                        if (filter === dietType.ANYTHING || meal.dietType === filter) {
+                          validDiet = true;
+                        }
+                        return validDiet;
+                      case sortingOrderStates.CUISINE_TYPE:
+                        let validCuisine = false;
+                        if (filter === cuisineType.ANYTHING || meal.Cuisine.cuisineType === filter) {
+                          validCuisine = true;
+                        }
+                        return validCuisine;
+                      default:
+                        return false;
+                    }
+                  })
+                  .map(meal => {
+                    return (
+                      <
+                        MealCard
+                        key={meal.name}
+                        {...meal}
+                        cuisineType={meal.cuisineType}
+                      />
+                    );
+                  }
+                )
               }
             </Slider>
           </div>
@@ -200,62 +270,18 @@ export class Home extends Component {
         </div>
         <div>
           <ButtonGroup color="primary" aria-label="outlined primary button group">
-            <Button
-              variant="outlined"
-              onClick={() => {
-                userContext.changeSortOrder(sortingOrderStates.CUISINE_TYPE);
-                localStorage.setItem('sortOrder', sortingOrderStates.CUISINE_TYPE);
-                this.setState({
-                  homeMealSortOrder: userContext.homeMealSortOrder
-                });
-                // this.forceUpdate();
-                window.location.reload();
-              }}
-              color="inherit"
-            >Cuisine Type</Button>
-            <Button
-              variant="outlined"
-              onClick={() => {
-                userContext.changeSortOrder(sortingOrderStates.DIET_TYPE);
-                localStorage.setItem('sortOrder', sortingOrderStates.DIET_TYPE);
-                this.setState({
-                  homeMealSortOrder: userContext.homeMealSortOrder,
-                });
-                // this.forceUpdate();
-                window.location.reload();
-              }}
-              color="inherit"
-            >Diet Type</Button>
-            <Button
-              variant="outlined"
-              onClick={() => {
-                localStorage.setItem('sortOrder', sortingOrderStates.CALORIES);
-                this.setState({
-                  homeMealSortOrder: sortingOrderStates.CALORIES
-                });
-              }}
-              color="inherit"
-            >Calories</Button>
-            <Button
-              variant="outlined"
-              onClick={() => {
-                localStorage.setItem('sortOrder', sortingOrderStates.PRICE.ASCENDING);
-                this.setState({
-                  homeMealSortOrder: sortingOrderStates.PRICE.ASCENDING
-                });
-              }}
-              color="inherit"
-            >Price Ascending</Button>
-            <Button
-              variant="outlined"
-              onClick={() => {
-                localStorage.setItem('sortOrder', sortingOrderStates.PRICE.DESCENDING);
-                this.setState({
-                  homeMealSortOrder: sortingOrderStates.PRICE.DESCENDING
-                });
-              }}
-              color="inherit"
-            >Price Descending</Button>
+            <Dropdown>
+              <Dropdown.Toggle id="dropdown-basic">
+                Filter
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <h6>Diet Type</h6>
+                {dietFilterItems}
+                <h6>Cuisine Type</h6>
+                {cuisineFilterItems}
+              </Dropdown.Menu>
+            </Dropdown>
           </ButtonGroup>
         </div>
         <div>

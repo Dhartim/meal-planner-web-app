@@ -17,15 +17,7 @@ import LandingPage from '../components/landingPage';
 import {UserProvider} from "../context/usercontext";
 import axios from "axios";
 
-export const sortingOrderStates = {
-  CUISINE_TYPE: 'cuisineType',
-  DIET_TYPE: 'dietType',
-  PRICE: {
-    ASCENDING: 'price.ascending',
-    DESCENDING: 'price.descending',
-  },
-  CALORIES: 'calories',
-};
+import { sortingOrderStates } from "../enums/sortOrder"
 
 class AppRouter extends Component {
   constructor(props) {
