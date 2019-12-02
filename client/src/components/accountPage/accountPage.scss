@@ -1,0 +1,46 @@
+.info__container {
+  display:flex;
+  margin-top: 7.5rem;
+}
+
+.chart {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  &__title {
+    text-align: center;
+    font-family: Roboto;
+    font-size:32px;
+  }
+}
+
+.tab-graph {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: var(--blue);
+
+  .tablinks { 
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+  }
+  
+}
+.chart__container {
+  width:50%;
+  height: auto;
+}
+.chart {
+  height: auto;
+  width: 70%;
+}
+.details-container {
+  width: 30%;
+  margin-left: 1rem;
+}
