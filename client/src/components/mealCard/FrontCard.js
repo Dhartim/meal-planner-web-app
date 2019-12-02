@@ -39,7 +39,8 @@ export class FrontCard extends Component{
                     <Card.Title>{meal.dishName}</Card.Title>
                     <Card.Text>
                         {meal.cuisineType}<br />
-                        Preptime : {meal.prepTime}
+                        Price: ${meal.price}<br />
+                        Preptime: {meal.prepTime}
                     </Card.Text>
                     <Form>
                         {['checkbox'].map(type => (
