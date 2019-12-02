@@ -17,6 +17,7 @@ import './sliderCards.css';
 import { sortingOrderStates } from '../../enums/sortOrder'
 import { cuisineType, cuisineTypeList } from '../../enums/cuisineType'
 import { dietType, dietTypeList } from '../../enums/dietType'
+import { sortByPrice } from "../../enums/price";
 
 const mealCardSliderSettings = {
   dots: true,
@@ -58,6 +59,7 @@ export class Home extends Component {
       meals: [],
       homeMealSortOrder: orderOption,
       filter: dietType.ANYTHING,
+      priceSort: sortByPrice.ANYTHING,
       loader: true,
       loader2: true,
     }
@@ -76,6 +78,7 @@ export class Home extends Component {
     });
 
     this.initializeFilter();
+    this.initializePriceSort();
 
     axios
       .get('/meals',{
@@ -92,14 +95,22 @@ export class Home extends Component {
       .catch(error => {
         console.log("Error = %s", error);
       });
-
-    // console.log('did mount? orderOption=%s', orderOption);
-    //
-    // userContext.changeSortOrder(orderOption);
-    // this.setState({
-    //   homeMealSortOrder: orderOption !== undefined && orderOption !== null ? orderOption : sortingOrderStates.CUISINE_TYPE,
-    // })
   }
+
+  initializePriceSort = () => {
+    const sort = localStorage.getItem('priceSort');
+    this.setState({
+      priceSort: sort
+    });
+  };
+
+  setPriceSort = (sort) => {
+    console.log("priceSort=%s", sort);
+    localStorage.setItem('priceSort', sort);
+    this.setState({
+      priceSort: sort
+    });
+  };
 
   setSort = (type) => {
     const userContext = this.context;
@@ -156,15 +167,13 @@ export class Home extends Component {
     for(var keyName in objects) {
       if (objects.hasOwnProperty(keyName)) {
         let listByType = objects[keyName];
-        // console.log(keyName);
-        // console.log(listByType);
         // push a slider containing the meals of this cuisine type onto the list
         list.push(
           <div key={keyName} className="meal-list">
             <h2>{keyName}</h2>
             <Slider {...mealCardSliderSettings}>
               {
-                listByType
+                [].concat(listByType)
                   .filter(meal => { // Filter out any meals that don't match
                     switch(homeMealSortOrder) {
                       case sortingOrderStates.DIET_TYPE:
@@ -183,7 +192,19 @@ export class Home extends Component {
                         return false;
                     }
                   })
+                  .sort((meal1, meal2) => {
+                    switch(this.state.priceSort) {
+                      case sortByPrice.DESCENDING:
+                        return meal2.price - meal1.price;
+                      case sortByPrice.ASCENDING:
+                        return meal1.price - meal2.price;
+                      default:
+                        return 0;
+                    }
+                  })
                   .map(meal => {
+                    console.log(this.state.priceSort);
+                    console.log(meal.price);
                     return (
                       <
                         MealCard
@@ -239,21 +260,6 @@ export class Home extends Component {
 
           mealList = dietTypeCardComponents;
           break;
-        case sortingOrderStates.CALORIES:
-          mealList = 'CALORIES_PLACEHOLDER';
-          break;
-        case sortingOrderStates.PRICE.ASCENDING:
-          const mealsByAscendingPrice = this.initializeMealsByType(meals, homeMealSortOrder, "price");
-          const ascendingPriceCardComponents = this.pushMealCardsToList(mealsByAscendingPrice);
-
-          mealList = ascendingPriceCardComponents;
-          break;
-        case sortingOrderStates.PRICE.DESCENDING:
-          const mealsByDescendingPrice = this.initializeMealsByType(meals, homeMealSortOrder, "price");
-          const descendingPriceCardComponents = this.pushMealCardsToList(mealsByDescendingPrice);
-
-          mealList = descendingPriceCardComponents;
-          break;
       }
       isLoading = false;
     }
@@ -280,6 +286,23 @@ export class Home extends Component {
                 {dietFilterItems}
                 <h6>Cuisine Type</h6>
                 {cuisineFilterItems}
+              </Dropdown.Menu>
+            </Dropdown>
+            <Dropdown>
+              <Dropdown.Toggle id="dropdown-basic">
+                Price
+              </Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item onClick={() => {
+                  this.setPriceSort(sortByPrice.ANYTHING);
+                }}>-</Dropdown.Item>
+                <Dropdown.Item onClick={() => {
+                  this.setPriceSort(sortByPrice.ASCENDING);
+                }}>Ascending</Dropdown.Item>
+                <Dropdown.Item onClick={() => {
+                  this.setPriceSort(sortByPrice.DESCENDING);
+                }}>Descending</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </ButtonGroup>
