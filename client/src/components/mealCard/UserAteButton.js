@@ -12,9 +12,7 @@ class UserAteButton extends React.Component {
             meal_id: this.props.meal_id,
         };
         
-       // this.isChecked = this.isChecked.bind(this);
         this.hasAte = this.hasAte.bind(this);
-       // this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
         this.addChecked = this.addChecked.bind(this);
         this.removeChecked = this.removeChecked.bind(this);
     }
@@ -22,11 +20,6 @@ class UserAteButton extends React.Component {
     componentDidMount() {
         this.hasAte();
     }
-    // handleCheckboxChange = () =>{
-    //     this.setState(initialState => ({
-    //       checked: !initialState.checked,
-    //     }));
-    // }
 
     addChecked(){
         const jwtToken = localStorage.getItem('jwtToken');
@@ -71,7 +64,8 @@ class UserAteButton extends React.Component {
         });
     }
 
-    hasAte() {
+    hasAte() 
+    {
         var { meal_id } = this.state;
         if(meal_id === undefined) {
           meal_id = 0;
@@ -102,11 +96,12 @@ class UserAteButton extends React.Component {
         } else {
           console.log("User Ate button - unauthorized.");
         }
-      };
+    }  
 //how to call these 2 functions ??
 //Also need to do create At something??
   render(){
-      
+      const {isEaten} = this.state.checked
+      console.log(isEaten)
     return (
       <div>
         <Form>
@@ -117,7 +112,7 @@ class UserAteButton extends React.Component {
                 id={`default-${type}`}
                 label={`I ate it`}
                 checked={this.state.checked}
-                onChange = {this.addChecked}
+                onChange = {!isEaten ? this.addChecked : this.removeChecked}
              />
             </div>
             ))}
