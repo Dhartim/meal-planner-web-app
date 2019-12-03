@@ -8,6 +8,10 @@ import BarChartComponent from './accountComponents/chartsComponents';
 import DonutChart from './accountComponents/chartsComponents';
 import RadioGroup from '../subcomponents/radioGroup';
 import { Pie } from 'react-chartjs-2';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+
 
 import './accountPage.scss'
 const date = require('date-and-time');
@@ -118,7 +122,6 @@ export default class AccountPage extends Component {
           } else {
             cal = nutrition.Nutrition[key] * 7
           }
-          console.log('cal:', cal, 'total:', totalCalories)
           values.push(Math.round((cal/totalCalories)*100))
         }
       }
@@ -159,11 +162,11 @@ export default class AccountPage extends Component {
     let rawToday = new Date(date.format(today, 'MM DD YYYY'));
     let startDate = date.addDays(rawToday, -today.getDay())
     let endDate = date.addDays(rawToday, 7-today.getDay());
-    let label = `Week of ${date.format(startDate, 'MMM. DD YYYY')}`;
+    let label = this.state.kind;
+    // let label = `Week of ${date.format(startDate, 'MMM. DD YYYY')}`;
     for(let i = 0; i < dates.length; i++ ) {
       let day = new Date(dateData[i].createdAt)
       if (startDate<=day && day <= endDate) {
-        console.log('d===',day)
         if (!data[day.getDay()]){
           data[day.getDay()] = dateData[i].Meal
 
@@ -236,11 +239,15 @@ export default class AccountPage extends Component {
       kind: kind
     })
   }
+  static defaultProps = {
+    displayTitle:true,
+    displayLegend: true,
+    legendPosition:'bottom',
+  }
 
   render() {
       let currTime = new Date();
       let message;
-      // console.log(this.state)
       if (this.state.customerId && new Date(this.state.expiresAt) > currTime) {
           let expired = new Date(this.state.expiresAt);
           // console.log(expired)
@@ -256,19 +263,52 @@ export default class AccountPage extends Component {
           message = <Stripe />;
       }
 
+      let settings = {
+        dots: true,
+        infinite: false,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    };
+
       return (
           <div>
-            {console.log('day: ', this.state.dayData, ' week: ', this.state.weekData)}
               <ProfileComponent state = {this.state}  message = { message } />
               <div className='info__container'>
-                <div className="sideBar__container"></div>
+                <div className="details-container">
+                  <DetailComponent preference = {this.state.preferences} />
+                </div>
+                <div className="chart__container">
                 <div  className="chart">
+                  <Slider {...settings}>
                   <div className="dayChart">
                     <Pie
                       data={this.state.dayData}
-                      // options={options}
-                      height={300}
-                      width={300}
+                      options={{
+                        title:{
+                          display:"stuff",
+                          text:"Today's Macros",
+                          fontSize:25,
+                          fontColor: 'white'
+                        },
+                        legend:{
+                          display:true,
+                          position:'bottom',
+                          labels: {
+                            fontSize: 25,
+                            fontColor: 'white'
+                          }
+                        },
+                        label: {
+                          fontSize: 25
+                        },
+                        tooltips: {
+                          titleFontSize: 20,
+                          bodyFontSize: 20
+                        }
+                      }
+                    }
+                    height={300}
                     ></Pie>
                   </div>
                   <div className="weekChart">
@@ -284,8 +324,12 @@ export default class AccountPage extends Component {
                       state={this.state.kind}
                       />
                   </div>
+                  </Slider>
+                  
                 </div>
-                <DetailComponent preference = {this.state.preferences} />
+                </div>
+                
+                
               </div>
           </div>
       )
