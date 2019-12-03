@@ -95,10 +95,32 @@ export default class AccountPage extends Component {
     }
     let labels=[]
     let values = []
+    let totalCalories = 0;
+
     for(let key in nutrition.Nutrition){
       if(typeof(nutrition.Nutrition[key])==='number'){
-        labels.push(key)
-        values.push(nutrition.Nutrition[key])
+        if ( key!=='calories') {
+          if (key==='totalFat'){
+            totalCalories += nutrition.Nutrition[key] * 9
+          } else {
+            totalCalories += nutrition.Nutrition[key] * 7
+          }
+        }
+      }
+    }
+    for(let key in nutrition.Nutrition){
+      if(typeof(nutrition.Nutrition[key])==='number'){
+        if ( key!=='calories') {
+          labels.push(key)
+          let cal = 0;
+          if (key==='totalFat'){
+            cal = nutrition.Nutrition[key] * 9
+          } else {
+            cal = nutrition.Nutrition[key] * 7
+          }
+          console.log('cal:', cal, 'total:', totalCalories)
+          values.push(Math.round((cal/totalCalories)*100))
+        }
       }
     }
     this.setState({
@@ -135,11 +157,9 @@ export default class AccountPage extends Component {
     let dates = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     let data = [undefined *7]
     let rawToday = new Date(date.format(today, 'MM DD YYYY'));
-    console.log('raw today', rawToday)
     let startDate = date.addDays(rawToday, -today.getDay())
     let endDate = date.addDays(rawToday, 7-today.getDay());
     let label = `Week of ${date.format(startDate, 'MMM. DD YYYY')}`;
-    console.log('start: ', startDate)
     for(let i = 0; i < dates.length; i++ ) {
       let day = new Date(dateData[i].createdAt)
       if (startDate<=day && day <= endDate) {
