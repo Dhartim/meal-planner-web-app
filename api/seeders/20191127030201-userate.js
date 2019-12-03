@@ -101,13 +101,13 @@ module.exports = {
       },
       {
         userId: 1,
-        mealId: 3,
+        mealId: 2,
         createdAt: new Date("12/01/2019"),
         updatedAt: new Date()
       },
       {
         userId: 1,
-        mealId: 1,
+        mealId: 4,
         createdAt: new Date("12/02/2019"),
         updatedAt: new Date()
       },

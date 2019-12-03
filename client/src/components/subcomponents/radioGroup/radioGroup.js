@@ -18,7 +18,7 @@ function getLabel(prop, i){
 
 const radioGroup = props => {
   let {radio, state} = props;
-  console.log('props====', props)
+  // console.log('props====', props)
   let rgroup = radio.map((prop, i) => {
     let { id, name, value, checked, onClick } = prop;
     return(
@@ -30,7 +30,7 @@ const radioGroup = props => {
           name={ name }
           value={ value }
           onClick={ onClick }
-          checked={value === state}
+          defaultChecked={checked}
         />
         {getLabel(prop, i)}
       </div>

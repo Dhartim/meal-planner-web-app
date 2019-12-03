@@ -10,22 +10,28 @@ export default class BarChart extends Component {
   }
 
   componentWillReceiveProps(props) {
+    let colors = {
+      'price': 'rgba(255, 99, 132, 0.2)',
+      'calories':'rgba(54, 162, 235, 0.6)',
+      'totalFat':'rgba(75, 192, 192, 0.6)',
+      'totalCarbohydrates':'rgba(255, 206, 86, 0.6)',
+      'protein': 'rgba(255, 159, 64, 0.6)'
+    }
     let temp = []
-    
     if(props.data.datasets.length>0){
       let datasets = props.data.datasets[0];
       let label = datasets.label
 
-      console.log('datasets', datasets)
+      // console.log('datasets', datasets)
 
       datasets.data.forEach(day =>{
-        if(day === undefined ){
+        console.log('data day:', day)
+        if(day === 0 ){
           temp.push(0);
         }else{
           props.kind === 'price' ? temp.push(day[props.kind]) : temp.push(day.Nutrition[props.kind])
         }
       })
-      console.log('setting state: data: ', temp)
       this.setState({
         barData: {
           labels: props.data.labels,
@@ -33,12 +39,17 @@ export default class BarChart extends Component {
             label,
             data: temp,
             backgroundColor: [
-              'rgba(255, 99, 132, 0.2)',
+              colors[props.kind],
+              colors[props.kind],
+              colors[props.kind],
+              colors[props.kind],
+              colors[props.kind],
+              colors[props.kind],
+              colors[props.kind]
             ]
           }]
         }
       })
-      console.log('after state: ', this.state.barData.datasets)
     }
   }
 
