@@ -17,15 +17,7 @@ import LandingPage from '../components/landingPage';
 import {UserProvider} from "../context/usercontext";
 import axios from "axios";
 
-export const sortingOrderStates = {
-  CUISINE_TYPE: 'cuisineType',
-  DIET_TYPE: 'dietType',
-  PRICE: {
-    ASCENDING: 'price.ascending',
-    DESCENDING: 'price.descending',
-  },
-  CALORIES: 'calories',
-};
+import { filterOrderStates } from "../enums/filterOrder"
 
 class AppRouter extends Component {
   constructor(props) {
@@ -33,7 +25,7 @@ class AppRouter extends Component {
 
     this.checkIfSortOrderExists = (order) => {
       let exists = false;
-      if (Object.values(sortingOrderStates).indexOf(order) > -1) {
+      if (Object.values(filterOrderStates).indexOf(order) > -1) {
         exists = true;
       }
       // console.log("order[%s] exists = %s", order, exists);
@@ -51,7 +43,7 @@ class AppRouter extends Component {
     this.changeSortOrder = (newOrder) => {
       const order = newOrder !== undefined && newOrder !== null &&
                     this.checkIfSortOrderExists(newOrder) ?
-                      newOrder : sortingOrderStates.CUISINE_TYPE;
+                      newOrder : filterOrderStates.CUISINE_TYPE;
 
       // console.log("CHANGED ORDER TO: ");
       // console.log(order);
@@ -68,7 +60,7 @@ class AppRouter extends Component {
       authorized: false,
       loading: true,
       changeUser: this.changeUser,
-      homeMealSortOrder: sortingOrderStates.CUISINE_TYPE,
+      homeMealSortOrder: filterOrderStates.CUISINE_TYPE,
       changeSortOrder: this.changeSortOrder,
     };
   }

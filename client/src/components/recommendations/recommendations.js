@@ -37,8 +37,8 @@ export class Recommendations extends Component {
       dots: true,
       infinite: false,
       speed: 500,
-      slidesToShow: 4,
-      slidesToScroll: 4
+      slidesToShow: 3,
+      slidesToScroll: 3
   };
     if(loggedIn) {
       for(let i = 0; i < recommendations.length; i++) {

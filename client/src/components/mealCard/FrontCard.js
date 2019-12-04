@@ -28,7 +28,7 @@ export class FrontCard extends Component{
         );
 
         let mealDesc;
-        let limit = 230;
+        let limit = 215;
         if (meal.desc.length > limit) {
             mealDesc = meal.desc.substring(0, limit) + "..."
         } else {

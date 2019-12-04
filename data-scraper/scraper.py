@@ -67,7 +67,7 @@ class WebPage:
         preparation_steps = []
         for step in preparations:
             preparation_steps.append(step.text.strip())
-        self.json['steps'] = preparation_steps
+        self.json['steps'] = "\n".join(preparation_steps)
 
     def get_nutrition(self):
         labels = self.html.find_all('span', class_='nutri-label')
