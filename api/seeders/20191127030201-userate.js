@@ -111,6 +111,36 @@ module.exports = {
         createdAt: new Date("12/02/2019"),
         updatedAt: new Date()
       },
+      {
+        userId: 1,
+        mealId: 7,
+        createdAt: new Date("12/01/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 5,
+        createdAt: new Date("12/01/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 6,
+        createdAt: new Date("12/02/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 7,
+        createdAt: new Date("12/03/2019"),
+        updatedAt: new Date()
+      },
+      {
+        userId: 1,
+        mealId: 6,
+        createdAt: new Date("12/03/2019"),
+        updatedAt: new Date()
+      },
     ], {});
   },
 
