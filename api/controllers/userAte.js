@@ -1,7 +1,7 @@
+const Sequelize = require('sequelize');
 const { UserAte, Meal, Nutrition } = require('../models');
 const getUserId = require('../middleware/getUserId');
 
-const Sequelize = require('sequelize');
 
 function list(req, res) {
   const userid = getUserId(req);
@@ -13,14 +13,14 @@ function list(req, res) {
     order: [
       ['createdAt', 'DESC'],
     ],
-    include:[{
+    include: [{
       model: Meal,
       attributes: ['price'],
-      include:[{
+      include: [{
         model: Nutrition,
-        attributes: ['calories', 'totalFat', 'saturatedFat', 'cholesterol', 'sodium', 'totalCarbohydrates', 'fiber', 'sugar', 'protein']
-      }]
-    }]
+        attributes: ['calories', 'totalFat', 'saturatedFat', 'cholesterol', 'sodium', 'totalCarbohydrates', 'fiber', 'sugar', 'protein'],
+      }],
+    }],
   })
     .then((userAtes) => {
       res.status(200).send(userAtes);
@@ -34,31 +34,31 @@ function hasAte(req, res) {
   return UserAte
     .findOne({
       where: {
-        userId: userId,
+        userId,
         mealId: req.params.mealId,
-      }
+      },
     })
-    .then(mealAte => {
+    .then((mealAte) => {
       // If found a mealAte, tell client that this meal is a mealAte
-      if(mealAte !== null) {
-        console.log("userId=%d, mealId=%d", mealAte.userId, mealAte.mealId);
+      if (mealAte !== null) {
+        console.log('userId=%d, mealId=%d', mealAte.userId, mealAte.mealId);
         res.status(200).send({
-          hasAte: true
+          hasAte: true,
         });
       } else {
         res.status(200).send({
-          hasAte: false
+          hasAte: false,
         });
       }
     })
-    .catch(error => {
-      console.log("error=%s", error);
-      res.status(400).send(error)
+    .catch((error) => {
+      console.log('error=%s', error);
+      res.status(400).send(error);
     });
 }
 
 function add(req, res) {
-  console.log(req)
+  console.log(req);
   const userid = getUserId(req);
   return UserAte
     .create({
@@ -75,19 +75,19 @@ function destroy(req, res) {
   return UserAte.findOne({
     where: {
       userId: userid,
-      mealId: req.body.mealId
+      mealId: req.body.mealId,
     },
   })
-  .then((mealAte) => {
-    if (!mealAte) {
-      return res.status(400).send({
-        message: 'Could not find mealAte to delete',
-      });
-    }
-    return mealAte.destroy()
-      .then(() => res.status(204).send())
-      .catch((error) => res.status(400).send(error));
-  });
+    .then((mealAte) => {
+      if (!mealAte) {
+        return res.status(400).send({
+          message: 'Could not find mealAte to delete',
+        });
+      }
+      return mealAte.destroy()
+        .then(() => res.status(204).send())
+        .catch((error) => res.status(400).send(error));
+    });
 }
 
 module.exports = {

@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
     User.hasMany(models.UserMeal, { foreignKey: 'userId' });
     User.hasMany(models.UserAte, { foreignKey: 'userId' });
     User.hasOne(models.Customer, { foreignKey: 'userId' });
-    User.hasOne(models.Preference, { foreignKey: 'userId' })
+    User.hasOne(models.Preference, { foreignKey: 'userId' });
     // associations can be defined here
   };
   return User;
