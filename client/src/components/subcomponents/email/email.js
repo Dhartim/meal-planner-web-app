@@ -42,7 +42,6 @@ export class Email extends Component {
   }
 
   sendEmail() {
-    console.log(this)
     const { firstName, email, body, message } = this.state;
     return axios.post('/contactUs', {
       firstName: firstName,

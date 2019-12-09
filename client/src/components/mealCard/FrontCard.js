@@ -9,7 +9,6 @@ import UserAteButton from "./UserAteButton";
 export class FrontCard extends Component {
   render() {
     const meal = this.props.meal;
-    // console.log("Meals = " , this.props);
     const renderTooltipTemp = (
       <Tooltip id="tooltip-right-start">
         <div>

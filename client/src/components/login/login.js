@@ -27,13 +27,11 @@ export default class Login extends Component {
   tryLogin = () => {
     // const EmailContext = React.createContext('email')
     const { email, password } = this.state;
-    console.log(this.state)
     Axios.post('/login', {
       email: email,
       password: password
     })
       .then((response) => {
-        console.log(response);
         console.log(`token=${response.headers.token}`);
         console.log(`status=${response.status}`);
 

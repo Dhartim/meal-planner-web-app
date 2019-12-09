@@ -81,7 +81,6 @@ class UserAteButton extends React.Component {
             this.setState({
               checked: res.data.hasAte
             });
-            // console.log(res);
           } else {
             console.log(`Error`);
           }

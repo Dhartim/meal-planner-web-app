@@ -58,7 +58,6 @@ function hasAte(req, res) {
 }
 
 function add(req, res) {
-  console.log(req);
   const userid = getUserId(req);
   return UserAte
     .create({

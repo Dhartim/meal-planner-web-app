@@ -49,7 +49,6 @@ class FavouriteButton extends React.Component {
             this.setState({
               isFaved: res.data.isFavorite
             });
-            // console.log(res);
           } else {
             console.log(`Error`);
           }

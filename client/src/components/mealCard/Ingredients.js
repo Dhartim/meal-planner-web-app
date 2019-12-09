@@ -55,7 +55,6 @@ class Ingredients extends React.Component {
   }
 
   render() {
-    console.log("ingredients = ", this.state.listOfIngredients);
     //got ingredients and quantity from backend 
     const ingredients = this.state.listOfIngredients.map((ingredient, i) => <div key={i}>{ingredient.name}</div>);
     const quantity = this.state.listOfIngredients.map((ingredientsQuantity, i) => <div key={i}>{ingredientsQuantity.quantity}</div>);

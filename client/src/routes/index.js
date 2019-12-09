@@ -28,7 +28,6 @@ class AppRouter extends Component {
       if (Object.values(filterOrderStates).indexOf(order) > -1) {
         exists = true;
       }
-      // console.log("order[%s] exists = %s", order, exists);
       return exists;
     };
 
@@ -44,9 +43,6 @@ class AppRouter extends Component {
       const order = newOrder !== undefined && newOrder !== null
         && this.checkIfSortOrderExists(newOrder)
         ? newOrder : filterOrderStates.CUISINE_TYPE;
-
-      // console.log("CHANGED ORDER TO: ");
-      // console.log(order);
 
       localStorage.setItem('sortOrder', order);
 
@@ -67,7 +63,6 @@ class AppRouter extends Component {
 
   componentDidMount() {
     const token = localStorage.getItem('jwtToken');
-    // console.log("token=%s", token);
     if (token !== null) {
       const orderOption = localStorage.getItem('sortOrder');
       this.changeSortOrder(orderOption);
@@ -84,7 +79,6 @@ class AppRouter extends Component {
             console.log('Authorized.');
           } else {
             this.changeUser(0, false, false);
-            // console.log(res.error);
           }
         })
         .catch((err) => {

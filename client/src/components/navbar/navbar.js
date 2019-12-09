@@ -39,17 +39,13 @@ export function Navbar(props) {
   const userContext = useContext(UserContext);
   const userId = userContext.userId;
   const loading = userContext.loading;
-  // console.log("navbar - id=%d", userId);
-  // console.log("navbar - loading=%s", loading);
 
   const classes = useStyles();
   const [authorized, setAuthorized] = React.useState(false);
 
   useEffect(() => {
     setAuthorized(userContext.authorized);
-    // setLoading(false);
   }, [userContext.authorized]);
-  // console.log(`logged in=${authorized}`);
 
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {

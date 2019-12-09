@@ -50,14 +50,6 @@ export class Favorites extends Component {
       // for each favorited meal, render a new meal card
       for (let i = 0; i < favorites.length; i++) {
         let favorite = favorites[i];
-        // console.log("favorite[%d]={dishName: %s\nnutritionInfo: %s\nimgUrl: %s\nprepTime: %s\ncookTime: %s\nrecipe: %s\ncuisineId: %s\ncuisineType: %s\n}", i,
-        //   favorite.dishName,
-        //   favorite.nutritionInfo,
-        //   favorite.imgUrl,
-        //   favorite.prepTime,
-        //   favorite.cookTime,
-        //   favorite.recipe,
-        //   favorite.cuisineId);
         favoritesList.push(
           <
             MealCard

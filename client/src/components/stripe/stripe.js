@@ -10,7 +10,6 @@ export default class Stripe extends Component {
   onToken = (token) => {
     const userContext = this.context;
     const userId = userContext.userId
-    console.log('userid', userId, ' token: ', token.id)
     axios.post('/charge', {
       stripeToken: token.id, userId: userId
     }).then(res => {

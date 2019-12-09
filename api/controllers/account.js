@@ -19,11 +19,8 @@ function getAccount(req, res) {
       attributes: ['id', 'email', 'firstName', 'lastName'],
     })
     .then((account) => {
-      // console.log('Account');
-      // console.log(account);
       res.status(200).send({ account });
     }).catch((error) => {
-      // console.log(error);
       res.status(400).send('Could not get account details');
     });
 }

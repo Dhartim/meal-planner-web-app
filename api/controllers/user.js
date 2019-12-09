@@ -80,7 +80,6 @@ function update(req, res) {
 }
 
 function getById(req, res) {
-  console.log(req.params);
   return User
     .findByPk(req.params.userId)
     .then((user) => (user ? res.status(200).send(user) : res.status(404).send(notFound)))

@@ -20,8 +20,6 @@ function getPreferences(req, res) {
 }
 
 function createPreferences(req, res) {
-  console.log('req--------: ', req.body);
-
   console.log('CREATE PREFERENCES');
   let userId;
   if (!req.body.userId) {
@@ -48,12 +46,9 @@ function createPreferences(req, res) {
     defaults: values,
   })
     .then(([preference, created]) => {
-      console.log('prefs: ', preference, ' created: ', created);
       if (!created) {
-        console.log('===================================');
         return updatePreferences(req, res);
       }
-      '+++++++++++++++++++++++++++++++New preferences created';
       return res.stat(200).send({
         message: 'created',
       });
@@ -64,7 +59,6 @@ function createPreferences(req, res) {
 }
 
 function updatePreferences(req, res) {
-  console.log('UUUUPPPPDTATIMG!!!!!!!!!!', req.body);
   const updatedValues = {};
 
   const params = [
@@ -91,7 +85,6 @@ function updatePreferences(req, res) {
       updatedValues[param] = data;
     }
   }
-  console.log('updated values:', updatedValues);
   return Preference.update(updatedValues,
     {
       where: {
@@ -99,7 +92,6 @@ function updatePreferences(req, res) {
       },
     })
     .then((preference) => {
-      console.log('perferences: ', preference);
       if (!preference) {
         return res.status(404).send({
           message: 'User does not have preferences.',
