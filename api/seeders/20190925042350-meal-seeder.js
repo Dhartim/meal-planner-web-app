@@ -38,7 +38,7 @@ module.exports = {
 
       const { nutrition } = recipe;
 
-      if (Object.keys(nutrition).length >0) {
+      if (Object.keys(nutrition).length > 0) {
         nutritionArray.push({
           mealId: index + 1,
           servingSize: `${Math.floor(Math.random() * 1000)} g`,

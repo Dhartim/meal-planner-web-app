@@ -11,7 +11,7 @@
   background-size: cover;
 }
 
-.landing-page__container{
+.landing-page__container {
   /*width:30%;*/
   /*width: 500px;*/
   /*height: 220px;*/
@@ -41,7 +41,7 @@
 .landing-page__user-auth {
   margin-top: 10px;
   width: 100%;
-  display:flex;
+  display: flex;
   /*height: 3rem;*/
 }
 
@@ -63,13 +63,14 @@
   font-weight: bold;
   border-radius: 3%;
   border: 1px solid rgba(255, 255, 255, 0.626);
-  color:whitesmoke;
-  width:100%;
+  color: whitesmoke;
+  width: 100%;
   background-color: #3f51b59c;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .auth-btn:hover {
   background-color: #3f51b5;
   color: whitesmoke;

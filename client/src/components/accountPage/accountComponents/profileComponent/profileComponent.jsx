@@ -1,24 +1,34 @@
-import React from "react";
-import './profileComponent.scss'
+import React from 'react';
+import './profileComponent.scss';
 
 
-const ProfileComponent = props => {
+const ProfileComponent = (props) => {
   const { state, message } = props;
-  
-  return(
+
+  return (
     <div className="profile__container">
-      <div className="profile__image-container"/>
+      <div className="profile__image-container" />
       {/* <img className={'centered-image'} src={require('./headshot.jpg')}/> */}
       <h3 className="profile__intro">
-          Welcome back {state.firstName} {state.lastName}!
+        <p>
+          Welcome back
+          {' '}
+          {state.firstName}
+          {' '}
+          {state.lastName}
+!
+        </p>
+        <br />
+        <p>
+          Your current email is
+          {' '}
+          {state.email}
+        </p>
+        { message }
       </h3>
-      <br/>
-      {/* <p>
-      Your current email is {state.email}
-      </p> */}
-      {/* {props.message} */}
-    </div>
-  )
-}
 
-export default ProfileComponent
+    </div>
+  );
+};
+
+export default ProfileComponent;

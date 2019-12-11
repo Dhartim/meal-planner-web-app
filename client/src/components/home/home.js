@@ -74,8 +74,6 @@ export class Home extends Component {
     const token = localStorage.getItem('jwtToken');
     const orderOption = localStorage.getItem('sortOrder');
 
-    //console.log('did mount? orderOption=%s', orderOption);
-
     userContext.changeSortOrder(orderOption);
     this.setState({
       homeMealSortOrder: orderOption
@@ -277,8 +275,6 @@ export class Home extends Component {
                     }
                   })
                   .map(meal => {
-                    // console.log(meal.price);
-                    // console.log(meal.Nutrition.calories);
                     return (
                       <
                         MealCard
@@ -301,14 +297,11 @@ export class Home extends Component {
 
   render() {
     const { loader, meals, homeMealSortOrder } = this.state;
-   // console.log('homeMealSortOrder=%s', homeMealSortOrder);
-
     let isLoading = true;
 
     var mealList;
 
     const userContext = this.context;
-    //console.log("HOME - context={userId: %s, authorized: %s}", userContext.userId, userContext.authorized);
 
     if(!loader) {
       switch(homeMealSortOrder) {

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import {Button, ButtonGroup} from "@material-ui/core";
+import { Button, ButtonGroup } from "@material-ui/core";
 
 import sortingOrderStates from '../home/home'
 
 export class SortAndFilter extends Component {
   render() {
 
-    return(
+    return (
       <div>
         <ButtonGroup color="primary" aria-label="outlined primary button group">
           <Button

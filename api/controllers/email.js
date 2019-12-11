@@ -4,10 +4,6 @@ const config = require('../config/config.json');
 const secret = require('../config/secret');
 
 function getUserEmail(req) {
-  /* const token = req.headers['x-access-token'];
-  const decode = jwt.verify(token, config.jwt.jwtSecret);
-  return decode.user.email; */
-
   const token = req.headers['x-access-token'];
   let userEmail = -1;
   if (token !== undefined) {
@@ -44,14 +40,11 @@ function mailOptions(from, to, subject, text) {
 }
 
 function contactUs(req, res) {
-  //  console.log(transporter);
   const { email, body, firstName } = req.body;
   const subject = `${firstName} is contacting you from: ${email}`;
   const meal_planner_email = 'jaldujaili@usfca.edu'; // email that will be sent to
   const mOptions = mailOptions(secret.email, meal_planner_email, subject, body);
-  // console.log(mOptions)
   transporter.sendMail(mOptions, (err, data) => {
-    console.log('err:', err, ' data: ', data);
     if (err) {
       res.send({
         success: false,
@@ -67,7 +60,7 @@ function contactUs(req, res) {
 }
 
 function createSchedule() {
-  console.log();
+  //TODO
 }
 
 function ingredientMailOptions(from, to, subject, html) {
@@ -80,7 +73,6 @@ function ingredientMailOptions(from, to, subject, html) {
 }
 
 function sendIngredient(req, res) {
-//  console.log(transporter);
   const userEmail = getUserEmail(req);
 
   if (userEmail != -1) {
@@ -103,9 +95,7 @@ function sendIngredient(req, res) {
 
     const mOptions = ingredientMailOptions(meal_planner_email, userEmail, subject, body);
 
-    // console.log(mOptions)
     transporter.sendMail(mOptions, (err, data) => {
-      console.log('err:', err, ' data: ', data);
       if (err) {
         res.send({
           success: false,

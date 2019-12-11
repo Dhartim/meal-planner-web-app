@@ -2,22 +2,22 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 // Routes
+import axios from 'axios';
 import BadRequest from '../components/badrequest';
-import Favorites from "../components/favorites";
+import Favorites from '../components/favorites';
 import Home from '../components/home';
-import Login from "../components/login";
-import MealCard from '../components/mealCard'
-import Navbar from "../components/navbar/navbar";
-import Questionnaire from "../components/questionnaire";
-import Stripe from "../components/stripe";
-import AccountPage from "../components/accountPage";
+import Login from '../components/login';
+import MealCard from '../components/mealCard';
+import Navbar from '../components/navbar/navbar';
+import Questionnaire from '../components/questionnaire';
+import Stripe from '../components/stripe';
+import AccountPage from '../components/accountPage';
 import Signup from '../components/signup';
 import LandingPage from '../components/landingPage';
 
-import {UserProvider} from "../context/usercontext";
-import axios from "axios";
+import { UserProvider } from '../context/usercontext';
 
-import { filterOrderStates } from "../enums/filterOrder"
+import { filterOrderStates } from '../enums/filterOrder';
 
 class AppRouter extends Component {
   constructor(props) {
@@ -28,31 +28,27 @@ class AppRouter extends Component {
       if (Object.values(filterOrderStates).indexOf(order) > -1) {
         exists = true;
       }
-      // console.log("order[%s] exists = %s", order, exists);
       return exists;
     };
 
     this.changeUser = (userId, authorized, loading) => {
       this.setState({
-        userId: userId,
-        authorized: authorized,
-        loading: loading,
-      })
+        userId,
+        authorized,
+        loading,
+      });
     };
 
     this.changeSortOrder = (newOrder) => {
-      const order = newOrder !== undefined && newOrder !== null &&
-                    this.checkIfSortOrderExists(newOrder) ?
-                      newOrder : filterOrderStates.CUISINE_TYPE;
-
-      // console.log("CHANGED ORDER TO: ");
-      // console.log(order);
+      const order = newOrder !== undefined && newOrder !== null
+        && this.checkIfSortOrderExists(newOrder)
+        ? newOrder : filterOrderStates.CUISINE_TYPE;
 
       localStorage.setItem('sortOrder', order);
 
       this.setState({
         homeMealSortOrder: order,
-      })
+      });
     };
 
     this.state = {
@@ -67,28 +63,26 @@ class AppRouter extends Component {
 
   componentDidMount() {
     const token = localStorage.getItem('jwtToken');
-    // console.log("token=%s", token);
-    if(token !== null) {
+    if (token !== null) {
       const orderOption = localStorage.getItem('sortOrder');
       this.changeSortOrder(orderOption);
 
       axios
         .get('/checkauth', {
           headers: {
-            'x-access-token': token
-          }
+            'x-access-token': token,
+          },
         })
-        .then(res => {
+        .then((res) => {
           if (res.status === 200) {
             this.changeUser(res.data.userId, res.data.authorized, false);
-            console.log("Authorized.")
+            console.log('Authorized.');
           } else {
             this.changeUser(0, false, false);
-            // console.log(res.error);
           }
         })
-        .catch(err => {
-          console.log("auth error: %s", err);
+        .catch((err) => {
+          console.log('auth error: %s', err);
         });
     } else {
       this.changeUser(0, false, false);
@@ -102,22 +96,22 @@ class AppRouter extends Component {
           <div>
             <Navbar {...this.props}>
               <Switch>
-                <Route exact path={'/'} component={LandingPage}/>
-                <Route exact path={'/dashboard'} component={Home} />
-                <Route exact path={'/favorites'} component={Favorites} /* Home route *//>
-                <Route exact path={'/register'} component={Signup} /* Signup route *//>
-                <Route exact path={'/mealCard'} component={MealCard} /*showing meal card *//>
-                <Route exact path={'/login'} component={Login}/>
-                <Route exact path={'/stripe'} component={Stripe}/>
-                <Route exact path={'/preferences'} component={Questionnaire}/>
-                <Route exact path={'/account'} component={AccountPage} />
-                <Route component={BadRequest}/>
+                <Route exact path="/" component={LandingPage} />
+                <Route exact path="/dashboard" component={Home} />
+                <Route exact path="/favorites" component={Favorites} /* Home route */ />
+                <Route exact path="/register" component={Signup} /* Signup route */ />
+                <Route exact path="/mealCard" component={MealCard} /* showing meal card */ />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/stripe" component={Stripe} />
+                <Route exact path="/preferences" component={Questionnaire} />
+                <Route exact path="/account" component={AccountPage} />
+                <Route component={BadRequest} />
               </Switch>
             </Navbar>
           </div>
         </UserProvider>
       </div>
-    )
+    );
   }
 }
 export default AppRouter;

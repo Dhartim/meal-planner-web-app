@@ -9,7 +9,9 @@ const notFound = { message: 'User Not Found' };
 
 
 function create(req, res) {
-  let { firstName, lastName, email, password } = req.body;
+  let {
+    firstName, lastName, email, password,
+  } = req.body;
 
   firstName = firstName.trim();
   lastName = lastName.trim();
@@ -19,12 +21,12 @@ function create(req, res) {
   return User
     .findOrCreate({
       where: {
-        email: email,
+        email,
       },
       defaults: {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
+        firstName,
+        lastName,
+        email,
         password: bcrypt.hashSync(password),
       },
     })
@@ -54,7 +56,7 @@ function create(req, res) {
       console.log(`An error occurred: ${error}`);
       res.status(400).send({
         message: `An error occurred: ${error}`,
-      })
+      });
     });
 }
 
@@ -78,7 +80,6 @@ function update(req, res) {
 }
 
 function getById(req, res) {
-  console.log(req.params);
   return User
     .findByPk(req.params.userId)
     .then((user) => (user ? res.status(200).send(user) : res.status(404).send(notFound)))
