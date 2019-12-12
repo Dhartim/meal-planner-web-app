@@ -22,9 +22,12 @@ For a full overview of the project please read: [here](https://docs.google.com/d
 2. >npm install
 3. Change directories to /api
 	>sequelize db:create 
-	>sequelize db:migrate 
-	>sequelize db:seed:all 
-	>npm start
+	
+	>sequelize db:migrate 	
+	
+	>sequelize db:seed:all 	
+	
+	>npm start	
 4. change directories to /client
 	>npm start
   
