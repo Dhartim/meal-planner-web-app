@@ -9,16 +9,23 @@ const notFound = { message: 'User Not Found' };
 
 
 function create(req, res) {
+  let { firstName, lastName, email, password } = req.body;
+
+  firstName = firstName.trim();
+  lastName = lastName.trim();
+  email = email.trim();
+  password = password.trim();
+
   return User
     .findOrCreate({
       where: {
-        email: req.body.email.trim(),
+        email: email,
       },
       defaults: {
-        firstName: req.body.firstName.trim(),
-        lastName: req.body.lastName.trim(),
-        email: req.body.email.trim(),
-        password: bcrypt.hashSync(req.body.password.trim()),
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: bcrypt.hashSync(password),
       },
     })
     .then(([user, created]) => {
@@ -26,6 +33,7 @@ function create(req, res) {
       // if account does exists, need to try again
       if (!created) {
         // 409: conflict with an existing resource; ie. duplicate username/emails
+        console.log('Email already exists. Please try again');
         return res.status(409).send({
           message: 'Email already exists. Please try again.',
         });
@@ -38,13 +46,16 @@ function create(req, res) {
 
       return res.status(201).send({
         data: {
-          user,
+          userId: user.id,
         },
       });
     })
-    .catch((error) => res.status(400).send({
-      message: `An error occurred: ${error}`,
-    }));
+    .catch((error) => {
+      console.log(`An error occurred: ${error}`);
+      res.status(400).send({
+        message: `An error occurred: ${error}`,
+      })
+    });
 }
 
 function update(req, res) {

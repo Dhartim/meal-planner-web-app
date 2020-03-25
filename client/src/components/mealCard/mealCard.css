@@ -77,3 +77,12 @@ h1 {
   span.icon.toggled.heart {
 	  color: red;
   }
+  .modalstyle {
+	padding: 30px;
+  }
+
+.imageStyle {
+	flex: 1;
+	width: 10%;
+	height: 10%;
+}

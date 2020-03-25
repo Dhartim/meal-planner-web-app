@@ -1,25 +1,10 @@
 import React, { useState } from "react";
-import {makeStyles} from "@material-ui/core";
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button';
-
+import Ingredients from './Ingredients';
 import './mealCard.css';
-import { FaRegTrashAlt } from "react-icons/fa";
-import Card from "react-bootstrap/Card";
-
-const useStyles = makeStyles(theme => ({
-      drawerHeader: {
-          display: 'flex',
-          alignItems: 'center',
-          padding: theme.spacing(0, 1),
-          ...theme.mixins.toolbar,
-          justifyContent: 'flex-end',
-      },
-  })
-);
 
 function MealDetailModal(props) {
-    const classes = useStyles();
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -31,8 +16,8 @@ function MealDetailModal(props) {
             <Button variant="primary" onClick={handleShow}>
                 More Details
             </Button>
-            <Modal show={show} onHide={handleClose}>
-                <div className={classes.drawerHeader} />
+            {/* //add styling to modal  */}
+            <Modal show={show} onHide={handleClose} className = "modalstyle">
                 <Modal.Header closeButton>
                     <Modal.Title>{meal.dishName}</Modal.Title>
                 </Modal.Header>
@@ -67,6 +52,10 @@ function MealDetailModal(props) {
                                         Vitamins & Minerals:  {meal.Nutrition.vitaminsAndMinerals}<br/>
                                     </div>
                                     </div>
+                                </div>
+                                <div class="col-sm-9">
+                                    <h5>Ingredients</h5>
+                                        <Ingredients meal_id={meal.id} />
                                 </div>
                             </div>
                         </div>

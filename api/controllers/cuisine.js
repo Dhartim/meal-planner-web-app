@@ -13,9 +13,9 @@ function listByType(req, res) {
     ),
     include: [{
       model: Meal,
-          include: [{
-            model: Nutrition,
-          }],
+      include: [{
+        model: Nutrition,
+      }],
     }],
   })
     .then((meals) => res.status(200).send(meals))
@@ -26,13 +26,19 @@ function list(req, res) {
   return Cuisine.findAll({
     include: [{
       model: Meal,
-          include: [{
-            model: Nutrition,
-          }],
+      include: [{
+        model: Nutrition,
+      }],
     }],
   })
-    .then((meals) => res.status(200).send(meals))
-    .catch((error) => res.status(400).send(error));
+  .then((meals) => {
+    console.log("meals=%s", meals);
+    res.status(200).send(meals)
+  })
+  .catch((error) => {
+    console.log("cuisine error = %s", error);
+    res.status(400).send(error)
+  });
 }
 
 module.exports = {

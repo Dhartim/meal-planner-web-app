@@ -15,3 +15,6 @@ api/server.js
 api/config
 
 .eslintrc.js
+
+# Scraper virtual env
+data-scraper/venv

@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import axios from 'axios';
 
+import AccountContext from "../accountPage/accountContext";
+
 export default function NavbarAuthCheck(ComponentToAuthorize) {
 
   return class extends Component {
@@ -14,27 +16,39 @@ export default function NavbarAuthCheck(ComponentToAuthorize) {
     }
 
     componentDidMount() {
-      axios
-        .get('/checkauth', {
-          headers: {
-            'x-access-token': localStorage.getItem('jwtToken')
-          }
-        })
-        .then(res => {
-          if (res.status === 200) {
+      const token = localStorage.getItem('jwtToken');
+      console.log("token=%s", token);
+      if(token !== null) {
+        axios
+          .get('/checkauth', {
+            headers: {
+              'x-access-token': token
+            }
+          })
+          .then(res => {
+            if (res.status === 200) {
+              this.setState({
+                loading: false,
+                loggedIn: true,
+              });
+              console.log("Authorized.")
+            } else {
+              throw new Error(res.error);
+            }
+          })
+          .catch(err => {
+            console.log("auth error: %s", err);
             this.setState({
               loading: false,
-              loggedIn: true,
+              redirect: true
             });
-            console.log("Authorized.")
-          } else {
-            throw new Error(res.error);
-          }
-        })
-        .catch(err => {
-          console.log("auth error: %s", err);
-          this.setState({ loading: false, redirect: true });
+          });
+      } else {
+        this.setState({
+          loading: false,
+          loggedIn: false,
         });
+      }
     }
 
     render() {

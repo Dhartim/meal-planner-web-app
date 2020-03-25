@@ -13,7 +13,7 @@ export class FrontCard extends Component{
     
     render(){
         const meal = this.props.meal;
-        console.log("Meals = " , this.props);
+        // console.log("Meals = " , this.props);
         const renderTooltipTemp = (
             <Tooltip id="tooltip-right-start">
               <div>
@@ -39,7 +39,8 @@ export class FrontCard extends Component{
                     <Card.Title>{meal.dishName}</Card.Title>
                     <Card.Text>
                         {meal.cuisineType}<br />
-                        Preptime : {meal.prepTime}
+                        Price: ${meal.price}<br />
+                        Preptime: {meal.prepTime}
                     </Card.Text>
                     <Form>
                         {['checkbox'].map(type => (

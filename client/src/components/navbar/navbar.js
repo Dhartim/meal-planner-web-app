@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import clsx from 'clsx';
 
 import {
@@ -18,13 +18,31 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { FaHeart, FaHome } from "react-icons/fa";
-import { MdAccountCircle } from "react-icons/md"
+import { MdAccountCircle, MdRestaurant } from "react-icons/md"
 
 import useStyles from "./navbarstyle";
+import UserContext from "../../context/usercontext";
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    location: ownProps.location
+  }
+};
 
 export function Navbar(props) {
+  const userContext = useContext(UserContext);
+  const userId = userContext.userId;
+  const loading = userContext.loading;
+  console.log("navbar - id=%d", userId);
+  console.log("navbar - loading=%s", loading);
+
   const classes = useStyles();
-  const authorized = props.auth;
+  const [authorized, setAuthorized] = React.useState(false);
+
+  useEffect(() => {
+    setAuthorized(userContext.authorized);
+    // setLoading(false);
+  }, [userContext.authorized]);
   console.log(`logged in=${authorized}`);
 
   const [open, setOpen] = React.useState(false);
@@ -34,6 +52,8 @@ export function Navbar(props) {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const homeLink = authorized ? '/dashboard' : '';
 
   return (
     <ClickAwayListener onClickAway={handleDrawerClose}>
@@ -55,7 +75,7 @@ export function Navbar(props) {
             </IconButton>
             <Typography className={classes.title}>
               <Button
-                href={'/'}
+                href={homeLink}
                 color="inherit"
                 className={classes.textButton}
               >
@@ -64,15 +84,18 @@ export function Navbar(props) {
                 </Typography>
               </Button>
             </Typography>
-            {authorized === true ? <br/> :
+            {loading ? <div/> :
+              authorized ? <div/> :
               <Button
                 href={'/register'}
                 className={classes.auth}
                 color="inherit"
               >
                 Sign up
-              </Button>}
-            {authorized === true ?
+              </Button>
+            }
+            {loading ? <div/> :
+              authorized ?
               <Button
                 href={'/'}
                 className={classes.auth}
@@ -111,7 +134,7 @@ export function Navbar(props) {
           </div>
           <Divider />
           <List>
-            <ListItem button component="a" href='/' key={'Home'} className={classes.listItem}>
+            <ListItem button component="a" href={homeLink} key={'Home'} className={classes.listItem}>
               <ListItemIcon>
                 <span>
                   <FaHome size ={25}/>
@@ -119,22 +142,40 @@ export function Navbar(props) {
               </ListItemIcon>
               <ListItemText primary={'Home'} />
             </ListItem>
-            <ListItem button component="a" href='/' key={'Profile'} className={classes.listItem}>
-              <ListItemIcon>
-                <span>
-                  <MdAccountCircle size ={25}/>
-                </span>
-              </ListItemIcon>
-              <ListItemText primary={'Profile'} />
-            </ListItem>
-            <ListItem button component="a" href='/favorites' key={'Favorites'} className={classes.listItem}>
-              <ListItemIcon>
-                <span className="greyHeart">
-                  <FaHeart size ={25}/>
-                </span>
-              </ListItemIcon>
-              <ListItemText primary={'Favorites'} />
-            </ListItem>
+
+            {authorized ?
+              <ListItem button component="a" href='/account' key={'Profile'} className={classes.listItem}>
+                <ListItemIcon>
+                  <span>
+                    <MdAccountCircle size ={25}/>
+                  </span>
+                </ListItemIcon>
+                <ListItemText primary={'Profile'} />
+              </ListItem>
+              : <div/>
+            }
+            {authorized ?
+              <ListItem button component="a" href='/preferences' key={'Preferences'} className={classes.listItem}>
+                <ListItemIcon>
+                  <span>
+                    <MdRestaurant size ={25}/>
+                  </span>
+                </ListItemIcon>
+                <ListItemText primary={'Preferences'} />
+              </ListItem>
+              : <div/>
+            }
+            {authorized ?
+              <ListItem button component="a" href='/favorites' key={'Favorites'} className={classes.listItem}>
+                <ListItemIcon>
+                  <span className="greyHeart">
+                    <FaHeart size ={25}/>
+                  </span>
+                </ListItemIcon>
+                <ListItemText primary={'Favorites'} />
+              </ListItem>
+              : <div/>
+            }
           </List>
           <Divider />
         </Drawer>
@@ -150,4 +191,5 @@ export function Navbar(props) {
     </ClickAwayListener>
   )
 }
+
 export default Navbar;

@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import FastfoodSharpIcon from '@material-ui/icons/FastfoodSharp';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-
-// Styles and layouts
-import useStyles from './signupstyle';
+import {Container, Row, Col, Button} from 'react-bootstrap';
+import {GiMeal }from "react-icons/gi/";
+import { 
+  Link
+  } from '@material-ui/core';
 import TextField from "@material-ui/core/TextField";
-import {Redirect} from "react-router-dom";
+// Styles and layouts
+import "./signup.css";
 
 export class SignUp extends Component {
   constructor(props) {
@@ -31,7 +25,7 @@ export class SignUp extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(`The values are ${this.state.firstName}, ${this.state.lastName}, ${this.state.email} , ${this.state.password}`)
+    console.log(`The values are ${this.state.firstName}, ${this.state.lastName}, ${this.state.email}, ${this.state.password}`)
     this.setState({
       firstName: '',
       lastName: '',
@@ -44,37 +38,32 @@ export class SignUp extends Component {
     console.log("SIGNUP");
     const { firstName, lastName, email, password } = this.state;
 
-    try {
-      return axios.post('/register', {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password
-      })
-      .then(res => {
-        this.setState({errorText: ''});
-        console.log("response token: %s", res.headers.token);
-        localStorage.setItem('jwtToken', res.headers.token);
-        this.props.history.push('/');
-        window.location.reload();
-      })
-      .catch(error => {
-        console.log("error: %s", error);
-        window.location.reload();
-        let statusCode = error.response.status;
-        if(statusCode === 409) {
-          this.setState({errorText: 'Email is already taken. Please try again.'});
-        }
-      });
-    } catch (err) {
-      console.log("some error is being caught: %s", err)
-    }
-    window.location.reload();
+    return axios.post('/register', {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password
+    })
+    .then(res => {
+      this.setState({errorText: ''});
+      //console.log("RESPONSE" + res);
+      console.log("response token: %s", res.headers.token);
+      localStorage.setItem('jwtToken', res.headers.token);
+      this.props.history.push('/preferences');
+      window.location.reload();
+    })
+    .catch(error => {
+      console.log("Axios post error: %s", error);
+      window.location.reload();
+      let statusCode = error.response.status;
+      if(statusCode === 409) {
+        this.setState({errorText: 'Email is already taken. Please try again.'});
+      }
+    });
   };
 
   firstName = () => {
     return(
-      <Grid item xs={12} sm={6}>
         <TextField
           variant="outlined"
           required
@@ -88,13 +77,11 @@ export class SignUp extends Component {
             this.setState({firstName: e.target.value})
           }}
         />
-      </Grid>
     );
   };
 
   lastName = () => {
     return(
-      <Grid item xs={12} sm={6}>
         <TextField
           variant="outlined"
           required
@@ -108,13 +95,11 @@ export class SignUp extends Component {
             this.setState({ lastName: e.target.value })
           }}
         />
-      </Grid>
     );
   };
 
   email = () => {
     return(
-      <Grid item xs={12}>
         <TextField
           variant="outlined"
           required
@@ -130,13 +115,11 @@ export class SignUp extends Component {
             this.setState({ validEmail: e.target.validity.valid });
           }}
         />
-      </Grid>
     );
   };
 
   password = () => {
     return(
-      <Grid item xs={12}>
         <TextField
           variant="outlined"
           required
@@ -151,76 +134,78 @@ export class SignUp extends Component {
             this.setState({ password: e.target.value })
           }}
         />
-      </Grid>
     );
   };
 
-  copyright = () => {
-    return (
-      <Typography variant="body2" color="textSecondary" align="center">
-        {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
-          Meal Planner
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-  };
+  // copyright = () => {
+  //   return (
+  //     <h6 color="textSecondary" align="center">
+  //       {'Copyright © '}
+  //       <Link color="inherit" href="https://material-ui.com/">
+  //         Meal Planner
+  //       </Link>{' '}
+  //       {new Date().getFullYear()}
+  //       {'.'}
+  //     </h6>
+  //   );
+  // };
 
   render() {
-    const classes = useStyles;
-
     let { errorText, validEmail } = this.state;
 
     return (
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
+      <Container className="signup_box">
+        <div>
           <center>
-            <Avatar className={classes.avatar} >
-              <FastfoodSharpIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
+            <GiMeal size={50}/>
+            <h3>
               Sign up
-            </Typography>
+            </h3>
           </center>
-
-          <form className={classes.form} onSubmit={this.onSubmit}>
-            <Grid container spacing={2}>
-              {this.firstName("firstName", "First Name")}
-              {this.lastName("lastName", "Last Name")}
-              {this.email()}
-              {this.password()}
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-              onClick={() => {
-                  if (validEmail) {
-                    this.signup()
-                  }
-                }
-              }
-            >
-              Sign Up
-            </Button>
-            <Grid container justify="flex-end">
-              <Grid item>
-                <Link href="#" variant="body2">
+          <span>&nbsp;</span>
+          <form  onSubmit={this.onSubmit}>
+            <Container>
+              <Row>
+                <Col>{this.firstName("firstName", "First Name")}</Col>
+                <Col>{this.lastName("lastName", "Last Name")}</Col>
+              </Row>
+              <span>&nbsp;</span>
+              <Row>
+                <Col>{this.email()}</Col>
+              </Row>
+              <span>&nbsp;</span>
+              <Row>
+                <Col>{this.password()}</Col>
+              </Row>
+              <span>&nbsp;</span>
+              <Row>
+              <center>
+                  <Col>
+                    <Button
+                      variant="primary"
+                      type="submit"
+                      className= "signup_button"
+                      onClick={() => {
+                          if (validEmail) {
+                            this.signup()
+                          }
+                        }
+                      }
+                    >
+                      Sign Up
+                    </Button>
+                  </Col>
+              </center>
+              </Row>
+              <span>&nbsp;</span>
+            </Container>
+            <Container justify="flex-end">
+                <Link href="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
-              </Grid>
-            </Grid>
+            </Container>
           </form>
         </div>
-        <Box mt={5}>
-          {this.copyright()}
-        </Box>
-        <br/>
         {errorText}
       </Container>
     );
