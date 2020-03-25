@@ -33,7 +33,6 @@ function createOrModifyCustomer(userId) {
 
 function charge(req, res) {
   const { userId, stripeToken } = req.body;
-
   stripe.charges.create({
     amount: 1000,
     currency: 'usd',

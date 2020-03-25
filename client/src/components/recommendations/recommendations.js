@@ -17,7 +17,7 @@ export class Recommendations extends Component {
     const jwtToken = localStorage.getItem('jwtToken');
 
     axios
-      .get('/recommendations', {
+      .get('/setRecs', {
         headers: {"x-access-token" : `${jwtToken}`}
       })
       .then(res => {
@@ -27,7 +27,6 @@ export class Recommendations extends Component {
         })
       })
       .catch(error => error)
-      console.log("RECOMMENDATION = ", this.state.recommendations);
   }
 
   render() {
@@ -37,13 +36,12 @@ export class Recommendations extends Component {
       dots: true,
       infinite: false,
       speed: 500,
-      slidesToShow: 4,
-      slidesToScroll: 4
+      slidesToShow: 3,
+      slidesToScroll: 3
   };
     if(loggedIn) {
       for(let i = 0; i < recommendations.length; i++) {
         let recommend = recommendations[i];
-        console.log("Recommendation =", recommend);
         recommendationList.push( 
             <
               MealCard
@@ -64,5 +62,4 @@ export class Recommendations extends Component {
     );
   }
 }
-
 export default Recommendations;

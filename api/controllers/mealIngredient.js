@@ -16,7 +16,6 @@ function list(req, res) {
       for (let i = 0; i < ingredients.length; i++) {
         ingredientIds.push(ingredients[i].ingredientId);
       }
-      console.log('ingredientIds: %s', ingredientIds);
       // Use the array of mealIds to find all those meals
       return Ingredient
         .findAll({

@@ -1,8 +1,14 @@
- const { Preference } = require('../models');
+const { Preference } = require('../models');
 const getUserId = require('../middleware/getUserId');
 
 function getPreferences(req, res) {
-  return Preference.findByPk(req.params.id)
+  let userId;
+  if (!req.body.userId) {
+    userId = getUserId(req);
+  } else {
+    userId = req.body.userId;
+  }
+  return Preference.findByPk(userId)
     .then((preference) => {
       if (!preference) {
         return res.status(404).send({
@@ -14,11 +20,16 @@ function getPreferences(req, res) {
 }
 
 function createPreferences(req, res) {
-  
-  console.log("CREATE PREFERENCES");
-  let userId = getUserId(req);
-  let values = {
-    userId: userId,
+  console.log('CREATE PREFERENCES');
+  let userId;
+  if (!req.body.userId) {
+    userId = getUserId(req);
+  } else {
+    userId = req.body.userId;
+  }
+
+  const values = {
+    userId,
     diet: req.body.diet,
     calories: req.body.calories,
     fat: req.body.fat,
@@ -27,31 +38,30 @@ function createPreferences(req, res) {
     weight: req.body.weight,
     desiredWeight: req.body.desiredWeight,
     mealCount: req.body.mealCount,
-    priceLimit: req.body.priceLimit
+    priceLimit: req.body.priceLimit,
   };
 
-  console.log(values);
-
   return Preference.findOrCreate({
-    where: {userId: userId},
-    defaults: values
+    where: { userId },
+    defaults: values,
   })
-    .then(result => {
-        return res.stat(200).send({
-            message: "New preferences created"
-        })
+    .then(([preference, created]) => {
+      if (!created) {
+        return updatePreferences(req, res);
+      }
+      return res.stat(200).send({
+        message: 'created',
+      });
     })
-    .catch(err => {
-        return res.status(404).send({
-            message: err
-        })
-    })
+    .catch((err) => res.status(404).send({
+      message: err,
+    }));
 }
 
 function updatePreferences(req, res) {
   const updatedValues = {};
 
-  let params = [
+  const params = [
     'calories',
     'fat',
     'protein',
@@ -59,26 +69,28 @@ function updatePreferences(req, res) {
     'weight',
     'desiredWeight',
     'mealCount',
-    'priceLimit'
+    'priceLimit',
   ];
 
-  let p;
-  for (p of params) {
-    const data = req.params[p];
+  let userId;
+  if (!req.body.userId) {
+    userId = getUserId(req);
+  } else {
+    userId = req.body.userId;
+  }
+  let param;
+  for (param of params) {
+    const data = req.body[param];
     if (data) {
-      updatedValues[p] = data;
+      updatedValues[param] = data;
     }
   }
-  // let calories = req.params.calories;
-  // let fat = req.params.fat;
-  // let protein = req.params.protein;
-  // let carbs = req.params.carbs;
-  // let currentWeight = req.params.weight;
-  // let desiredWeight = req.params.desiredWeight;
-
-  const userId = req.params.id;
-
-  return Preference.update(updatedValues, { where: { userId } })
+  return Preference.update(updatedValues,
+    {
+      where: {
+        userId,
+      },
+    })
     .then((preference) => {
       if (!preference) {
         return res.status(404).send({

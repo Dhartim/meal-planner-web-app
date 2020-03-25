@@ -1,0 +1,34 @@
+:root {
+    --red: #ff6961;
+    --orange: #FFAF5F;
+    --blue: #6f80dc;
+    --black: #262833;
+    --purple: #2f3051;
+    --dark: #1C1D31;
+}
+
+app-background {
+    background-color: var(--dark);
+}
+
+card-details {
+    background-color: var(--black);
+    color: #fff;
+    border-radius: 5px;
+}
+
+button-details {
+    background-color: var(--blue);
+    border-color: #6f80dc;
+}
+
+navbar-color {
+    background-color: var(--purple);
+}
+
+.button {
+    background-color: var(--blue) !important;
+    border-color: var(--blue) !important;
+    color: #fff;
+    border-radius: 5px;
+}

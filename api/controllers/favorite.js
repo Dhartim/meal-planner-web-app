@@ -17,7 +17,6 @@ function list(req, res) {
       for (let i = 0; i < favorites.length; i++) {
         favoriteMealIds.push(favorites[i].mealId);
       }
-      console.log('favoriteMealIds: %s', favoriteMealIds);
       // Use the array of mealIds to find all those meals
       return Meal
         .findAll({
@@ -54,7 +53,6 @@ function isFavorite(req, res) {
     .then((favorite) => {
       // If found a favorite, tell client that this meal is a favorite
       if (favorite !== null) {
-        console.log('userId=%d, mealId=%d', favorite.userId, favorite.mealId);
         res.status(200).send({
           isFavorite: true,
         });

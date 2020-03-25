@@ -1,9 +1,9 @@
 .landing-page {
-  background-image: url("../../assets/images/meal.jpg");
+  background-image: url("../../assets/images/salads.jpg");
   background-color: #cccccc;
   background-repeat: no-repeat;
-  height: 60vh;
-  border-radius: 1%;
+  height: 70vh;
+  /*border-radius: 1%;*/
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -11,47 +11,176 @@
   background-size: cover;
 }
 
-.landing-page__container{
-  width:30%;
+.landing-page__container {
+  /*width:30%;*/
+  /*width: 500px;*/
+  /*height: 220px;*/
   display: flex;
   flex-direction: column;
+  opacity: 100%;
+}
+
+.full-logo {
+  /*height: 220px;*/
+  width: 400px;
+  opacity: 100%;
 }
 
 .landing-page__meal-box {
-  background-color: rgba(255, 255, 255, 0.626);
-  border-radius: 3%;
-  width: 100%;
-  box-shadow: #3f51b5 2px 5px;
-  text-align: center;
+  /*background-color: rgba(255, 255, 255, 0.626);*/
+  /*border-radius: 3%;*/
+  /*width: 100%;*/
+  /*box-shadow: #3f51b5 2px 5px;*/
+  /*text-align: center;*/
+  /*background-color: var(--dark);*/
+  /*opacity: 90%;*/
+  /*border-radius: 5px;*/
+  padding: 10px;
 }
 
 .landing-page__user-auth {
-  padding-top: 1rem;
+  margin-top: 10px;
   width: 100%;
-  display:flex;
-  height: 3rem;
+  display: flex;
+  /*height: 3rem;*/
+}
+
+.btn-primary {
+  /*height: 36.5px;*/
+  /*width: 100%;*/
+  /*text-align: center;*/
+  /*border-radius: 5px;*/
+  /*font-size: .875rem;*/
+  /*display: inline-block;*/
+  /*width: 100% !important;*/
+}
+
+.btn-primary:hover {
+  background-color: var(--dark);
 }
 
 .auth-btn {
   font-weight: bold;
   border-radius: 3%;
   border: 1px solid rgba(255, 255, 255, 0.626);
-  color:whitesmoke;
-  width:100%;
+  color: whitesmoke;
+  width: 100%;
   background-color: #3f51b59c;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .auth-btn:hover {
   background-color: #3f51b5;
   color: whitesmoke;
   text-decoration: none;
 }
 
+.email-container {
+  background-color: white;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  /*background-color: #262833 !important;*/
+  /*color: #fff;*/
+  border-radius: 5px !important;
+}
 
+.MuiFormControl-root MuiTextField-root MuiFormControl-fullWidth {
+  background-color: white;
+}
+
+.MuiButtonBase-root {
+  margin-top: 5px;
+}
 
 .landing-page__contact-us {
   display: flex;
   justify-content: center;
+}
+
+.about {
+  /*height: 500px;*/
+  width: 100%;
+  padding-bottom: 50px;
+}
+
+.wb {
+  color: var(--dark);
+  background-color: #fff;
+}
+
+.db {
+  color: #fff;
+  opacity: 80%;
+}
+
+.about-text-container {
+  /*margin-bottom: 50px;*/
+}
+
+.about-header {
+  padding-top: 75px;
+  display: block;
+  /*height: 500px;*/
+  /*width: 49%;*/
+  /*text-align: right;*/
+  vertical-align: middle !important;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  /*padding-right: 5%;*/
+}
+
+.about-text {
+  padding-top: 10px;
+  padding-bottom: 20px;
+  display: block;
+  /*height: 500px;*/
+  width: 720px;
+  /*text-align: left;*/
+  vertical-align: middle !important;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  /*padding-right: 10%;*/
+  /*padding-left: 5%;*/
+  font-size: large;
+}
+
+.about-text h1 {
+  opacity: 87%;
+}
+
+.about-text p {
+  opacity: 70%;
+}
+
+.about-divider {
+  /*height: 60%;*/
+  background-color: #ff6961;
+  display: block;
+  width: 40%;
+  height: 1px;
+}
+
+.about-features {
+  display: table-cell;
+  width: 240px;
+}
+
+.about-image {
+  display: table-cell;
+  width: 180px;
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+.divider {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
 }

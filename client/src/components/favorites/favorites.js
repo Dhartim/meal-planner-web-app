@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import axios from "axios";
 import MealCard from "../mealCard";
 import './favorites.css';
@@ -25,12 +25,12 @@ export class Favorites extends Component {
     };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const jwtToken = localStorage.getItem('jwtToken');
 
     axios
       .get('/favorites', {
-        headers: {"x-access-token" : `${jwtToken}`}
+        headers: { "x-access-token": `${jwtToken}` }
       })
       .then(res => {
         this.setState({
@@ -46,38 +46,30 @@ export class Favorites extends Component {
     let favoritesList = [];
 
     // TODO: update frontend api and backend api to get if a meal is liked rather than workarounds
-    if(loggedIn) {
+    if (loggedIn) {
       // for each favorited meal, render a new meal card
-      for(let i = 0; i < favorites.length; i++) {
+      for (let i = 0; i < favorites.length; i++) {
         let favorite = favorites[i];
-        // console.log("favorite[%d]={dishName: %s\nnutritionInfo: %s\nimgUrl: %s\nprepTime: %s\ncookTime: %s\nrecipe: %s\ncuisineId: %s\ncuisineType: %s\n}", i,
-        //   favorite.dishName,
-        //   favorite.nutritionInfo,
-        //   favorite.imgUrl,
-        //   favorite.prepTime,
-        //   favorite.cookTime,
-        //   favorite.recipe,
-        //   favorite.cuisineId);
         favoritesList.push(
           <
             MealCard
             key={favorite.id}
             {...favorite}
-            cuisineType = {favorite.cuisineType}
+            cuisineType={favorite.cuisineType}
           />
-        );
+        )
       }
     } else {
 
     }
-
-    return(
+    return (
       <div>
-        <h2>FAVORITES</h2>
-        <div className="meal-list">
-          <Slider {...mealCardSliderSettings}>
-            {favoritesList}
-          </Slider>
+        <div className={"favorites-header"}>
+          <h1>Your Favorite Meals</h1>
+        </div>
+
+        <div className="favorites-row">
+          {favoritesList}
         </div>
       </div>
     );

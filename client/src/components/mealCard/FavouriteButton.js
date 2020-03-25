@@ -3,19 +3,19 @@ import { FaRegHeart, FaHeart } from "react-icons/fa/";
 import axios from "axios";
 
 function IsFav(props) {
-    return <span className="icon heart" onClick={props.onClick}><FaRegHeart size ={25}/></span>;
+  return <span className="icon heart" onClick={props.onClick}><FaRegHeart size={25} /></span>;
 }
 
 function IsNotFav(props) {
-    return <span className="icon toggled heart" onClick={props.onClick}><FaHeart size ={25}/></span>;
+  return <span className="icon toggled heart" onClick={props.onClick}><FaHeart size={25} /></span>;
 }
 
 class FavouriteButton extends React.Component {
 
-  constructor(props){
+  constructor(props) {
 
     super(props);
-    this.state ={
+    this.state = {
       isFaved: false,
       meal_id: this.props.meal_id,
     };
@@ -31,13 +31,13 @@ class FavouriteButton extends React.Component {
 
   isFavorite() {
     var { meal_id } = this.state;
-    if(meal_id === undefined) {
+    if (meal_id === undefined) {
       meal_id = 0;
     }
 
     const token = localStorage.getItem('jwtToken');
 
-    if(token !== null) {
+    if (token !== null) {
       axios
         .get(`/favorites/isfavorite/${meal_id}`, {
           headers: {
@@ -49,7 +49,6 @@ class FavouriteButton extends React.Component {
             this.setState({
               isFaved: res.data.isFavorite
             });
-            // console.log(res);
           } else {
             console.log(`Error`);
           }
@@ -64,8 +63,8 @@ class FavouriteButton extends React.Component {
 
   updateLikes() {
 
-    if(!this.state.updated) {
-        this.setState((prevState, props) => {
+    if (!this.state.updated) {
+      this.setState((prevState, props) => {
         return {
           updated: true
         };
@@ -80,58 +79,59 @@ class FavouriteButton extends React.Component {
     }
   }
 
-  addLikes(){
+  addLikes() {
     const jwtToken = localStorage.getItem('jwtToken');
 
-    axios.post('/favorites', {"mealId": this.state.meal_id},{ headers: {"x-access-token" : `${jwtToken}`} })
-    .then(response => {
+    axios.post('/favorites', { "mealId": this.state.meal_id }, { headers: { "x-access-token": `${jwtToken}` } })
+      .then(response => {
         if ((response.status === 201) || (response.status === 200)) {
-            this.setState({ isFaved: true });
-            console.log(response);
+          this.setState({ isFaved: true });
+          console.log(response);
         } else {
-            console.log(`Error`);
+          console.log(`Error`);
         }
-    })
-    .catch(error => {
+      })
+      .catch(error => {
         console.log("some error is being caught: %s", error)
-    });
+      });
   }
 
-  removeLike() {    
+  removeLike() {
     const jwtToken = localStorage.getItem('jwtToken');
 
     axios.delete('/favorites', {
-      headers: {"x-access-token" : `${jwtToken}`
+      headers: {
+        "x-access-token": `${jwtToken}`
       },
       data: {
         "mealId": this.state.meal_id
       }
     })
-    .then(response => {
+      .then(response => {
         if ((response.status === 200) || (response.status === 204)) {
-            this.setState({ isFaved: false });
-            console.log(response);
+          this.setState({ isFaved: false });
+          console.log(response);
         } else {
-            console.log(`Error`);
+          console.log(`Error`);
         }
-    })
-    .catch(error => {
+      })
+      .catch(error => {
         console.log("some error is being caught: %s", error)
-    });
+      });
   }
 
-  render(){
+  render() {
     const { isFaved } = this.state;
     let favBtn;
     if (isFaved) {
-        favBtn = <IsNotFav onClick={this.removeLike} />;
+      favBtn = <IsNotFav onClick={this.removeLike} />;
     } else {
-        favBtn = <IsFav onClick={this.addLikes} />;
+      favBtn = <IsFav onClick={this.addLikes} />;
     }
 
     return (
       <div>
-          {favBtn}
+        {favBtn}
       </div>
     );
   }

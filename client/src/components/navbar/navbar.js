@@ -22,6 +22,7 @@ import { MdAccountCircle, MdRestaurant } from "react-icons/md"
 
 import useStyles from "./navbarstyle";
 import UserContext from "../../context/usercontext";
+import {Image} from "react-bootstrap";
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -29,21 +30,22 @@ const mapStateToProps = (state, ownProps) => {
   }
 };
 
+let styles = {
+  height:'35px',
+  paddingRight:'5px'
+}
+
 export function Navbar(props) {
   const userContext = useContext(UserContext);
   const userId = userContext.userId;
   const loading = userContext.loading;
-  console.log("navbar - id=%d", userId);
-  console.log("navbar - loading=%s", loading);
 
   const classes = useStyles();
   const [authorized, setAuthorized] = React.useState(false);
 
   useEffect(() => {
     setAuthorized(userContext.authorized);
-    // setLoading(false);
   }, [userContext.authorized]);
-  console.log(`logged in=${authorized}`);
 
   const [open, setOpen] = React.useState(false);
   const handleDrawerOpen = () => {
@@ -79,8 +81,9 @@ export function Navbar(props) {
                 color="inherit"
                 className={classes.textButton}
               >
+                <Image className={'navImage'} src={require('../../assets/images/header-icon.png')} style={styles}/>
                 <Typography component={'span'} variant="h6" className={classes.title}>
-                  Meal Planner
+                  {/*Meal Planner*/}
                 </Typography>
               </Button>
             </Typography>
