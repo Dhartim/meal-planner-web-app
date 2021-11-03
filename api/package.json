@@ -30,7 +30,7 @@
     "sequelize-cli": "^5.5.1",
     "stripe": "^7.10.0",
     "uuid": "^3.3.2",
-    "validator": "^11.1.0"
+    "validator": "^13.7.0"
   },
   "nodemonConfig": {
     "restartable": "rs",
